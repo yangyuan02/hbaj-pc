@@ -7,13 +7,13 @@
                 <router-view></router-view>
             </div>
         </Main>
-        <Footer class="footer"></Footer>
+        <!-- <Footer class="footer"></Footer> -->
     </div>
 </template>
 
 <script>
 import Header from "./Header";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
 export default {
@@ -22,7 +22,7 @@ export default {
     },
     components: {
         Header,
-        Footer,
+        // Footer,
         Sidebar
     }
 };
