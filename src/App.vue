@@ -7,16 +7,20 @@
  -->
 <template>
     <div id="app">
-        <router-view />
+        <Layout></Layout>
     </div>
 </template>
 
 <script>
+import Layout from "@/components/Layout";
 import utils from "@/widget/utils";
 import store from "@/widget/store";
 import * as Model from "@/model/static";
 export default {
     name: "app",
+    components: {
+        Layout
+    },
     methods: {
         getLizardCode() {
             const cacheTimes = 30 * 24 * 60 * 60 * 1000;
