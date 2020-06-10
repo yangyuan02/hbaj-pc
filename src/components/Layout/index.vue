@@ -34,18 +34,12 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    .header {
-    }
     .main {
         flex: 1;
         display: flex;
-        .sidebar {
-        }
         .container-main {
             flex: 1;
         }
-    }
-    .footer {
     }
 }
 </style>
