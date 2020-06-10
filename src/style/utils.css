@@ -1,0 +1,58 @@
+.ellipsis {
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+}
+
+.ellipsisLineTwo {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "020";
+    clear: both;
+    height: 0;
+}
+
+.clearfix {
+    zoom: 1;
+    clear: both;
+}
+
+.w100 {
+    width: 100% !important;
+}
+
+.pLeftRight30 {
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+}
+
+.placeholder {
+    color: #b2b2b2;
+}
+
+.pLeft30 {
+    padding-left: 0.3rem !important;
+}
+
+.pRight30 {
+    padding-right: 0.3rem !important;
+}
+
+.menu-pBottom {
+    padding-bottom: 1.08rem;
+}
+
+.iphone-footer {
+    padding-bottom: 0.68rem;
+}
