@@ -23,7 +23,7 @@ module.exports = {
         config.devtool = "eval-source-map	";
         config.externals = {
             vue: "Vue",
-            // vuex: 'Vuex'
+            vuex: "Vuex",
             "vue-router": "VueRouter"
         };
         config.plugins.push(
