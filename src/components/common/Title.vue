@@ -16,7 +16,7 @@ export default {
     },
     props: {
         title: {
-            // 显示的问题
+            // 显示的文字
             type: String,
             default: ""
         },
