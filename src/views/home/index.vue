@@ -1,7 +1,8 @@
 <template>
-    <div @click="open">
-        登录
-        <LoginDialog :visible="isOpenLoggin"></LoginDialog>
+    <div>
+        <div @click="isOpenLoggin = true">登录</div>
+
+        <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
     </div>
 </template>
 
@@ -15,12 +16,6 @@ export default {
     },
     components: {
         LoginDialog
-    },
-    methods: {
-        open() {
-            this.isOpenLoggin = true;
-            console.log(1111);
-        }
     }
 };
 </script>
