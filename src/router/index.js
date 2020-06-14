@@ -36,6 +36,14 @@ export default new Router({
             meta: {
                 title: "海宝安检资讯"
             }
+        },
+        {
+            path: "/news/detail/:id",
+            name: "newsDetail",
+            component: () => import("@/views/news/detail"),
+            meta: {
+                title: "新闻详情"
+            }
         }
     ]
 });
