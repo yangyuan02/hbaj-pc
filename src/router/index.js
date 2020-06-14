@@ -44,6 +44,14 @@ export default new Router({
             meta: {
                 title: "新闻详情"
             }
+        },
+        {
+            path: "/course",
+            name: "course",
+            component: () => import("@/views/course"),
+            meta: {
+                title: "公共课件"
+            }
         }
     ]
 });
