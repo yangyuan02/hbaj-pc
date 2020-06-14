@@ -20,6 +20,22 @@ export default new Router({
             meta: {
                 title: "海宝安检首页"
             }
+        },
+        {
+            path: "/home",
+            name: "home",
+            component: () => import("@/views/home"),
+            meta: {
+                title: "海宝安检首页"
+            }
+        },
+        {
+            path: "/news",
+            name: "news",
+            component: () => import("@/views/news"),
+            meta: {
+                title: "海宝安检资讯"
+            }
         }
     ]
 });
