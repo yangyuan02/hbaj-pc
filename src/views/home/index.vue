@@ -7,6 +7,10 @@
                 <div class="home_news_list">
                     <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
                 </div>
+                <Title title="公共课件"></Title>
+                <div class="home_course_list">
+                    <CourseItem v-for="(item, index) in [1, 2]" :key="index"></CourseItem>
+                </div>
             </div>
         </div>
         <BgNav></BgNav>
@@ -18,6 +22,7 @@ import BgNav from "@/components/common/BgNav";
 import Title from "@/components/common/Title";
 import Banner from "./banner.vue";
 import NewsItem from "@/components/news";
+import CourseItem from "@/components/course";
 
 export default {
     data() {
@@ -27,7 +32,8 @@ export default {
         BgNav,
         Banner,
         Title,
-        NewsItem
+        NewsItem,
+        CourseItem
     }
 };
 </script>

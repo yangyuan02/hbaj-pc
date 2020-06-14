@@ -72,7 +72,7 @@ export default {
             .text {
                 height: 40px;
                 p {
-                    font-size: 14px;
+                    font-size: 16px;
                     font-family: MicrosoftYaHei;
                     color: rgba(51, 51, 51, 1);
                     line-height: 20px;
@@ -83,8 +83,8 @@ export default {
         }
         .news-item-digest {
             width: 100%;
-            margin-top: 7px;
-            margin-bottom: 8px;
+            margin-top: 2px;
+            margin-bottom: 2px;
             p {
                 font-size: 12px;
                 font-family: MicrosoftYaHei;
@@ -108,8 +108,8 @@ export default {
         }
     }
     .news-item-thumb {
-        width: 122px;
-        height: 82px;
+        width: 70px;
+        height: 70px;
         margin-left: 11px;
         // background: #f0f0f0;
         img {
