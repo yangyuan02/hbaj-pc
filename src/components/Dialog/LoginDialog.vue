@@ -55,6 +55,7 @@ export default {
         },
         close() {
             this.$emit("update:visible", false);
+            this.$store.commit("TOGGLE_LOGIN");
         }
     }
 };

@@ -3,13 +3,19 @@
         <div class="login">
             <div class="person">
                 <div class="thumb"></div>
-                <div class="name">船福</div>
+                <div class="name" @click="$store.commit('TOGGLE_LOGIN')">
+                    <span>船福</span>
+                </div>
             </div>
         </div>
         <div class="menu">
             <ul>
-                <li v-for="(item, index) in menu" :key="index">
-                    <i></i>
+                <li
+                    v-for="(item, index) in menu"
+                    :key="index"
+                    :class="[index === 0 ? 'active' : '']"
+                >
+                    <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
                     <span>{{ item.text }}</span>
                 </li>
             </ul>
@@ -24,32 +30,32 @@ export default {
             menu: [
                 {
                     text: "主页",
-                    icon: "",
+                    icon: "icontubiaoweb-01",
                     path: ""
                 },
                 {
                     text: "公共课件",
-                    icon: "",
+                    icon: "icontubiaoweb-02",
                     path: ""
                 },
                 {
                     text: "海宝资讯",
-                    icon: "",
+                    icon: "icontubiaoweb-03",
                     path: ""
                 },
                 {
                     text: "我的课件",
-                    icon: "",
+                    icon: "icontubiaoweb-04",
                     path: ""
                 },
                 {
                     text: "我的任务",
-                    icon: "",
+                    icon: "icontubiaoweb-05",
                     path: ""
                 },
                 {
                     text: "我的通知",
-                    icon: "",
+                    icon: "icontubiaoweb-06",
                     path: ""
                 }
             ]
@@ -70,7 +76,8 @@ aside {
             .thumb {
                 width: 76px;
                 height: 76px;
-                background: rgba(216, 216, 216, 1);
+                background: url("./images/user_default.png") no-repeat;
+                background-size: 100%;
                 border-radius: 50%;
                 margin: 0 auto;
                 margin-top: 26px;
@@ -90,12 +97,32 @@ aside {
     .menu {
         margin-top: 77px;
         text-align: center;
-        span {
-            font-size: 24px;
-            font-family: MicrosoftYaHei;
-            color: rgba(255, 255, 255, 1);
-            line-height: 31px;
-            -webkit-background-clip: text;
+        li {
+            margin-bottom: 53px;
+            cursor: pointer;
+            &.active {
+                i {
+                    color: rgba(255, 213, 26, 1);
+                }
+                span {
+                    color: rgba(255, 213, 26, 1);
+                }
+            }
+            i {
+                color: rgba(255, 255, 255, 1);
+                font-size: 26px;
+            }
+            span {
+                font-size: 24px;
+                font-family: MicrosoftYaHei;
+                color: rgba(255, 255, 255, 1);
+                line-height: 31px;
+                -webkit-background-clip: text;
+                margin-left: 20px;
+                width: 96px;
+                display: inline-block;
+                text-align-last: justify;
+            }
         }
     }
 }

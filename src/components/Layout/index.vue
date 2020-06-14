@@ -8,14 +8,17 @@
             </div>
         </Main>
         <!-- <Footer class="footer"></Footer> -->
+        <!-- 登录弹窗 -->
+        <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Header from "./Header";
 // import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-
+import LoginDialog from "@/components/Dialog/LoginDialog";
 export default {
     data() {
         return {};
@@ -23,7 +26,13 @@ export default {
     components: {
         Header,
         // Footer,
-        Sidebar
+        Sidebar,
+        LoginDialog
+    },
+    computed: {
+        ...mapState({
+            isOpenLoggin: state => state.loginStore.isOpenLogin
+        })
     }
 };
 </script>

@@ -1,21 +1,17 @@
 <template>
     <div>
-        <div @click="isOpenLoggin = true">登录</div>
-
-        <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
+        <BgNav></BgNav>
     </div>
 </template>
 
 <script>
-import LoginDialog from "@/components/Dialog/LoginDialog";
+import BgNav from "@/components/common/BgNav";
 export default {
     data() {
-        return {
-            isOpenLoggin: false
-        };
+        return {};
     },
     components: {
-        LoginDialog
+        BgNav
     }
 };
 </script>
