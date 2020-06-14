@@ -7,6 +7,8 @@
                 <div class="home_news_list">
                     <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
                 </div>
+            </div>
+            <div class="home_course">
                 <Title title="公共课件"></Title>
                 <div class="home_course_list">
                     <CourseItem v-for="(item, index) in [1, 2]" :key="index"></CourseItem>
@@ -42,11 +44,16 @@ export default {
 .home {
     display: flex;
     .home_container {
-        .home_news {
+        .home_news,
+        .home_course {
             background: #fff;
-            .home_news_list {
+            .home_news_list,
+            .home_course_list {
                 padding: 0px 16px;
             }
+        }
+        .home_course {
+            margin-top: 16px;
         }
     }
 }

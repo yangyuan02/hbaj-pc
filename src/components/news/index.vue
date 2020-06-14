@@ -64,6 +64,9 @@ export default {
     display: flex;
     padding: 20px 0px;
     border-bottom: 1px solid rgba(221, 221, 221, 1);
+    &:last-child {
+        border: none;
+    }
     .news-item-detail {
         flex: 1;
         width: 222px;
