@@ -1,51 +1,46 @@
 <template>
-    <div>
+    <div class="home">
+        <div class="home_container">
+            <Banner></Banner>
+            <div class="home_news">
+                <Title title="海宝资讯"></Title>
+                <div class="home_news_list">
+                    <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
+                </div>
+            </div>
+        </div>
         <BgNav></BgNav>
     </div>
 </template>
 
 <script>
 import BgNav from "@/components/common/BgNav";
+import Title from "@/components/common/Title";
+import Banner from "./banner.vue";
+import NewsItem from "@/components/news";
+
 export default {
     data() {
         return {};
     },
     components: {
-        BgNav
+        BgNav,
+        Banner,
+        Title,
+        NewsItem
     }
 };
 </script>
 
 <style lang="less">
-.login_dialog {
-    .head {
-        width: 100%;
-        .logo {
-            width: 82px;
-            height: 82px;
-            margin: 0 auto;
-            img {
-                width: 100;
-                height: 100%;
-                max-width: 100%;
+.home {
+    display: flex;
+    .home_container {
+        .home_news {
+            background: #fff;
+            .home_news_list {
+                padding: 0px 16px;
             }
-        }
-        .logo_text {
-            width: 100%;
-            text-align: center;
-            margin: 20px 0px;
-            span {
-                font-size: 20px;
-                font-family: MicrosoftYaHei;
-                color: rgba(15, 79, 168, 1);
-                line-height: 26px;
-                -webkit-background-clip: text;
-            }
-        }
-    }
-    .login_btn {
-        button {
-            width: 100%;
         }
     }
 }

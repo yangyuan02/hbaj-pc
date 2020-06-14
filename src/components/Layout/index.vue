@@ -48,6 +48,9 @@ export default {
         display: flex;
         .container-main {
             flex: 1;
+            padding-left: 24px;
+            padding-top: 24px;
+            background: rgba(240, 242, 245, 1);
         }
     }
 }

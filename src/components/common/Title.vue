@@ -42,8 +42,9 @@ export default {
     background: #fff;
     border-bottom: 1px solid rgba(245, 245, 245, 1);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 16px;
     .title {
         span {
             font-size: 18px;

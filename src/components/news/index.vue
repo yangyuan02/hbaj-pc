@@ -1,0 +1,121 @@
+<!--
+ * @Author: yangyuan
+ * @Date: 2020-04-16 21:03:29
+ * @Email: 1367511704@qq.com
+ * @LastEditTime: 2020-05-28 17:37:11
+ * @Description: 
+ -->
+<template>
+    <div class="news-content-item" @click="toNewsDetail(item.id)">
+        <div class="news-item-detail">
+            <div class="news-item-title">
+                <div class="text">
+                    <p class="ellipsisLineTwo">上海海事部门组织“超宽交会”保障邮轮安 全准点靠</p>
+                </div>
+            </div>
+            <div class="news-item-digest">
+                <p class="ellipsis">
+                    8月6日，上海吴淞口国际邮轮港迎来 五天内第二次邮轮的“三船同靠”…
+                </p>
+            </div>
+            <div class="news-item-source">
+                <div class="organization">
+                    <span>发布机构:</span>
+                    <span>海宝安检</span>
+                </div>
+                <div class="publishTime">
+                    <span>发布时间:</span>
+                    <span>2020-06-01</span>
+                </div>
+            </div>
+        </div>
+        <div class="news-item-thumb ui-lazyLoad-pic">
+            <!-- <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title"> -->
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {};
+    },
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
+    },
+    methods: {
+        toNewsDetail(id) {
+            this.$router.push({
+                name: "newsDetail",
+                params: {
+                    id
+                }
+            });
+        }
+    }
+};
+</script>
+
+<style lang="less">
+.news-content-item {
+    display: flex;
+    padding: 20px 0px;
+    border-bottom: 1px solid rgba(221, 221, 221, 1);
+    .news-item-detail {
+        flex: 1;
+        width: 222px;
+        .news-item-title {
+            width: 100%;
+            .text {
+                height: 40px;
+                p {
+                    font-size: 14px;
+                    font-family: MicrosoftYaHei;
+                    color: rgba(51, 51, 51, 1);
+                    line-height: 20px;
+                    letter-spacing: 1px;
+                    -webkit-background-clip: text;
+                }
+            }
+        }
+        .news-item-digest {
+            width: 100%;
+            margin-top: 7px;
+            margin-bottom: 8px;
+            p {
+                font-size: 12px;
+                font-family: MicrosoftYaHei;
+                color: rgba(102, 102, 102, 1);
+                line-height: 16px;
+                -webkit-background-clip: text;
+            }
+        }
+        .news-item-source {
+            display: flex;
+            align-content: center;
+            justify-content: space-between;
+            width: 100%;
+            span {
+                font-family: MicrosoftYaHei;
+                color: rgba(153, 153, 153, 1);
+                line-height: 13px;
+                -webkit-background-clip: text;
+                word-break: break-all;
+            }
+        }
+    }
+    .news-item-thumb {
+        width: 122px;
+        height: 82px;
+        margin-left: 11px;
+        // background: #f0f0f0;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+</style>

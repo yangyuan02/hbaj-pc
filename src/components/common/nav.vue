@@ -69,7 +69,7 @@ nav {
             padding-left: 25px;
             padding-right: 14px;
             justify-content: space-between;
-            margin-right: 40px;
+            margin-right: 38px;
             margin-bottom: 40px;
             span {
                 font-size: 16px;

@@ -22,5 +22,8 @@ export default {
     height: 959px;
     background: url("./images/nav.png") no-repeat;
     background-size: 100%;
+    margin-left: 24px;
+    padding-top: 62px;
+    padding-left: 24px;
 }
 </style>
