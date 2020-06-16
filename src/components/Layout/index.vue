@@ -6,10 +6,12 @@
             <div class="container-main">
                 <router-view></router-view>
             </div>
+            <Toolbar></Toolbar>
         </Main>
         <!-- <Footer class="footer"></Footer> -->
         <!-- 登录弹窗 -->
         <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
+        <!-- 右侧工具条 -->
     </div>
 </template>
 
@@ -18,6 +20,7 @@ import { mapState } from "vuex";
 import Header from "./Header";
 // import Footer from "./Footer";
 import Sidebar from "./Sidebar";
+import Toolbar from "../Toolbar";
 import LoginDialog from "@/components/Dialog/LoginDialog";
 export default {
     data() {
@@ -27,7 +30,8 @@ export default {
         Header,
         // Footer,
         Sidebar,
-        LoginDialog
+        LoginDialog,
+        Toolbar
     },
     computed: {
         ...mapState({
