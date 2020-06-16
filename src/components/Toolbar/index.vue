@@ -14,12 +14,15 @@
         <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
         <!-- 音频资源 -->
         <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
+
+        <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
     </div>
 </template>
 
 <script>
 import RichTextBoxDialog from "./Dialog/RichTextBoxDialog";
 import AudioDialog from "./Dialog/AudioDialog";
+import VideoDialog from "./Dialog/VideoDialog";
 export default {
     data() {
         return {
@@ -72,18 +75,20 @@ export default {
             ],
             shows: {
                 isOpenRichTextBoxDialog: false, // 富文本弹窗
-                isOpenAudioDialog: false // 音频资源
+                isOpenAudioDialog: false, // 音频资源
+                isOpenVideoDialog: false // 视频资源
             }
         };
     },
     components: {
         RichTextBoxDialog,
-        AudioDialog
+        AudioDialog,
+        VideoDialog
     },
     methods: {
         toolbarHander(type) {
             if (type === "attachment") {
-                this.shows.isOpenRichTextBoxDialog = true;
+                this.shows.isOpenAudioDialog = true;
             }
         }
     }

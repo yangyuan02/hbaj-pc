@@ -8,7 +8,7 @@
         @close="close"
     >
         <div v-loading="loading.detail">
-            <Audio :title="title" :src="src"></Audio>
+            <audio-hban :title="title" :src="src"></audio-hban>
         </div>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import Audio from "@/components/common/Audio";
+import AudioHban from "@/components/common/Audio";
 export default {
     components: {
-        Audio
+        AudioHban
     },
     props: {
         title: {
