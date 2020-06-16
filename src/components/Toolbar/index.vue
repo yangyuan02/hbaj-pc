@@ -12,11 +12,14 @@
         </div>
         <!-- 富文本编辑器 -->
         <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
+        <!-- 音频资源 -->
+        <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
     </div>
 </template>
 
 <script>
 import RichTextBoxDialog from "./Dialog/RichTextBoxDialog";
+import AudioDialog from "./Dialog/AudioDialog";
 export default {
     data() {
         return {
@@ -68,12 +71,14 @@ export default {
                 }
             ],
             shows: {
-                isOpenRichTextBoxDialog: false // 富文本弹窗
+                isOpenRichTextBoxDialog: false, // 富文本弹窗
+                isOpenAudioDialog: false // 音频资源
             }
         };
     },
     components: {
-        RichTextBoxDialog
+        RichTextBoxDialog,
+        AudioDialog
     },
     methods: {
         toolbarHander(type) {

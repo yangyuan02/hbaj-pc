@@ -7,8 +7,12 @@
         @open="open"
         @close="close"
     >
-        <div v-loading="loading">
+        <div v-loading="loading.detail">
             <RichTextBox></RichTextBox>
+        </div>
+        <div slot="footer">
+            <el-button @click="close">取消</el-button>
+            <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
         </div>
     </el-dialog>
 </template>
@@ -17,7 +21,12 @@
 import RichTextBox from "@/components/common/RichTextBox";
 export default {
     data() {
-        return {};
+        return {
+            loading: {
+                save: false,
+                detail: false
+            }
+        };
     },
     props: {
         visible: {
