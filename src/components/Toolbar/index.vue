@@ -1,56 +1,86 @@
 <template>
     <div id="toolbar">
-        <div class="item-toolbar" v-for="(item, index) in toolbarList" :key="index">
+        <div
+            class="item-toolbar"
+            v-for="(item, index) in toolbarList"
+            :key="index"
+            @click="toolbarHander(item.type)"
+        >
             <el-tooltip class="item" effect="dark" :content="item.text" placement="left">
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
             </el-tooltip>
         </div>
+        <!-- 富文本编辑器 -->
+        <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
     </div>
 </template>
 
 <script>
+import RichTextBoxDialog from "./Dialog/RichTextBoxDialog";
 export default {
     data() {
         return {
             toolbarList: [
                 {
                     text: "简介",
-                    icon: "icontubiaoweb-12"
+                    icon: "icontubiaoweb-12",
+                    type: ""
                 },
                 {
                     text: "制作人员",
-                    icon: "icontubiaoweb-13"
+                    icon: "icontubiaoweb-13",
+                    type: ""
                 },
                 {
                     text: "附件参考",
-                    icon: "icontubiaoweb-14"
+                    icon: "icontubiaoweb-14",
+                    type: "attachment"
                 },
                 {
                     text: "热点内容",
-                    icon: "icontubiaoweb-15"
+                    icon: "icontubiaoweb-15",
+                    type: ""
                 },
                 {
                     text: "引导内容",
-                    icon: "icontubiaoweb-16"
+                    icon: "icontubiaoweb-16",
+                    type: ""
                 },
                 {
                     text: "课件评论",
-                    icon: "icontubiaoweb-17"
+                    icon: "icontubiaoweb-17",
+                    type: ""
                 },
                 {
                     text: "启动引导",
-                    icon: "icontubiaoweb-18"
+                    icon: "icontubiaoweb-18",
+                    type: ""
                 },
                 {
                     text: "内容摘要",
-                    icon: "icontubiaoweb-19"
+                    icon: "icontubiaoweb-19",
+                    type: ""
                 },
                 {
                     text: "快速通道",
-                    icon: "icontubiaoweb-20"
+                    icon: "icontubiaoweb-20",
+                    type: ""
                 }
-            ]
+            ],
+            shows: {
+                isOpenRichTextBoxDialog: false // 富文本弹窗
+            }
         };
+    },
+    components: {
+        RichTextBoxDialog
+    },
+    methods: {
+        toolbarHander(type) {
+            if (type === "attachment") {
+                this.shows.isOpenRichTextBoxDialog = true;
+            }
+        }
     }
 };
 </script>
