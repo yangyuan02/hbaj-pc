@@ -69,6 +69,7 @@ aside {
     width: 255px;
     height: 100%;
     background: rgba(15, 79, 168, 1);
+    flex-shrink: 0;
     .login {
         width: 100%;
         .person {
