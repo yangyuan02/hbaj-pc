@@ -13,7 +13,10 @@
                 <li
                     v-for="(item, index) in menu"
                     :key="index"
-                    :class="[index === 0 ? 'active' : '']"
+                    :class="{
+                        active: $route.path.startsWith(item.path) || item.name === $route.name
+                    }"
+                    @click="goTo(item.path)"
                 >
                     <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
                     <span>{{ item.text }}</span>
@@ -31,35 +34,43 @@ export default {
                 {
                     text: "主页",
                     icon: "icontubiaoweb-01",
-                    path: ""
+                    path: "/home",
+                    name: "Index"
                 },
                 {
                     text: "公共课件",
                     icon: "icontubiaoweb-02",
-                    path: ""
+                    path: "/course"
                 },
                 {
                     text: "海宝资讯",
                     icon: "icontubiaoweb-03",
-                    path: ""
+                    path: "/news"
                 },
                 {
                     text: "我的课件",
                     icon: "icontubiaoweb-04",
-                    path: ""
+                    path: "/my/course"
                 },
                 {
                     text: "我的任务",
                     icon: "icontubiaoweb-05",
-                    path: ""
+                    path: "/my/task"
                 },
                 {
                     text: "我的通知",
                     icon: "icontubiaoweb-06",
-                    path: ""
+                    path: "/my/message"
                 }
             ]
         };
+    },
+    methods: {
+        goTo(path) {
+            this.$router.push({
+                path
+            });
+        }
     }
 };
 </script>

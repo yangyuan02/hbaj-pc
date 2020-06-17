@@ -51,7 +51,7 @@ export default {
             this.$router.push({
                 name: "newsDetail",
                 params: {
-                    id
+                    id: "1"
                 }
             });
         }

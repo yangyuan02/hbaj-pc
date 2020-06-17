@@ -18,7 +18,8 @@ export default {
 
 <style lang="less">
 .bg_nav {
-    width: 749px;
+    // width: 749px;
+    flex: 1;
     height: 959px;
     background: url("./images/nav.png") no-repeat;
     background-size: 100%;
