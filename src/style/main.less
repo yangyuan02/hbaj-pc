@@ -22,8 +22,8 @@ html {
 body {
     color: #333;
     font-size: 0.24rem;
-    font-family: "Helvetica Neue", Tahoma, Arial, PingFangSC-Regular,
-        "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    font-family: "Helvetica Neue", Tahoma, Arial, PingFangSC-Regular, "Hiragino Sans GB",
+        "Microsoft Yahei", sans-serif;
     -webkit-font-smoothing: antialiased;
     background: rgba(243, 242, 247, 1);
 }
@@ -85,5 +85,20 @@ i {
         opacity: 1;
         transform: translateY(0);
         -webkit-transform: translateY(0);
+    }
+}
+
+.moveToLeft {
+    animation: moveToLeft 3s ease-out backwards;
+}
+
+@keyframes moveToLeft {
+    from {
+        opacity: 0;
+        transform: translateX(296px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
     }
 }

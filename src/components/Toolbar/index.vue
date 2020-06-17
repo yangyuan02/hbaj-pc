@@ -10,6 +10,7 @@
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
             </el-tooltip>
         </div>
+
         <!-- 富文本编辑器 -->
         <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
         <!-- 音频资源 -->
@@ -23,6 +24,7 @@
 import RichTextBoxDialog from "./Dialog/RichTextBoxDialog";
 import AudioDialog from "./Dialog/AudioDialog";
 import VideoDialog from "./Dialog/VideoDialog";
+
 export default {
     data() {
         return {
@@ -30,7 +32,7 @@ export default {
                 {
                     text: "简介",
                     icon: "icontubiaoweb-12",
-                    type: ""
+                    type: "intro"
                 },
                 {
                     text: "制作人员",
@@ -88,7 +90,10 @@ export default {
     methods: {
         toolbarHander(type) {
             if (type === "attachment") {
-                this.shows.isOpenAudioDialog = true;
+                this.shows.isOpenRichTextBoxDialog = true;
+            }
+            if (type === "intro") {
+                this.$store.commit("TOGGLE_DRAWER");
             }
         }
     }

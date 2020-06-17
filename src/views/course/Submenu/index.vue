@@ -88,10 +88,11 @@ export default {
             display: flex;
             justify-content: space-between;
             li {
-                width: 190px;
+                // width: 190px;
                 height: 112px;
-                max-width: 100%;
+                max-width: 190px;
                 position: relative;
+                flex: 1;
                 img {
                     width: 100%;
                     height: 100%;
