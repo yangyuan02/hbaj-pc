@@ -2,7 +2,7 @@
 node_modules
 /dist
 /target
-/sh_msa
+/msa_pc
 /upload
 # local env files
 .env.local
