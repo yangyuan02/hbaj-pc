@@ -32,47 +32,47 @@ export default {
                 {
                     text: "简介",
                     icon: "icontubiaoweb-12",
-                    type: "intro"
+                    type: "drawerIntro"
                 },
                 {
                     text: "制作人员",
                     icon: "icontubiaoweb-13",
-                    type: ""
+                    type: "drawerPerson"
                 },
                 {
                     text: "附件参考",
                     icon: "icontubiaoweb-14",
-                    type: "attachment"
+                    type: "drawerAttachment"
                 },
                 {
                     text: "热点内容",
                     icon: "icontubiaoweb-15",
-                    type: ""
+                    type: "drawerHotContent"
                 },
                 {
                     text: "引导内容",
                     icon: "icontubiaoweb-16",
-                    type: ""
+                    type: "drawerGuideContent"
                 },
                 {
                     text: "课件评论",
                     icon: "icontubiaoweb-17",
-                    type: ""
+                    type: "drawerComment"
                 },
                 {
                     text: "启动引导",
                     icon: "icontubiaoweb-18",
-                    type: ""
+                    type: "drawerPlatGuide"
                 },
                 {
                     text: "内容摘要",
                     icon: "icontubiaoweb-19",
-                    type: ""
+                    type: "drawerDigest"
                 },
                 {
                     text: "快速通道",
                     icon: "icontubiaoweb-20",
-                    type: ""
+                    type: "drawerTrack"
                 }
             ],
             shows: {
@@ -89,12 +89,18 @@ export default {
     },
     methods: {
         toolbarHander(type) {
-            if (type === "attachment") {
-                this.shows.isOpenRichTextBoxDialog = true;
+            if (type === "drawerAttachment") {
+                this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
             }
-            if (type === "intro") {
-                this.$store.commit("TOGGLE_DRAWER");
+            if (type === "drawerIntro") {
+                this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
             }
+            if (type === "drawerPerson") {
+                this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
+            }
+            // if (type === "drawerPerson") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
+            // }
         }
     }
 };

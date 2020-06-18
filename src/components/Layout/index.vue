@@ -8,6 +8,8 @@
             </div>
             <!-- 简介面板 -->
             <IntroPanel></IntroPanel>
+            <!-- 课件参与人员 -->
+            <PersonPanel></PersonPanel>
             <!-- 右侧工具条 -->
             <Toolbar></Toolbar>
         </Main>
@@ -27,6 +29,7 @@ import LoginDialog from "@/components/Dialog/LoginDialog";
 
 // 左侧面板
 import IntroPanel from "../Toolbar/Panel/Intro";
+import PersonPanel from "../Toolbar/Panel/Person";
 
 export default {
     data() {
@@ -38,7 +41,9 @@ export default {
         Sidebar,
         LoginDialog,
         Toolbar,
-        IntroPanel
+
+        IntroPanel,
+        PersonPanel
     },
     computed: {
         ...mapState({

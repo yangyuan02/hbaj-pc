@@ -90,7 +90,7 @@ export default {
     methods: {
         handleClose(done) {
             done();
-            this.$store.commit("TOGGLE_DRAWER");
+            this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
         }
     }
 };
