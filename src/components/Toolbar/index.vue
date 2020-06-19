@@ -10,21 +10,10 @@
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
             </el-tooltip>
         </div>
-
-        <!-- 富文本编辑器 -->
-        <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
-        <!-- 音频资源 -->
-        <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
-
-        <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
     </div>
 </template>
 
 <script>
-import RichTextBoxDialog from "./Dialog/RichTextBoxDialog";
-import AudioDialog from "./Dialog/AudioDialog";
-import VideoDialog from "./Dialog/VideoDialog";
-
 export default {
     data() {
         return {
@@ -74,18 +63,8 @@ export default {
                     icon: "icontubiaoweb-20",
                     type: "drawerTrack"
                 }
-            ],
-            shows: {
-                isOpenRichTextBoxDialog: false, // 富文本弹窗
-                isOpenAudioDialog: false, // 音频资源
-                isOpenVideoDialog: false // 视频资源
-            }
+            ]
         };
-    },
-    components: {
-        RichTextBoxDialog,
-        AudioDialog,
-        VideoDialog
     },
     methods: {
         toolbarHander(type) {
