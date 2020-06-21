@@ -29,6 +29,7 @@ export default {
 <style lang="less">
 .message_container {
     display: flex;
+    height: 100%;
     .message_info {
         width: 363px;
     }
