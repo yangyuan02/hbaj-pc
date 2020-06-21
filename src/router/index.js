@@ -52,6 +52,22 @@ export default new Router({
             meta: {
                 title: "公共课件"
             }
+        },
+        {
+            path: "/my/task",
+            name: "MyTask",
+            component: () => import("@/views/my/task"),
+            meta: {
+                title: "我的任务"
+            }
+        },
+        {
+            path: "/my/message",
+            name: "MyMessage",
+            component: () => import("@/views/my/message"),
+            meta: {
+                title: "我的消息"
+            }
         }
     ]
 });
