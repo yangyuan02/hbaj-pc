@@ -40,8 +40,10 @@
             <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
             <!-- 音频资源 -->
             <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
-
+            <!-- 视频资源 -->
             <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
+
+            <AttachmentComponent :visible.sync="shows.isOpenAttachment"></AttachmentComponent>
         </div>
     </el-drawer>
 </template>
@@ -53,6 +55,8 @@ import RichTextBoxDialog from "../Dialog/RichTextBoxDialog";
 import AudioDialog from "../Dialog/AudioDialog";
 import VideoDialog from "../Dialog/VideoDialog";
 
+import AttachmentComponent from "../Dialog";
+
 export default {
     name: "Attachment",
     data() {
@@ -60,14 +64,16 @@ export default {
             shows: {
                 isOpenRichTextBoxDialog: false, // 富文本弹窗
                 isOpenAudioDialog: false, // 音频资源
-                isOpenVideoDialog: false // 视频资源
+                isOpenVideoDialog: false, // 视频资源
+                isOpenAttachment: false // 附件弹窗
             }
         };
     },
     components: {
         RichTextBoxDialog,
         AudioDialog,
-        VideoDialog
+        VideoDialog,
+        AttachmentComponent
     },
     computed: {
         ...mapState({
@@ -99,7 +105,7 @@ export default {
                 });
         },
         addAttachment() {
-            this.shows.isOpenRichTextBoxDialog = true;
+            this.shows.isOpenAttachment = true;
         }
     }
 };
