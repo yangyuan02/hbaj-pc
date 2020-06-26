@@ -6,6 +6,7 @@
         :modal-append-to-body="false"
         @open="open"
         @close="close"
+        width="30%"
     >
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="标题">
@@ -16,6 +17,10 @@
                 </el-input>
             </el-form-item>
         </el-form>
+        <div slot="footer">
+            <el-button @click="close">取消</el-button>
+            <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
+        </div>
     </el-dialog>
 </template>
 
@@ -25,8 +30,28 @@ export default {
         return {
             form: {
                 name: ""
+            },
+            loading: {
+                save: false
             }
         };
+    },
+    props: {
+        visible: {
+            type: Boolean,
+            default: false
+        }
+    },
+    methods: {
+        open() {
+            console.log("打开");
+        },
+        close() {
+            this.$emit("update:visible", false);
+        },
+        save() {
+            console.log("保存");
+        }
     }
 };
 </script>
