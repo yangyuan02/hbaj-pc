@@ -12,7 +12,9 @@
                 <el-tab-pane label="文本" name="text">
                     <el-button type="primary" @click="editDialog('text')">添加</el-button>
                 </el-tab-pane>
-                <el-tab-pane label="图片" name="images">图片</el-tab-pane>
+                <el-tab-pane label="图片" name="images">
+                    <el-button type="primary" @click="editDialog('images')">添加</el-button>
+                </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
                     <AudioHban></AudioHban>
                 </el-tab-pane>
@@ -25,6 +27,7 @@
             </el-tabs>
         </main>
         <TextDialog :visible.sync="shows.isOpenTextDialog"></TextDialog>
+        <ImageDialog :visible.sync="shows.isOpenImagesDialog"></ImageDialog>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
@@ -38,6 +41,7 @@ import AudioHban from "@/components/common/Audio";
 import VideoHban from "@/components/common/Video";
 
 import TextDialog from "./TextDialog";
+import ImageDialog from "./ImageDialog";
 export default {
     data() {
         return {
@@ -46,7 +50,8 @@ export default {
                 detail: false
             },
             shows: {
-                isOpenTextDialog: false
+                isOpenTextDialog: false, // 文本信息
+                isOpenImagesDialog: false
             }
         };
     },
@@ -61,7 +66,8 @@ export default {
         AudioHban,
         VideoHban,
 
-        TextDialog
+        TextDialog,
+        ImageDialog
     },
     methods: {
         open() {
@@ -77,9 +83,11 @@ export default {
             console.log(tab, event);
         },
         editDialog(type) {
-            console.log(type, this.activeName);
-            if (type === this.activeName) {
+            if (type === "text") {
                 this.shows.isOpenTextDialog = true;
+            }
+            if (type === "images") {
+                this.shows.isOpenImagesDialog = true;
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        title="附件管理"
+        title="文本信息"
         :visible.sync="visible"
         :close-on-click-modal="false"
         @open="open"
