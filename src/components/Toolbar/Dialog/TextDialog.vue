@@ -3,7 +3,6 @@
         title="附件管理"
         :visible.sync="visible"
         :close-on-click-modal="false"
-        :modal-append-to-body="false"
         @open="open"
         @close="close"
         width="30%"
@@ -48,6 +47,7 @@ export default {
             console.log("打开");
         },
         close() {
+            console.log(this.$refs.a.style);
             this.$emit("update:visible", false);
         },
         save() {

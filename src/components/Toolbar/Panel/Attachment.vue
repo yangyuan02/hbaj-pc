@@ -3,7 +3,6 @@
         title="我是标题"
         :visible.sync="drawerAttachment"
         :with-header="false"
-        :modal="false"
         :size="296"
         :before-close="handleClose"
     >

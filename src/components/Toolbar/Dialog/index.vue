@@ -2,9 +2,10 @@
     <el-dialog
         title="附件管理"
         :visible.sync="visible"
-        :modal-append-to-body="false"
         @open="open"
         @close="close"
+        append-to-body
+        :close-on-click-modal="false"
     >
         <main v-loading="loading.detail">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
