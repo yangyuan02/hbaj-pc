@@ -16,7 +16,7 @@
                     <el-button type="primary" @click="editDialog('images')">添加</el-button>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <AudioHban></AudioHban>
+                    <el-button type="primary" @click="editDialog('audio')">添加</el-button>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
                     <VideoHban></VideoHban>
@@ -28,6 +28,7 @@
         </main>
         <TextDialog :visible.sync="shows.isOpenTextDialog"></TextDialog>
         <ImageDialog :visible.sync="shows.isOpenImagesDialog"></ImageDialog>
+        <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
@@ -42,6 +43,7 @@ import VideoHban from "@/components/common/Video";
 
 import TextDialog from "./TextDialog";
 import ImageDialog from "./ImageDialog";
+import AudioDialog from "./AudioDialog";
 export default {
     data() {
         return {
@@ -51,7 +53,8 @@ export default {
             },
             shows: {
                 isOpenTextDialog: false, // 文本信息
-                isOpenImagesDialog: false
+                isOpenImagesDialog: false, //图片
+                isOpenAudioDialog: false // 音频
             }
         };
     },
@@ -88,6 +91,9 @@ export default {
             }
             if (type === "images") {
                 this.shows.isOpenImagesDialog = true;
+            }
+            if (type === "audio") {
+                this.shows.isOpenAudioDialog = true;
             }
         }
     }
