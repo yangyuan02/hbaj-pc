@@ -7,6 +7,7 @@
         @open="open"
         @close="close"
         width="30%"
+        append-to-body
     >
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="标题">
