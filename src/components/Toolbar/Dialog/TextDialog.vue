@@ -47,7 +47,6 @@ export default {
             console.log("打开");
         },
         close() {
-            console.log(this.$refs.a.style);
             this.$emit("update:visible", false);
         },
         save() {
