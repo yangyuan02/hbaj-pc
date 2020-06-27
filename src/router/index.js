@@ -54,6 +54,22 @@ export default new Router({
             }
         },
         {
+            path: "/my/person",
+            name: "MyPerson",
+            component: () => import("@/views/my/person"),
+            meta: {
+                title: "我的信息"
+            }
+        },
+        {
+            path: "/my/setting",
+            name: "MySetting",
+            component: () => import("@/views/my/setting"),
+            meta: {
+                title: "编辑信息"
+            }
+        },
+        {
             path: "/my/task",
             name: "MyTask",
             component: () => import("@/views/my/task"),

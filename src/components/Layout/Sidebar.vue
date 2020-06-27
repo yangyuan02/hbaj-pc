@@ -49,6 +49,11 @@ export default {
                     path: "/news"
                 },
                 {
+                    text: "我的信息",
+                    icon: "icontubiaoweb-06",
+                    path: "/my/person"
+                },
+                {
                     text: "我的课件",
                     icon: "icontubiaoweb-04",
                     path: "/my/course"
