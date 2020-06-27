@@ -17,8 +17,10 @@
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
                     <el-button type="primary" @click="editDialog('audio')">添加</el-button>
+                    <AudioHban></AudioHban>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
+                    <el-button type="primary" @click="editDialog('video')">添加</el-button>
                     <VideoHban></VideoHban>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="richtext">
@@ -29,6 +31,7 @@
         <TextDialog :visible.sync="shows.isOpenTextDialog"></TextDialog>
         <ImageDialog :visible.sync="shows.isOpenImagesDialog"></ImageDialog>
         <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
+        <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
@@ -44,6 +47,7 @@ import VideoHban from "@/components/common/Video";
 import TextDialog from "./TextDialog";
 import ImageDialog from "./ImageDialog";
 import AudioDialog from "./AudioDialog";
+import VideoDialog from "./VideoDialog";
 export default {
     data() {
         return {
@@ -54,7 +58,8 @@ export default {
             shows: {
                 isOpenTextDialog: false, // 文本信息
                 isOpenImagesDialog: false, //图片
-                isOpenAudioDialog: false // 音频
+                isOpenAudioDialog: false, // 音频
+                isOpenVideoDialog: false // 视频
             }
         };
     },
@@ -70,7 +75,9 @@ export default {
         VideoHban,
 
         TextDialog,
-        ImageDialog
+        ImageDialog,
+        AudioDialog,
+        VideoDialog
     },
     methods: {
         open() {
@@ -94,6 +101,9 @@ export default {
             }
             if (type === "audio") {
                 this.shows.isOpenAudioDialog = true;
+            }
+            if (type === "video") {
+                this.shows.isOpenVideoDialog = true;
             }
         }
     }
