@@ -1,138 +1,117 @@
 <!--
  * @Author: yangyuan
- * @Date: 2020-04-19 18:58:59
+ * @Date: 2020-04-20 22:10:56
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-06-01 21:25:43
+ * @LastEditTime: 2020-06-01 21:20:39
  * @Description: 
  -->
 <template>
-    <div
-        class="message-item-content"
-        :class="[item.status === 0 ? 'unread' : '']"
-        @click="message(item)"
-    >
-        <div class="role">
-            <div class="role-type">
-                <div class="thumb"></div>
-                <div class="text">
-                    <span>系统管理员</span>
-                </div>
+    <div class="task-item-content">
+        <div class="task-item-title">
+            <div class="text">
+                <p class="ellipsisLineTwo">2019年PSC集中大会站检要点-专题说明</p>
             </div>
-            <div class="role-info">
-                <div class="type-thumb-bg">
-                    <i class="iconfont icontubiao-17"></i>
-                </div>
-                <div class="tags">
-                    <span>咨询通知 </span>
-                </div>
+            <div class="status">
+                <span>未完成</span>
             </div>
         </div>
-        <div class="digest">
-            <p>这是一条消息</p>
+        <div class="task-item-detail">
+            <div class="task-item-thumb ui-lazyLoad-pic">
+                <div class="action">
+                    <span>立即执行</span>
+                </div>
+            </div>
+            <div class="task-item-digest">
+                <div class="duty"><span>负责人:</span><span>yangyuan</span></div>
+                <div class="start-time"><span>发起时间:</span><span>2020-06-06</span></div>
+                <div class="end-time"><span>结束时间:</span><span>2020-06-06</span></div>
+                <div class="member-content">
+                    <div class="text"><span>协作成员:</span></div>
+                    <div class="member-item">
+                        <span>zhangsan</span>
+                        <span>zhangsan</span>
+                        <span>zhangsan</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
-<script>
-import { messageDetail } from "@/model/api";
 
+<script>
+import "@/widget/lazyLoad";
 export default {
     props: {
         item: {
             type: Object,
             default: {}
         }
-    },
-    methods: {
-        message(item) {
-            const { id, status } = item;
-            if (status === 1) {
-                return this.$toast("消息是已读状态");
-            }
-            messageDetail(
-                {
-                    type: "PATCH"
-                },
-                `${id}/read`
-            ).then(res => {
-                if (res.suceeded) {
-                    item.status = 0;
-                    this.$toast("消息已读");
-                }
-                console.log(res);
-            });
-        }
     }
 };
 </script>
 
 <style lang="less">
-.message-item-content {
-    width: 363px;
-    height: 181px;
-    // margin: 0 auto;
-    margin-bottom: 10px;
+.task-item-content {
+    margin: 0 auto;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 1 2px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0.01px 1px 0px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-    filter: blur(0px);
+    filter: blur(px);
+    margin-bottom: 9px;
+    padding: 16px 8px 16px 8px;
     &:last-child {
         margin-bottom: 0;
     }
-    &.unread {
-        background: rgba(238, 238, 238, 1);
-    }
-    .role {
-        height: 90px;
-        background: rgba(96, 175, 255, 1);
+    .task-item-title {
         display: flex;
-        border-radius: 5px 5px 0 0;
-        position: relative;
-        .role-type {
-            display: flex;
-            align-items: center;
-            margin-left: 16px;
-            .thumb {
-                width: 52px;
-                height: 52px;
-                border-radius: 50%;
-                background: url("./images/admin.png") no-repeat;
-                background-size: 100%;
-            }
-            .text {
-                margin-left: 18px;
-                span {
-                    font-size: 14px;
-                    font-family: MicrosoftYaHei;
-                    color: rgba(22, 61, 163, 1);
-                    line-height: 18px;
-                    -webkit-background-clip: text;
-                }
+        .text {
+            flex: 1;
+            margin-right: 4px;
+            p {
+                font-size: 12px;
+                font-family: MicrosoftYaHei;
+                color: rgba(51, 51, 51, 1);
+                line-height: 20px;
+                -webkit-background-clip: text;
             }
         }
-        .role-info {
-            flex: 1;
-            position: relative;
-            .type-thumb-bg {
-                position: absolute;
-                bottom: 0;
-                right: 75px;
-                i {
-                    font-size: 60px;
-                    color: rgba(0, 126, 255, 0.26);
-                }
+        .status {
+            width: 35px;
+            height: 17px;
+            background: rgba(255, 157, 59, 1);
+            border-radius: 1px;
+            text-align: center;
+            line-height: 17px;
+            span {
+                font-size: 10px;
+                font-family: MicrosoftYaHei;
+                color: rgba(255, 255, 255, 1);
+                line-height: 13px;
             }
-            .tags {
-                position: absolute;
-                right: 0;
-                top: 18px;
+        }
+    }
+    .task-item-detail {
+        margin-top: 20px;
+        display: flex;
+
+        .task-item-thumb {
+            width: 105px;
+            height: 105px;
+            // background: #f0f0f0;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            .action {
                 width: 75px;
                 height: 20px;
-                background: rgba(224, 32, 32, 1);
-                border-radius: 10px 0px 0px 10px;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 10px;
                 text-align: center;
                 line-height: 20px;
                 span {
-                    font-size: 12px;
+                    font-size: 11px;
                     font-family: MicrosoftYaHei;
                     color: rgba(255, 255, 255, 1);
                     line-height: 15px;
@@ -140,16 +119,27 @@ export default {
                 }
             }
         }
-    }
-    .digest {
-        padding: 14px 17px;
-        p {
-            font-size: 14px;
+        .task-item-digest {
+            flex: 1;
+            font-size: 12px;
             font-family: MicrosoftYaHei;
-            color: rgba(51, 51, 51, 1);
+            color: rgba(102, 102, 102, 1);
             line-height: 19px;
-            letter-spacing: 1;
             -webkit-background-clip: text;
+            .text {
+                width: 90px;
+            }
+            .member-content {
+                display: flex;
+                flex: 1;
+                .member-item {
+                    display: flex;
+                    flex-wrap: wrap;
+                    span {
+                        margin-right: 5px;
+                    }
+                }
+            }
         }
     }
 }
