@@ -44,6 +44,7 @@ export default {
     margin-left: 24px;
     // padding-top: 62px;
     // padding-left: 24px;
+    cursor: move;
     position: relative;
     nav {
         position: absolute;

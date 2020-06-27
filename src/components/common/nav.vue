@@ -71,6 +71,7 @@ nav {
             justify-content: space-between;
             margin-right: 38px;
             margin-bottom: 40px;
+            cursor: default;
             span {
                 font-size: 16px;
                 font-family: MicrosoftYaHei;
