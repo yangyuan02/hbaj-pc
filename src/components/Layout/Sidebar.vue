@@ -3,8 +3,9 @@
         <div class="login">
             <div class="person">
                 <div class="thumb"></div>
-                <div class="name" @click="$store.commit('TOGGLE_LOGIN')">
-                    <span>船福</span>
+                <div class="name">
+                    <!-- <span>船福</span> -->
+                    <span @click="$store.commit('TOGGLE_LOGIN')">请登录</span>
                 </div>
             </div>
         </div>
