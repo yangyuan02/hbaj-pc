@@ -1,0 +1,20 @@
+<krpano>
+	<plugin name="video"
+			url.flash="videoplayer.swf"
+			url.html5="videoplayer.js"
+			videourl="video.m4v|video.webm"
+			posterurl="videoposter.jpg"
+			pausedonstart="false"
+			loop="false"
+			volume="1.0"
+			onvideoready=""
+			onvideoplay=""
+			onvideopaused=""
+			onvideocomplete=""
+			onerror=""
+	/>
+
+	<image hfov="360" vfov="180">
+		<sphere url="plugin:video" />
+	</image>
+</krpano>
