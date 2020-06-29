@@ -16,7 +16,7 @@ export default {
                 embedpano({
                     id: "kr",
                     swf: `${process.env.VUE_APP_PANO_PATH}/panostatic/tour.swf`,
-                    xml: `${process.env.VUE_APP_PANO_PATH}/panostatic/scene01.xml`,
+                    xml: `${process.env.VUE_APP_PANO_PATH}/panostatic/main.xml`,
                     target: "pano",
                     html5: "prefer",
                     mobilescale: 1.0,
