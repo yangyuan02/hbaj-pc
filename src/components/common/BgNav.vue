@@ -15,8 +15,8 @@ export default {
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
-                    swf: `${process.env.VUE_APP_PANO_PATH}/panostatic/tour.swf`,
-                    xml: `${process.env.VUE_APP_PANO_PATH}/panostatic/main.xml`,
+                    swf: "/pano/tour.swf",
+                    xml: "/pano/main.xml",
                     target: "pano",
                     html5: "prefer",
                     mobilescale: 1.0,
