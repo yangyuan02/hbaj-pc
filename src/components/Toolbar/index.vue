@@ -10,10 +10,20 @@
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
             </el-tooltip>
         </div>
+        <!-- 简介面板 -->
+        <IntroPanel></IntroPanel>
+        <!-- 课件参与人员 -->
+        <PersonPanel></PersonPanel>
+        <!-- 附件 -->
+        <AttachmentPanel></AttachmentPanel>
     </div>
 </template>
 
 <script>
+// 左侧面板
+import IntroPanel from "../Toolbar/Panel/Intro";
+import PersonPanel from "../Toolbar/Panel/Person";
+import AttachmentPanel from "../Toolbar/Panel/Attachment";
 export default {
     data() {
         return {
@@ -65,6 +75,11 @@ export default {
                 }
             ]
         };
+    },
+    components: {
+        IntroPanel,
+        PersonPanel,
+        AttachmentPanel
     },
     methods: {
         toolbarHander(type) {

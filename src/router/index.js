@@ -92,6 +92,14 @@ export default new Router({
             meta: {
                 title: "我的课件"
             }
+        },
+        {
+            path: "/my/p_ditor/:id",
+            name: "panoEditor",
+            component: () => import("@/views/my/panoEditor"),
+            meta: {
+                title: "新闻详情"
+            }
         }
     ]
 });
