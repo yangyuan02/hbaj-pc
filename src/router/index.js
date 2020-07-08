@@ -98,7 +98,7 @@ export default new Router({
             name: "panoEditor",
             component: () => import("@/views/my/panoEditor"),
             meta: {
-                title: "新闻详情"
+                title: "全景编辑器"
             }
         }
     ]

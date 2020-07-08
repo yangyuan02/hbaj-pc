@@ -6,9 +6,6 @@
             <div class="container-main">
                 <router-view></router-view>
             </div>
-
-            <!-- 右侧工具条 -->
-            <Toolbar></Toolbar>
         </Main>
         <!-- <Footer class="footer"></Footer> -->
         <!-- 登录弹窗 -->
@@ -21,7 +18,7 @@ import { mapState } from "vuex";
 import Header from "./Header";
 // import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import Toolbar from "../Toolbar";
+
 import LoginDialog from "@/components/Dialog/LoginDialog";
 
 export default {
@@ -32,8 +29,7 @@ export default {
         Header,
         // Footer,
         Sidebar,
-        LoginDialog,
-        Toolbar
+        LoginDialog
     },
     computed: {
         ...mapState({
@@ -58,6 +54,7 @@ export default {
             padding-top: 24px;
             padding-right: 24px;
             background: rgba(240, 242, 245, 1);
+            height: 100%;
         }
         .panel_sidebar {
             width: 296px;

@@ -17,7 +17,7 @@
         </div>
         <div class="task-item-detail">
             <div class="task-item-thumb ui-lazyLoad-pic">
-                <div class="action">
+                <div class="action" @click="goToPedit">
                     <span>立即执行</span>
                 </div>
             </div>
@@ -45,6 +45,16 @@ export default {
         item: {
             type: Object,
             default: {}
+        }
+    },
+    methods: {
+        goToPedit(id) {
+            this.$router.push({
+                name: "panoEditor",
+                params: {
+                    id: "247"
+                }
+            });
         }
     }
 };

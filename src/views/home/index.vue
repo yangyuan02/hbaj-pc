@@ -43,7 +43,9 @@ export default {
 <style lang="less">
 .home {
     display: flex;
+    height: 100%;
     .home_container {
+        height: 100%;
         .home_news,
         .home_course {
             background: #fff;

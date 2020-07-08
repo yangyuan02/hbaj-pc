@@ -38,7 +38,7 @@ export default {
 .bg_nav {
     // width: 749px;
     flex: 1;
-    height: 959px;
+    height: 100%;
     background: url("./images/nav.png") no-repeat;
     background-size: 100%;
     margin-left: 24px;
