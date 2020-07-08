@@ -14,8 +14,16 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="white" />
         <meta name="theme-color" content="#ff6900" />
-        <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+        />
         <title>加载中...</title>
+        <script
+            type="text/javascript"
+            src="https://msa_pc.vr2shipping.com/pano/panotour.js"
+        ></script>
+        <script type="text/javascript" src="https://msa_pc.vr2shipping.com/pano/jquery.js"></script>
         <!-- <script src="/activity-static/lizard/index.js"></script> -->
         <script type="text/javascript">
             window.globalConfig = {
@@ -39,7 +47,9 @@
                 document.head.appendChild(script);
             }
             function writeLizard() {
-                document.write('<script crossorigin="anonymous" type="text/javascript" src="/activity-static/lizard/index.js"><\/script>');
+                document.write(
+                    '<script crossorigin="anonymous" type="text/javascript" src="/activity-static/lizard/index.js"><\/script>'
+                );
             }
             function loadLizardScript() {
                 if (isLocalStorageSupported()) {
@@ -81,7 +91,9 @@
                         doc.head.appendChild(metaEl);
                     }
                     var docElement = doc.documentElement;
-                    var clientWidth = docElement.getBoundingClientRect ? docElement.getBoundingClientRect().width : docElement.clientWidth;
+                    var clientWidth = docElement.getBoundingClientRect
+                        ? docElement.getBoundingClientRect().width
+                        : docElement.clientWidth;
 
                     var docFontSize = 50 + "px";
                     if (clientWidth <= 1200) {
@@ -90,7 +102,15 @@
                             docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + "px";
                         }
                     }
-                    metaEl.setAttribute("content", "width=device-width,user-scalable=no,initial-scale=" + scale + ",maximum-scale=" + scale + ",minimum-scale=" + scale);
+                    metaEl.setAttribute(
+                        "content",
+                        "width=device-width,user-scalable=no,initial-scale=" +
+                            scale +
+                            ",maximum-scale=" +
+                            scale +
+                            ",minimum-scale=" +
+                            scale
+                    );
                     docElement.style.fontSize = docFontSize;
                 };
                 flex();
