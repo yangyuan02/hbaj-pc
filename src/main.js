@@ -2,10 +2,18 @@ import Vue from "vue";
 import Application from "./App.vue";
 import router from "./router";
 import store from "./store";
+import Toast from "@/components/toast";
+import loading from "@/components/loading";
+import pageLoading from "@/components/pageLoading";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
 Vue.use(ElementUI);
+
+Vue.use(loading);
+Vue.use(pageLoading);
+Vue.use(Toast);
+
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
@@ -20,7 +28,9 @@ router.beforeEach((to, from, next) => {
             // token存在 且token没有过期
             next();
         } else {
-            next({ path: "/login", query: { from: location.href } });
+            window.fromToPage = location.href;
+            store.commit("TOGGLE_LOGIN");
+            next(false);
         }
     } else {
         // 不需要登录的直接next()

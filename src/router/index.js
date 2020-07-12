@@ -58,7 +58,8 @@ export default new Router({
             name: "MyPerson",
             component: () => import("@/views/my/person"),
             meta: {
-                title: "我的信息"
+                title: "我的信息",
+                requireLogin: true
             }
         },
         {
@@ -66,7 +67,8 @@ export default new Router({
             name: "MySetting",
             component: () => import("@/views/my/setting"),
             meta: {
-                title: "编辑信息"
+                title: "编辑信息",
+                requireLogin: true
             }
         },
         {
@@ -74,7 +76,8 @@ export default new Router({
             name: "MyTask",
             component: () => import("@/views/my/task"),
             meta: {
-                title: "我的任务"
+                title: "我的任务",
+                requireLogin: true
             }
         },
         {
@@ -82,7 +85,8 @@ export default new Router({
             name: "MyMessage",
             component: () => import("@/views/my/message"),
             meta: {
-                title: "我的消息"
+                title: "我的消息",
+                requireLogin: true
             }
         },
         {
@@ -90,7 +94,8 @@ export default new Router({
             name: "MyCourse",
             component: () => import("@/views/my/course"),
             meta: {
-                title: "我的课件"
+                title: "我的课件",
+                requireLogin: true
             }
         },
         {
@@ -98,7 +103,8 @@ export default new Router({
             name: "panoEditor",
             component: () => import("@/views/my/panoEditor"),
             meta: {
-                title: "全景编辑器"
+                title: "全景编辑器",
+                requireLogin: true
             }
         }
     ]

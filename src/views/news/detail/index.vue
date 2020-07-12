@@ -65,7 +65,9 @@
 import Recommend from "./recommend";
 import Comment from "./comment";
 export default {
-    data() {},
+    data() {
+        return {};
+    },
     components: {
         Recommend,
         Comment

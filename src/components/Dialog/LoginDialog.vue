@@ -17,15 +17,23 @@
                     <span>海宝安检</span>
                 </div>
             </div>
-            <el-form ref="form" :model="form">
-                <el-form-item label="手机号">
-                    <el-input v-model="form.tel"></el-input>
+            <el-form ref="loginForm" :model="form" :rules="rules">
+                <el-form-item label="手机号" prop="mobile">
+                    <el-input
+                        v-model="form.mobile"
+                        maxlength="11"
+                        placeholder="请输入手机号"
+                    ></el-input>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input v-model="form.password"></el-input>
+                <el-form-item label="密码" prop="password">
+                    <el-input
+                        v-model="form.password"
+                        placeholder="请输入密码"
+                        type="password"
+                    ></el-input>
                 </el-form-item>
                 <el-form-item class="login_btn">
-                    <el-button type="primary" @click="onSubmit">登录</el-button>
+                    <el-button type="primary" @click="submit">登录</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -33,12 +41,19 @@
 </template>
 
 <script>
+import { user } from "@/model/api";
+import validate from "@/widget/validate";
+import store from "@/widget/store";
 export default {
     data() {
         return {
             form: {
-                tel: "",
+                mobile: "",
                 password: ""
+            },
+            rules: {
+                mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
+                password: [{ required: true, message: "请输入密码", trigger: "blur" }]
             },
             loading: false
         };
@@ -56,6 +71,35 @@ export default {
         close() {
             this.$emit("update:visible", false);
             this.$store.commit("TOGGLE_LOGIN");
+        },
+        submit() {
+            if (!validate.isMobile(this.form.mobile)) {
+                return this.$message.error("请输入正确的手机号");
+            }
+            const { mobile, password } = this.form;
+            this.$refs["loginForm"].validate(valid => {
+                if (valid) {
+                    user({ type: "POST", data: { mobile, password } }, "login").then(res => {
+                        if (res.suceeded) {
+                            const {
+                                suceeded,
+                                data: { authorization, id }
+                            } = res;
+
+                            store.set("authorization", authorization, "local");
+                            store.set("userId", id, "local");
+                            store.set("user", res.data, "local");
+                            this.$store.commit("TOGGLE_LOGIN");
+                            this.$message.success("登录成功");
+                            // if (window.fromToPage) {
+                            //     window.location.href = window.fromToPage;
+                            // } else {
+                            //     this.$router.push({ path: "/home" });
+                            // }
+                        }
+                    });
+                }
+            });
         }
     }
 };
