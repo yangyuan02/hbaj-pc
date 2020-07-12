@@ -56,7 +56,8 @@ export default {
                 mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
                 password: [{ required: true, message: "请输入密码", trigger: "blur" }]
             },
-            loading: false
+            loading: false,
+            isLoginAjax: false
         };
     },
     props: {
@@ -76,7 +77,10 @@ export default {
         },
         close() {
             // this.$emit("update:visible", false);
-            // this.$store.commit("TOGGLE_LOGIN");
+            if (this.isLoginAjax) {
+                return;
+            }
+            this.$store.commit("TOGGLE_LOGIN");
         },
         submit() {
             if (!validate.isMobile(this.form.mobile)) {
@@ -95,9 +99,9 @@ export default {
                             store.set("authorization", authorization, "local");
                             store.set("userId", id, "local");
                             store.set("user", res.data, "local");
-                            // this.close();
-                            // this.$emit("update:visible", false);
+                            this.isLoginAjax = true;
                             this.$store.commit("TOGGLE_LOGIN");
+                            // this.isLoginAjax = false;
                             this.$message.success("登录成功");
                         }
                     });
