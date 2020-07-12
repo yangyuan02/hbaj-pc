@@ -22,13 +22,37 @@ function drawImageIOSFix(ctx, img) {
             ctx.drawImage(img, arguments[2], arguments[3] / vertSquashRatio);
             break;
         case 6:
-            ctx.drawImage(img, arguments[2], arguments[3], arguments[4], arguments[5] / vertSquashRatio);
+            ctx.drawImage(
+                img,
+                arguments[2],
+                arguments[3],
+                arguments[4],
+                arguments[5] / vertSquashRatio
+            );
             break;
         case 8:
-            ctx.drawImage(img, arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7] / vertSquashRatio);
+            ctx.drawImage(
+                img,
+                arguments[2],
+                arguments[3],
+                arguments[4],
+                arguments[5],
+                arguments[6],
+                arguments[7] / vertSquashRatio
+            );
             break;
         case 10:
-            ctx.drawImage(img, arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arguments[9] / vertSquashRatio);
+            ctx.drawImage(
+                img,
+                arguments[2],
+                arguments[3],
+                arguments[4],
+                arguments[5],
+                arguments[6],
+                arguments[7],
+                arguments[8],
+                arguments[9] / vertSquashRatio
+            );
             break;
     }
 
@@ -140,7 +164,8 @@ function JPEGEncoder(a) {
                 103,
                 99
             ];
-        for (c = 0; 64 > c; c++) (i = d((b[c] * a + 50) / 100)), 1 > i ? (i = 1) : i > 255 && (i = 255), (e[z[c]] = i);
+        for (c = 0; 64 > c; c++)
+            (i = d((b[c] * a + 50) / 100)), 1 > i ? (i = 1) : i > 255 && (i = 255), (e[z[c]] = i);
         for (
             j = [
                 17,
@@ -213,8 +238,17 @@ function JPEGEncoder(a) {
             k++
         )
             (l = d((j[k] * a + 50) / 100)), 1 > l ? (l = 1) : l > 255 && (l = 255), (f[z[k]] = l);
-        for (m = [1, 1.387039845, 1.306562965, 1.175875602, 1, 0.785694958, 0.5411961, 0.275899379], n = 0, o = 0; 8 > o; o++)
-            for (p = 0; 8 > p; p++) (g[n] = 1 / (8 * e[z[n]] * m[o] * m[p])), (h[n] = 1 / (8 * f[z[n]] * m[o] * m[p])), n++;
+        for (
+            m = [1, 1.387039845, 1.306562965, 1.175875602, 1, 0.785694958, 0.5411961, 0.275899379],
+                n = 0,
+                o = 0;
+            8 > o;
+            o++
+        )
+            for (p = 0; 8 > p; p++)
+                (g[n] = 1 / (8 * e[z[n]] * m[o] * m[p])),
+                    (h[n] = 1 / (8 * f[z[n]] * m[o] * m[p])),
+                    n++;
     }
 
     function J(a, b) {
@@ -224,7 +258,8 @@ function JPEGEncoder(a) {
             d = 0,
             e = new Array();
         for (f = 1; 16 >= f; f++) {
-            for (g = 1; g <= a[f]; g++) (e[b[d]] = []), (e[b[d]][0] = c), (e[b[d]][1] = f), d++, c++;
+            for (g = 1; g <= a[f]; g++)
+                (e[b[d]] = []), (e[b[d]][0] = c), (e[b[d]][1] = f), d++, c++;
             c *= 2;
         }
         return e;
@@ -241,8 +276,16 @@ function JPEGEncoder(a) {
             a = 1,
             b = 2;
         for (c = 1; 15 >= c; c++) {
-            for (d = a; b > d; d++) (n[32767 + d] = c), (m[32767 + d] = []), (m[32767 + d][1] = c), (m[32767 + d][0] = d);
-            for (e = -(b - 1); -a >= e; e++) (n[32767 + e] = c), (m[32767 + e] = []), (m[32767 + e][1] = c), (m[32767 + e][0] = b - 1 + e);
+            for (d = a; b > d; d++)
+                (n[32767 + d] = c),
+                    (m[32767 + d] = []),
+                    (m[32767 + d][1] = c),
+                    (m[32767 + d][0] = d);
+            for (e = -(b - 1); -a >= e; e++)
+                (n[32767 + e] = c),
+                    (m[32767 + e] = []),
+                    (m[32767 + e][1] = c),
+                    (m[32767 + e][0] = b - 1 + e);
             (a <<= 1), (b <<= 1);
         }
     }
@@ -260,7 +303,11 @@ function JPEGEncoder(a) {
     }
 
     function N(a) {
-        for (var b = a[0], c = a[1] - 1; c >= 0; ) b & (1 << c) && (r |= 1 << s), c--, s--, 0 > s && (255 == r ? (O(255), O(0)) : O(r), (s = 7), (r = 0));
+        for (var b = a[0], c = a[1] - 1; c >= 0; )
+            b & (1 << c) && (r |= 1 << s),
+                c--,
+                s--,
+                0 > s && (255 == r ? (O(255), O(0)) : O(r), (s = 7), (r = 0));
     }
 
     function O(a) {
@@ -412,7 +459,21 @@ function JPEGEncoder(a) {
     }
 
     function S(a, b) {
-        P(65472), P(17), O(8), P(b), P(a), O(3), O(1), O(17), O(0), O(2), O(17), O(1), O(3), O(17), O(1);
+        P(65472),
+            P(17),
+            O(8),
+            P(b),
+            P(a),
+            O(3),
+            O(1),
+            O(17),
+            O(0),
+            O(2),
+            O(17),
+            O(1),
+            O(3),
+            O(17),
+            O(1);
     }
 
     function T() {
@@ -454,7 +515,14 @@ function JPEGEncoder(a) {
             j = 63,
             k = 64;
         for (l = Q(a, b), o = 0; k > o; ++o) p[z[o]] = l[o];
-        for (q = p[0] - c, c = p[0], 0 == q ? N(d[0]) : ((h = 32767 + q), N(d[n[h]]), N(m[h])), r = 63; r > 0 && 0 == p[r]; r--);
+        for (
+            q = p[0] - c,
+                c = p[0],
+                0 == q ? N(d[0]) : ((h = 32767 + q), N(d[n[h]]), N(m[h])),
+                r = 63;
+            r > 0 && 0 == p[r];
+            r--
+        );
         if (0 == r) return N(f), c;
         for (s = 1; r >= s; ) {
             for (u = s; 0 == p[s] && r >= s; ++s);
@@ -476,14 +544,24 @@ function JPEGEncoder(a) {
     function Y(a) {
         if ((0 >= a && (a = 1), a > 100 && (a = 100), y != a)) {
             var b = 0;
-            (b = 50 > a ? Math.floor(5e3 / a) : Math.floor(200 - 2 * a)), I(b), (y = a), console.log("Quality set to: " + a + "%");
+            (b = 50 > a ? Math.floor(5e3 / a) : Math.floor(200 - 2 * a)),
+                I(b),
+                (y = a),
+                console.log("Quality set to: " + a + "%");
         }
     }
 
     function Z() {
         var c,
             b = new Date().getTime();
-        a || (a = 50), X(), K(), L(), M(), Y(a), (c = new Date().getTime() - b), console.log("Initialization " + c + "ms");
+        a || (a = 50),
+            X(),
+            K(),
+            L(),
+            M(),
+            Y(a),
+            (c = new Date().getTime() - b),
+            console.log("Initialization " + c + "ms");
     }
 
     var d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, A, B, C, D, E, F, G, H;
@@ -963,9 +1041,18 @@ function JPEGEncoder(a) {
                             (B = m[E++]),
                             (C = m[E++]),
                             (t[H] = ((x[A] + x[(B + 256) >> 0] + x[(C + 512) >> 0]) >> 16) - 128),
-                            (u[H] = ((x[(A + 768) >> 0] + x[(B + 1024) >> 0] + x[(C + 1280) >> 0]) >> 16) - 128),
-                            (v[H] = ((x[(A + 1280) >> 0] + x[(B + 1536) >> 0] + x[(C + 1792) >> 0]) >> 16) - 128);
-                    (d = W(t, g, d, i, k)), (e = W(u, h, e, j, l)), (f = W(v, h, f, j, l)), (y += 32);
+                            (u[H] =
+                                ((x[(A + 768) >> 0] + x[(B + 1024) >> 0] + x[(C + 1280) >> 0]) >>
+                                    16) -
+                                128),
+                            (v[H] =
+                                ((x[(A + 1280) >> 0] + x[(B + 1536) >> 0] + x[(C + 1792) >> 0]) >>
+                                    16) -
+                                128);
+                    (d = W(t, g, d, i, k)),
+                        (e = W(u, h, e, j, l)),
+                        (f = W(v, h, f, j, l)),
+                        (y += 32);
                 }
                 z += 8;
             }
@@ -985,7 +1072,13 @@ function getImageDataFromImage(a) {
     var d,
         b = "string" == typeof a ? document.getElementById(a) : a,
         c = document.createElement("canvas");
-    return (c.width = b.width), (c.height = b.height), (d = c.getContext("2d")), d.drawImage(b, 0, 0), d.getImageData(0, 0, c.width, c.height);
+    return (
+        (c.width = b.width),
+        (c.height = b.height),
+        (d = c.getContext("2d")),
+        d.drawImage(b, 0, 0),
+        d.getImageData(0, 0, c.width, c.height)
+    );
 }
 
 function dataURL2Blob(dataURI) {
@@ -1150,10 +1243,14 @@ ImageUpload.prototype = {
         }
 
         // 修复android
-        if (isAndroid) {
+        else if (isAndroid) {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h);
             var encoder = new JPEGEncoder();
             base64 = encoder.encode(ctx.getImageData(0, 0, w, h), this.options.quality * 100);
+            this.formBlob = this.getSource(base64);
+        } else {
+            drawImageIOSFix(ctx, img, 0, 0, img.width, img.height, 0, 0, w, h);
+            base64 = canvas.toDataURL("image/jpeg", this.options.quality);
             this.formBlob = this.getSource(base64);
         }
         this.upload();

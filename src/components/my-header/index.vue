@@ -65,16 +65,12 @@ export default {
     },
     methods: {
         uploadAvatar(e, opt) {
-            this.$showLoading();
-
             var file = e.currentTarget.files[0];
             const info = this.info;
             var imageUpload = new ImageUpload(file, {
                 url: `/api/file/upload?fileName=${info.namecard}&relatedId=${info.id}&fileType=USER_AVATAR`,
                 fileKey: "file",
                 onUpload: result => {
-                    this.$hideLoading();
-
                     if (result.suceeded >= 1) {
                         // this.params[opt.img] = result.data.img_dir
                         e.target.value = "";

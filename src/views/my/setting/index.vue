@@ -1,7 +1,7 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="编辑信息"></Title>
+            <Title title="编辑信息" :isMore="false"></Title>
             <div class="message_list">
                 <my-header
                     :info="user"
@@ -82,11 +82,13 @@
 import Title from "@/components/common/Title";
 import BgNav from "@/components/common/BgNav";
 import MyHeader from "@/components/my-header";
+import { user } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
         return {
             user: {
-                namecard: ""
+                user: {}
             }
         };
     },
@@ -94,6 +96,44 @@ export default {
         Title,
         BgNav,
         MyHeader
+    },
+    methods: {
+        getUserDetail() {
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "get"
+                },
+                userId
+            ).then(res => {
+                if (res.suceeded) {
+                    this.user = res.data;
+                }
+
+                console.log(res);
+            });
+        },
+        onUploadSuccess(data) {
+            this.user.avatar = data.path;
+        },
+        updateUser() {
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "put",
+                    data: this.user
+                },
+                `${userId}/profile`
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$router.push("/my/person");
+                }
+                console.log(res);
+            });
+        }
+    },
+    mounted() {
+        this.getUserDetail();
     }
 };
 </script>
