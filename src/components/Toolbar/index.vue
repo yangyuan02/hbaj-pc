@@ -102,10 +102,10 @@ export default {
 
 <style lang="less">
 #toolbar {
-    width: 72px;
+    width: 46px;
     height: 100%;
     background: rgba(54, 64, 68, 1);
-    padding-top: 60px;
+    padding-top: 30px;
     .item-toolbar {
         width: 100%;
         display: flex;
@@ -113,7 +113,7 @@ export default {
         align-items: center;
         padding: 20px;
         i {
-            font-size: 26px;
+            font-size: 20px;
             color: #fff;
             cursor: pointer;
         }

@@ -1,6 +1,6 @@
 <template>
     <footer>
-        尾部
+        上海船福科技信息公司
     </footer>
 </template>
 
@@ -16,6 +16,8 @@ export default {
 footer {
     width: 100%;
     height: 80px;
-    background: red;
+    background: #0f4fa8;
+    color: #fff;
+    text-align: left;
 }
 </style>

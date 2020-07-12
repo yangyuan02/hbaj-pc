@@ -33,7 +33,7 @@ export default {
         return {
             menu: [
                 {
-                    text: "主页",
+                    text: "海宝主页",
                     icon: "icontubiaoweb-01",
                     path: "/home",
                     name: "Index"
@@ -83,7 +83,7 @@ export default {
 
 <style lang="less">
 aside {
-    width: 255px;
+    width: 190px;
     height: 100%;
     background: rgba(15, 79, 168, 1);
     flex-shrink: 0;
@@ -116,7 +116,7 @@ aside {
         margin-top: 77px;
         text-align: center;
         li {
-            margin-bottom: 53px;
+            margin-bottom: 30px;
             cursor: pointer;
             &.active {
                 i {
@@ -128,10 +128,10 @@ aside {
             }
             i {
                 color: rgba(255, 255, 255, 1);
-                font-size: 26px;
+                font-size: 18px;
             }
             span {
-                font-size: 24px;
+                font-size: 18px;
                 font-family: MicrosoftYaHei;
                 color: rgba(255, 255, 255, 1);
                 line-height: 31px;
@@ -139,7 +139,9 @@ aside {
                 margin-left: 20px;
                 width: 96px;
                 display: inline-block;
-                text-align-last: justify;
+                // text-align-last: justify;
+                text-align: left;
+                letter-spacing: 2px;
             }
         }
     }

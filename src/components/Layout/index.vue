@@ -3,7 +3,10 @@
         <Header class="header"></Header>
         <Main class="main">
             <Sidebar class="sidebar"></Sidebar>
-            <div class="container-main">
+            <div
+                class="container-main"
+                :style="{ paddingRight: $route.name === 'panoEditor' ? '0px' : '' }"
+            >
                 <router-view></router-view>
             </div>
         </Main>
@@ -50,9 +53,9 @@ export default {
         display: flex;
         .container-main {
             flex: 1;
-            padding-left: 24px;
-            padding-top: 24px;
-            padding-right: 24px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
             background: rgba(240, 242, 245, 1);
             height: 100%;
         }

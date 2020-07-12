@@ -42,7 +42,7 @@ export default {
     display: flex;
     #p_editor {
         flex: 1;
-        margin-right: 24px;
+        margin-right: 14px;
     }
 }
 </style>

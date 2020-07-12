@@ -11,7 +11,7 @@
             <div class="home_course">
                 <Title title="公共课件"></Title>
                 <div class="home_course_list">
-                    <CourseItem v-for="(item, index) in [1, 2]" :key="index"></CourseItem>
+                    <CourseItem v-for="(item, index) in [1, 2, 3]" :key="index"></CourseItem>
                 </div>
             </div>
         </div>
