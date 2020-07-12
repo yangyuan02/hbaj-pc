@@ -7,9 +7,7 @@
                 <TaskItem v-for="(item, index) in [1, 2, 3, 4]" :key="index"></TaskItem>
             </div>
         </div>
-        <div class="message_right">
-            空白区域
-        </div>
+        <BgNav></BgNav>
     </div>
 </template>
 
@@ -18,6 +16,7 @@
 import Title from "@/components/common/Title";
 import Calendar from "@/components/Calendar";
 import TaskItem from "./item";
+import BgNav from "@/components/common/BgNav";
 export default {
     data() {
         return {};
@@ -26,7 +25,8 @@ export default {
         // MessageItem,
         Title,
         Calendar,
-        TaskItem
+        TaskItem,
+        BgNav
     }
 };
 </script>

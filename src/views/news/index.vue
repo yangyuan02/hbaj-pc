@@ -30,5 +30,6 @@ export default {
 <style lang="less">
 .news {
     display: flex;
+    height: 100%;
 }
 </style>

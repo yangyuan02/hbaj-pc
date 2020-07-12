@@ -6,22 +6,22 @@
                 <message-item v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index"></message-item>
             </div>
         </div>
-        <div class="message_right">
-            空白区域
-        </div>
+        <BgNav></BgNav>
     </div>
 </template>
 
 <script>
 import MessageItem from "./item.vue";
 import Title from "@/components/common/Title";
+import BgNav from "@/components/common/BgNav";
 export default {
     data() {
         return {};
     },
     components: {
         MessageItem,
-        Title
+        Title,
+        BgNav
     }
 };
 </script>
