@@ -20,5 +20,7 @@ export default {
 .news_list {
     background: #fff;
     padding: 0 16px;
+    overflow-y: scroll;
+    height: 100%;
 }
 </style>

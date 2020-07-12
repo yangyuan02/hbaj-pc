@@ -89,13 +89,9 @@ export default {
                             store.set("authorization", authorization, "local");
                             store.set("userId", id, "local");
                             store.set("user", res.data, "local");
-                            this.$store.commit("TOGGLE_LOGIN");
+                            // this.close();
+                            this.$emit("update:visible", false);
                             this.$message.success("登录成功");
-                            // if (window.fromToPage) {
-                            //     window.location.href = window.fromToPage;
-                            // } else {
-                            //     this.$router.push({ path: "/home" });
-                            // }
                         }
                     });
                 }

@@ -37,6 +37,8 @@ export default {
     height: 100%;
     .task_list {
         margin-top: 20px;
+        overflow-y: scroll;
+        height: calc(100% - 363px);
     }
     .message_info {
         width: 363px;

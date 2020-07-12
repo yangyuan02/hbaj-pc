@@ -32,6 +32,10 @@ export default {
     height: 100%;
     .message_info {
         width: 363px;
+        .message_list {
+            overflow-y: scroll;
+            height: 100%;
+        }
     }
     .message_right {
         flex: 1;

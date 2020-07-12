@@ -36,10 +36,12 @@ export default {
 <style lang="less">
 .course {
     display: flex;
+    height: 100%;
     .course_nav {
         width: 294px;
         .course_list {
             background: #fff;
+            height: 100%;
             & > nav {
                 ul {
                     li {
@@ -55,7 +57,10 @@ export default {
         margin-left: 16px;
         flex: 1;
         background: #fff;
+        // height: 100%;
         .course_list {
+            overflow-y: scroll;
+            height: calc(100% - 258px);
             & > .course-content-item {
                 .course-item-thumb {
                     width: 125px !important;

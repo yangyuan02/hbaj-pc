@@ -35,18 +35,6 @@ export default {
                     icon: "icontubiaoweb-07",
                     path: "",
                     background: "rgba(153, 193, 254, 1)"
-                },
-                {
-                    text: "待加模块",
-                    icon: "icontubiaoweb-07",
-                    path: "",
-                    background: "rgba(97, 221, 160, 1)"
-                },
-                {
-                    text: "待加模块",
-                    icon: "icontubiaoweb-07",
-                    path: "",
-                    background: "RGBA(204, 204, 204, 1)"
                 }
             ]
         };
@@ -56,6 +44,7 @@ export default {
 
 <style lang="less">
 nav {
+    height: 100%;
     ul {
         display: flex;
         flex-wrap: wrap;

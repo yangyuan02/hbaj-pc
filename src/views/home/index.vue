@@ -2,16 +2,18 @@
     <div class="home">
         <div class="home_container">
             <Banner></Banner>
-            <div class="home_news">
-                <Title title="海宝资讯"></Title>
-                <div class="home_news_list">
-                    <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
+            <div class="scroll">
+                <div class="home_news">
+                    <Title title="海宝资讯"></Title>
+                    <div class="home_news_list">
+                        <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
+                    </div>
                 </div>
-            </div>
-            <div class="home_course">
-                <Title title="公共课件"></Title>
-                <div class="home_course_list">
-                    <CourseItem v-for="(item, index) in [1, 2, 3]" :key="index"></CourseItem>
+                <div class="home_course">
+                    <Title title="公共课件"></Title>
+                    <div class="home_course_list">
+                        <CourseItem v-for="(item, index) in [1, 2, 3]" :key="index"></CourseItem>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,6 +48,10 @@ export default {
     height: 100%;
     .home_container {
         height: 100%;
+        .scroll {
+            overflow-y: scroll;
+            height: calc(100% - 258px);
+        }
         .home_news,
         .home_course {
             background: #fff;

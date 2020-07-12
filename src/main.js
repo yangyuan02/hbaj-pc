@@ -29,8 +29,9 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             window.fromToPage = location.href;
-            store.commit("TOGGLE_LOGIN");
-            next(false);
+            // store.commit("TOGGLE_LOGIN");
+            // next(false);
+            next();
         }
     } else {
         // 不需要登录的直接next()

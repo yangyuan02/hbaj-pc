@@ -40,6 +40,7 @@ export default {
         width: 294px;
         .course_list {
             background: #fff;
+            height: 100%;
             & > nav {
                 ul {
                     li {
@@ -56,6 +57,8 @@ export default {
         flex: 1;
         background: #fff;
         .course_list {
+            overflow-y: scroll;
+            height: calc(100% - 258px);
             & > .course-content-item {
                 .course-item-thumb {
                     width: 125px !important;
