@@ -4,7 +4,7 @@
             <Title title="海宝资讯"></Title>
             <Calendar></Calendar>
             <div class="task_list">
-                <TaskItem v-for="(item, index) in [1, 2, 3, 4]" :key="index"></TaskItem>
+                <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
             </div>
         </div>
         <BgNav></BgNav>
@@ -12,14 +12,23 @@
 </template>
 
 <script>
-// import MessageItem from "./item.vue";
 import Title from "@/components/common/Title";
 import Calendar from "@/components/Calendar";
 import TaskItem from "./item";
 import BgNav from "@/components/common/BgNav";
+
+import { task } from "@/model/api";
+import utils from "@/widget/utils";
+
 export default {
     data() {
-        return {};
+        return {
+            list: [],
+            pageIndex: 1,
+            isScrollLoad: true,
+            showLoading: false,
+            pageTotal: 0
+        };
     },
     components: {
         // MessageItem,
@@ -27,6 +36,73 @@ export default {
         Calendar,
         TaskItem,
         BgNav
+    },
+    methods: {
+        getTaskList() {
+            const { pageIndex } = this;
+            task({
+                type: "GET",
+                data: {
+                    page: pageIndex,
+                    size: 10
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    const { content, total } = res.data;
+                    if (pageIndex > 1) {
+                        setTimeout(() => {
+                            this.showLoading = false;
+                            this.isScrollLoad = true;
+                            this.list = this.list.concat(content || []);
+                        }, 500);
+                    } else {
+                        this.list = content || [];
+                    }
+                    this.pageTotal = total;
+                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
+                        this.showLoading = false;
+                    }
+                }
+            });
+        },
+        scrollLoadList() {
+            const winHeight = window.innerHeight;
+            const scrollTop = document.scrollingElement.scrollTop;
+            const scrollViewHeight =
+                document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
+            const realFunc = () => {
+                if (
+                    winHeight + scrollTop >= scrollViewHeight &&
+                    this.list.length < this.pageTotal
+                ) {
+                    this.showLoading = true;
+                    this.pageIndex += 1;
+                    this.getTaskList();
+                } else {
+                    this.isScrollLoad = true;
+                }
+            };
+            if (this.isScrollLoad) {
+                this.isScrollLoad = false;
+                this.timer = window.requestAnimationFrame(realFunc);
+            }
+        }
+    },
+    mounted() {
+        this.getTaskList();
+        window.addEventListener(
+            "scroll",
+            this.scrollLoadList,
+            utils.isPassive() ? { passive: true, capture: true } : true
+        );
+    },
+    beforeDestroy() {
+        cancelAnimationFrame(this.timer);
+        window.removeEventListener(
+            "scroll",
+            this.scrollLoadList,
+            utils.isPassive() ? { passive: true, capture: true } : true
+        );
     }
 };
 </script>

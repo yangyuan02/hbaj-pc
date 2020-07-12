@@ -9,28 +9,38 @@
     <div class="task-item-content">
         <div class="task-item-title">
             <div class="text">
-                <p class="ellipsisLineTwo">2019年PSC集中大会站检要点-专题说明</p>
+                <p class="ellipsisLineTwo">{{ item.name }}</p>
             </div>
             <div class="status">
-                <span>未完成</span>
+                <span>{{ item.status | formTaskText }}</span>
             </div>
         </div>
         <div class="task-item-detail">
-            <div class="task-item-thumb ui-lazyLoad-pic">
+            <div
+                class="task-item-thumb ui-lazyLoad-pic"
+                v-lazy
+                :data-src="globalConfig.imagePath + item.project.imageUrl"
+            >
                 <div class="action" @click="goToPedit">
                     <span>立即执行</span>
                 </div>
             </div>
             <div class="task-item-digest">
-                <div class="duty"><span>负责人:</span><span>yangyuan</span></div>
-                <div class="start-time"><span>发起时间:</span><span>2020-06-06</span></div>
-                <div class="end-time"><span>结束时间:</span><span>2020-06-06</span></div>
+                <div class="duty">
+                    <span>负责人:</span><span>{{ item.creatorSgname }}</span>
+                </div>
+                <div class="start-time">
+                    <span>发起时间:</span><span>{{ item.startDate | formaData }}</span>
+                </div>
+                <div class="end-time">
+                    <span>结束时间:</span><span>{{ item.expireDate | formaData }}</span>
+                </div>
                 <div class="member-content">
                     <div class="text"><span>协作成员:</span></div>
                     <div class="member-item">
-                        <span>zhangsan</span>
-                        <span>zhangsan</span>
-                        <span>zhangsan</span>
+                        <span v-for="(k, index) in item.project.userList" :key="index">{{
+                            k.sgname
+                        }}</span>
                     </div>
                 </div>
             </div>
