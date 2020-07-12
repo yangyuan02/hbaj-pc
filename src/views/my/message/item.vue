@@ -23,12 +23,12 @@
                     <i class="iconfont icontubiao-17"></i>
                 </div>
                 <div class="tags">
-                    <span>咨询通知 </span>
+                    <span>{{ item.messageType | formMessageText }} </span>
                 </div>
             </div>
         </div>
         <div class="digest">
-            <p>这是一条消息</p>
+            <p>{{ item.content }}</p>
         </div>
     </div>
 </template>
