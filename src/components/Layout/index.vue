@@ -52,6 +52,7 @@ export default {
         flex: 1;
         display: flex;
         height: 100%;
+        overflow: hidden;
         .container-main {
             flex: 1;
             padding-left: 10px;
