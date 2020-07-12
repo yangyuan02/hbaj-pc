@@ -6,13 +6,21 @@
                 <div class="home_news">
                     <Title title="海宝资讯"></Title>
                     <div class="home_news_list">
-                        <NewsItem v-for="(item, index) in [1, 2]" :key="index"></NewsItem>
+                        <NewsItem
+                            v-for="(item, index) in newsList"
+                            :key="index"
+                            :item="item"
+                        ></NewsItem>
                     </div>
                 </div>
                 <div class="home_course">
                     <Title title="公共课件"></Title>
                     <div class="home_course_list">
-                        <CourseItem v-for="(item, index) in [1, 2, 3]" :key="index"></CourseItem>
+                        <CourseItem
+                            v-for="(item, index) in recommendProjectList"
+                            :key="index"
+                            :item="item"
+                        ></CourseItem>
                     </div>
                 </div>
             </div>
@@ -28,9 +36,16 @@ import Banner from "./banner.vue";
 import NewsItem from "@/components/news";
 import CourseItem from "@/components/course";
 
+import { home } from "@/model/api";
+import store from "@/widget/store";
+
 export default {
     data() {
-        return {};
+        return {
+            bannerList: [],
+            recommendProjectList: [],
+            items: []
+        };
     },
     components: {
         BgNav,
@@ -38,6 +53,63 @@ export default {
         Title,
         NewsItem,
         CourseItem
+    },
+    computed: {
+        newsList: function() {
+            return this.items.slice(0, 2);
+        }
+    },
+    methods: {
+        getHome() {
+            home({ type: "GET" }, "app/pageInfo").then(res => {
+                if (res.suceeded) {
+                    const {
+                        recommendProject,
+                        navImage,
+                        newsList,
+                        newsDefaultImage,
+                        blockModuleList
+                    } = res.data;
+                    const hash = {};
+                    const modulesList = [];
+                    this.recommendProjectList = Object.freeze(recommendProject);
+                    this.bannerList = Object.freeze(
+                        navImage.map(item => (item = JSON.parse(item)))
+                    );
+                    this.items = Object.freeze(newsList);
+                    store.set("newsDefaultImage", newsDefaultImage, "local");
+                    blockModuleList.forEach(item => {
+                        item.classList.unshift({ id: -1, moduleId: item.id, name: "全部" });
+                        if (!hash[item.name]) {
+                            hash[item.name] = item.name;
+                        }
+                    });
+                    Object.keys(hash).forEach(item => {
+                        const data = {
+                            name: item
+                        };
+                        data.children = blockModuleList.filter(k => k.name === item);
+                        modulesList.push(data);
+                    });
+                    this.modulesList = modulesList;
+                    store.set("modulesList", modulesList, "local");
+                }
+            });
+        },
+        toNewsDetail(id) {
+            this.$router.push({
+                name: "newsDetail",
+                params: {
+                    id
+                }
+            });
+        },
+        goTo(path) {
+            this.$router.push({ path });
+        }
+    },
+    mounted() {
+        this.getHome();
     }
 };
 </script>

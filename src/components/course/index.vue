@@ -7,37 +7,42 @@
  -->
 <template>
     <div class="course-content-item" @click="goDetail">
-        <div class="course-item-thumb ui-lazyLoad-pic">
+        <div
+            class="course-item-thumb ui-lazyLoad-pic"
+            v-lazy
+            :data-src="globalConfig.imagePath + item.imageUrl"
+        >
             <!-- <img :src="globalConfig.imagePath + item.imageUrl" alt="" /> -->
         </div>
         <div class="course-item-detail">
             <div class="course-item-title">
                 <div class="text ellipsisLineTwo">
-                    <p>船舶大型高压二氧化碳系统实船全景课</p>
+                    <p>{{ item.name }}</p>
                 </div>
                 <div class="status">
-                    <span>公开</span>
+                    <span>{{ item.publicFlg | formPublicFlg }}</span>
                 </div>
             </div>
             <div class="course-item-digest ellipsisLineTwo">
                 <p>
-                    8月6日，上海吴淞口国际邮轮港迎来 五天内第二次邮轮的“三船同靠”…
+                    {{ item.detail }}
                 </p>
             </div>
             <div class="course-item-source">
                 <div class="organization">
                     <span>发布机构:</span>
-                    <span>海宝安检</span>
+                    <span>{{ item.oriEnterpriseName }}</span>
                 </div>
                 <div class="publishTime">
                     <span>发布时间:</span>
-                    <span>2020-06-01</span>
+                    <span>{{ item.publishDate | formaData }}</span>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import "@/widget/lazyLoad";
 export default {
     data() {
         return {};

@@ -10,32 +10,37 @@
         <div class="news-item-detail">
             <div class="news-item-title">
                 <div class="text">
-                    <p class="ellipsisLineTwo">上海海事部门组织“超宽交会”保障邮轮安 全准点靠</p>
+                    <p class="ellipsisLineTwo">{{ item.title }}</p>
                 </div>
             </div>
             <div class="news-item-digest">
                 <p class="ellipsis">
-                    8月6日，上海吴淞口国际邮轮港迎来 五天内第二次邮轮的“三船同靠”…
+                    {{ item.summary }}
                 </p>
             </div>
             <div class="news-item-source">
                 <div class="organization">
                     <span>发布机构:</span>
-                    <span>海宝安检</span>
+                    <span>{{ item.author }}</span>
                 </div>
                 <div class="publishTime">
                     <span>发布时间:</span>
-                    <span>2020-06-01</span>
+                    <span>{{ item.publishTime | formaData }}</span>
                 </div>
             </div>
         </div>
-        <div class="news-item-thumb ui-lazyLoad-pic">
+        <div
+            class="news-item-thumb ui-lazyLoad-pic"
+            v-lazy
+            :data-src="globalConfig.imagePath + item.imageUrl"
+        >
             <!-- <img :src="globalConfig.imagePath + item.imageUrl" :alt="item.title"> -->
         </div>
     </div>
 </template>
 
 <script>
+import "@/widget/lazyLoad";
 export default {
     data() {
         return {};

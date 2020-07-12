@@ -2,19 +2,20 @@ import Vue from "vue";
 import Application from "./App.vue";
 import router from "./router";
 import store from "./store";
-import Toast from "@/components/toast";
-import loading from "@/components/loading";
-import pageLoading from "@/components/pageLoading";
+import filters from "./filters";
+
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
 Vue.use(ElementUI);
 
-Vue.use(loading);
-Vue.use(pageLoading);
-Vue.use(Toast);
-
 Vue.config.productionTip = false;
+
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key]);
+});
+
+Vue.prototype.globalConfig = window.globalConfig;
 
 router.beforeEach((to, from, next) => {
     if (to.name == "login" && window.localStorage.getItem("authorization")) {
