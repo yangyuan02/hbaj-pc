@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="home_container">
-            <Banner></Banner>
+            <Banner :bannerList="bannerList"></Banner>
             <div class="scroll">
                 <div class="home_news">
                     <Title title="海宝资讯"></Title>
