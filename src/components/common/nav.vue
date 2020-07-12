@@ -22,19 +22,19 @@ export default {
             list: [
                 {
                     title: "技术解读",
-                    icon: "icontubiaoweb-07",
+                    icon: "icontubiaoweb-411",
                     path: "",
                     bgColor: "rgba(253,178,133,1)"
                 },
                 {
                     title: "专业英语",
-                    icon: "icontubiaoweb-07",
+                    icon: "icontubiaoweb-431",
                     path: "",
                     bgColor: "rgba(253,144,147,1)"
                 },
                 {
                     title: "模拟训练",
-                    icon: "icontubiaoweb-07",
+                    icon: "icontubiaoweb-42",
                     path: "",
                     bgColor: "rgba(153, 193, 254, 1)"
                 }
