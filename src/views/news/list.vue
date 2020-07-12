@@ -1,6 +1,6 @@
 <template>
     <div class="news_list">
-        <NewsItem v-for="(item, index) in [1, 2, 3, 4, 5, 6, 7, 8]" :key="index"></NewsItem>
+        <NewsItem v-for="(item, index) in [1, 2, 3, 4, 5, 6, 7]" :key="index"></NewsItem>
     </div>
 </template>
 
