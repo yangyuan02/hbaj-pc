@@ -1,7 +1,7 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="海宝资讯"></Title>
+            <Title title="我的任务" :isMore="false"></Title>
             <Calendar></Calendar>
             <div class="task_list">
                 <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>

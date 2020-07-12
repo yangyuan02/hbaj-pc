@@ -1,7 +1,7 @@
 <template>
     <div class="news">
         <div class="home_container">
-            <Title title="海宝资讯"></Title>
+            <Title title="海宝资讯" :isMore="false"></Title>
             <List></List>
         </div>
         <BgNav></BgNav>

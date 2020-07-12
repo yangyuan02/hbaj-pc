@@ -1,22 +1,28 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="用户中心"></Title>
+            <Title title="用户中心" :isMore="false"></Title>
             <div class="message_list">
-                <my-header :info="user"></my-header>
+                <my-header :info="user" :isBack="false"></my-header>
                 <div class="person-box">
-                    <div class="role common" v-for="(item, index) in [1, 2]" :key="index">
-                        <div class="thumb"></div>
+                    <div class="role common" v-for="(item, index) in roleList" :key="index">
+                        <div class="thumb">
+                            <img :src="globalConfig.imagePath + item.enterpriseAvatar" alt="" />
+                        </div>
                         <div class="name">
-                            <span>海宝安检</span>
+                            <span>{{ item.name }}</span>
                         </div>
                         <div class="tag">
                             <span>角色</span>
                         </div>
                     </div>
-                    <div class="organization common" v-for="(item, index) in [1, 2]" :key="index">
+                    <div
+                        class="organization common"
+                        v-for="(item, index) in enterprises"
+                        :key="index"
+                    >
                         <div class="thumb">
-                            <!-- <img :src="globalConfig.imagePath + item.avatar" alt="" /> -->
+                            <img :src="globalConfig.imagePath + item.avatar" alt="" />
                         </div>
                         <div class="name">
                             <span>{{ item.name }}</span>
@@ -68,11 +74,18 @@
 import Title from "@/components/common/Title";
 import BgNav from "@/components/common/BgNav";
 import MyHeader from "@/components/my-header";
-import { user, messageDetail, sceneType } from "@/model/api";
+import { user } from "@/model/api";
 import store from "@/widget/store";
 export default {
     data() {
-        return {};
+        return {
+            user: {},
+            menupB: true,
+            blocks: [],
+            roleList: [],
+            enterprises: [],
+            ModuleIndex: 0
+        };
     },
     components: {
         // MessageItem,
@@ -82,18 +95,31 @@ export default {
     },
     methods: {
         getUserDetail() {
-            const blockId = "27";
-            sceneType(
+            const userId = store.get("userId", "local");
+            user(
                 {
                     type: "get"
                 },
-                blockId
+                userId
             ).then(res => {
                 if (res.suceeded) {
-                    // this.user = res.data;
-                    console.log("用户详情", res);
+                    const { blocks, roleList, enterprises } = res.data;
+                    (blocks || []).forEach(item => {
+                        if (item["moduleList"] && item["moduleList"][0]["classList"]) {
+                            item.classList = item["moduleList"][0]["classList"];
+                        }
+                    });
+                    this.blocks = blocks;
+                    this.roleList = roleList;
+                    this.enterprises = enterprises;
+                    this.user = res.data;
                 }
             });
+        },
+        setModuleIndex(Pindex, index) {
+            this.ModuleIndex = index;
+            this.blocks[Pindex]["classList"] =
+                this.blocks[Pindex]["moduleList"][index].classList || [];
         }
     },
     mounted() {

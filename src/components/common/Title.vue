@@ -3,7 +3,7 @@
         <div class="title">
             <span>{{ title }}</span>
         </div>
-        <div class="more">
+        <div class="more" v-if="isMore">
             <span @click="dispatchEvent">更多</span>
         </div>
     </div>
@@ -24,6 +24,10 @@ export default {
             // 点击之后的回调
             type: Function,
             default: () => {}
+        },
+        isMore: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {

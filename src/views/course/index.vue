@@ -1,7 +1,7 @@
 <template>
     <div class="course">
         <div class="course_nav">
-            <Title title="公共课件"></Title>
+            <Title title="公共课件" :isMore="false"></Title>
             <div class="course_list">
                 <Nav></Nav>
             </div>

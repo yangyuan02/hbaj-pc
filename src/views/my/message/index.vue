@@ -1,7 +1,7 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="海宝资讯"></Title>
+            <Title title="我的消息" :isMore="false"></Title>
             <div class="message_list">
                 <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
             </div>

@@ -93,7 +93,7 @@ export default {
             imageUpload.start();
         },
         edit() {
-            this.$router.push({ name: "mySetting" });
+            this.$router.push({ name: "MySetting" });
         }
     }
 };
