@@ -41,10 +41,11 @@
 </template>
 
 <script>
-import { user } from "@/model/api";
+import { user, messageDetail } from "@/model/api";
 import validate from "@/widget/validate";
 import store from "@/widget/store";
 import { mapState } from "vuex";
+
 export default {
     data() {
         return {
@@ -100,16 +101,43 @@ export default {
                             store.set("userId", id, "local");
                             store.set("user", res.data, "local");
                             this.isLoginAjax = true;
-                            $.cookie(
-                                "authorization",
-                                JSON.parse(window.localStorage.getItem("authorization"))
-                            );
-
                             this.$store.commit("TOGGLE_LOGIN");
                             // this.isLoginAjax = false;
                             this.$message.success("登录成功");
+                            this.getUserDetail();
+                            this.getMessageDetail();
                         }
                     });
+                }
+            });
+        },
+        getUserDetail() {
+            const userId = store.get("userId", "local");
+            user(
+                {
+                    type: "get"
+                },
+                userId
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$store.commit({
+                        type: "SET_USER_INFO",
+                        plylaod: res.data
+                    });
+                    this.user = res.data;
+                }
+            });
+        },
+        getMessageDetail() {
+            messageDetail(
+                {
+                    type: "get"
+                },
+                "unreadCount"
+            ).then(res => {
+                if (res.suceeded) {
+                    const { count } = res.data;
+                    this.count = count;
                 }
             });
         }

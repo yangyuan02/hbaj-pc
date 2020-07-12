@@ -2,10 +2,13 @@
     <aside>
         <div class="login">
             <div class="person">
-                <div class="thumb"></div>
+                <div
+                    class="thumb"
+                    :style="{ backgroundImage: `url(${globalConfig.imagePath + user.avatar})` }"
+                ></div>
                 <div class="name">
-                    <!-- <span>船福</span> -->
-                    <span @click="$store.commit('TOGGLE_LOGIN')">请登录</span>
+                    <span v-if="user.namecard">{{ user.namecard }}</span>
+                    <span @click="$store.commit('TOGGLE_LOGIN')" v-else>请登录</span>
                 </div>
             </div>
         </div>
@@ -28,6 +31,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { user, messageDetail } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
         return {
@@ -71,12 +77,39 @@ export default {
             ]
         };
     },
+    computed: {
+        ...mapState({
+            user: state => state.loginStore.user
+        })
+    },
+
     methods: {
         goTo(path) {
             this.$router.push({
                 path
             });
+        },
+        getUserDetail() {
+            const userId = store.get("userId", "local");
+            if (userId) {
+                user(
+                    {
+                        type: "get"
+                    },
+                    userId
+                ).then(res => {
+                    if (res.suceeded) {
+                        this.$store.commit({
+                            type: "SET_USER_INFO",
+                            plylaod: res.data
+                        });
+                    }
+                });
+            }
         }
+    },
+    mounted() {
+        this.getUserDetail();
     }
 };
 </script>
