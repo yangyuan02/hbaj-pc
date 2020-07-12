@@ -2,10 +2,17 @@
     <div class="submenu">
         <div class="submenu_list">
             <ul>
-                <li v-for="(item, index) in list" :key="index">
+                <li
+                    v-for="(item, index) in shipList"
+                    :key="index"
+                    :class="[
+                        $route.query.blockId.toString() === item.blockId.toString() ? 'active' : ''
+                    ]"
+                    @click="handShip(item)"
+                >
                     <img :src="item.src" :alt="item.text" />
                     <div class="mask">
-                        <span>{{ item.text }}</span>
+                        <span>{{ item.title }}</span>
                     </div>
                 </li>
             </ul>
@@ -13,11 +20,14 @@
         <div class="three_menu_list">
             <ul>
                 <li
-                    v-for="(item, index) in three_list"
+                    v-for="(item, index) in classList"
                     :key="index"
-                    :class="[index === 0 ? 'active' : '']"
+                    :class="[
+                        $route.query.classListId.toString() === item.id.toString() ? 'active' : ''
+                    ]"
+                    @click="handClass(item)"
                 >
-                    <span>{{ item.text }}</span>
+                    <span>{{ item.name }}</span>
                 </li>
             </ul>
         </div>
@@ -35,48 +45,90 @@ export default {
             list: [
                 {
                     src: img1,
-                    text: "豪华游轮"
+                    title: "豪华邮轮"
                 },
                 {
                     src: img2,
-                    text: "散货船"
+                    title: "散货船"
                 },
                 {
                     src: img3,
-                    text: "游船"
+                    title: "普通干货船"
                 },
                 {
                     src: img4,
-                    text: "集装箱船"
+                    title: "集装箱船"
                 }
             ],
-            three_list: [
-                {
-                    text: "全部分类"
-                },
-                {
-                    text: "救生"
-                },
-                {
-                    text: "消防"
-                },
-                {
-                    text: "无线电"
-                },
-                {
-                    text: "航行安全"
-                },
-                {
-                    text: "防污染"
-                },
-                {
-                    text: "安全靠港"
-                },
-                {
-                    text: "专项检查"
-                }
-            ]
+            classList: [],
+            shipList: []
         };
+    },
+    props: {
+        modulesList: {
+            type: Array,
+            default: []
+        },
+        path: {
+            type: String,
+            default: ""
+        }
+    },
+    computed: {
+        emptyList: function() {
+            return 5 - (this.classList.length % 5);
+        }
+    },
+    watch: {
+        $route: {
+            handler() {
+                this.getShipList();
+                this.getClassList();
+            },
+            immediate: true
+        }
+    },
+    methods: {
+        getShipList() {
+            const { name } = this.$route.query;
+            this.shipList = [];
+            const shipList = this.modulesList.filter(item => item.name === name);
+            const list = (shipList[0]["children"] || []).map(item => ({
+                ...item,
+                ...this.list.find(k => k.title === item.blockName)
+            }));
+            this.shipList = list;
+        },
+        getClassList() {
+            const { blockId } = this.$route.query;
+            this.classList = [];
+            this.classList = (this.shipList || []).find(
+                item => item.blockId.toString() === blockId.toString()
+            )["classList"];
+        },
+        handShip({ blockId, classList = [], id }) {
+            const query = {
+                ...this.$route.query,
+                moduleId: id,
+                blockId,
+                classListId: (classList.length && classList[0].id) || ""
+            };
+            this.routerChange(query);
+        },
+        handClass(data) {
+            const { id } = data;
+            const query = {
+                ...this.$route.query,
+                classListId: id
+            };
+            this.routerChange(query);
+        },
+        routerChange(query) {
+            this.$router.push({
+                path: this.path,
+                query
+            });
+        }
     }
 };
 </script>

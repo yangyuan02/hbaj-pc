@@ -2,11 +2,13 @@
     <nav>
         <ul>
             <li
-                v-for="(item, index) in navList"
+                v-for="(item, index) in listNav"
                 :key="index"
-                :style="{ 'background-color': item.background }"
+                :class="[$route.query.name === item.title ? 'active' : '']"
+                @click="handClick(item)"
+                :style="{ 'background-color': item.bgColor }"
             >
-                <span>{{ item.text }}</span>
+                <span>{{ item.title }}</span>
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
             </li>
         </ul>
@@ -17,27 +19,64 @@
 export default {
     data() {
         return {
-            navList: [
+            list: [
                 {
-                    text: "技术解读",
+                    title: "技术解读",
                     icon: "icontubiaoweb-07",
                     path: "",
-                    background: "rgba(253,178,133,1)"
+                    bgColor: "rgba(253,178,133,1)"
                 },
                 {
-                    text: "专业英语",
+                    title: "专业英语",
                     icon: "icontubiaoweb-07",
                     path: "",
-                    background: "rgba(253,144,147,1)"
+                    bgColor: "rgba(253,144,147,1)"
                 },
                 {
-                    text: "训练模拟",
+                    title: "模拟训练",
                     icon: "icontubiaoweb-07",
                     path: "",
-                    background: "rgba(153, 193, 254, 1)"
+                    bgColor: "rgba(153, 193, 254, 1)"
                 }
             ]
         };
+    },
+    props: {
+        modulesList: {
+            type: Array,
+            default: []
+        },
+        path: {
+            type: String,
+            default: ""
+        }
+    },
+    computed: {
+        listNav: function() {
+            return (this.modulesList || []).map(item => ({
+                ...item,
+                ...this.list.find(k => k.title === item.name)
+            }));
+        }
+    },
+    methods: {
+        handClick(data) {
+            const { title, children } = data;
+            const query = {
+                name: title
+            };
+            if (children && children.length > 0) {
+                query.moduleId = children[0].id;
+                query.blockId = children[0].blockId;
+                if (children[0].classList && children[0].classList.length > 0) {
+                    query.classListId = children[0].classList[0].id;
+                }
+            }
+            this.$router.push({
+                path: this.path,
+                query
+            });
+        }
     }
 };
 </script>
