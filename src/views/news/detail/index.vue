@@ -78,7 +78,9 @@ export default {
 <style lang="less">
 .news_detail {
     display: flex;
+    height: 100%;
     .recommend {
+        height: 100%;
         width: 364px;
         .title {
             height: 55px;
