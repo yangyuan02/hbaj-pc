@@ -86,7 +86,7 @@ export default {
 
     methods: {
         goTo(path) {
-            if (path === "/course") {
+            if (path === "/course" || path === "/my/course") {
                 const { name, children } = this.modulesList[0];
                 const query = {
                     name
@@ -99,7 +99,7 @@ export default {
                     }
                 }
                 this.$router.push({
-                    path: "/course",
+                    path,
                     query
                 });
             } else {
