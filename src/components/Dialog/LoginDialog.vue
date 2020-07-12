@@ -100,6 +100,11 @@ export default {
                             store.set("userId", id, "local");
                             store.set("user", res.data, "local");
                             this.isLoginAjax = true;
+                            $.cookie(
+                                "authorization",
+                                JSON.parse(window.localStorage.getItem("authorization"))
+                            );
+
                             this.$store.commit("TOGGLE_LOGIN");
                             // this.isLoginAjax = false;
                             this.$message.success("登录成功");

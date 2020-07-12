@@ -68,6 +68,8 @@
 import Title from "@/components/common/Title";
 import BgNav from "@/components/common/BgNav";
 import MyHeader from "@/components/my-header";
+import { user, messageDetail, sceneType } from "@/model/api";
+import store from "@/widget/store";
 export default {
     data() {
         return {};
@@ -77,6 +79,25 @@ export default {
         Title,
         BgNav,
         MyHeader
+    },
+    methods: {
+        getUserDetail() {
+            const blockId = "27";
+            sceneType(
+                {
+                    type: "get"
+                },
+                blockId
+            ).then(res => {
+                if (res.suceeded) {
+                    // this.user = res.data;
+                    console.log("用户详情", res);
+                }
+            });
+        }
+    },
+    mounted() {
+        this.getUserDetail();
     }
 };
 </script>
