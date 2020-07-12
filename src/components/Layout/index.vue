@@ -51,7 +51,7 @@ export default {
     .main {
         flex: 1;
         display: flex;
-        height: 100%;
+        height: 100%; // TODO:会有bug
         overflow: hidden;
         .container-main {
             flex: 1;

@@ -60,7 +60,7 @@ export default {
         // height: 100%;
         .course_list {
             overflow-y: scroll;
-            height: calc(100% - 258px);
+            // height: calc(100% - 258px);
             & > .course-content-item {
                 .course-item-thumb {
                     width: 125px !important;
