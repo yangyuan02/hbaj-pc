@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         title="登录"
-        :visible.sync="visible"
+        :visible.sync="isOpenLoggin"
         width="30%"
         :close-on-click-modal="false"
         :modal-append-to-body="false"
@@ -44,6 +44,7 @@
 import { user } from "@/model/api";
 import validate from "@/widget/validate";
 import store from "@/widget/store";
+import { mapState } from "vuex";
 export default {
     data() {
         return {
@@ -64,13 +65,18 @@ export default {
             default: false
         }
     },
+    computed: {
+        ...mapState({
+            isOpenLoggin: state => state.loginStore.isOpenLogin
+        })
+    },
     methods: {
         open() {
             console.log("打开");
         },
         close() {
-            this.$emit("update:visible", false);
-            this.$store.commit("TOGGLE_LOGIN");
+            // this.$emit("update:visible", false);
+            // this.$store.commit("TOGGLE_LOGIN");
         },
         submit() {
             if (!validate.isMobile(this.form.mobile)) {
@@ -90,7 +96,8 @@ export default {
                             store.set("userId", id, "local");
                             store.set("user", res.data, "local");
                             // this.close();
-                            this.$emit("update:visible", false);
+                            // this.$emit("update:visible", false);
+                            this.$store.commit("TOGGLE_LOGIN");
                             this.$message.success("登录成功");
                         }
                     });
