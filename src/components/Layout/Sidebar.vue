@@ -91,7 +91,7 @@ export default {
     methods: {
         goTo(path) {
             if (path === "/course" || path === "/my/course") {
-                const { name, children } = this.modulesList[0];
+                const { name, children } = store.get("modulesList", "local")[0];
                 const query = {
                     name
                 };
