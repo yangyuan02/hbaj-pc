@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
             // token存在 且token没有过期
             next();
         } else {
-            window.fromToPage = location.href;
+            window.fromToPage = to.fullPath;
             store.commit("TOGGLE_LOGIN");
             next(false);
             // next();
