@@ -114,6 +114,7 @@ export default {
 .message_container {
     display: flex;
     height: 100%;
+    overflow: hidden;
     .message_info {
         width: 363px;
         .message_list {

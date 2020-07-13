@@ -31,6 +31,7 @@ export default {
 .news {
     display: flex;
     height: 100%;
+    overflow: hidden;
     & > .home_container {
         width: 335px;
     }

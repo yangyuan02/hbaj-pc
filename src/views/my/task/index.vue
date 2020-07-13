@@ -114,6 +114,7 @@ export default {
 .message_container {
     display: flex;
     height: 100%;
+    overflow: hidden;
     .task_list {
         margin-top: 20px;
         overflow-y: scroll;
