@@ -137,8 +137,10 @@ export default {
 .course {
     display: flex;
     height: 100%;
+    overflow: hidden;
     .course_nav {
         width: 294px;
+        height: 100%;
         .course_list {
             background: #fff;
             height: 100%;
