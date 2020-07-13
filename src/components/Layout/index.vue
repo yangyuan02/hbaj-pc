@@ -4,13 +4,20 @@
         <Main class="main">
             <Sidebar class="sidebar"></Sidebar>
             <div
-                class="container-main"
-                :style="{ paddingRight: $route.name === 'panoEditor' ? '0px' : '' }"
+                class="right"
+                style="width:100%;display: flex;
+    flex-direction: column;"
             >
-                <router-view></router-view>
+                <div
+                    class="container-main"
+                    :style="{ paddingRight: $route.name === 'panoEditor' ? '0px' : '' }"
+                >
+                    <router-view></router-view>
+                </div>
+                <Footer class="footer"></Footer>
             </div>
         </Main>
-        <!-- <Footer class="footer"></Footer> -->
+
         <!-- 登录弹窗 -->
         <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
     </div>
@@ -19,7 +26,7 @@
 <script>
 import { mapState } from "vuex";
 import Header from "./Header";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
 import LoginDialog from "@/components/Dialog/LoginDialog";
@@ -30,7 +37,7 @@ export default {
     },
     components: {
         Header,
-        // Footer,
+        Footer,
         Sidebar,
         LoginDialog
     },
@@ -58,8 +65,9 @@ export default {
             padding-left: 10px;
             padding-top: 10px;
             padding-right: 10px;
+            padding-bottom: 10px;
             background: rgba(240, 242, 245, 1);
-            height: 100%;
+            height: calc(100% - 40px);
         }
         .panel_sidebar {
             width: 296px;

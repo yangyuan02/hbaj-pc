@@ -1,6 +1,7 @@
 <template>
     <footer>
-        上海船福科技信息公司
+        <p>上海船福信息科技有限公司设计开发</p>
+        <p>©2019 Vr2shipping 沪ICP备18041012号用户协议</p>
     </footer>
 </template>
 
@@ -15,9 +16,12 @@ export default {
 <style lang="less">
 footer {
     width: 100%;
-    height: 80px;
-    background: #0f4fa8;
+    height: 40px;
     color: #fff;
-    text-align: left;
+    text-align: center;
+    flex-shrink: 0;
+    p {
+        color: rgba(153, 153, 153, 1);
+    }
 }
 </style>
