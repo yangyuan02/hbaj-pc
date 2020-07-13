@@ -86,6 +86,7 @@ export default {
             display: flex;
             .text {
                 flex: 1;
+                height: 40px;
                 p {
                     font-size: 16px;
                     font-family: MicrosoftYaHei;
@@ -112,6 +113,7 @@ export default {
         .course-item-digest {
             margin-top: 2px;
             margin-bottom: 2px;
+            height: 34px;
             p {
                 font-family: MicrosoftYaHei;
                 color: rgba(102, 102, 102, 1);
@@ -124,6 +126,7 @@ export default {
             display: flex;
             align-content: center;
             justify-content: space-between;
+            margin-top: 8px;
             span {
                 font-size: 10px;
                 font-family: MicrosoftYaHei;
