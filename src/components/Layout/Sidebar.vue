@@ -4,7 +4,11 @@
             <div class="person">
                 <div
                     class="thumb"
-                    :style="{ backgroundImage: `url(${globalConfig.imagePath + user.avatar})` }"
+                    :style="{
+                        backgroundImage: user.avatar
+                            ? `url(${globalConfig.imagePath + user.avatar})`
+                            : './images/user_default.png'
+                    }"
                 ></div>
                 <div class="name">
                     <span v-if="user.namecard">{{ user.namecard }}</span>
