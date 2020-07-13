@@ -1,6 +1,6 @@
 <template>
     <div class="message_container">
-        <div class="message_info">
+        <div class="message_info" v-loading="loading">
             <Title title="用户中心" :isMore="false"></Title>
             <div class="message_list">
                 <my-header :info="user" :isBack="false"></my-header>
@@ -84,7 +84,8 @@ export default {
             blocks: [],
             roleList: [],
             enterprises: [],
-            ModuleIndex: 0
+            ModuleIndex: 0,
+            loading: false
         };
     },
     components: {
@@ -95,6 +96,7 @@ export default {
     },
     methods: {
         getUserDetail() {
+            this.loading = true;
             const userId = store.get("userId", "local");
             user(
                 {
@@ -103,6 +105,7 @@ export default {
                 userId
             ).then(res => {
                 if (res.suceeded) {
+                    this.loading = false;
                     const { blocks, roleList, enterprises } = res.data;
                     (blocks || []).forEach(item => {
                         if (item["moduleList"] && item["moduleList"][0]["classList"]) {

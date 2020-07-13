@@ -1,5 +1,5 @@
 <template>
-    <div class="news_list scroll-view-wrapper">
+    <div class="news_list scroll-view-wrapper" v-loading="loading">
         <NewsItem v-for="item in list" :key="item.id" :item="item"></NewsItem>
     </div>
 </template>
@@ -15,7 +15,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             pageTotal: 0,
-            showLoading: false
+            showLoading: false,
+            loading: false
         };
     },
     components: {
@@ -23,6 +24,7 @@ export default {
     },
     methods: {
         getNewsList() {
+            this.loading = true;
             const { pageIndex } = this;
             news({
                 type: "GET",
@@ -32,6 +34,7 @@ export default {
                 }
             }).then(res => {
                 if (res.suceeded) {
+                    this.loading = false;
                     const { content, total } = res.data;
                     if (pageIndex > 1) {
                         setTimeout(() => {

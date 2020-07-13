@@ -3,7 +3,7 @@
         <div class="message_info">
             <Title title="我的任务" :isMore="false"></Title>
             <Calendar></Calendar>
-            <div class="task_list">
+            <div class="task_list" v-loading="loading">
                 <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
             </div>
         </div>
@@ -27,7 +27,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             showLoading: false,
-            pageTotal: 0
+            pageTotal: 0,
+            loading: false
         };
     },
     components: {
@@ -40,6 +41,7 @@ export default {
     methods: {
         getTaskList() {
             const { pageIndex } = this;
+            this.loading = true;
             task({
                 type: "GET",
                 data: {
@@ -48,6 +50,7 @@ export default {
                 }
             }).then(res => {
                 if (res.suceeded) {
+                    this.loading = false;
                     const { content, total } = res.data;
                     if (pageIndex > 1) {
                         setTimeout(() => {

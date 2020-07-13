@@ -2,7 +2,7 @@
     <div class="message_container">
         <div class="message_info">
             <Title title="我的消息" :isMore="false"></Title>
-            <div class="message_list">
+            <div class="message_list" v-loading="loading">
                 <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
             </div>
         </div>
@@ -25,7 +25,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             pageTotal: 0,
-            showLoading: false
+            showLoading: false,
+            loading: false
         };
     },
     components: {
@@ -36,6 +37,7 @@ export default {
     methods: {
         getMessageList() {
             const { pageIndex } = this;
+            this.loading = true;
             messageDetail(
                 {
                     type: "get",
@@ -49,6 +51,7 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     const { content, total } = res.data;
+                    this.loading = false;
                     if (pageIndex > 1) {
                         setTimeout(() => {
                             this.showLoading = false;

@@ -8,7 +8,7 @@
         </div>
         <div class="course_content">
             <Submenu :modulesList="modulesList" path="course"></Submenu>
-            <div class="course_list">
+            <div class="course_list" v-loading="loading">
                 <CourseItem
                     v-for="(item, index) in recommendProjectList"
                     :key="index"
@@ -35,7 +35,8 @@ export default {
             pageIndex: 1,
             isScrollLoad: true,
             showLoading: false,
-            pageTotal: 0
+            pageTotal: 0,
+            loading: false
         };
     },
     components: {
@@ -46,6 +47,7 @@ export default {
     },
     methods: {
         getCourseList() {
+            this.loading = true;
             const { pageIndex } = this;
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
@@ -63,6 +65,7 @@ export default {
                 "project"
             ).then(res => {
                 if (res.suceeded) {
+                    this.loading = false;
                     const { content, total } = res.data;
                     if (pageIndex > 1) {
                         setTimeout(() => {

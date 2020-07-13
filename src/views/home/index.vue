@@ -5,7 +5,7 @@
             <div class="scroll">
                 <div class="home_news">
                     <Title title="海宝资讯"></Title>
-                    <div class="home_news_list">
+                    <div class="home_news_list" v-loading="loading">
                         <NewsItem
                             v-for="(item, index) in newsList"
                             :key="index"
@@ -15,7 +15,7 @@
                 </div>
                 <div class="home_course">
                     <Title title="公共课件"></Title>
-                    <div class="home_course_list">
+                    <div class="home_course_list" v-loading="loading">
                         <CourseItem
                             v-for="(item, index) in recommendProjectList"
                             :key="index"
@@ -44,7 +44,8 @@ export default {
         return {
             bannerList: [],
             recommendProjectList: [],
-            items: []
+            items: [],
+            loading: false
         };
     },
     components: {
@@ -61,8 +62,10 @@ export default {
     },
     methods: {
         getHome() {
+            this.loading = true;
             home({ type: "GET" }, "app/pageInfo").then(res => {
                 if (res.suceeded) {
+                    this.loading = false;
                     const {
                         recommendProject,
                         navImage,
