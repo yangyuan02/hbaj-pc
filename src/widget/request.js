@@ -35,7 +35,17 @@ function clearStorage() {
 
 export default function request(
     url,
-    { type, timeout, dataType = "json", data, cache = false, expires = 5 * 60 * 1000, headers = { "Content-Type": "application/json" }, hostPath, ignoreLogin = false }
+    {
+        type,
+        timeout,
+        dataType = "json",
+        data,
+        cache = false,
+        expires = 5 * 60 * 1000,
+        headers = { "Content-Type": "application/json" },
+        hostPath,
+        ignoreLogin = false
+    }
 ) {
     const options = {
         type,
@@ -57,7 +67,7 @@ export default function request(
 
     if (store.get("authorization", "local")) {
         options.headers["Authorization"] = `Bearer ${store.get("authorization", "local")}`;
-        utils.setCookie("authorization", store.get("authorization", "local"));
+        // utils.setCookie("authorization", store.get("authorization", "local"));
     }
 
     // if (store.get("user", "local")) {
