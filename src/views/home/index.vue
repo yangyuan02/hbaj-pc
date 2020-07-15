@@ -4,7 +4,7 @@
             <Banner :bannerList="bannerList"></Banner>
             <div class="scroll">
                 <div class="home_news">
-                    <Title title="海宝资讯"></Title>
+                    <Title title="海宝资讯" :onClick="toMoreNews"></Title>
                     <div class="home_news_list" v-loading="loading">
                         <NewsItem
                             v-for="(item, index) in newsList"
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="home_course">
-                    <Title title="公共课件"></Title>
+                    <Title title="公共课件" :onClick="toMoreCourse"></Title>
                     <div class="home_course_list" v-loading="loading">
                         <CourseItem
                             v-for="(item, index) in recommendProjectList"
@@ -109,6 +109,26 @@ export default {
         },
         goTo(path) {
             this.$router.push({ path });
+        },
+        toMoreNews() {
+            this.$router.push({ path: "/news" });
+        },
+        toMoreCourse() {
+            const { name, children } = store.get("modulesList", "local")[0];
+            const query = {
+                name
+            };
+            if (children && children.length > 0) {
+                query.moduleId = children[0].id;
+                query.blockId = children[0].blockId;
+                if (children[0].classList && children[0].classList.length > 0) {
+                    query.classListId = children[0].classList[0].id;
+                }
+            }
+            this.$router.push({
+                path: "/course",
+                query
+            });
         }
     },
     mounted() {

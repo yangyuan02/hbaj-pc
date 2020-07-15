@@ -61,7 +61,8 @@ export default {
                 {
                     text: "我的信息",
                     icon: "icontubiaoweb-06",
-                    path: "/my/person"
+                    path: "/my/person",
+                    name: "MySetting"
                 },
                 {
                     text: "我的课件",
@@ -71,7 +72,8 @@ export default {
                 {
                     text: "我的任务",
                     icon: "icontubiaoweb-05",
-                    path: "/my/task"
+                    path: "/my/task",
+                    name: "panoEditor"
                 },
                 {
                     text: "我的通知",
