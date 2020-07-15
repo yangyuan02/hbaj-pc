@@ -99,6 +99,6 @@ export default {
     background: #fff;
     padding: 0 16px;
     overflow-y: scroll;
-    height: 100%;
+    height: calc(100% - 55px);
 }
 </style>

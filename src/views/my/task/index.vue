@@ -3,7 +3,7 @@
         <div class="message_info">
             <Title title="我的任务" :isMore="false"></Title>
             <Calendar></Calendar>
-            <div class="task_list" v-loading="loading">
+            <div class="task_list scroll-view-wrapper" v-loading="loading">
                 <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
             </div>
         </div>
@@ -118,10 +118,12 @@ export default {
     .task_list {
         margin-top: 20px;
         overflow-y: scroll;
-        height: calc(100% - 400px);
+        height: calc(100% - 365px);
+        padding-bottom: 10px;
     }
     .message_info {
         width: 363px;
+        padding-bottom: 5px;
     }
     .message_right {
         flex: 1;

@@ -2,7 +2,7 @@
     <div class="message_container">
         <div class="message_info">
             <Title title="我的消息" :isMore="false"></Title>
-            <div class="message_list" v-loading="loading">
+            <div class="message_list scroll-view-wrapper" v-loading="loading">
                 <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
             </div>
         </div>
@@ -119,7 +119,7 @@ export default {
         width: 363px;
         .message_list {
             overflow-y: scroll;
-            height: 100%;
+            height: calc(100% - 55px);
         }
     }
     .message_right {

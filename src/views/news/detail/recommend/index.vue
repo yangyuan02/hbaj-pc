@@ -100,6 +100,6 @@ export default {
     margin-top: 4px;
     background: #fff;
     overflow-y: scroll;
-    height: 100%;
+    height: calc(100% - 55px);
 }
 </style>
