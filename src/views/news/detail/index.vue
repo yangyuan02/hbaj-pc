@@ -69,7 +69,7 @@ export default {
         return {};
     },
     components: {
-        Recommend,
+        Recommend, // 一些修改
         Comment
     }
 };
