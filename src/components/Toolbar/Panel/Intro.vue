@@ -68,6 +68,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { task } from "@/model/api";
 export default {
     name: "Intro",
     data() {
@@ -91,6 +92,12 @@ export default {
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
+        },
+        getTaskDetail() {
+            // 通过任务id获取项目的有关信息
+            task({
+                type: "GET"
+            });
         }
     }
 };
