@@ -1,13 +1,13 @@
 <template>
     <el-drawer
         title="我是标题"
-        :visible.sync="drawerIntro"
+        :visible="drawerIntro"
         :with-header="false"
         :modal="false"
         :size="296"
         :before-close="handleClose"
     >
-        <div class="panel_sidebar">
+        <div class="panel_sidebar" v-loading="loading">
             <div class="intro common">
                 <h2>课件详情</h2>
                 <el-form label-position="top" :model="params">
@@ -68,7 +68,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { task } from "@/model/api";
+import { taskDetail } from "@/model/api";
 export default {
     name: "Intro",
     data() {
@@ -79,7 +79,8 @@ export default {
                 type: "",
                 textarea: "",
                 value1: "",
-                value2: ""
+                value2: "",
+                loading: false // 加载状态
             }
         };
     },
@@ -88,15 +89,38 @@ export default {
             drawerIntro: state => state.toolbarStore.drawerIntro
         })
     },
+    watch: {
+        drawerIntro(newVal, oldVal) {
+            if (newVal) {
+                this.getTaskDetail();
+            }
+        }
+    },
     methods: {
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
         },
         getTaskDetail() {
+            const taskId = this.$route.params.id;
+            this.loading = true;
+            console.log(taskId);
             // 通过任务id获取项目的有关信息
-            task({
-                type: "GET"
+            taskDetail(
+                {
+                    type: "GET"
+                },
+                taskId
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$nextTick(() => {
+                        this.loading = false;
+                    });
+
+                    console.log(res, "taskId", this.loading);
+                } else {
+                    this.loading = false;
+                }
             });
         }
     }
