@@ -7,7 +7,7 @@
         :size="296"
         :before-close="handleClose"
     >
-        <div class="panel_sidebar" v-loading="loading">
+        <div class="panel_sidebar">
             <div class="intro common">
                 <h2>课件详情</h2>
                 <el-form label-position="top" :model="params">
@@ -79,8 +79,7 @@ export default {
                 type: "",
                 textarea: "",
                 value1: "",
-                value2: "",
-                loading: false // 加载状态
+                value2: ""
             }
         };
     },
@@ -103,8 +102,6 @@ export default {
         },
         getTaskDetail() {
             const taskId = this.$route.params.id;
-            this.loading = true;
-            console.log(taskId);
             // 通过任务id获取项目的有关信息
             taskDetail(
                 {
@@ -113,13 +110,8 @@ export default {
                 taskId
             ).then(res => {
                 if (res.suceeded) {
-                    this.$nextTick(() => {
-                        this.loading = false;
-                    });
-
                     console.log(res, "taskId", this.loading);
                 } else {
-                    this.loading = false;
                 }
             });
         }
