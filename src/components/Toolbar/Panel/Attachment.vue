@@ -19,12 +19,12 @@
                         <span>操作</span>
                     </div>
                     <div class="body">
-                        <div class="item" v-for="(item, index) in [1, 2, 3, 4]" :key="index">
+                        <div class="item" v-for="(item, index) in attachmentList" :key="index">
                             <div class="link">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div class="link_name">
-                                <span class="ellipsis">附件名称</span>
+                            <div class="link_name ellipsis">
+                                <span>{{ item.title }}</span>
                             </div>
                             <div class="operate">
                                 <i class="iconfont icontubiaoweb-21" @click="handleDel"></i>
@@ -56,6 +56,8 @@ import VideoDialog from "../Dialog/VideoDialog";
 
 import AttachmentComponent from "../Dialog";
 
+import { hotspot } from "@/model/api";
+
 export default {
     name: "Attachment",
     data() {
@@ -65,7 +67,8 @@ export default {
                 isOpenAudioDialog: false, // 音频资源
                 isOpenVideoDialog: false, // 视频资源
                 isOpenAttachment: false // 附件弹窗
-            }
+            },
+            attachmentList: [] // 获取附件列表
         };
     },
     components: {
@@ -78,6 +81,13 @@ export default {
         ...mapState({
             drawerAttachment: state => state.toolbarStore.drawerAttachment
         })
+    },
+    watch: {
+        drawerAttachment(newVal, oldVal) {
+            if (newVal) {
+                this.getAttachmentList();
+            }
+        }
     },
     methods: {
         handleClose(done) {
@@ -105,6 +115,25 @@ export default {
         },
         addAttachment() {
             this.shows.isOpenAttachment = true;
+        },
+        getAttachmentList() {
+            const projectId = this.$route.params.projectId;
+            // 通过任务id获取项目的有关信息
+            hotspot({
+                type: "GET",
+                data: {
+                    projectId,
+                    type: "ATTACHMENT",
+                    page: "1",
+                    size: "1000"
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.attachmentList = res.data.content;
+                    console.log(res.data, "attach");
+                } else {
+                }
+            });
         }
     }
 };
@@ -155,6 +184,7 @@ export default {
                     width: 33%;
                     text-align: center;
                     &.link_name {
+                        width: 70px;
                         font-size: 14px;
                         font-family: MicrosoftYaHei;
                         color: rgba(102, 102, 102, 1);
