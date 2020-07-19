@@ -10,10 +10,14 @@
         <div class="panel_sidebar">
             <div class="person common">
                 <h2>课件参与人员</h2>
-                <div class="course_item_person" v-for="(item, index) in [1, 2, 3, 4]" :key="index">
+                <div
+                    class="course_item_person"
+                    v-for="(item, index) in params.userList"
+                    :key="index"
+                >
                     <div class="thumb"></div>
                     <div class="info">
-                        <div class="name">船福</div>
+                        <div class="name">{{ item.sgname }}</div>
                         <div class="role">
                             <div class="title">角色:</div>
                             <div class="roles">
@@ -35,7 +39,9 @@ export default {
     name: "Person",
     data() {
         return {
-            params: {}
+            params: {
+                userList: []
+            }
         };
     },
     computed: {
@@ -57,16 +63,15 @@ export default {
         },
         getProjectDetail() {
             // 获取课件参与人员列表
-            const taskId = this.$route.params.id;
+            const projectId = this.$route.params.projectId;
             projectDetail(
                 {
                     type: "GET"
                 },
-                taskId
+                projectId
             ).then(res => {
                 if (res.suceeded) {
-                    this.params = res.data;
-                    console.log(res, "taskId", this.loading);
+                    this.params.userList = res.data.userList;
                 } else {
                 }
             });
