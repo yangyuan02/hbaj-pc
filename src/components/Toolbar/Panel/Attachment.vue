@@ -185,6 +185,7 @@ export default {
                     text-align: center;
                     &.link_name {
                         width: 70px;
+                        text-align: left;
                         font-size: 14px;
                         font-family: MicrosoftYaHei;
                         color: rgba(102, 102, 102, 1);
