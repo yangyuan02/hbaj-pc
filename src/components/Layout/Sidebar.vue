@@ -151,11 +151,12 @@ aside {
                 width: 76px;
                 height: 76px;
                 background: url("./images/user_default.png") no-repeat;
-                background-size: 100%;
+                background-size: cover;
                 border-radius: 50%;
                 margin: 0 auto;
                 margin-top: 26px;
                 margin-bottom: 4px;
+                background-position: center center;
             }
             .name {
                 margin: 0 auto;
