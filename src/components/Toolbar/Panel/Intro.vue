@@ -13,22 +13,23 @@
                 <el-form label-position="top" :model="params">
                     <el-form-item label="上传图片">
                         <el-upload
+                            class="avatar-uploader"
                             action="https://jsonplaceholder.typicode.com/posts/"
-                            list-type="picture-card"
-                            :on-preview="handlePictureCardPreview"
-                            :on-remove="handleRemove"
-                            limit="1"
-                            class="w100"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload"
                         >
-                            <i class="el-icon-plus"></i>
+                            <img
+                                v-if="params.project.imageUrl"
+                                :src="globalConfig.imagePath + params.project.imageUrl"
+                                class="avatar"
+                            />
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="" />
-                        </el-dialog>
                     </el-form-item>
                     <el-form-item label="发起时间">
                         <el-date-picker
-                            v-model="params.value1"
+                            v-model="params.startDate"
                             type="date"
                             placeholder="选择日期"
                             class="w100"
@@ -37,7 +38,7 @@
                     </el-form-item>
                     <el-form-item label="结束时间">
                         <el-date-picker
-                            v-model="params.value2"
+                            v-model="params.expireDate"
                             type="date"
                             placeholder="选择日期"
                             class="w100"
@@ -45,14 +46,14 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item label="课件标题">
-                        <el-input v-model="params.type" class="w100"></el-input>
+                        <el-input v-model="params.name" class="w100"></el-input>
                     </el-form-item>
                     <el-form-item label="课件简介">
                         <el-input
                             type="textarea"
                             :rows="2"
                             placeholder="请输入内容"
-                            v-model="params.textarea"
+                            v-model="params.project.detail"
                             class="w100"
                         >
                         </el-input>
@@ -74,12 +75,13 @@ export default {
     data() {
         return {
             params: {
-                name: "",
-                region: "",
-                type: "",
-                textarea: "",
-                value1: "",
-                value2: ""
+                project: {
+                    detail: "", // 课件简介
+                    imageUrl: "" // 图片
+                },
+                startDate: "", // 任务开始时间
+                expireDate: "", // 任务结束时间
+                name: "" // 课件标题
             }
         };
     },
@@ -110,6 +112,7 @@ export default {
                 taskId
             ).then(res => {
                 if (res.suceeded) {
+                    this.params = res.data;
                     console.log(res, "taskId", this.loading);
                 } else {
                 }
@@ -119,4 +122,28 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409eff;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
+</style>
