@@ -29,6 +29,8 @@
 
 <script>
 import { mapState } from "vuex";
+import { projectDetail } from "@/model/api";
+
 export default {
     name: "Person",
     data() {
@@ -41,10 +43,33 @@ export default {
             drawerPerson: state => state.toolbarStore.drawerPerson
         })
     },
+    watch: {
+        drawerPerson(newVal, oldVal) {
+            if (newVal) {
+                this.getProjectDetail();
+            }
+        }
+    },
     methods: {
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
+        },
+        getProjectDetail() {
+            // 获取课件参与人员列表
+            const taskId = this.$route.params.id;
+            projectDetail(
+                {
+                    type: "GET"
+                },
+                taskId
+            ).then(res => {
+                if (res.suceeded) {
+                    this.params = res.data;
+                    console.log(res, "taskId", this.loading);
+                } else {
+                }
+            });
         }
     }
 };

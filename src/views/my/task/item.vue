@@ -21,7 +21,7 @@
                 v-lazy
                 :data-src="globalConfig.imagePath + item.project.imageUrl"
             >
-                <div class="action" @click="goToPedit(item.id)">
+                <div class="action" @click="goToPedit(item.id, item.project.id)">
                     <span>立即执行</span>
                 </div>
             </div>
@@ -58,11 +58,12 @@ export default {
         }
     },
     methods: {
-        goToPedit(id) {
+        goToPedit(taskId, projectId) {
             this.$router.push({
                 name: "panoEditor",
                 params: {
-                    id
+                    taskId,
+                    projectId
                 }
             });
         }

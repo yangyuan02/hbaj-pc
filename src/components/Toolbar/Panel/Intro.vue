@@ -103,7 +103,7 @@ export default {
             this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
         },
         getTaskDetail() {
-            const taskId = this.$route.params.id;
+            const taskId = this.$route.params.taskId;
             // 通过任务id获取项目的有关信息
             taskDetail(
                 {

@@ -30,3 +30,5 @@ export const addComment = data => request(`${baseUrl}/comment`, data);
 export const sceneType = data => request(`${baseUrl}/sceneType`, data);
 
 export const taskDetail = (data, url) => request(`${baseUrl}/task/${url}`, data);
+
+export const projectDetail = (data, url) => request(`${baseUrl}/project/${url}`, data);
