@@ -50,7 +50,7 @@
                         </el-date-picker>
                     </el-form-item>
                     <el-form-item label="课件标题">
-                        <el-input v-model="params.name" class="w100"></el-input>
+                        <el-input v-model="params.project.name" class="w100"></el-input>
                     </el-form-item>
                     <el-form-item label="课件简介">
                         <el-input

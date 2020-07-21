@@ -27,7 +27,10 @@
                                 <span>{{ item.title }}</span>
                             </div>
                             <div class="operate">
-                                <i class="iconfont icontubiaoweb-21" @click="handleDel"></i>
+                                <i
+                                    class="iconfont icontubiaoweb-21"
+                                    @click="handleDel(item, index)"
+                                ></i>
                                 <i class="iconfont icontubiaoweb-22"></i>
                                 <i class="iconfont icontubiaoweb-23"></i>
                             </div>
@@ -56,7 +59,7 @@ import VideoDialog from "../Dialog/VideoDialog";
 
 import AttachmentComponent from "../Dialog";
 
-import { hotspot } from "@/model/api";
+import { hotspot, hotspotDetail } from "@/model/api";
 
 export default {
     name: "Attachment",
@@ -94,17 +97,26 @@ export default {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
         },
-        handleDel() {
+        delAttach(id) {
+            // 删除附件
+            hotspotDetail({ type: "delete" }, id).then(res => {
+                if (res.suceeded) {
+                    this.getAttachmentList();
+                    this.$message({
+                        type: "success",
+                        message: "删除成功!"
+                    });
+                }
+            });
+        },
+        handleDel(item, index) {
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
             })
                 .then(() => {
-                    this.$message({
-                        type: "success",
-                        message: "删除成功!"
-                    });
+                    this.delAttach(item.id);
                 })
                 .catch(() => {
                     this.$message({
