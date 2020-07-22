@@ -24,7 +24,14 @@
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
                             <div class="link_name ellipsis">
-                                <span>{{ item.title }}</span>
+                                <el-tooltip
+                                    class="item"
+                                    effect="dark"
+                                    :content="item.title"
+                                    placement="top-start"
+                                >
+                                    <span>{{ item.title }}</span>
+                                </el-tooltip>
                             </div>
                             <div class="operate">
                                 <i
@@ -110,7 +117,7 @@ export default {
             });
         },
         handleDel(item, index) {
-            this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+            this.$confirm(`此操作将永久删 ${item.title}, 是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
