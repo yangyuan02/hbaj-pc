@@ -126,7 +126,20 @@ export default {
                 });
         },
         addAttachment() {
-            this.shows.isOpenAttachment = true;
+            const projectId = this.$route.params.projectId;
+            hotspot({
+                type: "post",
+                data: {
+                    projectId,
+                    title: "请修改附件名称",
+                    type: "ATTACHMENT"
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.getAttachmentList();
+                }
+            });
+            // this.shows.isOpenAttachment = true;
         },
         getAttachmentList() {
             const projectId = this.$route.params.projectId;
