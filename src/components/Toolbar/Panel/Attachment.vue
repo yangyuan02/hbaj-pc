@@ -38,8 +38,14 @@
                                     class="iconfont icontubiaoweb-21"
                                     @click="handleDel(item, index)"
                                 ></i>
-                                <i class="iconfont icontubiaoweb-22"></i>
-                                <i class="iconfont icontubiaoweb-23"></i>
+                                <i
+                                    class="iconfont icontubiaoweb-22"
+                                    @click="up(attachmentList, index)"
+                                ></i>
+                                <i
+                                    class="iconfont icontubiaoweb-23"
+                                    @click="down(attachmentList, index)"
+                                ></i>
                             </div>
                         </div>
                     </div>
@@ -66,7 +72,7 @@ import VideoDialog from "../Dialog/VideoDialog";
 
 import AttachmentComponent from "../Dialog";
 
-import { hotspot, hotspotDetail } from "@/model/api";
+import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
 export default {
     name: "Attachment",
@@ -78,7 +84,8 @@ export default {
                 isOpenVideoDialog: false, // 视频资源
                 isOpenAttachment: false // 附件弹窗
             },
-            attachmentList: [] // 获取附件列表
+            attachmentList: [], // 获取附件列表
+            newArr: [] //
         };
     },
     components: {
@@ -166,6 +173,40 @@ export default {
                 } else {
                 }
             });
+        },
+        sortAttachment() {
+            const projectId = this.$route.params.projectId;
+            const hotspotIds = this.newArr.map(item => item.id);
+            projectDetail(
+                {
+                    type: "post",
+                    data: {
+                        hotspotIds
+                    }
+                },
+                `${projectId}/hotspot/changeSeq`
+            ).then(res => {
+                if (res.suceeded) {
+                    this.getAttachmentList();
+                    console.log(res);
+                }
+            });
+        },
+        up(arr, index) {
+            if (arr.length > 1 && index !== 0) {
+                this.newArr = this.swapItems(arr, index, index - 1);
+                this.sortAttachment();
+            }
+        },
+        down(arr, index) {
+            if (arr.length > 1 && index !== arr.length - 1) {
+                this.newArr = this.swapItems(arr, index, index + 1);
+                this.sortAttachment();
+            }
+        },
+        swapItems(arr, index1, index2) {
+            arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+            return arr;
         }
     }
 };
