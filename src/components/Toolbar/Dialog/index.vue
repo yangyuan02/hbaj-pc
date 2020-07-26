@@ -11,6 +11,7 @@
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
                 <el-tab-pane label="文本" name="text">
                     <el-button type="primary" @click="editDialog('text')">添加</el-button>
+                    <TextList :list="display.textList"></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="images">
                     <el-button type="primary" @click="editDialog('images')">添加</el-button>
@@ -49,8 +50,8 @@
             :onSuccess="getAttachmentVideo"
         ></VideoDialog>
         <div slot="footer">
-            <el-button @click="close">取消</el-button>
-            <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
+            <el-button @click="close">关闭</el-button>
+            <!-- <el-button type="primary" :loading="loading.save" @click="save">保存</el-button> -->
         </div>
     </el-dialog>
 </template>
@@ -64,6 +65,8 @@ import TextDialog from "./TextDialog";
 import ImageDialog from "./ImageDialog";
 import AudioDialog from "./AudioDialog";
 import VideoDialog from "./VideoDialog";
+
+import TextList from "../List/Text";
 
 import { hotspotContent } from "@/model/api";
 
@@ -81,7 +84,10 @@ export default {
                 isOpenVideoDialog: false // 视频
             },
             params: {}, // 参数
-            attchmentId: "" // 附件id
+            attchmentId: "", // 附件id
+            display: {
+                textList: [] // 文本列表
+            }
         };
     },
     props: {
@@ -102,7 +108,9 @@ export default {
         TextDialog,
         ImageDialog,
         AudioDialog,
-        VideoDialog
+        VideoDialog,
+
+        TextList
     },
     watch: {
         data(newVal) {
@@ -155,6 +163,9 @@ export default {
                 "all"
             ).then(res => {
                 if (res.suceeded) {
+                    if (type === "TEXT") {
+                        this.display.textList = res.data;
+                    }
                     console.log(res);
                 }
             });
