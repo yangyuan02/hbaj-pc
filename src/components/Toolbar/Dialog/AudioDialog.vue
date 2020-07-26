@@ -89,7 +89,7 @@ export default {
             },
             rules: {
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
-                extra: [{ required: true, message: "请上传图片" }]
+                extra: [{ required: true, message: "请上传音频" }]
             },
             fileList: [
                 // {
