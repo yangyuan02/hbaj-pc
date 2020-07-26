@@ -124,7 +124,7 @@ export default {
             return isJPG && isLt2M;
         },
         addImages() {
-            // 新增文本内容
+            // 新增图片内容
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList

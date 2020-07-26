@@ -9,28 +9,30 @@
         append-to-body
     >
         <div v-loading="loading.detail">
-            <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                multiple
-                :limit="3"
-                :on-exceed="handleExceed"
-                :file-list="fileList"
-            >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-            <el-input
-                type="textarea"
-                :rows="2"
-                placeholder="请输入内容"
-                v-model="textarea"
-                style="margin-left: 0px;"
-            >
-            </el-input>
+            <el-form ref="form" :model="params" label-width="80px" :rules="rules">
+                <el-form-item label="" prop="extra">
+                    <el-upload
+                        class="upload-demo"
+                        :action="uploadUrl"
+                        :on-success="handleAvatarSuccess"
+                        :limit="1"
+                        :file-list="fileList"
+                    >
+                        <el-button size="small" type="primary">点击上传</el-button>
+                        <div slot="tip" class="el-upload__tip">只能上传音频文件</div>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item label="" prop="title">
+                    <el-input
+                        type="textarea"
+                        :rows="2"
+                        placeholder="请输入描述"
+                        v-model="params.title"
+                        style="margin-left: 0px;"
+                    >
+                    </el-input>
+                </el-form-item>
+            </el-form>
         </div>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
@@ -40,36 +42,61 @@
 </template>
 
 <script>
+import { hotspotContentDetail } from "@/model/api";
+
 export default {
     props: {
+        visible: {
+            type: Boolean,
+            default: false
+        },
         title: {
             // 音频资源标题
             default: "",
             type: String
         },
-        src: {
-            // 音频资源链接
-            default: "",
-            type: String
+        id: {
+            type: [String, Number],
+            default: ""
         },
-        visible: {
-            type: Boolean,
-            default: false
+        onSuccess: {
+            type: Function,
+            default: () => {}
+        }
+    },
+    watch: {
+        id(newVal) {
+            this.params.hotspotId = newVal;
+        }
+    },
+    computed: {
+        uploadUrl() {
+            const url = `/api/file/upload?fileName=${this.params.content}&fileType=HOTSPOT_AUDIO`;
+            return url;
         }
     },
     data() {
         return {
+            params: {
+                // 参数
+                content: "", // 内容
+                extra: "", // 附件url
+                hotspotId: 0, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "AUDIO" // 类型
+            },
+            rules: {
+                title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+                extra: [{ required: true, message: "请上传图片" }]
+            },
             fileList: [
-                {
-                    name: "food.jpeg",
-                    url:
-                        "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
-                },
-                {
-                    name: "food2.jpeg",
-                    url:
-                        "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
-                }
+                // {
+                //     name: "food.jpeg",
+                //     url:
+                //         "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
+                // }
             ],
             loading: {
                 save: false,
@@ -85,22 +112,34 @@ export default {
             this.$emit("update:visible", false);
         },
         save() {
+            this.$refs["form"].validate(valid => {
+                if (valid) {
+                    this.addAudio();
+                }
+            });
             console.log("保存");
         },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
+        handleAvatarSuccess(res, file) {
+            console.log(res);
+            this.params.extra = globalConfig.imagePath + res.data.path;
         },
-        handlePreview(file) {
-            console.log(file);
-        },
-        handleExceed(files, fileList) {
-            this.$message.warning(
-                `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length +
-                    fileList.length} 个文件`
-            );
-        },
-        beforeRemove(file, fileList) {
-            return this.$confirm(`确定移除 ${file.name}？`);
+        addAudio() {
+            // 新增音频内容
+            const hotspotContentList = [this.params];
+            const params = {
+                hotspotContentList
+            };
+            hotspotContentDetail({
+                type: "post",
+                data: params
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.$refs["form"].resetFields();
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
         }
     }
 };
