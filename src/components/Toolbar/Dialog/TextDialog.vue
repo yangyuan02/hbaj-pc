@@ -8,12 +8,17 @@
         width="30%"
         append-to-body
     >
-        <el-form ref="form" :model="form" label-width="80px">
+        <el-form ref="form" :model="params" :rules="rules" label-width="80px">
             <el-form-item label="标题">
-                <el-input v-model="form.name" placeholder="请输入标题"></el-input>
+                <el-input v-model="params.title" placeholder="请输入标题"></el-input>
             </el-form-item>
             <el-form-item label="内容">
-                <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea">
+                <el-input
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入内容"
+                    v-model="params.content"
+                >
                 </el-input>
             </el-form-item>
         </el-form>
@@ -25,6 +30,8 @@
 </template>
 
 <script>
+import { hotspotContentDetail } from "@/model/api";
+
 export default {
     data() {
         return {
@@ -33,9 +40,20 @@ export default {
             },
             params: {
                 // 参数
+                content: "", // 内容
+                // extra: "string", // 附件url
+                hotspotId: 0, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "TEXT" // 类型
             },
             loading: {
                 save: false
+            },
+            rules: {
+                content: [{ required: true, message: "请输入内容", trigger: "blur" }],
+                title: [{ required: true, message: "请输入标题", trigger: "blur" }]
             }
         };
     },
@@ -44,9 +62,18 @@ export default {
             type: Boolean,
             default: false
         },
-        data: {
-            type: Object,
-            default: {}
+        id: {
+            type: [String, Number],
+            default: ""
+        },
+        onSuccess: {
+            type: Function,
+            default: () => {}
+        }
+    },
+    watch: {
+        id(newVal) {
+            this.params.hotspotId = newVal;
         }
     },
     methods: {
@@ -57,7 +84,26 @@ export default {
             this.$emit("update:visible", false);
         },
         save() {
+            this.$refs["form"].validate(valid => {
+                if (valid) {
+                    this.addText();
+                }
+            });
+
             console.log("保存");
+        },
+        addText() {
+            // 新增文本内容
+            hotspotContentDetail({
+                type: "post",
+                data: this.params
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
         }
     }
 };

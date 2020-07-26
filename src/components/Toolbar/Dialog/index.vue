@@ -28,10 +28,26 @@
                 </el-tab-pane>
             </el-tabs>
         </main>
-        <TextDialog :visible.sync="shows.isOpenTextDialog"></TextDialog>
-        <ImageDialog :visible.sync="shows.isOpenImagesDialog"></ImageDialog>
-        <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
-        <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
+        <TextDialog
+            :visible.sync="shows.isOpenTextDialog"
+            :id="attchmentId"
+            :onSuccess="getAttachmentText"
+        ></TextDialog>
+        <ImageDialog
+            :visible.sync="shows.isOpenImagesDialog"
+            :id="attchmentId"
+            :onSuccess="getAttachmentImages"
+        ></ImageDialog>
+        <AudioDialog
+            :visible.sync="shows.isOpenAudioDialog"
+            :id="attchmentId"
+            :onSuccess="getAttachmentAudio"
+        ></AudioDialog>
+        <VideoDialog
+            :visible.sync="shows.isOpenVideoDialog"
+            :id="attchmentId"
+            :onSuccess="getAttachmentVideo"
+        ></VideoDialog>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
@@ -64,7 +80,8 @@ export default {
                 isOpenAudioDialog: false, // 音频
                 isOpenVideoDialog: false // 视频
             },
-            params: {} // 参数
+            params: {}, // 参数
+            attchmentId: "" // 附件id
         };
     },
     props: {
@@ -108,6 +125,7 @@ export default {
             console.log(tab, event);
         },
         editDialog(type) {
+            this.attchmentId = this.params.id;
             if (type === "text") {
                 this.shows.isOpenTextDialog = true;
             }

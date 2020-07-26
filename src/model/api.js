@@ -38,3 +38,5 @@ export const hotspot = (data, url) => request(`${baseUrl}/hotspot`, data);
 export const hotspotDetail = (data, url) => request(`${baseUrl}/hotspot/${url}`, data);
 
 export const hotspotContent = (data, url) => request(`${baseUrl}/hotspotContent/${url}`, data);
+
+export const hotspotContentDetail = (data, url) => request(`${baseUrl}/hotspotContent`, data);
