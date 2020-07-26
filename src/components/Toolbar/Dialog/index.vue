@@ -10,10 +10,13 @@
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
                 <el-tab-pane label="文本" name="text">
-                    <TextList :list="display.textList"></TextList>
+                    <TextList :list="display.textList" :onSuccess="getAttachmentText"></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="image">
-                    <ImagesList :list="display.imageList"></ImagesList>
+                    <ImagesList
+                        :list="display.imageList"
+                        :onSuccess="getAttachmentImages"
+                    ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
                     <AudioHban :src="display.audioList[0].extra"></AudioHban>
