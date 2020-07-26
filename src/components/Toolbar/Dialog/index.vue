@@ -7,28 +7,27 @@
         append-to-body
         :close-on-click-modal="false"
     >
-        <main v-loading="loading.detail">
+        <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
                 <el-tab-pane label="文本" name="text">
-                    <el-button type="primary" @click="editDialog('text')">添加</el-button>
                     <TextList :list="display.textList"></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="image">
-                    <el-button type="primary" @click="editDialog('image')">添加</el-button>
                     <ImagesList :list="display.imagesList"></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <el-button type="primary" @click="editDialog('audio')">添加</el-button>
                     <AudioHban></AudioHban>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
-                    <el-button type="primary" @click="editDialog('video')">添加</el-button>
                     <VideoHban></VideoHban>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="richtext">
                     <RichTextBox></RichTextBox>
                 </el-tab-pane>
             </el-tabs>
+            <div class="operate">
+                <el-button type="primary" @click="editDialog()">添加</el-button>
+            </div>
         </main>
         <TextDialog
             :visible.sync="shows.isOpenTextDialog"
@@ -138,18 +137,18 @@ export default {
             this.handerAttachment(name);
             console.log(tab, event);
         },
-        editDialog(type) {
+        editDialog() {
             this.attchmentId = this.params.id;
-            if (type === "text") {
+            if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;
             }
-            if (type === "image") {
+            if (this.activeName === "image") {
                 this.shows.isOpenImagesDialog = true;
             }
-            if (type === "audio") {
+            if (this.activeName === "audio") {
                 this.shows.isOpenAudioDialog = true;
             }
-            if (type === "video") {
+            if (this.activeName === "video") {
                 this.shows.isOpenVideoDialog = true;
             }
         },
@@ -206,9 +205,17 @@ export default {
 </script>
 
 <style lang="less">
-.attach_model {
-    .el-dialog__body {
-        padding-top: 0px;
+.attchment_dialog {
+    position: relative;
+    .operate {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .attach_model {
+        .el-dialog__body {
+            padding-top: 0px;
+        }
     }
 }
 </style>
