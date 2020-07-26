@@ -23,7 +23,7 @@
                             <div class="link">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div class="link_name ellipsis">
+                            <div class="link_name ellipsis" @click="editOpenEditAttachment(item)">
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
@@ -59,6 +59,13 @@
             <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
 
             <AttachmentComponent :visible.sync="shows.isOpenAttachment"></AttachmentComponent>
+
+            <!-- 修改附件弹窗 -->
+            <editAttachmentDialog
+                :visible.sync="shows.isOpenEditAttachment"
+                :data="currentItem"
+                :onSuccess="getAttachmentList"
+            ></editAttachmentDialog>
         </div>
     </el-drawer>
 </template>
@@ -72,6 +79,8 @@ import VideoDialog from "../Dialog/VideoDialog";
 
 import AttachmentComponent from "../Dialog";
 
+import editAttachmentDialog from "./editAttachment";
+
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
 export default {
@@ -82,17 +91,20 @@ export default {
                 isOpenRichTextBoxDialog: false, // 富文本弹窗
                 isOpenAudioDialog: false, // 音频资源
                 isOpenVideoDialog: false, // 视频资源
-                isOpenAttachment: false // 附件弹窗
+                isOpenAttachment: false, // 附件弹窗
+                isOpenEditAttachment: false // 修改附件弹窗
             },
             attachmentList: [], // 获取附件列表
-            newArr: [] //
+            newArr: [], //
+            currentItem: {}
         };
     },
     components: {
         RichTextBoxDialog,
         AudioDialog,
         VideoDialog,
-        AttachmentComponent
+        AttachmentComponent,
+        editAttachmentDialog
     },
     computed: {
         ...mapState({
@@ -207,6 +219,12 @@ export default {
         swapItems(arr, index1, index2) {
             arr[index1] = arr.splice(index2, 1, arr[index1])[0];
             return arr;
+        },
+        editOpenEditAttachment(data) {
+            // 修改附件名称弹窗
+            this.currentItem = data;
+            this.shows.isOpenEditAttachment = true;
+            console.log(data);
         }
     }
 };
