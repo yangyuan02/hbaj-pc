@@ -9,7 +9,13 @@
         append-to-body
     >
         <main>
-            <el-form ref="form" :model="params" label-width="80px" :rules="rules">
+            <el-form
+                ref="form"
+                :model="params"
+                label-width="80px"
+                :rules="rules"
+                label-position="left"
+            >
                 <el-form-item label="上传图片" prop="extra">
                     <el-upload
                         class="avatar-uploader"
@@ -147,9 +153,11 @@ export default {
 
 <style lang="less">
 .mark {
+    display: flex;
     .el-form-item__content {
         margin-left: 0 !important;
         margin-top: 20px;
+        flex: 1;
     }
 }
 </style>

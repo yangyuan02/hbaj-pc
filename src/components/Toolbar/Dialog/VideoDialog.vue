@@ -9,8 +9,14 @@
         append-to-body
     >
         <div v-loading="loading.detail">
-            <el-form ref="form" :model="params" label-width="80px" :rules="rules">
-                <el-form-item label="" prop="extra">
+            <el-form
+                ref="form"
+                :model="params"
+                label-width="80px"
+                :rules="rules"
+                label-position="left"
+            >
+                <el-form-item label="上传" prop="extra">
                     <el-upload
                         class="upload-demo"
                         :action="uploadUrl"
@@ -19,10 +25,10 @@
                         :file-list="fileList"
                     >
                         <el-button size="small" type="primary">点击上传</el-button>
-                        <div slot="tip" class="el-upload__tip">只能上传音频文件</div>
+                        <div slot="tip" class="el-upload__tip">只能上传视频文件</div>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="" prop="title">
+                <el-form-item label="描述" prop="title">
                     <el-input
                         type="textarea"
                         :rows="2"

@@ -8,7 +8,7 @@
         width="30%"
         append-to-body
     >
-        <el-form ref="form" :model="params" :rules="rules" label-width="80px">
+        <el-form ref="form" :model="params" :rules="rules" label-width="80px" label-position="left">
             <el-form-item label="标题" prop="title">
                 <el-input v-model="params.title" placeholder="请输入标题"></el-input>
             </el-form-item>
