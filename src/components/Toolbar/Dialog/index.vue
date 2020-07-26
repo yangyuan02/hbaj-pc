@@ -13,13 +13,13 @@
                     <TextList :list="display.textList"></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="image">
-                    <ImagesList :list="display.imagesList"></ImagesList>
+                    <ImagesList :list="display.imageList"></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <AudioHban></AudioHban>
+                    <AudioHban :src="display.audioList[0].extra"></AudioHban>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
-                    <VideoHban></VideoHban>
+                    <VideoHban :src="display.videoList[0].extra"></VideoHban>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="richtext">
                     <RichTextBox></RichTextBox>
@@ -88,7 +88,17 @@ export default {
             attchmentId: "", // 附件id
             display: {
                 textList: [], // 文本列表
-                imagesList: [] // 图文列表
+                imageList: [], // 图文列表
+                audioList: [
+                    {
+                        extra: ""
+                    }
+                ], // 音频列表
+                videoList: [
+                    {
+                        extra: ""
+                    }
+                ] // 视频列表
             }
         };
     },
@@ -135,7 +145,6 @@ export default {
         handleClick(tab, event) {
             const name = tab.name.toLocaleUpperCase();
             this.handerAttachment(name);
-            console.log(tab, event);
         },
         editDialog() {
             this.attchmentId = this.params.id;
@@ -156,6 +165,7 @@ export default {
             // 获取具体的附件信息
             const { id } = this.params;
             this.loading.detail = true;
+            this.typeTab = type;
             hotspotContent(
                 {
                     type: "get",
@@ -170,13 +180,8 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.loading.detail = false;
-                    if (type === "TEXT") {
-                        this.display.textList = res.data;
-                    }
-                    if (type === "IMAGE") {
-                        this.display.imagesList = res.data;
-                    }
-                    console.log(res);
+                    let type = this.typeTab.toLocaleLowerCase();
+                    this.display[type + "List"] = res.data || [];
                 }
             });
         },
