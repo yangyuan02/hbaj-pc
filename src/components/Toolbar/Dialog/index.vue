@@ -48,6 +48,9 @@ import TextDialog from "./TextDialog";
 import ImageDialog from "./ImageDialog";
 import AudioDialog from "./AudioDialog";
 import VideoDialog from "./VideoDialog";
+
+import { hotspotContent } from "@/model/api";
+
 export default {
     data() {
         return {
@@ -60,13 +63,18 @@ export default {
                 isOpenImagesDialog: false, //图片
                 isOpenAudioDialog: false, // 音频
                 isOpenVideoDialog: false // 视频
-            }
+            },
+            params: {} // 参数
         };
     },
     props: {
         visible: {
             type: Boolean,
             default: false
+        },
+        data: {
+            type: Object,
+            default: {}
         }
     },
     components: {
@@ -79,9 +87,16 @@ export default {
         AudioDialog,
         VideoDialog
     },
+    watch: {
+        data(newVal) {
+            console.log(newVal);
+            this.params = newVal;
+        }
+    },
     methods: {
         open() {
             console.log("打开");
+            this.getAttachmentText("text");
         },
         close() {
             this.$emit("update:visible", false);
@@ -105,6 +120,46 @@ export default {
             if (type === "video") {
                 this.shows.isOpenVideoDialog = true;
             }
+        },
+        handerAttachment(type) {
+            // 获取具体的附件信息
+            const { id } = this.params;
+            hotspotContent(
+                {
+                    type: "get",
+                    data: {
+                        hotspotId: id,
+                        type,
+                        size: 1000,
+                        page: 1
+                    }
+                },
+                "all"
+            ).then(res => {
+                if (res.suceeded) {
+                    console.log(res);
+                }
+            });
+        },
+        getAttachmentText() {
+            // 获取文本
+            this.handerAttachment("TEXT");
+        },
+        getAttachmentImages() {
+            // 获取图文
+            this.handerAttachment("IMAGE");
+        },
+        getAttachmentAudio() {
+            // 获取音频
+            this.handerAttachment("AUDIO");
+        },
+        getAttachmentVideo() {
+            // 获取视频
+            this.handerAttachment("VIDEO");
+        },
+        getAttachmentHTML() {
+            // 获取富文本
+            this.handerAttachment("HTML");
         }
     }
 };

@@ -31,6 +31,9 @@ export default {
             form: {
                 name: ""
             },
+            params: {
+                // 参数
+            },
             loading: {
                 save: false
             }
@@ -40,6 +43,10 @@ export default {
         visible: {
             type: Boolean,
             default: false
+        },
+        data: {
+            type: Object,
+            default: {}
         }
     },
     methods: {

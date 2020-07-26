@@ -20,10 +20,13 @@
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link">
+                            <div class="link" @click="editAttachment(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div class="link_name ellipsis" @click="editOpenEditAttachment(item)">
+                            <div
+                                class="link_name ellipsis"
+                                @click="editOpenEditAttachmentName(item)"
+                            >
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
@@ -52,13 +55,16 @@
                 </div>
             </div>
             <!-- 富文本编辑器 -->
-            <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog>
+            <!-- <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog> -->
             <!-- 音频资源 -->
-            <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog>
+            <!-- <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog> -->
             <!-- 视频资源 -->
-            <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog>
+            <!-- <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog> -->
 
-            <AttachmentComponent :visible.sync="shows.isOpenAttachment"></AttachmentComponent>
+            <AttachmentComponent
+                :visible.sync="shows.isOpenAttachment"
+                :data="currentItem"
+            ></AttachmentComponent>
 
             <!-- 修改附件弹窗 -->
             <editAttachmentDialog
@@ -73,9 +79,9 @@
 <script>
 import { mapState } from "vuex";
 
-import RichTextBoxDialog from "../Dialog/RichTextBoxDialog";
-import AudioDialog from "../Dialog/AudioDialog";
-import VideoDialog from "../Dialog/VideoDialog";
+// import RichTextBoxDialog from "../Dialog/RichTextBoxDialog";
+// import AudioDialog from "../Dialog/AudioDialog";
+// import VideoDialog from "../Dialog/VideoDialog";
 
 import AttachmentComponent from "../Dialog";
 
@@ -100,9 +106,9 @@ export default {
         };
     },
     components: {
-        RichTextBoxDialog,
-        AudioDialog,
-        VideoDialog,
+        // RichTextBoxDialog,
+        // AudioDialog,
+        // VideoDialog,
         AttachmentComponent,
         editAttachmentDialog
     },
@@ -165,7 +171,6 @@ export default {
                     this.getAttachmentList();
                 }
             });
-            // this.shows.isOpenAttachment = true;
         },
         getAttachmentList() {
             const projectId = this.$route.params.projectId;
@@ -220,11 +225,15 @@ export default {
             arr[index1] = arr.splice(index2, 1, arr[index1])[0];
             return arr;
         },
-        editOpenEditAttachment(data) {
+        editOpenEditAttachmentName(data) {
             // 修改附件名称弹窗
             this.currentItem = data;
             this.shows.isOpenEditAttachment = true;
             console.log(data);
+        },
+        editAttachment(data) {
+            this.currentItem = data;
+            this.shows.isOpenAttachment = true;
         }
     }
 };
