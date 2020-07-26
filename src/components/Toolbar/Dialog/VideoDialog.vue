@@ -71,7 +71,7 @@ export default {
     },
     computed: {
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.content}&fileType=HOTSPOT_VIDEO`;
+            const url = `/api/file/upload?fileName=${this.params.title}&fileType=HOTSPOT_VIDEO`;
             return url;
         }
     },
