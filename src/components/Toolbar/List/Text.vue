@@ -38,6 +38,10 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        onNotifiy: {
+            type: Function,
+            defalut: () => {}
         }
     },
     methods: {
@@ -61,6 +65,9 @@ export default {
                         message: "已取消删除"
                     });
                 });
+        },
+        edit(data) {
+            this.onNotifiy && this.onNotifiy(data, "text");
         }
     }
 };

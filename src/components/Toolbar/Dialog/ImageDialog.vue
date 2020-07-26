@@ -90,6 +90,10 @@ export default {
             type: [String, Number],
             default: ""
         },
+        editData: {
+            type: Object,
+            default: {}
+        },
         onSuccess: {
             type: Function,
             default: () => {}
@@ -98,6 +102,9 @@ export default {
     watch: {
         id(newVal) {
             this.params.hotspotId = newVal;
+        },
+        editData(newVal) {
+            this.params = newVal;
         }
     },
     methods: {
@@ -105,6 +112,7 @@ export default {
             console.log("打开");
         },
         close() {
+            this.$refs["form"].resetFields();
             this.$emit("update:visible", false);
         },
         save() {
@@ -141,7 +149,6 @@ export default {
             }).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
-                    this.$refs["form"].resetFields();
                     this.close();
                     this.onSuccess && this.onSuccess();
                 }

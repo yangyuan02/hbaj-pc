@@ -10,12 +10,17 @@
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
                 <el-tab-pane label="文本" name="text">
-                    <TextList :list="display.textList" :onSuccess="getAttachmentText"></TextList>
+                    <TextList
+                        :list="display.textList"
+                        :onSuccess="getAttachmentText"
+                        :onNotifiy="notifiy"
+                    ></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="image">
                     <ImagesList
                         :list="display.imageList"
                         :onSuccess="getAttachmentImages"
+                        :onNotifiy="notifiy"
                     ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
@@ -35,11 +40,13 @@
         <TextDialog
             :visible.sync="shows.isOpenTextDialog"
             :id="attchmentId"
+            :editData="editData"
             :onSuccess="getAttachmentText"
         ></TextDialog>
         <ImageDialog
             :visible.sync="shows.isOpenImagesDialog"
             :id="attchmentId"
+            :editData="editData"
             :onSuccess="getAttachmentImages"
         ></ImageDialog>
         <AudioDialog
@@ -89,6 +96,7 @@ export default {
             },
             params: {}, // 参数
             attchmentId: "", // 附件id
+            editData: {}, // 编辑数据
             display: {
                 textList: [], // 文本列表
                 imageList: [], // 图文列表
@@ -207,6 +215,22 @@ export default {
         getAttachmentHTML() {
             // 获取富文本
             this.handerAttachment("HTML");
+        },
+        notifiy(data, type) {
+            this.editData = data;
+            // 列表回调通知
+            if (type === "text") {
+                this.shows.isOpenTextDialog = true;
+            }
+            if (type === "image") {
+                this.shows.isOpenImagesDialog = true;
+            }
+            if (type === "audio") {
+                this.shows.isOpenAudioDialog = true;
+            }
+            if (type === "video") {
+                this.shows.isOpenVideoDialog = true;
+            }
         }
     }
 };

@@ -9,7 +9,7 @@
                     <div class="sort common">
                         <i class="iconfont iconpaixu"></i>
                     </div>
-                    <div class="edit common">
+                    <div class="edit common" @click="edit(item)">
                         <i class="iconfont icontubiaoweb-07"></i>
                     </div>
                     <div class="del common" @click="del(item)">
@@ -43,6 +43,10 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        onNotifiy: {
+            type: Function,
+            defalut: () => {}
         }
     },
     methods: {
@@ -66,6 +70,9 @@ export default {
                         message: "已取消删除"
                     });
                 });
+        },
+        edit(data) {
+            this.onNotifiy && this.onNotifiy(data, "image");
         }
     }
 };
