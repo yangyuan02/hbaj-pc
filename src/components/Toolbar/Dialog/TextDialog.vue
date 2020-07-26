@@ -9,10 +9,10 @@
         append-to-body
     >
         <el-form ref="form" :model="params" :rules="rules" label-width="80px">
-            <el-form-item label="标题">
+            <el-form-item label="标题" prop="title">
                 <el-input v-model="params.title" placeholder="请输入标题"></el-input>
             </el-form-item>
-            <el-form-item label="内容">
+            <el-form-item label="内容" prop="content">
                 <el-input
                     type="textarea"
                     :rows="2"
@@ -35,9 +35,6 @@ import { hotspotContentDetail } from "@/model/api";
 export default {
     data() {
         return {
-            form: {
-                name: ""
-            },
             params: {
                 // 参数
                 content: "", // 内容
@@ -94,12 +91,17 @@ export default {
         },
         addText() {
             // 新增文本内容
+            const hotspotContentList = [this.params];
+            const params = {
+                hotspotContentList
+            };
             hotspotContentDetail({
                 type: "post",
-                data: this.params
+                data: params
             }).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
+                    this.$refs["form"].resetFields();
                     this.close();
                     this.onSuccess && this.onSuccess();
                 }
