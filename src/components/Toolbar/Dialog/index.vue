@@ -13,8 +13,9 @@
                     <el-button type="primary" @click="editDialog('text')">添加</el-button>
                     <TextList :list="display.textList"></TextList>
                 </el-tab-pane>
-                <el-tab-pane label="图片" name="images">
-                    <el-button type="primary" @click="editDialog('images')">添加</el-button>
+                <el-tab-pane label="图片" name="image">
+                    <el-button type="primary" @click="editDialog('image')">添加</el-button>
+                    <ImagesList :list="display.imagesList"></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
                     <el-button type="primary" @click="editDialog('audio')">添加</el-button>
@@ -67,6 +68,7 @@ import AudioDialog from "./AudioDialog";
 import VideoDialog from "./VideoDialog";
 
 import TextList from "../List/Text";
+import ImagesList from "../List/Images";
 
 import { hotspotContent } from "@/model/api";
 
@@ -86,7 +88,8 @@ export default {
             params: {}, // 参数
             attchmentId: "", // 附件id
             display: {
-                textList: [] // 文本列表
+                textList: [], // 文本列表
+                imagesList: [] // 图文列表
             }
         };
     },
@@ -110,7 +113,8 @@ export default {
         AudioDialog,
         VideoDialog,
 
-        TextList
+        TextList,
+        ImagesList
     },
     watch: {
         data(newVal) {
@@ -130,6 +134,8 @@ export default {
             console.log("保存");
         },
         handleClick(tab, event) {
+            const name = tab.name.toLocaleUpperCase();
+            this.handerAttachment(name);
             console.log(tab, event);
         },
         editDialog(type) {
@@ -137,7 +143,7 @@ export default {
             if (type === "text") {
                 this.shows.isOpenTextDialog = true;
             }
-            if (type === "images") {
+            if (type === "image") {
                 this.shows.isOpenImagesDialog = true;
             }
             if (type === "audio") {
@@ -150,6 +156,7 @@ export default {
         handerAttachment(type) {
             // 获取具体的附件信息
             const { id } = this.params;
+            this.loading.detail = true;
             hotspotContent(
                 {
                     type: "get",
@@ -163,8 +170,12 @@ export default {
                 "all"
             ).then(res => {
                 if (res.suceeded) {
+                    this.loading.detail = false;
                     if (type === "TEXT") {
                         this.display.textList = res.data;
+                    }
+                    if (type === "IMAGE") {
+                        this.display.imagesList = res.data;
                     }
                     console.log(res);
                 }
