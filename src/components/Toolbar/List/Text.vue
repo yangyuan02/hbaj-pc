@@ -5,10 +5,16 @@
                 <div class="text-title">
                     <span>{{ item.title }}</span>
                 </div>
-                <div class="operate">
-                    <div class="sort"></div>
-                    <div class="del"></div>
-                    <div class="edit"></div>
+                <div class="operate_btn">
+                    <div class="sort common">
+                        <i class="iconfont iconpaixu"></i>
+                    </div>
+                    <div class="edit common">
+                        <i class="iconfont icontubiaoweb-07"></i>
+                    </div>
+                    <div class="del common">
+                        <i class="iconfont icontubiaoweb-27"></i>
+                    </div>
                 </div>
             </div>
             <div class="text-body">
@@ -40,6 +46,27 @@ export default {
     // box-shadow: 0 8px 16px 0 rgba(216, 216, 216, 1), 0 6px 20px 0 rgba(216, 216, 216, 1);
     .text-header {
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .operate_btn {
+            display: flex;
+            .common {
+                width: 18px;
+                height: 18px;
+                &:hover {
+                    i {
+                        color: #409eff;
+                    }
+                }
+                i {
+                    font-size: 18px;
+                }
+            }
+            .edit {
+                margin: 0px 10px;
+            }
+        }
         .text-title {
             span {
                 font-size: 16px;

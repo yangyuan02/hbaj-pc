@@ -5,10 +5,16 @@
                 <div class="images-title">
                     <span>{{ item.title }}</span>
                 </div>
-                <div class="operate">
-                    <div class="sort"></div>
-                    <div class="del"></div>
-                    <div class="edit"></div>
+                <div class="operate_btn">
+                    <div class="sort common">
+                        <i class="iconfont iconpaixu"></i>
+                    </div>
+                    <div class="edit common">
+                        <i class="iconfont icontubiaoweb-07"></i>
+                    </div>
+                    <div class="del common">
+                        <i class="iconfont icontubiaoweb-27"></i>
+                    </div>
                 </div>
             </div>
             <div class="images-body">
@@ -46,12 +52,33 @@ export default {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .images-header {
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .images-title {
             span {
                 font-size: 16px;
                 font-family: MicrosoftYaHei;
                 color: rgba(51, 51, 51, 1);
                 line-height: 24px;
+            }
+        }
+        .operate_btn {
+            display: flex;
+            .common {
+                width: 18px;
+                height: 18px;
+                &:hover {
+                    i {
+                        color: #409eff;
+                    }
+                }
+                i {
+                    font-size: 18px;
+                }
+            }
+            .edit {
+                margin: 0px 10px;
             }
         }
     }
