@@ -51,7 +51,8 @@ export default {
             rules: {
                 content: [{ required: true, message: "请输入内容", trigger: "blur" }],
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }]
-            }
+            },
+            type: ""
         };
     },
     props: {
@@ -70,6 +71,11 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        editType: {
+            // 编辑类型
+            type: String,
+            default: ""
         }
     },
     watch: {
@@ -80,6 +86,9 @@ export default {
             this.$nextTick(() => {
                 this.params = { ...newVal };
             });
+        },
+        editType(newVal) {
+            this.type = newVal;
         }
     },
     methods: {
@@ -93,7 +102,7 @@ export default {
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.addText();
+                    this.type && this.type === "text" ? this.editText() : this.addText();
                 }
             });
 

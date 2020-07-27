@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { hotspotContentDetail } from "@/model/api";
+import { hotspotContentDetail, hotspotContent } from "@/model/api";
 
 export default {
     data() {
@@ -72,7 +72,8 @@ export default {
                 content: [{ required: true, message: "请输入内容", trigger: "blur" }],
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
                 extra: [{ required: true, message: "请上传图片" }]
-            }
+            },
+            type: ""
         };
     },
     computed: {
@@ -97,16 +98,24 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        editType: {
+            // 编辑类型
+            type: String,
+            default: ""
         }
     },
     watch: {
         id(newVal) {
             this.params.hotspotId = newVal;
         },
-        editData: function(newVal) {
+        editData(newVal) {
             this.$nextTick(() => {
                 this.params = { ...newVal };
             });
+        },
+        editType(newVal) {
+            this.type = newVal;
         }
     },
     methods: {
@@ -120,7 +129,7 @@ export default {
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.addImages();
+                    this.type && this.type === "image" ? this.editImages() : this.addImages();
                 }
             });
         },

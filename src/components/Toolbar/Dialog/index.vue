@@ -42,12 +42,14 @@
             :id="attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentText"
+            :editType="editType"
         ></TextDialog>
         <ImageDialog
             :visible.sync="shows.isOpenImagesDialog"
             :id="attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentImages"
+            :editType="editType"
         ></ImageDialog>
         <AudioDialog
             :visible.sync="shows.isOpenAudioDialog"
@@ -110,7 +112,8 @@ export default {
                         extra: ""
                     }
                 ] // 视频列表
-            }
+            },
+            editType: "" // 编辑类型
         };
     },
     props: {
@@ -160,6 +163,7 @@ export default {
         editDialog() {
             this.attchmentId = this.params.id;
             // this.editData = {};
+            this.editType = "";
             if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;
             }
@@ -219,6 +223,7 @@ export default {
         },
         notifiy(data, type) {
             this.editData = { ...data };
+            this.editType = type;
             // 列表回调通知
             if (type === "text") {
                 this.shows.isOpenTextDialog = true;
