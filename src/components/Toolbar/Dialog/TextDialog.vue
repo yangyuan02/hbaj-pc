@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { hotspotContentDetail } from "@/model/api";
+import { hotspotContentDetail, hotspotContent } from "@/model/api";
 
 export default {
     data() {
@@ -77,7 +77,9 @@ export default {
             this.params.hotspotId = newVal;
         },
         editData(newVal) {
-            this.params = newVal;
+            this.$nextTick(() => {
+                this.params = { ...newVal };
+            });
         }
     },
     methods: {
@@ -85,7 +87,6 @@ export default {
             console.log("打开");
         },
         close() {
-            this.clear();
             this.$refs["form"].resetFields();
             this.$emit("update:visible", false);
         },
@@ -100,6 +101,7 @@ export default {
         },
         addText() {
             // 新增文本内容
+            this.params.id = "";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -108,6 +110,22 @@ export default {
                 type: "post",
                 data: params
             }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
+        },
+        editText() {
+            // 修改文本
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
                     this.close();

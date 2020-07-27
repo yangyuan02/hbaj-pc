@@ -103,8 +103,10 @@ export default {
         id(newVal) {
             this.params.hotspotId = newVal;
         },
-        editData(newVal) {
-            this.params = newVal;
+        editData: function(newVal) {
+            this.$nextTick(() => {
+                this.params = { ...newVal };
+            });
         }
     },
     methods: {
@@ -139,6 +141,7 @@ export default {
         },
         addImages() {
             // 新增图片内容
+            this.params.id = "";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -147,6 +150,22 @@ export default {
                 type: "post",
                 data: params
             }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
+        },
+        editImages() {
+            // 修改文本
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
                     this.close();

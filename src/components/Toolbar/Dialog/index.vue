@@ -159,6 +159,7 @@ export default {
         },
         editDialog() {
             this.attchmentId = this.params.id;
+            // this.editData = {};
             if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;
             }
@@ -217,7 +218,7 @@ export default {
             this.handerAttachment("HTML");
         },
         notifiy(data, type) {
-            this.editData = data;
+            this.editData = { ...data };
             // 列表回调通知
             if (type === "text") {
                 this.shows.isOpenTextDialog = true;
