@@ -16,6 +16,8 @@
         <PersonPanel></PersonPanel>
         <!-- 附件 -->
         <AttachmentPanel></AttachmentPanel>
+        <!-- 热点内容 -->
+        <ScenePanel></ScenePanel>
     </div>
 </template>
 
@@ -24,6 +26,7 @@
 import IntroPanel from "../Toolbar/Panel/Intro";
 import PersonPanel from "../Toolbar/Panel/Person";
 import AttachmentPanel from "../Toolbar/Panel/Attachment/index.vue";
+import ScenePanel from "../Toolbar/Panel/Scene/index.vue";
 export default {
     data() {
         return {
@@ -79,7 +82,8 @@ export default {
     components: {
         IntroPanel,
         PersonPanel,
-        AttachmentPanel
+        AttachmentPanel,
+        ScenePanel
     },
     methods: {
         toolbarHander(type) {
@@ -92,9 +96,9 @@ export default {
             if (type === "drawerPerson") {
                 this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
             }
-            // if (type === "drawerPerson") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
-            // }
+            if (type === "drawerHotContent") {
+                this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            }
         }
     }
 };
