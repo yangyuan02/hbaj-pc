@@ -83,7 +83,7 @@ import { mapState } from "vuex";
 // import AudioDialog from "../Dialog/AudioDialog";
 // import VideoDialog from "../Dialog/VideoDialog";
 
-import AttachmentComponent from "../Dialog";
+import AttachmentComponent from "../../Dialog";
 
 import editAttachmentDialog from "./editAttachment";
 

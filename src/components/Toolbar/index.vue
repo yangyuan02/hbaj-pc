@@ -23,7 +23,7 @@
 // 左侧面板
 import IntroPanel from "../Toolbar/Panel/Intro";
 import PersonPanel from "../Toolbar/Panel/Person";
-import AttachmentPanel from "../Toolbar/Panel/Attachment";
+import AttachmentPanel from "../Toolbar/Panel/Attachment/index.vue";
 export default {
     data() {
         return {
