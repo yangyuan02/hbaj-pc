@@ -5,6 +5,7 @@
         :with-header="false"
         :size="296"
         :before-close="handleClose"
+        :modal="false"
     >
         <div class="panel_sidebar">
             <div class="attachment common">

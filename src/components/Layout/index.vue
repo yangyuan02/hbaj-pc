@@ -69,31 +69,6 @@ export default {
             background: rgba(240, 242, 245, 1);
             height: calc(100% - 40px);
         }
-        .panel_sidebar {
-            width: 296px;
-            height: 100%;
-            background: #fff;
-            padding: 0 24px;
-            // transform: translateX(296px);
-            // display: none;
-            .common {
-                h2 {
-                    font-size: 18px;
-                    font-family: MicrosoftYaHei;
-                    color: rgba(51, 51, 51, 1);
-                    line-height: 24px;
-                    padding: 10px 0;
-                }
-                .el-form-item {
-                    .el-form-item__label {
-                        font-size: 16px;
-                        font-family: MicrosoftYaHei;
-                        color: rgba(51, 51, 51, 1);
-                        line-height: 21px;
-                    }
-                }
-            }
-        }
     }
 }
 </style>
