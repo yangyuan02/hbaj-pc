@@ -15,7 +15,7 @@
                 <div class="attachment_list">
                     <div class="header">
                         <span>链接内容</span>
-                        <span>附件名称</span>
+                        <span>场景名称</span>
                         <span>操作</span>
                     </div>
                     <div class="body">
@@ -54,12 +54,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 富文本编辑器 -->
-            <!-- <RichTextBoxDialog :visible.sync="shows.isOpenRichTextBoxDialog"></RichTextBoxDialog> -->
-            <!-- 音频资源 -->
-            <!-- <AudioDialog :visible.sync="shows.isOpenAudioDialog"></AudioDialog> -->
-            <!-- 视频资源 -->
-            <!-- <VideoDialog :visible.sync="shows.isOpenVideoDialog"></VideoDialog> -->
 
             <AttachmentComponent
                 :visible.sync="shows.isOpenAttachment"
@@ -79,10 +73,6 @@
 <script>
 import { mapState } from "vuex";
 
-// import RichTextBoxDialog from "../Dialog/RichTextBoxDialog";
-// import AudioDialog from "../Dialog/AudioDialog";
-// import VideoDialog from "../Dialog/VideoDialog";
-
 import AttachmentComponent from "../../Dialog";
 
 import editSceneDialog from "./editScene";
@@ -94,9 +84,6 @@ export default {
     data() {
         return {
             shows: {
-                isOpenRichTextBoxDialog: false, // 富文本弹窗
-                isOpenAudioDialog: false, // 音频资源
-                isOpenVideoDialog: false, // 视频资源
                 isOpenAttachment: false, // 附件弹窗
                 isOpenEditAttachment: false // 修改附件弹窗
             },
@@ -106,9 +93,6 @@ export default {
         };
     },
     components: {
-        // RichTextBoxDialog,
-        // AudioDialog,
-        // VideoDialog,
         AttachmentComponent,
         editSceneDialog
     },
