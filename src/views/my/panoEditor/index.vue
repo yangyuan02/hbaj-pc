@@ -1,6 +1,7 @@
 <template>
     <div class="p_editor_container">
         <div id="p_editor" :style="{ width: isOpenedWidth.width }"></div>
+        <SceneList></SceneList>
         <!-- 右侧工具条 -->
         <Toolbar></Toolbar>
     </div>
@@ -8,12 +9,14 @@
 
 <script>
 import Toolbar from "@/components/Toolbar";
+import SceneList from "@/components/Toolbar/Panel/Scene/sceneList";
 export default {
     data() {
         return {};
     },
     components: {
-        Toolbar
+        Toolbar,
+        SceneList
     },
     methods: {
         initPano() {

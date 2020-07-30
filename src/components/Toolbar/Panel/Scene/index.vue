@@ -62,11 +62,11 @@
             ></AttachmentComponent>
 
             <!-- 修改附件弹窗 -->
-            <editAttachmentDialog
+            <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
                 :data="currentItem"
                 :onSuccess="getAttachmentList"
-            ></editAttachmentDialog>
+            ></editSceneDialog>
         </div>
     </el-drawer>
 </template>
@@ -228,64 +228,68 @@ export default {
 </script>
 
 <style lang="less">
-.attachment {
-    .title {
-        height: 88px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        span {
-            font-size: 18px;
-            font-family: MicrosoftYaHei;
-            color: rgba(51, 51, 51, 1);
-            line-height: 24px;
-        }
-        i {
-            font-size: 24px;
-            color: rgba(15, 79, 168, 1);
-        }
-    }
-    .attachment_list {
-        .header {
+.panel_sidebar {
+    position: relative;
+    box-shadow: none;
+    .attachment {
+        .title {
+            height: 88px;
             display: flex;
             justify-content: space-between;
-            height: 32px;
             align-items: center;
-            background: rgba(248, 248, 248, 1);
             span {
-                width: 33%;
-                font-size: 14px;
+                font-size: 18px;
                 font-family: MicrosoftYaHei;
-                color: rgba(102, 102, 102, 1);
-                line-height: 19px;
-                text-align: center;
+                color: rgba(51, 51, 51, 1);
+                line-height: 24px;
+            }
+            i {
+                font-size: 24px;
+                color: rgba(15, 79, 168, 1);
             }
         }
-        .body {
-            .item {
+        .attachment_list {
+            .header {
                 display: flex;
                 justify-content: space-between;
+                height: 32px;
                 align-items: center;
-                height: 42px;
-                border-bottom: 1px solid #eee;
-                & > div {
+                background: rgba(248, 248, 248, 1);
+                span {
                     width: 33%;
+                    font-size: 14px;
+                    font-family: MicrosoftYaHei;
+                    color: rgba(102, 102, 102, 1);
+                    line-height: 19px;
                     text-align: center;
-                    &.link_name {
-                        width: 70px;
-                        text-align: left;
-                        font-size: 14px;
-                        font-family: MicrosoftYaHei;
-                        color: rgba(102, 102, 102, 1);
-                        line-height: 19px;
-                    }
-                    &.operate {
-                        display: flex;
-                        justify-content: space-around;
-                    }
-                    i {
-                        font-size: 16px;
-                        color: rgba(15, 79, 168, 1);
+                }
+            }
+            .body {
+                .item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 42px;
+                    border-bottom: 1px solid #eee;
+                    & > div {
+                        width: 33%;
+                        text-align: center;
+                        &.link_name {
+                            width: 70px;
+                            text-align: left;
+                            font-size: 14px;
+                            font-family: MicrosoftYaHei;
+                            color: rgba(102, 102, 102, 1);
+                            line-height: 19px;
+                        }
+                        &.operate {
+                            display: flex;
+                            justify-content: space-around;
+                        }
+                        i {
+                            font-size: 16px;
+                            color: rgba(15, 79, 168, 1);
+                        }
                     }
                 }
             }
