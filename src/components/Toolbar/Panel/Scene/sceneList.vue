@@ -1,5 +1,5 @@
 <template>
-    <div class="scene_list">
+    <div class="scene_list" v-if="isOpenScene">
         <div class="attachment common">
             <div class="title">
                 <span>场景热点列表</span>
@@ -51,6 +51,12 @@
 export default {
     data() {
         return {};
+    },
+    computed: {
+        isOpenScene: function() {
+            // 打开的时候应该还需要一点动画
+            return this.$store.state.toolbarStore.openScene;
+        }
     }
 };
 </script>
@@ -60,7 +66,7 @@ export default {
     position: absolute;
     width: 296px;
     height: 100%;
-    right: 310px;
+    right: 306px;
     top: 0px;
     background: #fff;
     padding: 0 24px;

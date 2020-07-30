@@ -62,11 +62,11 @@
             ></AttachmentComponent>
 
             <!-- 修改附件弹窗 -->
-            <editSceneDialog
+            <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
                 :data="currentItem"
                 :onSuccess="getAttachmentList"
-            ></editSceneDialog>
+            ></editSceneDialog> -->
         </div>
     </el-drawer>
 </template>
@@ -76,7 +76,7 @@ import { mapState } from "vuex";
 
 import AttachmentComponent from "../../Dialog";
 
-import editSceneDialog from "./editScene";
+// import editSceneDialog from "./editScene";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
@@ -85,8 +85,8 @@ export default {
     data() {
         return {
             shows: {
-                isOpenAttachment: false, // 附件弹窗
-                isOpenEditAttachment: false // 修改附件弹窗
+                isOpenAttachment: false // 附件弹窗
+                // isOpenEditAttachment: false // 修改附件弹窗
             },
             attachmentList: [], // 获取附件列表
             newArr: [], //
@@ -94,8 +94,8 @@ export default {
         };
     },
     components: {
-        AttachmentComponent,
-        editSceneDialog
+        AttachmentComponent
+        // editSceneDialog
     },
     computed: {
         ...mapState({
@@ -215,9 +215,10 @@ export default {
         },
         editOpenEditAttachmentName(data) {
             // 修改附件名称弹窗
-            this.currentItem = data;
-            this.shows.isOpenEditAttachment = true;
-            console.log(data);
+            // this.currentItem = data;
+            // this.shows.isOpenEditAttachment = true;
+            // console.log(data);
+            this.$store.commit("TOGGLE_DRAWER", "openScene");
         },
         editAttachment(data) {
             this.currentItem = data;

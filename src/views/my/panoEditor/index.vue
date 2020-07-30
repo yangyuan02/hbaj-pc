@@ -38,8 +38,11 @@ export default {
             const data = this.$store.state.toolbarStore;
             const isOpen = Object.values(data).some(item => item);
             return {
-                width: `calc(100% - ${isOpen ? "310px" : "0px"})`
+                width: `calc(100% - ${isOpen ? (this.isOpenScene ? "616px" : "310px") : "0px"})`
             };
+        },
+        isOpenScene: function() {
+            return this.$store.state.toolbarStore.openScene;
         }
     },
     mounted() {
