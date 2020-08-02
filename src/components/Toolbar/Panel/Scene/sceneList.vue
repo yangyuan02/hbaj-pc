@@ -12,7 +12,7 @@
                     <span>操作</span>
                 </div>
                 <div class="body">
-                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                    <div class="item" v-for="(item, index) in list" :key="index">
                         <div class="link" @click="editAttachment(item)">
                             <i class="iconfont icontubiaoweb-29"></i>
                         </div>
@@ -20,10 +20,10 @@
                             <el-tooltip
                                 class="item"
                                 effect="dark"
-                                :content="item.name"
+                                :content="item.title"
                                 placement="top-start"
                             >
-                                <span>{{ item.name }}</span>
+                                <span>{{ item.title }}</span>
                             </el-tooltip>
                         </div>
                         <div class="operate">
@@ -56,6 +56,9 @@ export default {
         isOpenScene: function() {
             // 打开的时候应该还需要一点动画
             return this.$store.state.toolbarStore.openScene;
+        },
+        list: function() {
+            return this.$store.state.toolbarStore.sceneList;
         }
     }
 };

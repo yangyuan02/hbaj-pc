@@ -219,6 +219,27 @@ export default {
             // this.shows.isOpenEditAttachment = true;
             // console.log(data);
             this.$store.commit("TOGGLE_DRAWER", "openScene");
+            this.getsceneList(data);
+        },
+        // 获取场景列表
+        getsceneList(data) {
+            const projectId = this.$route.params.projectId;
+            const { id } = data;
+            hotspot({
+                type: "get",
+                data: {
+                    projectId,
+                    sceneId: id,
+                    type: "DEFAULT",
+                    page: 1,
+                    size: 1000
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    const list = res.data.content || [];
+                    this.$store.commit("SETSCENELIST", list);
+                }
+            });
         },
         editAttachment(data) {
             this.currentItem = data;

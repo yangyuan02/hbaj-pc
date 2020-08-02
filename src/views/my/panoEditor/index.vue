@@ -36,7 +36,9 @@ export default {
     computed: {
         isOpenedWidth: function() {
             const data = this.$store.state.toolbarStore;
-            const isOpen = Object.values(data).some(item => item);
+            const isOpen = Object.values(data)
+                .filter(item => item === false || item === true)
+                .some(item => item);
             return {
                 width: `calc(100% - ${isOpen ? (this.isOpenScene ? "616px" : "310px") : "0px"})`
             };

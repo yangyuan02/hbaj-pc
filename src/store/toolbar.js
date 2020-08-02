@@ -9,12 +9,17 @@ const state = {
     drawerPlatGuide: false, // 启动引导
     drawerDigest: false, // 内容摘要
     drawerTrack: false, // 快速通道
-    openScene: false // 场景热点列表
+    openScene: false, // 场景热点列表
+    sceneList: [] // 场景热点列表
 };
 
 const mutations = {
     TOGGLE_DRAWER(state, type) {
         state[type] = !state[type];
+    },
+    SETSCENELIST(state, data) {
+        console.log(data);
+        state["sceneList"] = data;
     }
 };
 
