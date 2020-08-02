@@ -14,9 +14,10 @@
                 <div class="body" v-if="list && list.length" v-loading="loading">
                     <div class="item" v-for="(item, index) in list" :key="index">
                         <div class="link">
-                            <i class="iconfont icontubiaoweb-29"></i>
+                            <i class="iconfont icontubiaoweb-29" @click="backFindHotspot(item)"></i>
+                            <i class="iconfont icontubiaoweb-26" @click="updateHotspot(item)"></i>
                         </div>
-                        <div class="link_name ellipsis">
+                        <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
                             <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -27,25 +28,32 @@
                             </el-tooltip>
                         </div>
                         <div class="operate">
-                            <i class="iconfont icontubiaoweb-21"></i>
-                            <i class="iconfont icontubiaoweb-22"></i>
-                            <i class="iconfont icontubiaoweb-23"></i>
+                            <i class="iconfont icontubiaoweb-21" @click="handleDel(item)"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- 修改附件弹窗 -->
+        <editAttachmentDialog
+            :visible.sync="isOpenEditAttachment"
+            :data="currentItem"
+            :onSuccess="() => getsceneList(this.$store.state.toolbarStore.id)"
+        ></editAttachmentDialog>
     </div>
 </template>
 
 <script>
-import { hotspot } from "@/model/api";
+import { hotspot, hotspotDetail } from "@/model/api";
+import editAttachmentDialog from "../Attachment/editAttachment";
 
 export default {
     data() {
         return {
             list: [],
-            loading: false
+            loading: false,
+            isOpenEditAttachment: false,
+            currentItem: {}
         };
     },
     computed: {
@@ -53,6 +61,9 @@ export default {
             // 打开的时候应该还需要一点动画
             return this.$store.state.toolbarStore.openScene;
         }
+    },
+    components: {
+        editAttachmentDialog
     },
     watch: {
         "$store.state.toolbarStore.id": function(newval) {
@@ -83,6 +94,56 @@ export default {
                     console.log(list, "11");
                 }
             });
+        },
+        backFindHotspot(data) {
+            const { code, locationX, locationY } = data;
+            window.backFindHotspot && backFindHotspot(code, locationX, locationY);
+        },
+        updateHotspot(data) {
+            const id = data.id;
+            const getScenePara = window.getScenePara && window.getScenePara();
+            const parasm = { ...data, locationX: getScenePara[2], locationY: getScenePara[3] };
+            hotspotDetail({ type: "put", data: parasm }, id).then(res => {
+                if (res.suceeded) {
+                    this.$message({
+                        type: "success",
+                        message: "更新成功!"
+                    });
+                }
+            });
+        },
+        delScenel() {
+            // 删除附件
+            hotspotDetail({ type: "delete" }, id).then(res => {
+                if (res.suceeded) {
+                    this.getAttachmentList();
+                    this.$message({
+                        type: "success",
+                        message: "删除成功!"
+                    });
+                }
+            });
+        },
+        handleDel(item, index) {
+            this.$confirm(`此操作将永久删 ${item.title}, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    this.delScenel(item.id);
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
+        },
+        editOpenEditAttachmentName(data) {
+            // 修改附件名称弹窗
+            this.currentItem = data;
+            this.isOpenEditAttachment = true;
         }
     }
 };
@@ -97,6 +158,7 @@ export default {
     top: 0px;
     background: #fff;
     padding: 0 24px;
+    z-index: 2000;
     .attachment {
         .title {
             height: 88px;
@@ -137,6 +199,10 @@ export default {
                     align-items: center;
                     height: 42px;
                     border-bottom: 1px solid #eee;
+                    .link {
+                        display: flex;
+                        justify-content: space-around;
+                    }
                     & > div {
                         width: 33%;
                         text-align: center;
