@@ -11,7 +11,6 @@
             <div class="attachment common">
                 <div class="title">
                     <span>场景列表</span>
-                    <i class="iconfont icontubiaoweb-24" @click="addAttachment"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
@@ -21,13 +20,10 @@
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link" @click="editAttachment(item)">
+                            <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div
-                                class="link_name ellipsis"
-                                @click="editOpenEditAttachmentName(item)"
-                            >
+                            <div class="link_name ellipsis">
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
@@ -143,21 +139,6 @@ export default {
                     });
                 });
         },
-        addAttachment() {
-            const projectId = this.$route.params.projectId;
-            hotspot({
-                type: "post",
-                data: {
-                    projectId,
-                    title: "请修改附件名称",
-                    type: "ATTACHMENT"
-                }
-            }).then(res => {
-                if (res.suceeded) {
-                    this.getAttachmentList();
-                }
-            });
-        },
         getAttachmentList() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
@@ -214,16 +195,7 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
-            // 修改附件名称弹窗
-            // this.currentItem = data;
-            // this.shows.isOpenEditAttachment = true;
-            // console.log(data);
             this.$store.commit("SETSCENELIST", data.id);
-        },
-
-        editAttachment(data) {
-            this.currentItem = data;
-            this.shows.isOpenAttachment = true;
         }
     }
 };
