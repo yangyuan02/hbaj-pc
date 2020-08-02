@@ -3,7 +3,7 @@
         <div class="attachment common">
             <div class="title">
                 <span>场景热点列表</span>
-                <i class="iconfont icontubiaoweb-24" @click="addAttachment"></i>
+                <i class="iconfont icontubiaoweb-24"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
@@ -11,12 +11,12 @@
                     <span>场景名称</span>
                     <span>操作</span>
                 </div>
-                <div class="body">
+                <div class="body" v-if="list && list.length" v-loading="loading">
                     <div class="item" v-for="(item, index) in list" :key="index">
-                        <div class="link" @click="editAttachment(item)">
+                        <div class="link">
                             <i class="iconfont icontubiaoweb-29"></i>
                         </div>
-                        <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
+                        <div class="link_name ellipsis">
                             <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -27,18 +27,9 @@
                             </el-tooltip>
                         </div>
                         <div class="operate">
-                            <i
-                                class="iconfont icontubiaoweb-21"
-                                @click="handleDel(item, index)"
-                            ></i>
-                            <i
-                                class="iconfont icontubiaoweb-22"
-                                @click="up(attachmentList, index)"
-                            ></i>
-                            <i
-                                class="iconfont icontubiaoweb-23"
-                                @click="down(attachmentList, index)"
-                            ></i>
+                            <i class="iconfont icontubiaoweb-21"></i>
+                            <i class="iconfont icontubiaoweb-22"></i>
+                            <i class="iconfont icontubiaoweb-23"></i>
                         </div>
                     </div>
                 </div>
@@ -48,17 +39,50 @@
 </template>
 
 <script>
+import { hotspot } from "@/model/api";
+
 export default {
     data() {
-        return {};
+        return {
+            list: [],
+            loading: false
+        };
     },
     computed: {
         isOpenScene: function() {
             // 打开的时候应该还需要一点动画
             return this.$store.state.toolbarStore.openScene;
-        },
-        list: function() {
-            return this.$store.state.toolbarStore.sceneList;
+        }
+    },
+    watch: {
+        "$store.state.toolbarStore.id": function(newval) {
+            if (newval) {
+                this.getsceneList(newval);
+            }
+        }
+    },
+    methods: {
+        // 获取场景列表
+        getsceneList(id) {
+            const projectId = this.$route.params.projectId;
+            this.loading = true;
+            hotspot({
+                type: "get",
+                data: {
+                    projectId,
+                    sceneId: id,
+                    type: "DEFAULT",
+                    page: 1,
+                    size: 1000
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.loading = false;
+                    const list = res.data.content || [];
+                    this.list = list;
+                    console.log(list, "11");
+                }
+            });
         }
     }
 };
