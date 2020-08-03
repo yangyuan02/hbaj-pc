@@ -18,6 +18,8 @@
         <AttachmentPanel></AttachmentPanel>
         <!-- 热点内容 -->
         <ScenePanel></ScenePanel>
+        <!-- 课件引导 -->
+        <GuidePanel></GuidePanel>
     </div>
 </template>
 
@@ -27,6 +29,7 @@ import IntroPanel from "../Toolbar/Panel/Intro";
 import PersonPanel from "../Toolbar/Panel/Person";
 import AttachmentPanel from "../Toolbar/Panel/Attachment/index.vue";
 import ScenePanel from "../Toolbar/Panel/Scene/index.vue";
+import GuidePanel from "../Toolbar/Panel/Guide/index.vue";
 export default {
     data() {
         return {
@@ -83,7 +86,8 @@ export default {
         IntroPanel,
         PersonPanel,
         AttachmentPanel,
-        ScenePanel
+        ScenePanel,
+        GuidePanel
     },
     methods: {
         toolbarHander(type) {
@@ -98,6 +102,9 @@ export default {
             }
             if (type === "drawerHotContent") {
                 this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            }
+            if (type === "drawerGuideContent") {
+                this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
             }
         }
     }
