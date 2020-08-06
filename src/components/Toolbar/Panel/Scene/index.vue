@@ -24,7 +24,7 @@
                             <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div class="link_name ellipsis">
+                            <div class="link_name ellipsis" @click="loadpanoscene(item)">
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
@@ -197,6 +197,9 @@ export default {
         },
         editOpenEditAttachmentName(data) {
             this.$store.commit("SETSCENELIST", data.id);
+        },
+        loadpanoscene(data) {
+            window.loadpanoscene && window.loadpanoscene(data.id, data.code);
         },
         addScene() {
             // 新增场景
