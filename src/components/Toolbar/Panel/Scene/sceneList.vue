@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+        <div id="triangle-right" @click="closeDrawer"></div>
         <!-- 修改附件弹窗 -->
         <editAttachmentDialog
             :visible.sync="isOpenEditAttachment"
@@ -183,6 +184,10 @@ export default {
         editAttachment(data) {
             this.currentItem = data;
             this.isOpenAttachment = true;
+        },
+        closeDrawer() {
+            this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            this.$store.commit("TOGGLE_DRAWER", "openScene");
         }
     }
 };
@@ -197,7 +202,18 @@ export default {
     top: 0px;
     background: #fff;
     padding: 0 24px;
-    z-index: 2000;
+    z-index: 3000;
+    #triangle-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 20px solid #eee;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50);
+    }
     .attachment {
         .title {
             height: 88px;

@@ -6,6 +6,7 @@
         :size="296"
         :before-close="handleClose"
         :modal="false"
+        :wrapperClosable="false"
     >
         <div class="panel_sidebar">
             <div class="attachment common">
@@ -57,7 +58,7 @@
                 :visible.sync="shows.isOpenAttachment"
                 :data="currentItem"
             ></AttachmentComponent>
-
+            <div id="triangle-right" @click="closeDrawer"></div>
             <!-- 修改附件弹窗 -->
             <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
@@ -231,6 +232,12 @@ export default {
                     message: "已经在场景列表中了"
                 });
             }
+        },
+        closeDrawer() {
+            this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            if (this.$store.state.toolbarStore.openScene) {
+                this.$store.commit("TOGGLE_DRAWER", "openScene");
+            }
         }
     },
     mounted() {
@@ -306,6 +313,17 @@ export default {
                 }
             }
         }
+    }
+    #triangle-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 20px solid #eee;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50);
     }
 }
 </style>
