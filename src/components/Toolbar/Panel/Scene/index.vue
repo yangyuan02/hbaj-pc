@@ -11,6 +11,7 @@
             <div class="attachment common">
                 <div class="title">
                     <span>场景列表</span>
+                    <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
@@ -196,7 +197,40 @@ export default {
         },
         editOpenEditAttachmentName(data) {
             this.$store.commit("SETSCENELIST", data.id);
+        },
+        addScene() {
+            // 新增场景
+            const sceneId = window.getScenePara && window.getScenePara()[4];
+            const isScene = this.attachmentList.find(item => sceneId === item.id);
+            const sceneIds = this.attachmentList.map(item => item.id);
+            sceneIds.push(sceneId);
+            if (!isScene) {
+                const projectId = this.$route.params.projectId;
+                projectDetail(
+                    {
+                        type: "post",
+                        data: {
+                            projectId,
+                            sceneId,
+                            sceneIds
+                        }
+                    },
+                    `${projectId}/scene`
+                ).then(res => {
+                    if (res.suceeded) {
+                        this.getAttachmentList();
+                    }
+                });
+            } else {
+                this.$message({
+                    type: "error",
+                    message: "已经在场景列表中了"
+                });
+            }
         }
+    },
+    mounted() {
+        window._hban_addScene = this.addScene;
     }
 };
 </script>
