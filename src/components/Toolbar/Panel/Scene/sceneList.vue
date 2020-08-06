@@ -14,7 +14,7 @@
                 <div class="body" v-if="list && list.length" v-loading="loading">
                     <div class="item" v-for="(item, index) in list" :key="index">
                         <div class="link">
-                            <i class="iconfont icontubiaoweb-29" @click="backFindHotspot(item)"></i>
+                            <i class="iconfont icontubiaoweb-29" @click="editAttachment(item)"></i>
                             <i class="iconfont icontubiaoweb-26" @click="updateHotspot(item)"></i>
                         </div>
                         <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
@@ -40,12 +40,18 @@
             :data="currentItem"
             :onSuccess="() => getsceneList(this.$store.state.toolbarStore.id)"
         ></editAttachmentDialog>
+        <!-- 附件弹窗 -->
+        <AttachmentComponent
+            :visible.sync="isOpenAttachment"
+            :data="currentItem"
+        ></AttachmentComponent>
     </div>
 </template>
 
 <script>
 import { hotspot, hotspotDetail } from "@/model/api";
 import editAttachmentDialog from "../Attachment/editAttachment";
+import AttachmentComponent from "../../Dialog";
 
 export default {
     data() {
@@ -53,6 +59,7 @@ export default {
             list: [],
             loading: false,
             isOpenEditAttachment: false,
+            isOpenAttachment: false,
             currentItem: {}
         };
     },
@@ -63,7 +70,8 @@ export default {
         }
     },
     components: {
-        editAttachmentDialog
+        editAttachmentDialog,
+        AttachmentComponent
     },
     watch: {
         "$store.state.toolbarStore.id": function(newval) {
@@ -171,6 +179,10 @@ export default {
                     });
                 }
             });
+        },
+        editAttachment(data) {
+            this.currentItem = data;
+            this.isOpenAttachment = true;
         }
     }
 };
