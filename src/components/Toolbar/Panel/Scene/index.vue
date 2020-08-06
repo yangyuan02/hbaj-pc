@@ -196,7 +196,7 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
-            this.$store.commit("SETSCENELIST", data.id);
+            this.$store.commit("SETSCENELIST", data.id, data.code);
         },
         loadpanoscene(data) {
             window.loadpanoscene && window.loadpanoscene(data.id, data.code);

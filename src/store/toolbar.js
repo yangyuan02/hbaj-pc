@@ -10,16 +10,18 @@ const state = {
     drawerDigest: false, // 内容摘要
     drawerTrack: false, // 快速通道
     openScene: false, // 场景热点列表
-    id: "" // 场景热点列表id
+    id: "", // 场景热点列表id
+    sceneCode: ""
 };
 
 const mutations = {
     TOGGLE_DRAWER(state, type) {
         state[type] = !state[type];
     },
-    SETSCENELIST(state, id) {
+    SETSCENELIST(state, id, code) {
         state["openScene"] = true;
         state["id"] = id;
+        state["code"] = code;
     }
 };
 

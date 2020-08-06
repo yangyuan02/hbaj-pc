@@ -3,7 +3,7 @@
         <div class="attachment common">
             <div class="title">
                 <span>场景热点列表</span>
-                <i class="iconfont icontubiaoweb-24"></i>
+                <i class="iconfont icontubiaoweb-24" @click="addHotScene"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
@@ -144,6 +144,32 @@ export default {
             // 修改附件名称弹窗
             this.currentItem = data;
             this.isOpenEditAttachment = true;
+        },
+        addHotScene() {
+            const getScenePara = window.getScenePara && window.getScenePara();
+            const projectId = this.$route.params.projectId;
+            const data = {
+                locationFov: getScenePara[1], //场景的视角
+                locationX: getScenePara[2], //获取的热点横坐标
+                locationY: getScenePara[3], //获取的热点垂向坐标
+                projectId, //项目ID
+                sceneId: getScenePara[4], //场景ID
+                title: "默认场景名称", //热点名称
+                type: "DEFAULT" //热点类型
+            };
+
+            hotspot({ type: "post", data }).then(res => {
+                if (res.suceeded) {
+                    const id = this.$store.state.toolbarStore.id;
+                    const code = this.$store.state.toolbarStore.code;
+                    this.getsceneList(id);
+                    window.loadpanoscene && window.loadpanoscene(id, code);
+                    this.$message({
+                        type: "success",
+                        message: "新增成功!"
+                    });
+                }
+            });
         }
     }
 };
