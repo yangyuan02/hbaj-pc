@@ -15,15 +15,15 @@
                 </div>
                 <div class="attachment_list">
                     <div class="header">
-                        <span>链接内容</span>
+                        <!-- <span>链接内容</span> -->
                         <span>场景名称</span>
                         <span>操作</span>
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link" @click="editOpenEditAttachmentName(item)">
+                            <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
-                            </div>
+                            </div> -->
                             <div class="link_name ellipsis" @click="loadpanoscene(item)">
                                 <el-tooltip
                                     class="item"
@@ -200,6 +200,7 @@ export default {
         },
         loadpanoscene(data) {
             window.loadpanoscene && window.loadpanoscene(data.id, data.code);
+            this.editOpenEditAttachmentName(data);
         },
         addScene() {
             // 新增场景

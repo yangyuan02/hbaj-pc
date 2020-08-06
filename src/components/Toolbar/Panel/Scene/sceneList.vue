@@ -96,6 +96,7 @@ export default {
             });
         },
         backFindHotspot(data) {
+            // 这个做啥的，暂时不知道
             const { code, locationX, locationY } = data;
             window.backFindHotspot && backFindHotspot(code, locationX, locationY);
         },
