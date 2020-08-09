@@ -163,16 +163,22 @@ export default {
                 imageUrl: this.staticPath,
                 detail
             };
-            projectDetail(
-                {
-                    type: "PUT",
-                    data
-                },
-                projectId
-            ).then(res => {
+            projectDetail({ type: "get" }, projectId).then(res => {
                 if (res.suceeded) {
-                    this.$message.sucess("操作成功");
                 }
+                const { moduleId, oriEnterpriseId, classId } = res.data;
+                Object.assign(data, { moduleId, oriEnterpriseId, classId });
+                projectDetail(
+                    {
+                        type: "PUT",
+                        data
+                    },
+                    projectId
+                ).then(res => {
+                    if (res.suceeded) {
+                        this.$message.success("操作成功");
+                    }
+                });
             });
         }
     }
