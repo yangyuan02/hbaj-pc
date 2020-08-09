@@ -28,14 +28,14 @@
                                 class="link_name ellipsis"
                                 @click="editOpenEditAttachmentName(item)"
                             >
-                                <el-tooltip
+                                <!-- <el-tooltip
                                     class="item"
                                     effect="dark"
                                     :content="item.title"
                                     placement="top-start"
-                                >
-                                    <span>{{ item.title }}</span>
-                                </el-tooltip>
+                                > -->
+                                <span>{{ item.title }}</span>
+                                <!-- </el-tooltip> -->
                             </div>
                             <div class="operate">
                                 <i
@@ -183,7 +183,8 @@ export default {
                 {
                     type: "post",
                     data: {
-                        hotspotIds
+                        hotspotIds,
+                        projectId
                     }
                 },
                 `${projectId}/hotspot/changeSeq`

@@ -3,7 +3,7 @@
         title="我是标题"
         :visible.sync="drawerPerson"
         :with-header="false"
-        :modal="false"
+        :modal="true"
         :size="296"
         :before-close="handleClose"
     >
