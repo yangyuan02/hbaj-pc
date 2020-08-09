@@ -1,72 +1,62 @@
 <template>
-    <el-drawer
-        title="我是标题"
-        :visible.sync="openGuideScene"
-        :with-header="false"
-        :size="296"
-        :before-close="handleClose"
-        :modal="false"
-        :wrapperClosable="false"
-    >
-        <div class="panel_sidebar">
-            <div class="attachment common">
-                <div class="title">
-                    <span>场景列表</span>
-                    <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
+    <div class="guideList" v-if="openGuideScene">
+        <div class="attachment common">
+            <div class="title">
+                <span>场景列表</span>
+                <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
+            </div>
+            <div class="attachment_list">
+                <div class="header">
+                    <!-- <span>链接内容</span> -->
+                    <span>场景名称</span>
+                    <span>操作</span>
                 </div>
-                <div class="attachment_list">
-                    <div class="header">
-                        <!-- <span>链接内容</span> -->
-                        <span>场景名称</span>
-                        <span>操作</span>
-                    </div>
-                    <div class="body">
-                        <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
+                <div class="body">
+                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                        <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div> -->
-                            <div class="link_name ellipsis" @click="loadpanoscene(item)">
-                                <el-tooltip
-                                    class="item"
-                                    effect="dark"
-                                    :content="item.name"
-                                    placement="top-start"
-                                >
-                                    <span>{{ item.name }}</span>
-                                </el-tooltip>
-                            </div>
-                            <div class="operate">
-                                <i
-                                    class="iconfont icontubiaoweb-21"
-                                    @click="handleDel(item, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-22"
-                                    @click="up(attachmentList, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-23"
-                                    @click="down(attachmentList, index)"
-                                ></i>
-                            </div>
+                        <div class="link_name ellipsis" @click="loadpanoscene(item)">
+                            <el-tooltip
+                                class="item"
+                                effect="dark"
+                                :content="item.name"
+                                placement="top-start"
+                            >
+                                <span>{{ item.name }}</span>
+                            </el-tooltip>
+                        </div>
+                        <div class="operate">
+                            <i
+                                class="iconfont icontubiaoweb-21"
+                                @click="handleDel(item, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-22"
+                                @click="up(attachmentList, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-23"
+                                @click="down(attachmentList, index)"
+                            ></i>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <AttachmentComponent
-                :visible.sync="shows.isOpenAttachment"
-                :data="currentItem"
-            ></AttachmentComponent>
-            <div id="triangle-right" @click="closeDrawer"></div>
-            <!-- 修改附件弹窗 -->
-            <!-- <editSceneDialog
+        <AttachmentComponent
+            :visible.sync="shows.isOpenAttachment"
+            :data="currentItem"
+        ></AttachmentComponent>
+        <div id="triangle-right" @click="closeDrawer"></div>
+        <!-- 修改附件弹窗 -->
+        <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
                 :data="currentItem"
                 :onSuccess="getAttachmentList"
             ></editSceneDialog> -->
-        </div>
-    </el-drawer>
+    </div>
 </template>
 
 <script>
@@ -247,9 +237,15 @@ export default {
 </script>
 
 <style lang="less">
-.panel_sidebar {
-    position: relative;
-    box-shadow: none;
+.guideList {
+    position: absolute;
+    width: 296px;
+    height: 100%;
+    right: 306px;
+    top: 0px;
+    background: #fff;
+    padding: 0 24px;
+    z-index: 3000;
     .attachment {
         .title {
             height: 88px;
