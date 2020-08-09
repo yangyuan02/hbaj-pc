@@ -11,7 +11,8 @@ const state = {
     drawerTrack: false, // 快速通道
     openScene: false, // 场景热点列表
     id: "", // 场景热点列表id
-    sceneCode: ""
+    sceneCode: "",
+    openGuideScene: false // 引导列表-场景列表
 };
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
         state["openScene"] = true;
         state["id"] = id;
         state["code"] = code;
+    },
+    SETGuIDELIST(state) {
+        state["openGuideScene"] = true;
     }
 };
 

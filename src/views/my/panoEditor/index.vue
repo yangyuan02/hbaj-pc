@@ -2,6 +2,7 @@
     <div class="p_editor_container">
         <div id="p_editor" :style="{ width: isOpenedWidth.width }"></div>
         <SceneList></SceneList>
+        <GuideList></GuideList>
         <!-- 右侧工具条 -->
         <Toolbar></Toolbar>
     </div>
@@ -10,13 +11,15 @@
 <script>
 import Toolbar from "@/components/Toolbar";
 import SceneList from "@/components/Toolbar/Panel/Scene/sceneList";
+import GuideList from "@/components/Toolbar/Panel/Guide/guideList.vue";
 export default {
     data() {
         return {};
     },
     components: {
         Toolbar,
-        SceneList
+        SceneList,
+        GuideList
     },
     methods: {
         initPano() {

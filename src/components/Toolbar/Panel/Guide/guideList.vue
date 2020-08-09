@@ -1,30 +1,31 @@
 <template>
     <el-drawer
         title="我是标题"
-        :visible.sync="drawerGuideContent"
+        :visible.sync="openGuideScene"
         :with-header="false"
         :size="296"
         :before-close="handleClose"
         :modal="false"
+        :wrapperClosable="false"
     >
         <div class="panel_sidebar">
             <div class="attachment common">
                 <div class="title">
-                    <span>引导脚本列表</span>
-                    <i class="iconfont icontubiaoweb-24"></i>
+                    <span>场景列表</span>
+                    <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
-                        <span>链接内容</span>
-                        <span>脚本名称</span>
+                        <!-- <span>链接内容</span> -->
+                        <span>场景名称</span>
                         <span>操作</span>
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link" @click="editOpenEditAttachmentName(item)">
+                            <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
-                            </div>
-                            <div class="link_name ellipsis">
+                            </div> -->
+                            <div class="link_name ellipsis" @click="loadpanoscene(item)">
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
@@ -57,7 +58,7 @@
                 :visible.sync="shows.isOpenAttachment"
                 :data="currentItem"
             ></AttachmentComponent>
-
+            <div id="triangle-right" @click="closeDrawer"></div>
             <!-- 修改附件弹窗 -->
             <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
@@ -96,11 +97,11 @@ export default {
     },
     computed: {
         ...mapState({
-            drawerGuideContent: state => state.toolbarStore.drawerGuideContent
+            openGuideScene: state => state.toolbarStore.openGuideScene
         })
     },
     watch: {
-        drawerGuideContent(newVal, oldVal) {
+        openGuideScene(newVal, oldVal) {
             if (newVal) {
                 this.getAttachmentList();
             }
@@ -109,7 +110,7 @@ export default {
     methods: {
         handleClose(done) {
             done();
-            this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
+            this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
         },
         delAttach(id) {
             // 删除附件
@@ -196,8 +197,51 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
-            this.$store.commit("SETGuIDELIST");
+            this.$store.commit("SETSCENELIST", data.id, data.code);
+        },
+        loadpanoscene(data) {
+            window.loadpanoscene && window.loadpanoscene(data.id, data.code);
+            this.editOpenEditAttachmentName(data);
+        },
+        addScene() {
+            // 新增场景
+            const sceneId = window.getScenePara && window.getScenePara()[4];
+            const isScene = this.attachmentList.find(item => sceneId === item.id);
+            const sceneIds = this.attachmentList.map(item => item.id);
+            sceneIds.push(sceneId);
+            if (!isScene) {
+                const projectId = this.$route.params.projectId;
+                projectDetail(
+                    {
+                        type: "post",
+                        data: {
+                            projectId,
+                            sceneId,
+                            sceneIds
+                        }
+                    },
+                    `${projectId}/scene`
+                ).then(res => {
+                    if (res.suceeded) {
+                        this.getAttachmentList();
+                    }
+                });
+            } else {
+                this.$message({
+                    type: "error",
+                    message: "已经在场景列表中了"
+                });
+            }
+        },
+        closeDrawer() {
+            this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            if (this.$store.state.toolbarStore.openScene) {
+                this.$store.commit("TOGGLE_DRAWER", "openScene");
+            }
         }
+    },
+    mounted() {
+        window._hban_addScene = this.addScene;
     }
 };
 </script>
@@ -269,6 +313,17 @@ export default {
                 }
             }
         }
+    }
+    #triangle-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 20px solid #eee;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50);
     }
 }
 </style>
