@@ -3,13 +3,13 @@
         <div class="attachment common">
             <div class="title">
                 <span>场景列表</span>
-                <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
+                <!-- <i class="iconfont icontubiaoweb-24" @click="addScene"></i> -->
             </div>
             <div class="attachment_list">
                 <div class="header">
                     <!-- <span>链接内容</span> -->
                     <span>场景名称</span>
-                    <span>操作</span>
+                    <!-- <span>操作</span> -->
                 </div>
                 <div class="body">
                     <div class="item" v-for="(item, index) in attachmentList" :key="index">
@@ -26,7 +26,7 @@
                                 <span>{{ item.name }}</span>
                             </el-tooltip>
                         </div>
-                        <div class="operate">
+                        <!-- <div class="operate">
                             <i
                                 class="iconfont icontubiaoweb-21"
                                 @click="handleDel(item, index)"
@@ -39,7 +39,7 @@
                                 class="iconfont icontubiaoweb-23"
                                 @click="down(attachmentList, index)"
                             ></i>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -224,10 +224,8 @@ export default {
             }
         },
         closeDrawer() {
-            this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
-            if (this.$store.state.toolbarStore.openScene) {
-                this.$store.commit("TOGGLE_DRAWER", "openScene");
-            }
+            this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
+            this.$store.commit("TOGGLE_DRAWER", "openGuideScene");
         }
     },
     mounted() {

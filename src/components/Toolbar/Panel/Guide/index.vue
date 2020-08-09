@@ -57,6 +57,7 @@
                 :visible.sync="shows.isOpenAttachment"
                 :data="currentItem"
             ></AttachmentComponent>
+            <div id="triangle-right" @click="closeDrawer"></div>
 
             <!-- 修改附件弹窗 -->
             <!-- <editSceneDialog
@@ -197,6 +198,12 @@ export default {
         },
         editOpenEditAttachmentName(data) {
             this.$store.commit("SETGuIDELIST");
+        },
+        closeDrawer() {
+            this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
+            if (this.$store.state.toolbarStore.openGuideScene) {
+                this.$store.commit("TOGGLE_DRAWER", "openGuideScene");
+            }
         }
     }
 };
@@ -269,6 +276,17 @@ export default {
                 }
             }
         }
+    }
+    #triangle-right {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 20px solid #eee;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50);
     }
 }
 </style>
