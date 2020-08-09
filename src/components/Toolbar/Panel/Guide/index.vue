@@ -11,7 +11,7 @@
             <div class="attachment common">
                 <div class="title">
                     <span>引导脚本列表</span>
-                    <i class="iconfont icontubiaoweb-24"></i>
+                    <i class="iconfont icontubiaoweb-24" @click="addGuide"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
@@ -21,17 +21,20 @@
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link" @click="editOpenEditAttachmentName(item)">
+                            <div class="link">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div>
-                            <div class="link_name ellipsis">
+                            <div
+                                class="link_name ellipsis"
+                                @click="editOpenEditAttachmentName(item)"
+                            >
                                 <el-tooltip
                                     class="item"
                                     effect="dark"
-                                    :content="item.name"
+                                    :content="item.title"
                                     placement="top-start"
                                 >
-                                    <span>{{ item.name }}</span>
+                                    <span>{{ item.title }}</span>
                                 </el-tooltip>
                             </div>
                             <div class="operate">
@@ -144,19 +147,17 @@ export default {
         getAttachmentList() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
-            projectDetail(
-                {
-                    type: "GET",
-                    data: {
-                        projectId,
-                        page: "1",
-                        size: "1000"
-                    }
-                },
-                `${projectId}/panoInfo`
-            ).then(res => {
+            hotspot({
+                type: "GET",
+                data: {
+                    projectId,
+                    type: "GUIDE",
+                    page: "1",
+                    size: "1000"
+                }
+            }).then(res => {
                 if (res.suceeded) {
-                    this.attachmentList = res.data;
+                    this.attachmentList = res.data.content || [];
                     console.log(res.data, "attach");
                 } else {
                 }
@@ -204,6 +205,26 @@ export default {
             if (this.$store.state.toolbarStore.openGuideScene) {
                 this.$store.commit("TOGGLE_DRAWER", "openGuideScene");
             }
+        },
+        addGuide() {
+            const projectId = this.$route.params.projectId;
+            // 通过任务id获取项目的有关信息
+            hotspot({
+                type: "post",
+                data: {
+                    projectId,
+                    type: "GUIDE",
+                    title: "请修改脚本介绍"
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message({
+                        type: "success",
+                        message: "操作成功"
+                    });
+                    this.getAttachmentList();
+                }
+            });
         }
     }
 };
