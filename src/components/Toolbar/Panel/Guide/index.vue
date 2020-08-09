@@ -6,6 +6,7 @@
         :size="296"
         :before-close="handleClose"
         :modal="false"
+        :wrapperClosable="false"
     >
         <div class="panel_sidebar">
             <div class="attachment common">

@@ -7,15 +7,15 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <!-- <span>链接内容</span> -->
+                    <span>链接内容</span>
                     <span>场景名称</span>
                     <!-- <span>操作</span> -->
                 </div>
                 <div class="body">
                     <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                        <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
-                                <i class="iconfont icontubiaoweb-29"></i>
-                            </div> -->
+                        <div class="link">
+                            <i class="iconfont icontubiaoweb-26" @click="updateHotspot(item)"></i>
+                        </div>
                         <div class="link_name ellipsis" @click="loadpanoscene(item)">
                             <el-tooltip
                                 class="item"
@@ -193,35 +193,28 @@ export default {
             window.loadpanoscene && window.loadpanoscene(data.id, data.code);
             this.editOpenEditAttachmentName(data);
         },
-        addScene() {
-            // 新增场景
-            const sceneId = window.getScenePara && window.getScenePara()[4];
-            const isScene = this.attachmentList.find(item => sceneId === item.id);
-            const sceneIds = this.attachmentList.map(item => item.id);
-            sceneIds.push(sceneId);
-            if (!isScene) {
-                const projectId = this.$route.params.projectId;
-                projectDetail(
-                    {
-                        type: "post",
-                        data: {
-                            projectId,
-                            sceneId,
-                            sceneIds
-                        }
-                    },
-                    `${projectId}/scene`
-                ).then(res => {
-                    if (res.suceeded) {
-                        this.getAttachmentList();
-                    }
-                });
-            } else {
-                this.$message({
-                    type: "error",
-                    message: "已经在场景列表中了"
-                });
-            }
+        updateHotspot() {
+            const getScenePara = window.getScenePara && window.getScenePara();
+            const projectId = this.$route.params.projectId;
+            const data = {
+                locationFov: getScenePara[1], //场景的视角
+                locationX: getScenePara[2], //获取的热点横坐标
+                locationY: getScenePara[3], //获取的热点垂向坐标
+                projectId, //项目ID
+                sceneId: getScenePara[4] //场景ID
+                // title: "默认场景名称", //热点名称
+                // type: "DEFAULT" //热点类型
+            };
+
+            hotspot({ type: "post", data }).then(res => {
+                if (res.suceeded) {
+                    this.getAttachmentList();
+                    this.$message({
+                        type: "success",
+                        message: "更新成功!"
+                    });
+                }
+            });
         },
         closeDrawer() {
             this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
