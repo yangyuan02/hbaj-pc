@@ -23,7 +23,10 @@
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
                             <div class="link">
-                                <i class="iconfont icontubiaoweb-29"></i>
+                                <i
+                                    class="iconfont icontubiaoweb-29"
+                                    @click="openHotspotConent(item)"
+                                ></i>
                             </div>
                             <div
                                 class="link_name ellipsis"
@@ -63,6 +66,11 @@
             ></AttachmentComponent>
             <div id="triangle-right" @click="closeDrawer"></div>
 
+            <HotspotConent
+                :visible.sync="shows.isOpenHotspotConent"
+                :data="currentItem"
+            ></HotspotConent>
+
             <!-- 修改附件弹窗 -->
             <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
@@ -78,6 +86,9 @@ import { mapState } from "vuex";
 
 import AttachmentComponent from "../../Dialog";
 
+// 批量新增弹窗
+import HotspotConent from "./Dialog/";
+
 // import editSceneDialog from "./editScene";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
@@ -87,7 +98,8 @@ export default {
     data() {
         return {
             shows: {
-                isOpenAttachment: false // 附件弹窗
+                isOpenAttachment: false, // 附件弹窗
+                isOpenHotspotConent: false // 批量新增弹窗
                 // isOpenEditAttachment: false // 修改附件弹窗
             },
             attachmentList: [], // 获取附件列表
@@ -96,7 +108,8 @@ export default {
         };
     },
     components: {
-        AttachmentComponent
+        AttachmentComponent,
+        HotspotConent
         // editSceneDialog
     },
     computed: {
@@ -226,6 +239,10 @@ export default {
                     this.getAttachmentList();
                 }
             });
+        },
+        openHotspotConent(data) {
+            this.currentItem = data;
+            this.shows.isOpenHotspotConent = true;
         }
     }
 };
