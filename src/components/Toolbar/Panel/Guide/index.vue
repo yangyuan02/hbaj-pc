@@ -161,17 +161,20 @@ export default {
         getAttachmentList() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
-            hotspot({
-                type: "GET",
-                data: {
-                    projectId,
-                    type: "GUIDE",
-                    page: "1",
-                    size: "1000"
-                }
-            }).then(res => {
+            hotspotDetail(
+                {
+                    type: "GET",
+                    data: {
+                        projectId,
+                        type: "GUIDE",
+                        page: "1",
+                        size: "1000"
+                    }
+                },
+                "/all"
+            ).then(res => {
                 if (res.suceeded) {
-                    this.attachmentList = res.data.content || [];
+                    this.attachmentList = res.data || [];
                     console.log(res.data, "attach");
                 } else {
                 }
