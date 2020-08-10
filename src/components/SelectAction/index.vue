@@ -6,7 +6,14 @@
         <div class="select-body">
             <div class="action_list">
                 <ul>
-                    <li v-for="(item, index) in 16" :key="index"></li>
+                    <li
+                        v-for="(item, index) in list"
+                        :key="index"
+                        @click="select(globalConfig.imagePath + item)"
+                        class="ui-lazyLoad-pic"
+                    >
+                        <img :src="globalConfig.imagePath + item" alt="" />
+                    </li>
                 </ul>
             </div>
             <div class="desc">
@@ -26,10 +33,23 @@ export default {
         title: {
             type: String,
             default: ""
+        },
+        list: {
+            type: Array,
+            default: []
+        },
+        onSelect: {
+            type: Function,
+            default: () => {}
         }
     },
     data() {
         return {};
+    },
+    methods: {
+        select(url) {
+            this.onSelect && this.onSelect(url);
+        }
     }
 };
 </script>
@@ -54,6 +74,10 @@ export default {
                     margin-right: 10px;
                     margin-bottom: 8px;
                     background: rgba(221, 221, 221, 1);
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
         }

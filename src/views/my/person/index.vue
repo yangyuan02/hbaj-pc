@@ -149,6 +149,7 @@ export default {
                     background: rgba(15, 79, 168, 1);
                     padding: 8px;
                     position: relative;
+                    border-radius: 4px;
                     .thumb {
                         width: 60px;
                         height: 60px;

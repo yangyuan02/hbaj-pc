@@ -124,6 +124,7 @@ export default {
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
+            cursor: pointer;
             .action {
                 width: 75px;
                 height: 20px;

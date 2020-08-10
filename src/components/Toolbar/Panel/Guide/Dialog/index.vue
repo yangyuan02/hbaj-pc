@@ -12,7 +12,15 @@
             <div class="hostcontent">
                 <div class="hostcontent_left">
                     <div class="info">
-                        <div class="action" @click="isOpenAction = true"></div>
+                        <div
+                            class="action"
+                            @click="isOpenAction = true"
+                            :style="{
+                                'background-image': `url(
+                                    ${selectData.img1}
+                                )`
+                            }"
+                        ></div>
                         <div class="digest">
                             <div class="title">
                                 <span>简介</span>
@@ -37,7 +45,7 @@
                 </div>
             </div>
         </main>
-        <SelectAction :visible.sync="isOpenAction"></SelectAction>
+        <SelectAction :visible.sync="isOpenAction" :onConfirm="onConfirm"></SelectAction>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
@@ -64,6 +72,10 @@ export default {
             loading: {
                 save: false,
                 detail: false
+            },
+            selectData: {
+                img1: "",
+                img2: ""
             }
         };
     },
@@ -81,6 +93,10 @@ export default {
                 }
             });
             console.log("保存");
+        },
+        onConfirm(data) {
+            Object.assign(this.selectData, data);
+            console.log(data);
         }
     }
 };
