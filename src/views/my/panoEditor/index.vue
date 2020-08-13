@@ -1,7 +1,7 @@
 <template>
     <div class="p_editor_container">
         <div id="p_editor" :style="{ width: isOpenedWidth.width }"></div>
-        <SceneList></SceneList>
+        <SceneList ref="SceneList"></SceneList>
         <GuideList></GuideList>
         <!-- 右侧工具条 -->
         <Toolbar></Toolbar>
@@ -34,6 +34,10 @@ export default {
                     passQueryParameters: true
                 });
             });
+        },
+        getZindex() {
+            const zIndex = document.querySelector(".el-drawer__open").parentElement.style.zIndex;
+            return parseInt(zIndex, 10);
         }
     },
     computed: {
@@ -43,11 +47,40 @@ export default {
                 .filter(item => item === false || item === true)
                 .some(item => item);
             return {
-                width: `calc(100% - ${isOpen ? (this.isOpenScene ? "616px" : "310px") : "0px"})`
+                width: `calc(100% - ${
+                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "616px" : "310px") : "0px"
+                })`
             };
         },
         isOpenScene: function() {
             return this.$store.state.toolbarStore.openScene;
+        },
+        isOpenGuideScene: function() {
+            return this.$store.state.toolbarStore.openGuideScene;
+        }
+    },
+    watch: {
+        isOpenScene: function(val) {
+            if (val) {
+                this.$nextTick(() => {
+                    const zIndex = this.getZindex() + 1;
+                    const elesCene = document.querySelector(".scene_list");
+                    if (elesCene) {
+                        elesCene.style.zIndex = zIndex;
+                    }
+                });
+            }
+        },
+        isOpenGuideScene: function(val) {
+            if (val) {
+                this.$nextTick(() => {
+                    const zIndex = this.getZindex() + 1;
+                    const eleGuide = document.querySelector(".guideList");
+                    if (eleGuide) {
+                        eleGuide.style.zIndex = zIndex;
+                    }
+                });
+            }
         }
     },
     mounted() {

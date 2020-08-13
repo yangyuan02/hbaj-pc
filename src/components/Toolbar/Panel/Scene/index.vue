@@ -12,12 +12,12 @@
             <div class="attachment common">
                 <div class="title">
                     <span>场景列表</span>
-                    <i class="iconfont icontubiaoweb-24" @click="addScene"></i>
+                    <i class="iconfont icontubiaoweb-24 cursor" @click="addScene"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
                         <!-- <span>链接内容</span> -->
-                        <span>场景名称</span>
+                        <span style="text-align:left">场景名称</span>
                         <span>操作</span>
                     </div>
                     <div class="body">
@@ -281,7 +281,10 @@ export default {
                     font-family: MicrosoftYaHei;
                     color: rgba(102, 102, 102, 1);
                     line-height: 19px;
-                    text-align: center;
+                    text-align: left;
+                    &:last-child {
+                        text-align: center;
+                    }
                 }
             }
             .body {
@@ -301,6 +304,7 @@ export default {
                             font-family: MicrosoftYaHei;
                             color: rgba(102, 102, 102, 1);
                             line-height: 19px;
+                            cursor: pointer;
                         }
                         &.operate {
                             display: flex;
