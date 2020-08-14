@@ -16,15 +16,15 @@
         </div>
         <div class="course-item-detail">
             <div class="course-item-title">
-                <div class="text ellipsisLineTwo">
+                <div class="text">
                     <p>{{ item.name }}</p>
                 </div>
                 <div class="status">
                     <span>{{ item.publicFlg | formPublicFlg }}</span>
                 </div>
             </div>
-            <div class="course-item-digest ellipsisLineTwo">
-                <p>
+            <div class="course-item-digest">
+                <p class="ellipsis">
                     {{ item.detail }}
                 </p>
             </div>
@@ -72,6 +72,7 @@ export default {
     .course-item-thumb {
         width: 70px;
         height: 70px;
+        flex-shrink: 0;
         margin-right: 11px;
         img {
             width: 100%;
@@ -82,6 +83,7 @@ export default {
     .course-item-detail {
         flex: 1;
         width: 222px;
+        position: relative;
         .course-item-title {
             display: flex;
             .text {
@@ -127,6 +129,8 @@ export default {
             align-content: center;
             justify-content: space-between;
             margin-top: 8px;
+            position: absolute;
+            bottom: 0;
             span {
                 font-size: 10px;
                 font-family: MicrosoftYaHei;

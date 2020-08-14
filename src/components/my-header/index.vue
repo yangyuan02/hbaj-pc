@@ -12,13 +12,13 @@
             <span>我的</span>
             <i class="iconfont icontubiao-251 edit" @click="edit" v-if="isEdit"></i>
         </header>
-        <div class="my-person-info">
+        <div class="my-person-info ">
             <div class="person-thumb">
                 <input
                     v-if="isOnUplaod"
                     type="file"
                     @change="uploadAvatar($event)"
-                    class="upload_file"
+                    class="upload_file cursor"
                     accept="image/png,image/jpeg,image/jpg"
                 />
                 <img :src="globalConfig.imagePath + info.avatar" alt="" v-if="info.avatar" />

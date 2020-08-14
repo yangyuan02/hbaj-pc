@@ -20,11 +20,11 @@
             </div>
             <div class="news-item-source">
                 <div class="organization">
-                    <span>发布机构:</span>
+                    <!-- <span>发布机构:</span> -->
                     <span>{{ item.author }}</span>
                 </div>
                 <div class="publishTime">
-                    <span>发布时间:</span>
+                    <!-- <span>发布时间:</span> -->
                     <span>{{ item.publishTime | formaData }}</span>
                 </div>
             </div>

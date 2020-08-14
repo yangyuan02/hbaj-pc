@@ -10,8 +10,8 @@
                             : './images/user_default.png'
                     }"
                 ></div>
-                <div class="name">
-                    <span v-if="user.namecard">{{ user.namecard }}</span>
+                <div class="name cursor">
+                    <span v-if="user.namecard" @click="goMy">{{ user.namecard }}</span>
                     <span @click="$store.commit('TOGGLE_LOGIN')" v-else>请登录</span>
                 </div>
             </div>
@@ -129,6 +129,9 @@ export default {
                     }
                 });
             }
+        },
+        goMy() {
+            this.$router.push({ path: "/my/person" });
         }
     },
     mounted() {
