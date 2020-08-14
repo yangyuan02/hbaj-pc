@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="images-body">
-                <div class="content">
+                <div class="content ellipsis3">
                     <p>{{ item.content }}</p>
                 </div>
                 <div class="images">
@@ -123,6 +123,7 @@ export default {
         justify-content: space-between;
         height: 100px;
         .content {
+            flex: 1;
             p {
                 font-size: 14px;
                 font-family: MicrosoftYaHei;
@@ -134,6 +135,7 @@ export default {
         .images {
             width: 80px;
             height: 80px;
+            margin-left: 8px;
             img {
                 width: 100%;
                 height: 100%;

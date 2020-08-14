@@ -245,6 +245,11 @@ export default {
 <style lang="less">
 .attchment_dialog {
     position: relative;
+
+    .el-tabs__content {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
     .operate {
         position: absolute;
         right: 0;

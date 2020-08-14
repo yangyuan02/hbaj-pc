@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-body">
+            <div class="text-body ellipsis3">
                 <p>{{ item.content }}</p>
             </div>
         </div>

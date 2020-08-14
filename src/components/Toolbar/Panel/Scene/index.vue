@@ -37,15 +37,15 @@
                             </div>
                             <div class="operate">
                                 <i
-                                    class="iconfont icontubiaoweb-21"
+                                    class="iconfont icontubiaoweb-21 cursor"
                                     @click="handleDel(item, index)"
                                 ></i>
                                 <i
-                                    class="iconfont icontubiaoweb-22"
+                                    class="iconfont icontubiaoweb-22 cursor"
                                     @click="up(attachmentList, index)"
                                 ></i>
                                 <i
-                                    class="iconfont icontubiaoweb-23"
+                                    class="iconfont icontubiaoweb-23 cursor"
                                     @click="down(attachmentList, index)"
                                 ></i>
                             </div>

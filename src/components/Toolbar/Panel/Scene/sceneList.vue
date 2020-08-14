@@ -3,7 +3,7 @@
         <div class="attachment common">
             <div class="title">
                 <span>场景热点列表</span>
-                <i class="iconfont icontubiaoweb-24" @click="addHotScene"></i>
+                <i class="iconfont icontubiaoweb-24 cursor" @click="addHotScene"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
@@ -14,21 +14,33 @@
                 <div class="body" v-if="list && list.length" v-loading="loading">
                     <div class="item" v-for="(item, index) in list" :key="index">
                         <div class="link">
-                            <i class="iconfont icontubiaoweb-29" @click="editAttachment(item)"></i>
-                            <i class="iconfont icontubiaoweb-26" @click="updateHotspot(item)"></i>
+                            <i
+                                class="iconfont icontubiaoweb-29 cursor"
+                                @click="editAttachment(item)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-26 cursor"
+                                @click="updateHotspot(item)"
+                            ></i>
                         </div>
-                        <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
-                            <el-tooltip
+                        <div
+                            class="link_name ellipsis cursor"
+                            @click="editOpenEditAttachmentName(item)"
+                        >
+                            <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
                                 :content="item.title"
                                 placement="top-start"
-                            >
-                                <span>{{ item.title }}</span>
-                            </el-tooltip>
+                            > -->
+                            <span>{{ item.title }}</span>
+                            <!-- </el-tooltip> -->
                         </div>
                         <div class="operate">
-                            <i class="iconfont icontubiaoweb-21" @click="handleDel(item)"></i>
+                            <i
+                                class="iconfont icontubiaoweb-21 cursor"
+                                @click="handleDel(item)"
+                            ></i>
                         </div>
                     </div>
                 </div>
@@ -100,7 +112,9 @@ export default {
                     this.loading = false;
                     const list = res.data.content || [];
                     this.list = list;
-                    console.log(list, "11");
+                    const id = this.$store.state.toolbarStore.id;
+                    const code = this.$store.state.toolbarStore.code;
+                    window.loadpanoscene && window.loadpanoscene(id, code);
                 }
             });
         },
@@ -122,11 +136,11 @@ export default {
                 }
             });
         },
-        delScenel() {
+        delScenel(id) {
             // 删除附件
             hotspotDetail({ type: "delete" }, id).then(res => {
                 if (res.suceeded) {
-                    this.getAttachmentList();
+                    this.getsceneList(this.$store.state.toolbarStore.id);
                     this.$message({
                         type: "success",
                         message: "删除成功!"
@@ -171,9 +185,7 @@ export default {
             hotspot({ type: "post", data }).then(res => {
                 if (res.suceeded) {
                     const id = this.$store.state.toolbarStore.id;
-                    const code = this.$store.state.toolbarStore.code;
                     this.getsceneList(id);
-                    window.loadpanoscene && window.loadpanoscene(id, code);
                     this.$message({
                         type: "success",
                         message: "新增成功!"
