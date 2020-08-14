@@ -7,12 +7,12 @@
                 </div>
                 <div class="operate_btn">
                     <div class="sort common">
-                        <i class="iconfont iconpaixu"></i>
+                        <i class="iconfont iconpaixu cursor"></i>
                     </div>
-                    <div class="edit common" @click="edit(item)">
+                    <div class="edit common cursor" @click="edit(item)">
                         <i class="iconfont icontubiaoweb-07"></i>
                     </div>
-                    <div class="del common" @click="del(item)">
+                    <div class="del common cursor" @click="del(item)">
                         <i class="iconfont icontubiaoweb-27"></i>
                     </div>
                 </div>
