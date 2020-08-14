@@ -3,7 +3,7 @@
         title="我是标题"
         :visible="drawerIntro"
         :with-header="false"
-        :modal="true"
+        :modal="false"
         :size="296"
         :before-close="handleClose"
     >

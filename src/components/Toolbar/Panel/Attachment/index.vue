@@ -11,18 +11,18 @@
             <div class="attachment common">
                 <div class="title">
                     <span>项目附件</span>
-                    <i class="iconfont icontubiaoweb-24" @click="addAttachment"></i>
+                    <i class="iconfont icontubiaoweb-24 cursor" @click="addAttachment"></i>
                 </div>
                 <div class="attachment_list">
                     <div class="header">
-                        <span>链接内容</span>
+                        <span>链接</span>
                         <span>附件名称</span>
                         <span>操作</span>
                     </div>
                     <div class="body">
                         <div class="item" v-for="(item, index) in attachmentList" :key="index">
                             <div class="link" @click="editAttachment(item)">
-                                <i class="iconfont icontubiaoweb-29"></i>
+                                <i class="iconfont icontubiaoweb-29 cursor"></i>
                             </div>
                             <div
                                 class="link_name ellipsis"
@@ -39,15 +39,15 @@
                             </div>
                             <div class="operate">
                                 <i
-                                    class="iconfont icontubiaoweb-21"
+                                    class="iconfont icontubiaoweb-21 cursor"
                                     @click="handleDel(item, index)"
                                 ></i>
                                 <i
-                                    class="iconfont icontubiaoweb-22"
+                                    class="iconfont icontubiaoweb-22 cursor"
                                     @click="up(attachmentList, index)"
                                 ></i>
                                 <i
-                                    class="iconfont icontubiaoweb-23"
+                                    class="iconfont icontubiaoweb-23 cursor"
                                     @click="down(attachmentList, index)"
                                 ></i>
                             </div>
