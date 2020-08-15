@@ -14,6 +14,7 @@
                         :list="display.textList"
                         :onSuccess="getAttachmentText"
                         :onNotifiy="notifiy"
+                        :onSortOpen="onSortOpen"
                     ></TextList>
                 </el-tab-pane>
                 <el-tab-pane label="图片" name="image">
@@ -65,6 +66,7 @@
             :visible.sync="shows.isOpenSortTextList"
             :id="attchmentId"
             :onSuccess="getAttachmentText"
+            :list="sortList"
         ></SortTextList>
         <div slot="footer">
             <el-button @click="close">关闭</el-button>
@@ -120,6 +122,7 @@ export default {
                     }
                 ] // 视频列表
             },
+            sortList: [], // 排序列表
             editType: "" // 编辑类型
         };
     },
@@ -244,6 +247,13 @@ export default {
             }
             if (type === "video") {
                 this.shows.isOpenVideoDialog = true;
+            }
+        },
+        onSortOpen(data, type) {
+            this.attchmentId = this.params.id;
+            if (type === "text") {
+                this.shows.isOpenSortTextList = true;
+                this.sortList = data.map(item => ({ id: item.id, name: item.title }));
             }
         }
     }

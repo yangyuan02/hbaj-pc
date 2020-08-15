@@ -7,13 +7,13 @@
                 </div>
                 <div class="operate_btn">
                     <div class="sort common">
-                        <i class="iconfont iconpaixu cursor"></i>
+                        <i class="iconfont iconpaixu cursor" @click="sort(list)"></i>
                     </div>
-                    <div class="edit common cursor" @click="edit(item)">
-                        <i class="iconfont icontubiaoweb-07"></i>
+                    <div class="edit common" @click="edit(item)">
+                        <i class="iconfont icontubiaoweb-07 cursor"></i>
                     </div>
-                    <div class="del common cursor" @click="del(item)">
-                        <i class="iconfont icontubiaoweb-27"></i>
+                    <div class="del common" @click="del(item)">
+                        <i class="iconfont icontubiaoweb-27 cursor"></i>
                     </div>
                 </div>
             </div>
@@ -42,6 +42,10 @@ export default {
         onNotifiy: {
             type: Function,
             defalut: () => {}
+        },
+        onSortOpen: {
+            type: Function,
+            defalut: () => {}
         }
     },
     methods: {
@@ -68,6 +72,9 @@ export default {
         },
         edit(data) {
             this.onNotifiy && this.onNotifiy(data, "text");
+        },
+        sort(list) {
+            this.onSortOpen && this.onSortOpen(list, "text");
         }
     }
 };
