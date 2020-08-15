@@ -15,7 +15,6 @@ export default {
                 this.editor = new Editor("#editor"); // 构造富文本实例
                 this.editorConfig(); // 修改富文本配置
                 this.editor.create(); // 创建富文本
-                this.editor = Object.freeze(this.editor); // 冻结对象没有数据响应
             });
         },
         editorConfig() {

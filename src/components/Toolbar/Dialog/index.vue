@@ -32,12 +32,12 @@
                 <el-tab-pane label="视频" name="video">
                     <VideoHban :src="display.videoList[0].extra"></VideoHban>
                 </el-tab-pane>
-                <el-tab-pane label="富文本" name="richtext">
-                    <RichTextBox></RichTextBox>
+                <el-tab-pane label="富文本" name="html">
+                    <RichTextBox ref="RichTextBox"></RichTextBox>
                 </el-tab-pane>
             </el-tabs>
             <div class="operate">
-                <el-button type="primary" @click="editDialog()">添加</el-button>
+                <el-button type="primary" @click="editDialog()">{{ buttonText }}</el-button>
             </div>
         </main>
         <TextDialog
@@ -92,7 +92,7 @@ import SortList from "./SortList";
 import TextList from "../List/Text";
 import ImagesList from "../List/Images";
 
-import { hotspotContent } from "@/model/api";
+import { hotspotContent, hotspotContentDetail } from "@/model/api";
 
 export default {
     data() {
@@ -159,6 +159,14 @@ export default {
             this.params = newVal;
         }
     },
+    computed: {
+        buttonText: function() {
+            if (this.activeName === "html") {
+                return "保存";
+            }
+            return "添加";
+        }
+    },
     methods: {
         open() {
             console.log("打开");
@@ -175,6 +183,11 @@ export default {
             this.handerAttachment(name);
         },
         editDialog() {
+            if (this.activeName === "html") {
+                // 富文本
+                this.hadnleRichtext();
+                return;
+            }
             this.attchmentId = this.params.id;
             // this.editData = {};
             this.editType = "";
@@ -190,6 +203,29 @@ export default {
             if (this.activeName === "video") {
                 this.shows.isOpenVideoDialog = true;
             }
+        },
+        hadnleRichtext() {
+            // 保存富文本
+            const RichTextBox = this.$refs.RichTextBox;
+            const getHtml = RichTextBox.getHtml();
+            const params = {
+                // 参数
+                content: getHtml, // 内容
+                // extra: "string", // 附件url
+                hotspotId: this.params.id, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "HTML" // 类型
+            };
+            hotspotContentDetail({
+                type: "post",
+                data: params
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                }
+            });
         },
         handerAttachment(type) {
             // 获取具体的附件信息
