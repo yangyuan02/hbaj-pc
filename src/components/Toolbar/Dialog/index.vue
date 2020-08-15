@@ -62,12 +62,12 @@
             :id="attchmentId"
             :onSuccess="getAttachmentVideo"
         ></VideoDialog>
-        <SortTextList
+        <SortList
             :visible.sync="shows.isOpenSortTextList"
             :id="attchmentId"
             :onSuccess="getAttachmentText"
             :list="sortList"
-        ></SortTextList>
+        ></SortList>
         <div slot="footer">
             <el-button @click="close">关闭</el-button>
             <!-- <el-button type="primary" :loading="loading.save" @click="save">保存</el-button> -->
@@ -84,7 +84,7 @@ import TextDialog from "./TextDialog";
 import ImageDialog from "./ImageDialog";
 import AudioDialog from "./AudioDialog";
 import VideoDialog from "./VideoDialog";
-import SortTextList from "./SortTextList";
+import SortList from "./SortList";
 
 import TextList from "../List/Text";
 import ImagesList from "../List/Images";
@@ -145,7 +145,7 @@ export default {
         ImageDialog,
         AudioDialog,
         VideoDialog,
-        SortTextList,
+        SortList,
 
         TextList,
         ImagesList
