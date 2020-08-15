@@ -251,6 +251,12 @@ export default {
                     if (res.data.length === 0 && (type === "audio" || type === "video")) {
                         this.display[type + "List"].push({ extra: "" });
                     }
+                    if (this.activeName === "html") {
+                        // 富文本
+                        if (res.data.length > 0) {
+                            this.$refs.RichTextBox.setHtml(res.data[0].content);
+                        }
+                    }
                 }
             });
         },
