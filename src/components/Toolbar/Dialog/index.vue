@@ -123,7 +123,8 @@ export default {
                     {
                         extra: ""
                     }
-                ] // 视频列表
+                ], // 视频列表
+                richText: {} // 富文本
             },
             sortList: [], // 排序列表
             editType: "" // 编辑类型
@@ -185,7 +186,7 @@ export default {
         editDialog() {
             if (this.activeName === "html") {
                 // 富文本
-                this.hadnleRichtext();
+                this.display.richText.id ? this.handleRichTextEdit() : this.hadnleRichtext();
                 return;
             }
             this.attchmentId = this.params.id;
@@ -218,10 +219,37 @@ export default {
                 title: "", // 标题
                 type: "HTML" // 类型
             };
+            const hotspotContentList = [params];
             hotspotContentDetail({
                 type: "post",
-                data: params
+                data: { hotspotContentList }
             }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                }
+            });
+        },
+        handleRichTextEdit() {
+            const RichTextBox = this.$refs.RichTextBox;
+            const getHtml = RichTextBox.getHtml();
+            const params = {
+                // 参数
+                content: getHtml, // 内容
+                // extra: "string", // 附件url
+                hotspotId: this.params.id, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "HTML" // 类型
+            };
+            // 修改富文本
+            hotspotContent(
+                {
+                    type: "post",
+                    data: params
+                },
+                this.display.richText.id
+            ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
                 }
@@ -255,6 +283,7 @@ export default {
                         // 富文本
                         if (res.data.length > 0) {
                             this.$refs.RichTextBox.setHtml(res.data[0].content);
+                            this.display.richText = res.data[0];
                         }
                     }
                 }
