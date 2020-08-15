@@ -32,14 +32,14 @@
                                 class="link_name ellipsis"
                                 @click="editOpenEditAttachmentName(item)"
                             >
-                                <el-tooltip
+                                <!-- <el-tooltip
                                     class="item"
                                     effect="dark"
                                     :content="item.title"
                                     placement="top-start"
-                                >
-                                    <span>{{ item.title }}</span>
-                                </el-tooltip>
+                                > -->
+                                <span>{{ item.title }}</span>
+                                <!-- </el-tooltip> -->
                             </div>
                             <div class="operate">
                                 <i
@@ -54,6 +54,7 @@
                                     class="iconfont icontubiaoweb-23"
                                     @click="down(attachmentList, index)"
                                 ></i>
+                                <i class="iconfont icontubiaoweb-28" @click="edit(item, index)"></i>
                             </div>
                         </div>
                     </div>
@@ -72,11 +73,11 @@
             ></HotspotConent>
 
             <!-- 修改附件弹窗 -->
-            <!-- <editSceneDialog
+            <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
                 :data="currentItem"
                 :onSuccess="getAttachmentList"
-            ></editSceneDialog> -->
+            ></editSceneDialog>
         </div>
     </el-drawer>
 </template>
@@ -89,7 +90,7 @@ import AttachmentComponent from "../../Dialog";
 // 批量新增弹窗
 import HotspotConent from "./Dialog/";
 
-// import editSceneDialog from "./editScene";
+import editSceneDialog from "./editGuide";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
@@ -99,8 +100,8 @@ export default {
         return {
             shows: {
                 isOpenAttachment: false, // 附件弹窗
-                isOpenHotspotConent: false // 批量新增弹窗
-                // isOpenEditAttachment: false // 修改附件弹窗
+                isOpenHotspotConent: false, // 批量新增弹窗
+                isOpenEditAttachment: false // 修改附件弹窗
             },
             attachmentList: [], // 获取附件列表
             newArr: [], //
@@ -109,8 +110,8 @@ export default {
     },
     components: {
         AttachmentComponent,
-        HotspotConent
-        // editSceneDialog
+        HotspotConent,
+        editSceneDialog
     },
     computed: {
         ...mapState({
@@ -131,8 +132,7 @@ export default {
         },
         delAttach(id) {
             // 删除附件
-            const projectId = this.$route.params.projectId;
-            projectDetail({ type: "delete" }, `${projectId}/scene/${id}`).then(res => {
+            hotspotDetail({ type: "delete" }, id).then(res => {
                 if (res.suceeded) {
                     this.getAttachmentList();
                     this.$message({
@@ -143,7 +143,7 @@ export default {
             });
         },
         handleDel(item, index) {
-            this.$confirm(`此操作将永久删 ${item.name}, 是否继续?`, "提示", {
+            this.$confirm(`此操作将永久删 ${item.title}, 是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
@@ -182,12 +182,12 @@ export default {
         },
         sortAttachment() {
             const projectId = this.$route.params.projectId;
-            const sceneIds = this.newArr.map(item => item.id);
+            const hotspotIds = this.newArr.map(item => item.id);
             projectDetail(
                 {
                     type: "post",
                     data: {
-                        sceneIds
+                        hotspotIds
                     }
                 },
                 `${projectId}/scene/changeSeq`
@@ -216,6 +216,12 @@ export default {
         },
         editOpenEditAttachmentName(data) {
             this.$store.commit("SETGuIDELIST");
+        },
+        edit(data) {
+            // 修改附件名称弹窗
+            this.currentItem = data;
+            this.shows.isOpenEditAttachment = true;
+            console.log(data);
         },
         closeDrawer() {
             this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");

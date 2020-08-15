@@ -6,6 +6,7 @@
         @close="close"
         append-to-body
         :close-on-click-modal="false"
+        class=""
     >
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
@@ -211,6 +212,9 @@ export default {
                     this.loading.detail = false;
                     let type = this.typeTab.toLocaleLowerCase();
                     this.display[type + "List"] = res.data || [];
+                    if (res.data.length === 0 && (type === "audio" || type === "video")) {
+                        this.display[type + "List"].push({ extra: "" });
+                    }
                 }
             });
         },
@@ -265,6 +269,9 @@ export default {
 </script>
 
 <style lang="less">
+.el-dialog__body {
+    max-height: 600px;
+}
 .attchment_dialog {
     position: relative;
 

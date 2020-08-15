@@ -153,6 +153,10 @@ export default {
                 }
             }).then(res => {
                 if (res.suceeded) {
+                    this.$message({
+                        type: "success",
+                        message: "操作成功"
+                    });
                     this.getAttachmentList();
                 }
             });
