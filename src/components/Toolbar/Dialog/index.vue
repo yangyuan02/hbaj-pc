@@ -22,6 +22,7 @@
                         :list="display.imageList"
                         :onSuccess="getAttachmentImages"
                         :onNotifiy="notifiy"
+                        :onSortOpen="onSortOpen"
                     ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
@@ -65,7 +66,8 @@
         <SortList
             :visible.sync="shows.isOpenSortTextList"
             :id="attchmentId"
-            :onSuccess="getAttachmentText"
+            :getType="getType"
+            :onSuccess="type => handerAttachment(type)"
             :list="sortList"
         ></SortList>
         <div slot="footer">
@@ -251,7 +253,9 @@ export default {
         },
         onSortOpen(data, type) {
             this.attchmentId = this.params.id;
-            if (type === "text") {
+            this.sortList = [];
+            if (type === "text" || type === "image") {
+                this.getType = type.toLocaleUpperCase();
                 this.shows.isOpenSortTextList = true;
                 this.sortList = data.map(item => ({ id: item.id, name: item.title }));
             }

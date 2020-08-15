@@ -58,11 +58,18 @@ export default {
         list: {
             type: Array,
             default: []
+        },
+        getType: {
+            type: String,
+            default: ""
         }
     },
     watch: {
         id(newVal) {
             this.params.hotspotId = newVal;
+        },
+        list(val) {
+            this.sortList = val;
         }
     },
     computed: {
@@ -75,6 +82,8 @@ export default {
             console.log("打开", this.list);
         },
         close() {
+            this.sortList = [];
+            this.list = [];
             this.$emit("update:visible", false);
         },
         save() {
@@ -97,7 +106,7 @@ export default {
                 "changeSeq"
             ).then(res => {
                 if (res.suceeded) {
-                    this.onSuccess && this.onSuccess();
+                    this.onSuccess && this.onSuccess(this.getType);
                     this.close();
                 }
             });
