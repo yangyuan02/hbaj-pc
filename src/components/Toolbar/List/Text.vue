@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-body ellipsis3">
+            <div class="text-body">
                 <p>{{ item.content }}</p>
             </div>
         </div>
@@ -81,7 +81,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .text-list-item {
-    height: 120px;
+    // height: 120px;
     border: 1px solid #eee;
     margin-bottom: 20px;
     padding: 12px 10px;

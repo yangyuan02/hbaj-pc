@@ -6,7 +6,7 @@
         @close="close"
         append-to-body
         :close-on-click-modal="false"
-        class=""
+        class="attchment"
     >
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
@@ -340,24 +340,26 @@ export default {
 </script>
 
 <style lang="less">
-.el-dialog__body {
-    max-height: 600px;
-}
-.attchment_dialog {
-    position: relative;
+.attchment {
+    .el-dialog__body {
+        height: 600px;
+    }
+    .attchment_dialog {
+        position: relative;
 
-    .el-tabs__content {
-        max-height: 500px;
-        overflow-y: scroll;
-    }
-    .operate {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .attach_model {
-        .el-dialog__body {
-            padding-top: 0px;
+        .el-tabs__content {
+            max-height: 500px;
+            overflow-y: scroll;
+        }
+        .operate {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .attach_model {
+            .el-dialog__body {
+                padding-top: 0px;
+            }
         }
     }
 }

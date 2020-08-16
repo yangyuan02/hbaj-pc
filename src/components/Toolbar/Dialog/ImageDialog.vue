@@ -7,6 +7,7 @@
         @close="close"
         width="30%"
         append-to-body
+        class="addImagedialog"
     >
         <main>
             <el-form
@@ -28,13 +29,13 @@
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="标题" prop="title">
+                <el-form-item label="标题" prop="title" class="title">
                     <el-input v-model="params.title" placeholder="请输入标题"></el-input>
                 </el-form-item>
                 <el-form-item label="内容" class="mark" prop="content">
                     <el-input
                         type="textarea"
-                        :rows="2"
+                        :rows="4"
                         placeholder="请输入内容"
                         v-model="params.content"
                     >
@@ -187,12 +188,23 @@ export default {
 </script>
 
 <style lang="less">
-.mark {
-    display: flex;
-    .el-form-item__content {
-        margin-left: 0 !important;
-        margin-top: 20px;
-        flex: 1;
+.addImagedialog {
+    .el-dialog__body {
+        height: 400px;
+        .title {
+            margin-bottom: 0px;
+        }
+        .mark {
+            display: flex;
+            .el-form-item__content {
+                margin-left: 0 !important;
+                margin-top: 20px;
+                flex: 1;
+                textarea {
+                    resize: none;
+                }
+            }
+        }
     }
 }
 </style>

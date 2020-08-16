@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="images-body">
-                <div class="content ellipsis3">
+                <div class="content">
                     <p>{{ item.content }}</p>
                 </div>
                 <div class="images">
@@ -87,7 +87,7 @@ export default {
 
 <style lang="less" scoped>
 .images-list-item {
-    height: 150px;
+    // height: 150px;
     border: 1px solid #eee;
     margin-bottom: 20px;
     padding: 12px 10px;
