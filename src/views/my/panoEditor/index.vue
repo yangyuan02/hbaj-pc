@@ -43,12 +43,22 @@ export default {
     computed: {
         isOpenedWidth: function() {
             const data = this.$store.state.toolbarStore;
-            const isOpen = Object.values(data)
-                .filter(item => item === false || item === true)
-                .some(item => item);
+            const toolbarList = [
+                "drawerAttachment",
+                "drawerIntro",
+                "drawerPerson",
+                "drawerHotContent",
+                "drawerGuideContent"
+            ];
+            const isOpenListValue = toolbarList.map(item => data[item]).some(item => item);
+
             return {
                 width: `calc(100% - ${
-                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "0" : "0px") : "0px"
+                    isOpenListValue
+                        ? this.isOpenScene || this.isOpenGuideScene
+                            ? "600px"
+                            : "296px"
+                        : "0px"
                 })`
             };
         },
@@ -58,30 +68,6 @@ export default {
         isOpenGuideScene: function() {
             return this.$store.state.toolbarStore.openGuideScene;
         }
-    },
-    watch: {
-        // isOpenScene: function(val) {
-        //     if (val) {
-        //         this.$nextTick(() => {
-        //             const zIndex = this.getZindex() + 1;
-        //             const elesCene = document.querySelector(".scene_list");
-        //             if (elesCene) {
-        //                 elesCene.style.zIndex = zIndex;
-        //             }
-        //         });
-        //     }
-        // },
-        // isOpenGuideScene: function(val) {
-        //     if (val) {
-        //         this.$nextTick(() => {
-        //             const zIndex = this.getZindex() + 1;
-        //             const eleGuide = document.querySelector(".guideList");
-        //             if (eleGuide) {
-        //                 eleGuide.style.zIndex = zIndex;
-        //             }
-        //         });
-        //     }
-        // }
     },
     mounted() {
         this.initPano();
@@ -94,9 +80,10 @@ export default {
     height: 100%;
     display: flex;
     position: relative;
+    padding-right: 46px;
     #p_editor {
         // flex: 1;
-        margin-right: 14px;
+        margin-right: 6px;
         transition: width 300ms;
         // position: relative;
     }

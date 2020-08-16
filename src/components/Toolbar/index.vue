@@ -123,7 +123,8 @@ export default {
     height: 100%;
     background: rgba(54, 64, 68, 1);
     padding-top: 30px;
-    position: relative;
+    position: absolute;
+    right: 0;
     .item-toolbar {
         width: 100%;
         display: flex;
