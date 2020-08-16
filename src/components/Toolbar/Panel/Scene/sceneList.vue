@@ -132,6 +132,7 @@ export default {
             const parasm = { ...data, locationX: getScenePara[2], locationY: getScenePara[3] };
             hotspotDetail({ type: "put", data: parasm }, id).then(res => {
                 if (res.suceeded) {
+                    this.getsceneList(this.$store.state.toolbarStore.id);
                     this.$message({
                         type: "success",
                         message: "更新成功!"
