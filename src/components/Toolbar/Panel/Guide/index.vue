@@ -16,8 +16,8 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>链接内容</span>
-                    <span>脚本名称</span>
+                    <span>内容</span>
+                    <span>概要</span>
                     <span>操作</span>
                 </div>
                 <div class="body">
@@ -307,7 +307,7 @@ export default {
                         &.link_name {
                             width: 70px;
                             text-align: left;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-family: MicrosoftYaHei;
                             color: rgba(102, 102, 102, 1);
                             line-height: 19px;
@@ -317,7 +317,7 @@ export default {
                             justify-content: space-around;
                         }
                         i {
-                            font-size: 16px;
+                            font-size: 12px;
                             color: rgba(15, 79, 168, 1);
                         }
                     }

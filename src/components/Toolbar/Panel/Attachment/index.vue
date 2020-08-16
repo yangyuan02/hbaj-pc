@@ -14,17 +14,23 @@
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addAttachment"></i>
             </div>
             <div class="attachment_list">
-                <div class="header">
-                    <span>编辑详情</span>
-                    <span>课件参考</span>
+                <div class="attachment-header">
+                    <span style="width:13%">详情</span>
+                    <span style="width:170px">课件参考</span>
                     <span>操作</span>
                 </div>
-                <div class="body">
-                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                        <div class="link" @click="editAttachment(item)">
+                <div class="attachment-body">
+                    <div
+                        class="item"
+                        v-for="(item, index) in attachmentList"
+                        :key="index"
+                        :class="{ active: index === currentIndex }"
+                        @click="select(index)"
+                    >
+                        <div class="link" @click="editAttachment(item)" style="width:13%">
                             <i class="iconfont icontubiaoweb-29 cursor"></i>
                         </div>
-                        <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
+                        <div class="link_name ellipsis cursor">
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -46,6 +52,10 @@
                             <i
                                 class="iconfont icontubiaoweb-23 cursor"
                                 @click="down(attachmentList, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-28 cursor"
+                                @click="editOpenEditAttachmentName(item, index)"
                             ></i>
                         </div>
                     </div>
@@ -87,7 +97,9 @@ export default {
             },
             attachmentList: [], // 获取附件列表
             newArr: [], //
-            currentItem: {}
+            currentItem: {},
+            isUpDown: false,
+            currentIndex: null // 当前选择行
         };
     },
     components: {
@@ -107,6 +119,14 @@ export default {
         }
     },
     methods: {
+        select(index) {
+            console.log("111");
+            if (this.isUpDown) {
+                // bug
+                return false;
+            }
+            this.currentIndex = index;
+        },
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
@@ -202,21 +222,28 @@ export default {
         up(arr, index) {
             if (arr.length > 1 && index !== 0) {
                 this.newArr = this.swapItems(arr, index, index - 1);
+                this.isUpDown = true;
+                this.currentIndex = index - 1;
                 this.sortAttachment();
+                // this.isUpDown = false;
             }
         },
         down(arr, index) {
             if (arr.length > 1 && index !== arr.length - 1) {
                 this.newArr = this.swapItems(arr, index, index + 1);
+                this.currentIndex = index + 1;
+                this.isUpDown = true;
                 this.sortAttachment();
+                // this.isUpDown = false;
             }
         },
         swapItems(arr, index1, index2) {
             arr[index1] = arr.splice(index2, 1, arr[index1])[0];
             return arr;
         },
-        editOpenEditAttachmentName(data) {
+        editOpenEditAttachmentName(data, index) {
             // 修改附件名称弹窗
+            this.currentIndex = index;
             this.currentItem = data;
             this.shows.isOpenEditAttachment = true;
             console.log(data);
@@ -248,9 +275,9 @@ export default {
         }
     }
     .attachment_list {
-        .header {
+        .attachment-header {
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-between;
             height: 32px;
             align-items: center;
             background: rgba(248, 248, 248, 1);
@@ -263,10 +290,10 @@ export default {
                 text-align: center;
             }
         }
-        .body {
+        .attachment-body {
             .item {
                 display: flex;
-                justify-content: space-between;
+                // justify-content: space-between;
                 align-items: center;
                 height: 42px;
                 // min-height: 42px;
@@ -275,22 +302,32 @@ export default {
                     width: 33%;
                     text-align: center;
                     &.link_name {
-                        width: 70px;
+                        width: 170px;
                         text-align: left;
                         font-size: 12px;
                         font-family: MicrosoftYaHei;
                         color: rgba(102, 102, 102, 1);
                         line-height: 19px;
+                        margin-left: 4px;
                     }
                     &.operate {
                         display: flex;
                         justify-content: space-around;
                     }
                     i {
-                        font-size: 16px;
+                        font-size: 12px;
                         color: rgba(15, 79, 168, 1);
                     }
                 }
+            }
+            .active {
+                background: rgb(255, 165, 0);
+                // i {
+                //     color: #ffd51a;
+                // }
+                // span {
+                //     color: #ffd51a;
+                // }
             }
         }
     }

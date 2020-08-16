@@ -52,7 +52,7 @@
                 <el-form-item label="课件标题">
                     <el-input v-model="params.project.name" class="w100"></el-input>
                 </el-form-item>
-                <el-form-item label="课件简介">
+                <el-form-item label="课件简介" class="intro_textarea">
                     <el-input
                         type="textarea"
                         :rows="2"
@@ -216,5 +216,10 @@ export default {
     // width: 178px;
     height: 178px;
     display: block;
+}
+.intro_textarea {
+    textarea {
+        resize: none;
+    }
 }
 </style>

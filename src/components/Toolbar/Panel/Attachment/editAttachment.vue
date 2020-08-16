@@ -53,7 +53,10 @@ export default {
                 id: "" // id
             },
             rules: {
-                title: [{ required: true, message: "请输入附件名称", trigger: "blur" }]
+                title: [
+                    { required: true, message: "请输入附件名称", trigger: "blur" },
+                    { max: 12, message: "最多12个字符", trigger: "blur" }
+                ]
             },
             loading: {
                 save: false

@@ -239,7 +239,7 @@ export default {
     top: 0px;
     background: #fff;
     padding: 0 24px;
-    z-index: 3000;
+    z-index: 10;
     .attachment {
         .title {
             height: 88px;
