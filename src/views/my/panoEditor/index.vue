@@ -48,7 +48,7 @@ export default {
                 .some(item => item);
             return {
                 width: `calc(100% - ${
-                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "616px" : "0px") : "0px"
+                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "0" : "0px") : "0px"
                 })`
             };
         },
@@ -93,10 +93,12 @@ export default {
 .p_editor_container {
     height: 100%;
     display: flex;
+    position: relative;
     #p_editor {
         // flex: 1;
         margin-right: 14px;
         transition: width 300ms;
+        // position: relative;
     }
     .panel_sidebar {
         width: 296px;
@@ -108,6 +110,7 @@ export default {
         position: absolute;
         top: 0;
         right: 46px;
+        overflow: hidden;
         .common {
             h2 {
                 font-size: 18px;

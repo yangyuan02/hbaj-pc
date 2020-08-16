@@ -210,11 +210,11 @@ export default {
     position: absolute;
     width: 296px;
     height: 100%;
-    right: 306px;
-    top: 0px;
+    right: 346px;
+    // top: 0px;
     background: #fff;
     padding: 0 24px;
-    z-index: 3000;
+    z-index: 10;
     #triangle-right {
         width: 0;
         height: 0;
