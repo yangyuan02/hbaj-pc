@@ -9,7 +9,7 @@
     > -->
     <div class="panel_sidebar" v-if="drawerPerson">
         <div class="person common">
-            <h2>课件参与人员</h2>
+            <h2>课件制作人员</h2>
             <div class="course_item_person" v-for="(item, index) in params.userList" :key="index">
                 <div class="thumb"></div>
                 <div class="info">
@@ -17,7 +17,7 @@
                     <div class="role">
                         <div class="title">角色:</div>
                         <div class="roles">
-                            <span>船员</span>
+                            <span>海宝安检团队</span>
                         </div>
                     </div>
                 </div>

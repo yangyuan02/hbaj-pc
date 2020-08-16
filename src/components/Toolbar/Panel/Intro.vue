@@ -9,7 +9,7 @@
     > -->
     <div class="panel_sidebar" v-if="drawerIntro">
         <div class="intro common">
-            <h2>课件详情</h2>
+            <h2>编辑课件简介</h2>
             <el-form label-position="top" :model="params">
                 <el-form-item label="上传图片">
                     <el-upload

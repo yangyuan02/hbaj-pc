@@ -2,7 +2,7 @@
     <div class="scene_list" v-if="isOpenScene">
         <div class="attachment common">
             <div class="title">
-                <span>场景热点列表</span>
+                <span>添加场景标签</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addHotScene"></i>
             </div>
             <div class="attachment_list">

@@ -11,7 +11,7 @@
     <div class="panel_sidebar" v-if="drawerGuideContent">
         <div class="attachment common">
             <div class="title">
-                <span>引导脚本列表</span>
+                <span>编辑课件概览</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addGuide"></i>
             </div>
             <div class="attachment_list">

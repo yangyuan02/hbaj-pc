@@ -2,7 +2,7 @@
     <div class="guideList" v-if="openGuideScene">
         <div class="attachment common">
             <div class="title">
-                <span>场景列表</span>
+                <span>定位概要位置</span>
                 <!-- <i class="iconfont icontubiaoweb-24" @click="addScene"></i> -->
             </div>
             <div class="attachment_list">
@@ -235,7 +235,7 @@ export default {
     position: absolute;
     width: 296px;
     height: 100%;
-    right: 306px;
+    right: 346px;
     top: 0px;
     background: #fff;
     padding: 0 24px;

@@ -10,13 +10,13 @@
     <div class="panel_sidebar" v-if="drawerAttachment">
         <div class="attachment common">
             <div class="title">
-                <span>项目附件</span>
+                <span>添加课件参考</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addAttachment"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>链接</span>
-                    <span>附件名称</span>
+                    <span>编辑详情</span>
+                    <span>课件参考</span>
                     <span>操作</span>
                 </div>
                 <div class="body">
@@ -26,11 +26,11 @@
                         </div>
                         <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
                             <!-- <el-tooltip
-                                    class="item"
-                                    effect="dark"
-                                    :content="item.title"
-                                    placement="top-start"
-                                > -->
+                                class="item"
+                                effect="dark"
+                                :content="item.title"
+                                placement="left-start"
+                            > -->
                             <span>{{ item.title }}</span>
                             <!-- </el-tooltip> -->
                         </div>
@@ -269,6 +269,7 @@ export default {
                 justify-content: space-between;
                 align-items: center;
                 height: 42px;
+                // min-height: 42px;
                 border-bottom: 1px solid #eee;
                 & > div {
                     width: 33%;
@@ -276,7 +277,7 @@ export default {
                     &.link_name {
                         width: 70px;
                         text-align: left;
-                        font-size: 14px;
+                        font-size: 12px;
                         font-family: MicrosoftYaHei;
                         color: rgba(102, 102, 102, 1);
                         line-height: 19px;

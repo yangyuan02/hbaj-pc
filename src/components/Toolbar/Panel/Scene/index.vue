@@ -11,7 +11,7 @@
     <div class="panel_sidebar" v-if="drawerHotContent">
         <div class="attachment common">
             <div class="title">
-                <span>场景列表</span>
+                <span>添加场景资源</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addScene"></i>
             </div>
             <div class="attachment_list">
