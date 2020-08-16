@@ -21,7 +21,13 @@
                     <span>操作</span>
                 </div>
                 <div class="body">
-                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                    <div
+                        class="item"
+                        v-for="(item, index) in attachmentList"
+                        :key="index"
+                        @click="select(index)"
+                        :class="{ active: index === currentIndex }"
+                    >
                         <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div> -->
@@ -88,7 +94,9 @@ export default {
             },
             attachmentList: [], // 获取附件列表
             newArr: [], //
-            currentItem: {}
+            currentItem: {},
+            currentIndex: null,
+            isUpDown: false
         };
     },
     components: {
@@ -108,6 +116,14 @@ export default {
         }
     },
     methods: {
+        select(index) {
+            console.log("111");
+            if (this.isUpDown) {
+                // bug
+                return false;
+            }
+            this.currentIndex = index;
+        },
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
@@ -184,13 +200,22 @@ export default {
         up(arr, index) {
             if (arr.length > 1 && index !== 0) {
                 this.newArr = this.swapItems(arr, index, index - 1);
+                this.isUpDown = true;
+                this.currentIndex = index - 1;
                 this.sortAttachment();
+                setTimeout(() => {
+                    this.isUpDown = false;
+                }, 0);
             }
         },
         down(arr, index) {
             if (arr.length > 1 && index !== arr.length - 1) {
                 this.newArr = this.swapItems(arr, index, index + 1);
+                this.isUpDown = true;
                 this.sortAttachment();
+                setTimeout(() => {
+                    this.isUpDown = false;
+                }, 0);
             }
         },
         swapItems(arr, index1, index2) {
@@ -315,6 +340,9 @@ export default {
                             color: rgba(15, 79, 168, 1);
                         }
                     }
+                }
+                .active {
+                    background: rgb(255, 165, 0);
                 }
             }
         }
