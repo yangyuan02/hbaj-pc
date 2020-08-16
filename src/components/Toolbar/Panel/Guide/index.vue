@@ -1,5 +1,5 @@
 <template>
-    <el-drawer
+    <!-- <el-drawer
         title="我是标题"
         :visible.sync="drawerGuideContent"
         :with-header="false"
@@ -7,79 +7,79 @@
         :before-close="handleClose"
         :modal="false"
         :wrapperClosable="false"
-    >
-        <div class="panel_sidebar">
-            <div class="attachment common">
-                <div class="title">
-                    <span>引导脚本列表</span>
-                    <i class="iconfont icontubiaoweb-24" @click="addGuide"></i>
+    > -->
+    <div class="panel_sidebar" v-if="drawerGuideContent">
+        <div class="attachment common">
+            <div class="title">
+                <span>引导脚本列表</span>
+                <i class="iconfont icontubiaoweb-24 cursor" @click="addGuide"></i>
+            </div>
+            <div class="attachment_list">
+                <div class="header">
+                    <span>链接内容</span>
+                    <span>脚本名称</span>
+                    <span>操作</span>
                 </div>
-                <div class="attachment_list">
-                    <div class="header">
-                        <span>链接内容</span>
-                        <span>脚本名称</span>
-                        <span>操作</span>
-                    </div>
-                    <div class="body">
-                        <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link">
-                                <i
-                                    class="iconfont icontubiaoweb-29"
-                                    @click="openHotspotConent(item)"
-                                ></i>
-                            </div>
-                            <div
-                                class="link_name ellipsis"
-                                @click="editOpenEditAttachmentName(item)"
-                            >
-                                <!-- <el-tooltip
+                <div class="body">
+                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                        <div class="link">
+                            <i
+                                class="iconfont icontubiaoweb-29"
+                                @click="openHotspotConent(item)"
+                            ></i>
+                        </div>
+                        <div
+                            class="link_name ellipsis cursor"
+                            @click="editOpenEditAttachmentName(item)"
+                        >
+                            <!-- <el-tooltip
                                     class="item"
                                     effect="dark"
                                     :content="item.title"
                                     placement="top-start"
                                 > -->
-                                <span>{{ item.title }}</span>
-                                <!-- </el-tooltip> -->
-                            </div>
-                            <div class="operate">
-                                <i
-                                    class="iconfont icontubiaoweb-21"
-                                    @click="handleDel(item, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-22"
-                                    @click="up(attachmentList, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-23"
-                                    @click="down(attachmentList, index)"
-                                ></i>
-                                <i class="iconfont icontubiaoweb-28" @click="edit(item, index)"></i>
-                            </div>
+                            <span>{{ item.title }}</span>
+                            <!-- </el-tooltip> -->
+                        </div>
+                        <div class="operate">
+                            <i
+                                class="iconfont icontubiaoweb-21"
+                                @click="handleDel(item, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-22"
+                                @click="up(attachmentList, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-23"
+                                @click="down(attachmentList, index)"
+                            ></i>
+                            <i class="iconfont icontubiaoweb-28" @click="edit(item, index)"></i>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <AttachmentComponent
-                :visible.sync="shows.isOpenAttachment"
-                :data="currentItem"
-            ></AttachmentComponent>
-            <div id="triangle-right" @click="closeDrawer"></div>
-
-            <HotspotConent
-                :visible.sync="shows.isOpenHotspotConent"
-                :data="currentItem"
-            ></HotspotConent>
-
-            <!-- 修改附件弹窗 -->
-            <editSceneDialog
-                :visible.sync="shows.isOpenEditAttachment"
-                :data="currentItem"
-                :onSuccess="getAttachmentList"
-            ></editSceneDialog>
         </div>
-    </el-drawer>
+
+        <AttachmentComponent
+            :visible.sync="shows.isOpenAttachment"
+            :data="currentItem"
+        ></AttachmentComponent>
+        <div id="triangle-right" @click="closeDrawer"></div>
+
+        <HotspotConent
+            :visible.sync="shows.isOpenHotspotConent"
+            :data="currentItem"
+        ></HotspotConent>
+
+        <!-- 修改附件弹窗 -->
+        <editSceneDialog
+            :visible.sync="shows.isOpenEditAttachment"
+            :data="currentItem"
+            :onSuccess="getAttachmentList"
+        ></editSceneDialog>
+    </div>
+    <!-- </el-drawer> -->
 </template>
 
 <script>

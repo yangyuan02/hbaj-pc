@@ -14,9 +14,12 @@
                 <div class="body">
                     <div class="item" v-for="(item, index) in attachmentList" :key="index">
                         <div class="link">
-                            <i class="iconfont icontubiaoweb-26" @click="updateHotspot(item)"></i>
+                            <i
+                                class="iconfont icontubiaoweb-26 cursor"
+                                @click="updateHotspot(item)"
+                            ></i>
                         </div>
-                        <div class="link_name ellipsis" @click="loadpanoscene(item)">
+                        <div class="link_name ellipsis cursor" @click="loadpanoscene(item)">
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"

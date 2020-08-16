@@ -48,7 +48,7 @@ export default {
                 .some(item => item);
             return {
                 width: `calc(100% - ${
-                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "616px" : "310px") : "0px"
+                    isOpen ? (this.isOpenScene || this.isOpenGuideScene ? "616px" : "0px") : "0px"
                 })`
             };
         },
@@ -105,6 +105,9 @@ export default {
         padding: 0 24px;
         // transform: translateX(296px);
         // display: none;
+        position: absolute;
+        top: 0;
+        right: 46px;
         .common {
             h2 {
                 font-size: 18px;

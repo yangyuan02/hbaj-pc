@@ -1,5 +1,5 @@
 <template>
-    <el-drawer
+    <!-- <el-drawer
         title="我是标题"
         :visible.sync="drawerHotContent"
         :with-header="false"
@@ -7,66 +7,66 @@
         :before-close="handleClose"
         :modal="false"
         :wrapperClosable="false"
-    >
-        <div class="panel_sidebar">
-            <div class="attachment common">
-                <div class="title">
-                    <span>场景列表</span>
-                    <i class="iconfont icontubiaoweb-24 cursor" @click="addScene"></i>
+    > -->
+    <div class="panel_sidebar" v-if="drawerHotContent">
+        <div class="attachment common">
+            <div class="title">
+                <span>场景列表</span>
+                <i class="iconfont icontubiaoweb-24 cursor" @click="addScene"></i>
+            </div>
+            <div class="attachment_list">
+                <div class="header">
+                    <!-- <span>链接内容</span> -->
+                    <span style="text-align:left">场景名称</span>
+                    <span>操作</span>
                 </div>
-                <div class="attachment_list">
-                    <div class="header">
-                        <!-- <span>链接内容</span> -->
-                        <span style="text-align:left">场景名称</span>
-                        <span>操作</span>
-                    </div>
-                    <div class="body">
-                        <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
+                <div class="body">
+                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                        <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div> -->
-                            <div class="link_name ellipsis" @click="loadpanoscene(item)">
-                                <!-- <el-tooltip
+                        <div class="link_name ellipsis" @click="loadpanoscene(item)">
+                            <!-- <el-tooltip
                                     class="item"
                                     effect="dark"
                                     :content="item.name"
                                     placement="top-start"
                                 > -->
-                                <span>{{ item.name }}</span>
-                                <!-- </el-tooltip> -->
-                            </div>
-                            <div class="operate">
-                                <i
-                                    class="iconfont icontubiaoweb-21 cursor"
-                                    @click="handleDel(item, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-22 cursor"
-                                    @click="up(attachmentList, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-23 cursor"
-                                    @click="down(attachmentList, index)"
-                                ></i>
-                            </div>
+                            <span>{{ item.name }}</span>
+                            <!-- </el-tooltip> -->
+                        </div>
+                        <div class="operate">
+                            <i
+                                class="iconfont icontubiaoweb-21 cursor"
+                                @click="handleDel(item, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-22 cursor"
+                                @click="up(attachmentList, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-23 cursor"
+                                @click="down(attachmentList, index)"
+                            ></i>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <AttachmentComponent
-                :visible.sync="shows.isOpenAttachment"
-                :data="currentItem"
-            ></AttachmentComponent>
-            <div id="triangle-right" @click="closeDrawer"></div>
-            <!-- 修改附件弹窗 -->
-            <!-- <editSceneDialog
+        <AttachmentComponent
+            :visible.sync="shows.isOpenAttachment"
+            :data="currentItem"
+        ></AttachmentComponent>
+        <div id="triangle-right" @click="closeDrawer"></div>
+        <!-- 修改附件弹窗 -->
+        <!-- <editSceneDialog
                 :visible.sync="shows.isOpenEditAttachment"
                 :data="currentItem"
                 :onSuccess="getAttachmentList"
             ></editSceneDialog> -->
-        </div>
-    </el-drawer>
+    </div>
+    <!-- </el-drawer> -->
 </template>
 
 <script>

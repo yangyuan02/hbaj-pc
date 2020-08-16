@@ -26,6 +26,20 @@ const mutations = {
     },
     SETGuIDELIST(state) {
         state["openGuideScene"] = true;
+    },
+    SETTOGGLETOOLBR(state, type) {
+        const toolbarList = [
+            "drawerAttachment",
+            "drawerIntro",
+            "drawerPerson",
+            "drawerHotContent",
+            "drawerGuideContent"
+        ];
+        const hideList = toolbarList.filter(item => item !== type);
+        hideList.forEach(item => {
+            state[item] = false;
+        });
+        state[type] = !state[type];
     }
 };
 

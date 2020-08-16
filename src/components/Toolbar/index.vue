@@ -91,21 +91,27 @@ export default {
     },
     methods: {
         toolbarHander(type) {
-            if (type === "drawerAttachment") {
-                this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
-            }
-            if (type === "drawerIntro") {
-                this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
-            }
-            if (type === "drawerPerson") {
-                this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
-            }
-            if (type === "drawerHotContent") {
-                this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
-            }
-            if (type === "drawerGuideContent") {
-                this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
-            }
+            // const toolbarList = ['drawerAttachment', 'drawerIntro', 'drawerPerson', 'drawerHotContent', 'drawerGuideContent']
+            // const hideList = toolbarList.filter(item => item ===type);
+            // hideList.forEach(item => {
+
+            // })
+            this.$store.commit("SETTOGGLETOOLBR", type);
+            // if (type === "drawerAttachment") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
+            // }
+            // if (type === "drawerIntro") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
+            // }
+            // if (type === "drawerPerson") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
+            // }
+            // if (type === "drawerHotContent") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+            // }
+            // if (type === "drawerGuideContent") {
+            //     this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
+            // }
         }
     }
 };
@@ -117,6 +123,7 @@ export default {
     height: 100%;
     background: rgba(54, 64, 68, 1);
     padding-top: 30px;
+    position: relative;
     .item-toolbar {
         width: 100%;
         display: flex;

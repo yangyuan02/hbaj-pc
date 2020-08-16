@@ -1,74 +1,71 @@
 <template>
-    <el-drawer
+    <!-- <el-drawer
         title="我是标题"
         :visible.sync="drawerAttachment"
         :with-header="false"
         :size="296"
         :before-close="handleClose"
         :modal="false"
-    >
-        <div class="panel_sidebar">
-            <div class="attachment common">
-                <div class="title">
-                    <span>项目附件</span>
-                    <i class="iconfont icontubiaoweb-24 cursor" @click="addAttachment"></i>
+    > -->
+    <div class="panel_sidebar" v-if="drawerAttachment">
+        <div class="attachment common">
+            <div class="title">
+                <span>项目附件</span>
+                <i class="iconfont icontubiaoweb-24 cursor" @click="addAttachment"></i>
+            </div>
+            <div class="attachment_list">
+                <div class="header">
+                    <span>链接</span>
+                    <span>附件名称</span>
+                    <span>操作</span>
                 </div>
-                <div class="attachment_list">
-                    <div class="header">
-                        <span>链接</span>
-                        <span>附件名称</span>
-                        <span>操作</span>
-                    </div>
-                    <div class="body">
-                        <div class="item" v-for="(item, index) in attachmentList" :key="index">
-                            <div class="link" @click="editAttachment(item)">
-                                <i class="iconfont icontubiaoweb-29 cursor"></i>
-                            </div>
-                            <div
-                                class="link_name ellipsis"
-                                @click="editOpenEditAttachmentName(item)"
-                            >
-                                <!-- <el-tooltip
+                <div class="body">
+                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                        <div class="link" @click="editAttachment(item)">
+                            <i class="iconfont icontubiaoweb-29 cursor"></i>
+                        </div>
+                        <div class="link_name ellipsis" @click="editOpenEditAttachmentName(item)">
+                            <!-- <el-tooltip
                                     class="item"
                                     effect="dark"
                                     :content="item.title"
                                     placement="top-start"
                                 > -->
-                                <span>{{ item.title }}</span>
-                                <!-- </el-tooltip> -->
-                            </div>
-                            <div class="operate">
-                                <i
-                                    class="iconfont icontubiaoweb-21 cursor"
-                                    @click="handleDel(item, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-22 cursor"
-                                    @click="up(attachmentList, index)"
-                                ></i>
-                                <i
-                                    class="iconfont icontubiaoweb-23 cursor"
-                                    @click="down(attachmentList, index)"
-                                ></i>
-                            </div>
+                            <span>{{ item.title }}</span>
+                            <!-- </el-tooltip> -->
+                        </div>
+                        <div class="operate">
+                            <i
+                                class="iconfont icontubiaoweb-21 cursor"
+                                @click="handleDel(item, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-22 cursor"
+                                @click="up(attachmentList, index)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-23 cursor"
+                                @click="down(attachmentList, index)"
+                            ></i>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <AttachmentComponent
-                :visible.sync="shows.isOpenAttachment"
-                :data="currentItem"
-            ></AttachmentComponent>
-
-            <!-- 修改附件弹窗 -->
-            <editAttachmentDialog
-                :visible.sync="shows.isOpenEditAttachment"
-                :data="currentItem"
-                :onSuccess="getAttachmentList"
-            ></editAttachmentDialog>
         </div>
-    </el-drawer>
+
+        <AttachmentComponent
+            :visible.sync="shows.isOpenAttachment"
+            :data="currentItem"
+        ></AttachmentComponent>
+
+        <!-- 修改附件弹窗 -->
+        <editAttachmentDialog
+            :visible.sync="shows.isOpenEditAttachment"
+            :data="currentItem"
+            :onSuccess="getAttachmentList"
+        ></editAttachmentDialog>
+    </div>
+    <!-- </el-drawer> -->
 </template>
 
 <script>

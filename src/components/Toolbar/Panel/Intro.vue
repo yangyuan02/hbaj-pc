@@ -1,74 +1,74 @@
 <template>
-    <el-drawer
+    <!-- <el-drawer
         title="我是标题"
         :visible="drawerIntro"
         :with-header="false"
         :modal="false"
         :size="296"
         :before-close="handleClose"
-    >
-        <div class="panel_sidebar">
-            <div class="intro common">
-                <h2>课件详情</h2>
-                <el-form label-position="top" :model="params">
-                    <el-form-item label="上传图片">
-                        <el-upload
-                            class="avatar-uploader"
-                            :action="uploadUrl"
-                            :show-file-list="false"
-                            :on-success="handleAvatarSuccess"
-                            :before-upload="beforeAvatarUpload"
-                        >
-                            <img
-                                v-if="params.project.imageUrl && staticPath"
-                                :src="params.project.imageUrl"
-                                class="avatar"
-                            />
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload>
-                    </el-form-item>
-                    <el-form-item label="发起时间">
-                        <el-date-picker
-                            v-model="params.startDate"
-                            type="date"
-                            placeholder="选择日期"
-                            class="w100"
-                            format="yyyy-MM-dd"
-                            value-format="timestamp"
-                        >
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="结束时间">
-                        <el-date-picker
-                            v-model="params.expireDate"
-                            type="date"
-                            placeholder="选择日期"
-                            class="w100"
-                            format="yyyy-MM-dd"
-                            value-format="timestamp"
-                        >
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="课件标题">
-                        <el-input v-model="params.project.name" class="w100"></el-input>
-                    </el-form-item>
-                    <el-form-item label="课件简介">
-                        <el-input
-                            type="textarea"
-                            :rows="2"
-                            placeholder="请输入内容"
-                            v-model="params.project.detail"
-                            class="w100"
-                        >
-                        </el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="onSubmit" class="w100">保存</el-button>
-                    </el-form-item>
-                </el-form>
-            </div>
+    > -->
+    <div class="panel_sidebar" v-if="drawerIntro">
+        <div class="intro common">
+            <h2>课件详情</h2>
+            <el-form label-position="top" :model="params">
+                <el-form-item label="上传图片">
+                    <el-upload
+                        class="avatar-uploader"
+                        :action="uploadUrl"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload"
+                    >
+                        <img
+                            v-if="params.project.imageUrl && staticPath"
+                            :src="params.project.imageUrl"
+                            class="avatar"
+                        />
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item label="发起时间">
+                    <el-date-picker
+                        v-model="params.startDate"
+                        type="date"
+                        placeholder="选择日期"
+                        class="w100"
+                        format="yyyy-MM-dd"
+                        value-format="timestamp"
+                    >
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="结束时间">
+                    <el-date-picker
+                        v-model="params.expireDate"
+                        type="date"
+                        placeholder="选择日期"
+                        class="w100"
+                        format="yyyy-MM-dd"
+                        value-format="timestamp"
+                    >
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="课件标题">
+                    <el-input v-model="params.project.name" class="w100"></el-input>
+                </el-form-item>
+                <el-form-item label="课件简介">
+                    <el-input
+                        type="textarea"
+                        :rows="2"
+                        placeholder="请输入内容"
+                        v-model="params.project.detail"
+                        class="w100"
+                    >
+                    </el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit" class="w100">保存</el-button>
+                </el-form-item>
+            </el-form>
         </div>
-    </el-drawer>
+    </div>
+    <!-- </el-drawer> -->
 </template>
 
 <script>
