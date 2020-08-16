@@ -5,9 +5,10 @@
         :close-on-click-modal="false"
         @open="open"
         @close="close"
-        width="30%"
+        width="580px"
         append-to-body
         class="addImagedialog"
+        top="0vh"
     >
         <main>
             <el-form
@@ -35,7 +36,7 @@
                 <el-form-item label="内容" class="mark" prop="content">
                     <el-input
                         type="textarea"
-                        :rows="4"
+                        :rows="3"
                         placeholder="请输入内容"
                         v-model="params.content"
                     >
@@ -189,8 +190,14 @@ export default {
 
 <style lang="less">
 .addImagedialog {
+    .el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
     .el-dialog__body {
-        height: 400px;
+        height: 370px;
         .title {
             margin-bottom: 0px;
         }

@@ -7,6 +7,9 @@
         append-to-body
         :close-on-click-modal="false"
         class="attchment"
+        lock-scroll
+        top="0vh"
+        width="700px"
     >
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
@@ -341,8 +344,16 @@ export default {
 
 <style lang="less">
 .attchment {
+    .el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .el-dialog__body {
-        height: 600px;
+        height: 500px;
+        overflow: hidden; // 小心bug
     }
     .attchment_dialog {
         position: relative;

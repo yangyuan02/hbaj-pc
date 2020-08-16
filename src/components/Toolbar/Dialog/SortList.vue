@@ -5,8 +5,10 @@
         :close-on-click-modal="false"
         @open="open"
         @close="close"
-        width="30%"
+        width="580px"
         append-to-body
+        class="addSortdialog"
+        top="0vh"
     >
         <div class="sort-content">
             <draggable @start="start" @end="end" handle=".handler">
@@ -136,25 +138,41 @@ export default {
 </script>
 
 <style lang="less">
-.sort-content {
-    .item {
-        display: flex;
-        align-items: center;
-        height: 40px;
-        border-top: 1px solid #eee;
-        background: #fff;
-        .handler {
-            margin-right: 10px;
-            cursor: move;
-            i {
-                cursor: move;
-                &:hover {
-                    color: #409eff;
-                }
+.addSortdialog {
+    /deep/ .el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .title {
+            textarea {
+                resize: none;
             }
         }
-        &:last-child {
-            border-bottom: 1px solid #eee;
+    }
+    /deep/.el-dialog__body {
+        height: 370px;
+    }
+    .sort-content {
+        .item {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            border-top: 1px solid #eee;
+            background: #fff;
+            .handler {
+                margin-right: 10px;
+                cursor: move;
+                i {
+                    cursor: move;
+                    &:hover {
+                        color: #409eff;
+                    }
+                }
+            }
+            &:last-child {
+                border-bottom: 1px solid #eee;
+            }
         }
     }
 }

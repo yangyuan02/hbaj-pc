@@ -5,9 +5,10 @@
         :close-on-click-modal="false"
         @open="open"
         @close="close"
-        width="30%"
+        width="580px"
         append-to-body
         class="addTextdialog"
+        top="0vh"
     >
         <el-form ref="form" :model="params" :rules="rules" label-width="80px" label-position="left">
             <el-form-item label="标题" prop="title">
@@ -16,7 +17,7 @@
             <el-form-item label="内容" prop="content" class="add_text_textarea">
                 <el-input
                     type="textarea"
-                    :rows="13"
+                    :rows="12"
                     placeholder="请输入内容"
                     v-model="params.content"
                 >
@@ -149,8 +150,14 @@ export default {
 
 <style lang="less">
 .addTextdialog {
+    .el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
     .el-dialog__body {
-        height: 400px;
+        height: 370px;
         .add_text_textarea {
             .el-form-item__content {
                 .el-textarea {

@@ -5,8 +5,10 @@
         :close-on-click-modal="false"
         @open="open"
         @close="close"
-        width="30%"
+        width="580px"
         append-to-body
+        class="addVideodialog"
+        top="0vh"
     >
         <div v-loading="loading.detail">
             <el-form
@@ -31,7 +33,7 @@
                 <el-form-item label="描述" prop="title">
                     <el-input
                         type="textarea"
-                        :rows="2"
+                        :rows="9"
                         placeholder="请输入描述"
                         v-model="params.title"
                         style="margin-left: 0px;"
@@ -151,4 +153,21 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.addVideodialog {
+    /deep/ .el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .title {
+            textarea {
+                resize: none;
+            }
+        }
+    }
+    /deep/.el-dialog__body {
+        height: 370px;
+    }
+}
+</style>

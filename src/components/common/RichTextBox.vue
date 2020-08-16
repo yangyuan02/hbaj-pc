@@ -79,4 +79,10 @@ export default {
 };
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+#editor {
+    .w-e-text-container {
+        height: 380px !important;
+    }
+}
+</style>
