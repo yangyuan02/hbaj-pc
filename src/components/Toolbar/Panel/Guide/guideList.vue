@@ -7,8 +7,8 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>定位</span>
-                    <span>场景名称</span>
+                    <span style="width:13%">定位</span>
+                    <span style="width:170px">场景名称</span>
                     <!-- <span>操作</span> -->
                 </div>
                 <div class="body">
@@ -19,14 +19,18 @@
                         @click="select(item, index)"
                         :class="{ active: index === currentIndex }"
                     >
-                        <div class="link">
+                        <div class="link" style="width:13%">
                             <i
                                 class="iconfont icontubiaoweb-26 cursor"
                                 @click="updateHotspot(item)"
                                 v-if="currentIndex === index"
                             ></i>
                         </div>
-                        <div class="link_name ellipsis cursor" @click="loadpanoscene(item, index)">
+                        <div
+                            class="link_name ellipsis cursor"
+                            @click="loadpanoscene(item, index)"
+                            style="width:170px"
+                        >
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -282,6 +286,7 @@ export default {
                 font-family: MicrosoftYaHei;
                 color: rgba(51, 51, 51, 1);
                 line-height: 24px;
+                // text-align: left;
             }
             i {
                 font-size: 24px;
@@ -291,7 +296,7 @@ export default {
         .attachment_list {
             .header {
                 display: flex;
-                justify-content: space-between;
+                // justify-content: space-between;
                 height: 32px;
                 align-items: center;
                 background: rgba(248, 248, 248, 1);

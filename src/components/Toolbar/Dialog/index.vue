@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        title="课件参考内容编辑"
+        :title="dialogTitle"
         :visible.sync="visible"
         @open="open"
         @close="close"
@@ -141,6 +141,10 @@ export default {
         data: {
             type: Object,
             default: {}
+        },
+        dialogTitle: {
+            type: String,
+            default: "件参考内容编辑"
         }
     },
     components: {

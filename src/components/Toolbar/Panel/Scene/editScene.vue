@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        title="修改附件名称"
+        title="修改标签名称"
         :visible.sync="visible"
         :close-on-click-modal="false"
         @open="open"

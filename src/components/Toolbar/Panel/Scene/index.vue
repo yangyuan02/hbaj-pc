@@ -142,7 +142,7 @@ export default {
             });
         },
         handleDel(item, index) {
-            this.$confirm(`此操作将永久删 ${item.name}, 是否继续?`, "提示", {
+            this.$confirm(`此操作仅删除${item.name}场景，场景标签将被暂时保留, 是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"

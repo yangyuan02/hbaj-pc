@@ -4,7 +4,8 @@
             class="item-toolbar"
             v-for="(item, index) in toolbarList"
             :key="index"
-            @click="toolbarHander(item.type)"
+            @click="toolbarHander(item.type, index)"
+            :class="{ active: index === currentIndex && isCurrentOpen[item.type] }"
         >
             <el-tooltip class="item" effect="dark" :content="item.text" placement="left">
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
@@ -79,7 +80,8 @@ export default {
                     icon: "icontubiaoweb-20",
                     type: "drawerTrack"
                 }
-            ]
+            ],
+            currentIndex: null
         };
     },
     components: {
@@ -89,29 +91,16 @@ export default {
         ScenePanel,
         GuidePanel
     },
+    computed: {
+        isCurrentOpen: function() {
+            const data = this.$store.state.toolbarStore;
+            return data;
+        }
+    },
     methods: {
-        toolbarHander(type) {
-            // const toolbarList = ['drawerAttachment', 'drawerIntro', 'drawerPerson', 'drawerHotContent', 'drawerGuideContent']
-            // const hideList = toolbarList.filter(item => item ===type);
-            // hideList.forEach(item => {
-
-            // })
+        toolbarHander(type, index) {
+            this.currentIndex = index;
             this.$store.commit("SETTOGGLETOOLBR", type);
-            // if (type === "drawerAttachment") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerAttachment");
-            // }
-            // if (type === "drawerIntro") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
-            // }
-            // if (type === "drawerPerson") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerPerson");
-            // }
-            // if (type === "drawerHotContent") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
-            // }
-            // if (type === "drawerGuideContent") {
-            //     this.$store.commit("TOGGLE_DRAWER", "drawerGuideContent");
-            // }
         }
     }
 };
@@ -131,6 +120,11 @@ export default {
         justify-content: center;
         align-items: center;
         padding: 20px;
+        &.active {
+            i {
+                color: rgb(255, 165, 0);
+            }
+        }
         i {
             font-size: 20px;
             color: #fff;

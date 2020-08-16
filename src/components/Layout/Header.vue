@@ -8,6 +8,9 @@
                 <span>海宝安检</span>
             </div>
         </div>
+        <div class="crumbs">
+            <span>{{ crumbs }}</span>
+        </div>
     </header>
 </template>
 
@@ -15,6 +18,11 @@
 export default {
     data() {
         return {};
+    },
+    computed: {
+        crumbs: function() {
+            return this.$route.meta.title;
+        }
     }
 };
 </script>
@@ -24,6 +32,8 @@ header {
     width: 100%;
     height: 50px;
     background: #fff;
+    display: flex !important;
+    align-items: center;
     .logo {
         width: 190px;
         height: 100%;
@@ -49,6 +59,12 @@ header {
                 line-height: 29px;
                 -webkit-background-clip: text;
             }
+        }
+    }
+    .crumbs {
+        margin-left: 20px;
+        span {
+            font-size: 16px;
         }
     }
 }

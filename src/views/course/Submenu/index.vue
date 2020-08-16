@@ -26,6 +26,7 @@
                         $route.query.classListId.toString() === item.id.toString() ? 'active' : ''
                     ]"
                     @click="handClass(item)"
+                    class="cursor"
                 >
                     <span>{{ item.name }}</span>
                 </li>
@@ -136,6 +137,7 @@ export default {
 <style lang="less">
 .submenu {
     .submenu_list {
+        max-width: 888px;
         ul {
             display: flex;
             justify-content: space-between;
@@ -145,6 +147,10 @@ export default {
                 max-width: 190px;
                 position: relative;
                 flex: 1;
+                border-radius: 12px;
+                &.active {
+                    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+                }
                 img {
                     width: 100%;
                     height: 100%;

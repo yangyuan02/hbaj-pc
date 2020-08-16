@@ -11,12 +11,12 @@
     <div class="panel_sidebar" v-if="drawerGuideContent">
         <div class="attachment common">
             <div class="title">
-                <span>编辑课件概览</span>
+                <span>编辑课件播放</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addGuide"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span style="width:13%">内容</span>
+                    <span style="width:13%">步骤</span>
                     <span style="width:170px">概要</span>
                     <span>操作</span>
                 </div>
@@ -242,6 +242,11 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
+            const { locationX, locationY } = data;
+
+            const getScenePara = window.getScenePara && window.getScenePara();
+
+            window.backFindHotspot && backFindHotspot(getScenePara[0], locationX, locationY);
             this.$store.commit("SETGuIDELIST", data);
         },
         edit(data) {

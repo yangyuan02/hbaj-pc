@@ -165,7 +165,7 @@ export default {
                 type: "post",
                 data: {
                     projectId,
-                    title: "请修改附件名称",
+                    title: "新增课件参考",
                     type: "ATTACHMENT"
                 }
             }).then(res => {

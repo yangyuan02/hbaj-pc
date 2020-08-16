@@ -7,6 +7,7 @@
                 :class="[$route.query.name === item.title ? 'active' : '']"
                 @click="handClick(item)"
                 :style="{ 'background-color': item.bgColor }"
+                class="cursor"
             >
                 <span>{{ item.title }}</span>
                 <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
@@ -24,19 +25,22 @@ export default {
                     title: "技术解读",
                     icon: "icontubiaoweb-411",
                     path: "",
-                    bgColor: "rgba(253,178,133,1)"
+                    bgColor: "rgba(253,178,133,1)",
+                    sort: 1
                 },
                 {
                     title: "专业英语",
                     icon: "icontubiaoweb-431",
                     path: "",
-                    bgColor: "rgba(253,144,147,1)"
+                    bgColor: "rgba(253,144,147,1)",
+                    sort: 2
                 },
                 {
                     title: "模拟训练",
                     icon: "icontubiaoweb-42",
                     path: "",
-                    bgColor: "rgba(153, 193, 254, 1)"
+                    bgColor: "rgba(153, 193, 254, 1)",
+                    sort: 3
                 }
             ]
         };
@@ -57,6 +61,7 @@ export default {
                 ...item,
                 ...this.list.find(k => k.title === item.name)
             }));
+            // .sort((a, b) => a.sort - b.sort);
         }
     },
     methods: {

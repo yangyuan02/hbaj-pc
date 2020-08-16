@@ -1,7 +1,7 @@
 <template>
     <div class="course">
         <div class="course_nav">
-            <Title title="公共课件" :isMore="false"></Title>
+            <Title title="课件功能模块" :isMore="false"></Title>
             <div class="course_list">
                 <Nav :modulesList="modulesList" path="course"></Nav>
             </div>
@@ -149,6 +149,9 @@ export default {
                     li {
                         margin: 0 auto;
                         margin-top: 40px;
+                        &.active {
+                            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+                        }
                     }
                 }
             }

@@ -39,7 +39,7 @@
                                 @click="handleDel(item)"
                             ></i>
                             <i
-                                class="iconfont icontubiaoweb-28"
+                                class="iconfont icontubiaoweb-28 cursor"
                                 @click="editOpenEditAttachmentName(item)"
                             ></i>
                         </div>
@@ -58,13 +58,14 @@
         <AttachmentComponent
             :visible.sync="isOpenAttachment"
             :data="currentItem"
+            dialogTitle="场景标签内容编辑"
         ></AttachmentComponent>
     </div>
 </template>
 
 <script>
 import { hotspot, hotspotDetail } from "@/model/api";
-import editAttachmentDialog from "../Attachment/editAttachment";
+import editAttachmentDialog from "./editScene";
 import AttachmentComponent from "../../Dialog";
 
 export default {
@@ -182,7 +183,7 @@ export default {
                 locationY: getScenePara[3], //获取的热点垂向坐标
                 projectId, //项目ID
                 sceneId: getScenePara[4], //场景ID
-                title: "默认场景名称", //热点名称
+                title: "新增热点标签", //热点名称
                 type: "DEFAULT" //热点类型
             };
 
