@@ -82,7 +82,7 @@ export default {
 <style lang="less">
 #editor {
     .w-e-text-container {
-        height: 380px !important;
+        height: 450px !important;
     }
 }
 </style>

@@ -352,8 +352,13 @@ export default {
     }
 
     .el-dialog__body {
-        height: 500px;
+        // height: 500px;
+
         overflow: hidden; // 小心bug
+        main {
+            height: 500px;
+            padding-bottom: 10px;
+        }
     }
     .attchment_dialog {
         position: relative;
