@@ -80,7 +80,7 @@ export default {
     },
     computed: {
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.title}&fileType=HOTSPOT_IMAGE`;
+            const url = `/api/file/upload?fileName=${this.params.title}&relatedId=${this.id}&fileType=HOTSPOT_IMAGE`;
             return url;
         }
     },

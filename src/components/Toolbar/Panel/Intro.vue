@@ -28,7 +28,7 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="发起时间">
-                    <el-date-picker
+                    <!-- <el-date-picker
                         v-model="params.startDate"
                         type="date"
                         placeholder="选择日期"
@@ -36,9 +36,26 @@
                         format="yyyy-MM-dd"
                         value-format="timestamp"
                     >
-                    </el-date-picker>
+                    </el-date-picker> -->
+                    <span
+                        >{{ params.startDate | formaData }}-{{
+                            params.expireDate | formaData
+                        }}</span
+                    >
                 </el-form-item>
-                <el-form-item label="结束时间">
+                <el-form-item label="发起时间">
+                    <!-- <el-date-picker
+                        v-model="params.startDate"
+                        type="date"
+                        placeholder="选择日期"
+                        class="w100"
+                        format="yyyy-MM-dd"
+                        value-format="timestamp"
+                    >
+                    </el-date-picker> -->
+                    <span></span>
+                </el-form-item>
+                <!-- <el-form-item label="结束时间">
                     <el-date-picker
                         v-model="params.expireDate"
                         type="date"
@@ -48,7 +65,7 @@
                         value-format="timestamp"
                     >
                     </el-date-picker>
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="课件标题">
                     <el-input v-model="params.project.name" class="w100"></el-input>
                 </el-form-item>

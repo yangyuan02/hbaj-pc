@@ -7,6 +7,8 @@
         @close="close"
         width="680px"
         append-to-body
+        class="addGuidedialog"
+        top="0vh"
     >
         <main>
             <div class="hostcontent">
@@ -31,17 +33,23 @@
                         </div>
                     </div>
                     <div class="content">
-                        <el-input type="textarea" :rows="3" placeholder="内容"></el-input>
+                        <el-input type="textarea" :rows="6" placeholder="内容"></el-input>
                     </div>
                 </div>
                 <div class="hostcontent_right">
-                    <audio
-                        id="audioPlayerGuide"
-                        src="http://pano.vr2shipping.com/static/enterprise/null/hotspot/HOTSPOT_AUDIO_null_1595746249823_mydream.mp3"
-                        controlsList="nodownload"
-                        controls="controls"
-                        ref="audio"
-                    ></audio>
+                    <div class="hostcontent_audio">
+                        <audio
+                            id="audioPlayerGuide"
+                            src="http://pano.vr2shipping.com/static/enterprise/null/hotspot/HOTSPOT_AUDIO_null_1595746249823_mydream.mp3"
+                            controlsList="nodownload"
+                            controls="controls"
+                            ref="audio"
+                        ></audio>
+                    </div>
+                    <div class="operator">
+                        <i class="iconfont icontubiaoweb-24 cursor"></i>
+                        <i class="iconfont icontubiaoweb-24 cursor"></i>
+                    </div>
                 </div>
             </div>
         </main>
@@ -102,28 +110,48 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.hostcontent {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    .hostcontent_left {
-        width: 50%;
-        // border-right: 1px solid rgba(245, 245, 245, 1);
-        margin-right: 10px;
-        .info {
+<style scoped lang="less">
+.addGuidedialog {
+    /deep/.el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .hostcontent {
+            width: 100%;
             display: flex;
-            .action {
-                width: 96px;
-                height: 96px;
-                background: rgba(216, 216, 216, 1);
+            justify-content: space-between;
+            .hostcontent_left {
+                width: 50%;
+                // border-right: 1px solid rgba(245, 245, 245, 1);
+                margin-right: 10px;
+                .info {
+                    display: flex;
+                    .action {
+                        width: 96px;
+                        height: 96px;
+                        background: rgba(216, 216, 216, 1);
+                    }
+                    .digest {
+                        margin-left: 10px;
+                    }
+                }
+                .content {
+                    margin-top: 10px;
+                    .el-textarea {
+                        textarea {
+                            resize: none;
+                        }
+                    }
+                }
             }
-            .digest {
-                margin-left: 10px;
+            .hostcontent_right {
+                // display: flex;
+                // align-items: center;
             }
         }
-        .content {
-            margin-top: 10px;
+        .el-dialog__body {
+            height: 250px;
         }
     }
 }
