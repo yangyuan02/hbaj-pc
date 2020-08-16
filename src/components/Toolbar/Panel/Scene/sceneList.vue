@@ -7,13 +7,13 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>内容</span>
-                    <span>标签名称</span>
+                    <span style="width:13%">内容</span>
+                    <span style="width:170px">标签名称</span>
                     <span>操作</span>
                 </div>
                 <div class="body" v-if="list && list.length" v-loading="loading">
                     <div class="item" v-for="(item, index) in list" :key="index">
-                        <div class="link">
+                        <div class="link" style="width:13%">
                             <i
                                 class="iconfont icontubiaoweb-29 cursor"
                                 @click="editAttachment(item)"
@@ -278,7 +278,7 @@ export default {
                         width: 33%;
                         text-align: center;
                         &.link_name {
-                            width: 70px;
+                            width: 170px;
                             text-align: left;
                             font-size: 12px;
                             font-family: MicrosoftYaHei;

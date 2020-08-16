@@ -324,7 +324,7 @@ export default {
                         width: 33%;
                         text-align: center;
                         &.link_name {
-                            width: 70px;
+                            width: 170px;
                             text-align: left;
                             font-size: 14px;
                             font-family: MicrosoftYaHei;
