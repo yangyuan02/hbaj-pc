@@ -203,10 +203,11 @@ export default {
                 {
                     type: "post",
                     data: {
-                        hotspotIds
+                        hotspotIds,
+                        projectId
                     }
                 },
-                `${projectId}/scene/changeSeq`
+                `${projectId}/hotspot/changeSeq`
             ).then(res => {
                 if (res.suceeded) {
                     this.getAttachmentList();
@@ -241,7 +242,7 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
-            this.$store.commit("SETGuIDELIST");
+            this.$store.commit("SETGuIDELIST", data);
         },
         edit(data) {
             // 修改附件名称弹窗

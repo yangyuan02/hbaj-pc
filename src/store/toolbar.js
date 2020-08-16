@@ -12,7 +12,8 @@ const state = {
     openScene: false, // 场景热点列表
     id: "", // 场景热点列表id
     sceneCode: "",
-    openGuideScene: false // 引导列表-场景列表
+    openGuideScene: false, // 引导列表-场景列表
+    GuideData: {} // 引导脚本列表当前选择
 };
 
 const mutations = {
@@ -24,8 +25,9 @@ const mutations = {
         state["id"] = id;
         state["code"] = code;
     },
-    SETGuIDELIST(state) {
+    SETGuIDELIST(state, GuideData) {
         state["openGuideScene"] = true;
+        state["GuideData"] = GuideData;
     },
     SETTOGGLETOOLBR(state, type) {
         const toolbarList = [

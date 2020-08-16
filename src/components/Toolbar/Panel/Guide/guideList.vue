@@ -12,14 +12,21 @@
                     <!-- <span>操作</span> -->
                 </div>
                 <div class="body">
-                    <div class="item" v-for="(item, index) in attachmentList" :key="index">
+                    <div
+                        class="item cursor"
+                        v-for="(item, index) in attachmentList"
+                        :key="index"
+                        @click="select(item, index)"
+                        :class="{ active: index === currentIndex }"
+                    >
                         <div class="link">
                             <i
                                 class="iconfont icontubiaoweb-26 cursor"
                                 @click="updateHotspot(item)"
+                                v-if="currentIndex === index"
                             ></i>
                         </div>
-                        <div class="link_name ellipsis cursor" @click="loadpanoscene(item)">
+                        <div class="link_name ellipsis cursor" @click="loadpanoscene(item, index)">
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -81,7 +88,8 @@ export default {
             },
             attachmentList: [], // 获取附件列表
             newArr: [], //
-            currentItem: {}
+            currentItem: {},
+            currentIndex: null
         };
     },
     components: {
@@ -98,12 +106,30 @@ export default {
             if (newVal) {
                 this.getAttachmentList();
             }
+        },
+        "$store.state.toolbarStore.GuideData.sceneId": function() {
+            this.setCurrent(this.attachmentList);
         }
     },
     methods: {
+        select(data, index) {
+            this.currentIndex = index;
+            this.loadpanoscene(data, index);
+        },
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
+        },
+        setCurrent(list) {
+            if (!list.length) {
+                return false;
+            }
+            const GuideData = this.$store.state.toolbarStore.GuideData;
+            const sceneId = GuideData.sceneId;
+            const currentIndex = list.findIndex(item => item.id === sceneId);
+            if (currentIndex) {
+                this.currentIndex = currentIndex;
+            }
         },
         delAttach(id) {
             // 删除附件
@@ -150,6 +176,7 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.attachmentList = res.data;
+                    this.setCurrent(this.attachmentList);
                     console.log(res.data, "attach");
                 } else {
                 }
@@ -192,26 +219,30 @@ export default {
         editOpenEditAttachmentName(data) {
             this.$store.commit("SETSCENELIST", data.id, data.code);
         },
-        loadpanoscene(data) {
+        loadpanoscene(data, index) {
             window.loadpanoscene && window.loadpanoscene(data.id, data.code);
-            this.editOpenEditAttachmentName(data);
+            this.currentIndex = index;
+            // this.editOpenEditAttachmentName(data);
         },
-        updateHotspot() {
+        updateHotspot(newData) {
             const getScenePara = window.getScenePara && window.getScenePara();
             const projectId = this.$route.params.projectId;
+            const GuideData = this.$store.state.toolbarStore.GuideData;
             const data = {
                 locationFov: getScenePara[1], //场景的视角
                 locationX: getScenePara[2], //获取的热点横坐标
                 locationY: getScenePara[3], //获取的热点垂向坐标
                 projectId, //项目ID
-                sceneId: getScenePara[4] //场景ID
+                sceneId: getScenePara[4], //场景ID
+                id: GuideData.id // 引导脚本列表id
                 // title: "默认场景名称", //热点名称
                 // type: "DEFAULT" //热点类型
             };
 
-            hotspot({ type: "post", data }).then(res => {
+            hotspotDetail({ type: "put", data }, GuideData.id).then(res => {
                 if (res.suceeded) {
                     this.getAttachmentList();
+                    window.loadpanoscene && window.loadpanoscene(newData.id, newData.code);
                     this.$message({
                         type: "success",
                         message: "更新成功!"
@@ -300,6 +331,9 @@ export default {
                             color: rgba(15, 79, 168, 1);
                         }
                     }
+                }
+                .active {
+                    background: rgb(255, 165, 0);
                 }
             }
         }
