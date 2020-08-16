@@ -211,6 +211,7 @@ export default {
         down(arr, index) {
             if (arr.length > 1 && index !== arr.length - 1) {
                 this.newArr = this.swapItems(arr, index, index + 1);
+                this.currentIndex = index + 1;
                 this.isUpDown = true;
                 this.sortAttachment();
                 setTimeout(() => {

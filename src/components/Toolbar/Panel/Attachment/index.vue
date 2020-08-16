@@ -326,12 +326,6 @@ export default {
             }
             .active {
                 background: rgb(255, 165, 0);
-                // i {
-                //     color: #ffd51a;
-                // }
-                // span {
-                //     color: #ffd51a;
-                // }
             }
         }
     }

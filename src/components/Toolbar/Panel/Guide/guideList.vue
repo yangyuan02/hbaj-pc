@@ -7,7 +7,7 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>链接内容</span>
+                    <span>定位</span>
                     <span>场景名称</span>
                     <!-- <span>操作</span> -->
                 </div>
