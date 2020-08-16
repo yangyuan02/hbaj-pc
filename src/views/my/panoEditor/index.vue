@@ -34,11 +34,11 @@ export default {
                     passQueryParameters: true
                 });
             });
-        },
-        getZindex() {
-            const zIndex = document.querySelector(".el-drawer__open").parentElement.style.zIndex;
-            return parseInt(zIndex, 10);
         }
+        // getZindex() {
+        //     const zIndex = document.querySelector(".el-drawer__open").parentElement.style.zIndex;
+        //     return parseInt(zIndex, 10);
+        // }
     },
     computed: {
         isOpenedWidth: function() {
@@ -60,28 +60,28 @@ export default {
         }
     },
     watch: {
-        isOpenScene: function(val) {
-            if (val) {
-                this.$nextTick(() => {
-                    const zIndex = this.getZindex() + 1;
-                    const elesCene = document.querySelector(".scene_list");
-                    if (elesCene) {
-                        elesCene.style.zIndex = zIndex;
-                    }
-                });
-            }
-        },
-        isOpenGuideScene: function(val) {
-            if (val) {
-                this.$nextTick(() => {
-                    const zIndex = this.getZindex() + 1;
-                    const eleGuide = document.querySelector(".guideList");
-                    if (eleGuide) {
-                        eleGuide.style.zIndex = zIndex;
-                    }
-                });
-            }
-        }
+        // isOpenScene: function(val) {
+        //     if (val) {
+        //         this.$nextTick(() => {
+        //             const zIndex = this.getZindex() + 1;
+        //             const elesCene = document.querySelector(".scene_list");
+        //             if (elesCene) {
+        //                 elesCene.style.zIndex = zIndex;
+        //             }
+        //         });
+        //     }
+        // },
+        // isOpenGuideScene: function(val) {
+        //     if (val) {
+        //         this.$nextTick(() => {
+        //             const zIndex = this.getZindex() + 1;
+        //             const eleGuide = document.querySelector(".guideList");
+        //             if (eleGuide) {
+        //                 eleGuide.style.zIndex = zIndex;
+        //             }
+        //         });
+        //     }
+        // }
     },
     mounted() {
         this.initPano();

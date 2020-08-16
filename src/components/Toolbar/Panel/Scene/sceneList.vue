@@ -7,8 +7,8 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span>链接内容</span>
-                    <span>场景名称</span>
+                    <span>内容</span>
+                    <span>标签名称</span>
                     <span>操作</span>
                 </div>
                 <div class="body" v-if="list && list.length" v-loading="loading">
@@ -18,15 +18,8 @@
                                 class="iconfont icontubiaoweb-29 cursor"
                                 @click="editAttachment(item)"
                             ></i>
-                            <i
-                                class="iconfont icontubiaoweb-26 cursor"
-                                @click="updateHotspot(item)"
-                            ></i>
                         </div>
-                        <div
-                            class="link_name ellipsis cursor"
-                            @click="editOpenEditAttachmentName(item)"
-                        >
+                        <div class="link_name ellipsis cursor" @click="backFindHotspot(item)">
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -38,8 +31,16 @@
                         </div>
                         <div class="operate">
                             <i
+                                class="iconfont icontubiaoweb-26 cursor"
+                                @click="updateHotspot(item)"
+                            ></i>
+                            <i
                                 class="iconfont icontubiaoweb-21 cursor"
                                 @click="handleDel(item)"
+                            ></i>
+                            <i
+                                class="iconfont icontubiaoweb-28"
+                                @click="editOpenEditAttachmentName(item)"
                             ></i>
                         </div>
                     </div>
@@ -118,10 +119,12 @@ export default {
                 }
             });
         },
-        backFindHotspot(data) {
+        backFindHotspot(item) {
             // 这个做啥的，暂时不知道
-            const { code, locationX, locationY } = data;
-            window.backFindHotspot && backFindHotspot(code, locationX, locationY);
+            const { locationX, locationY } = item;
+            const getScenePara = window.getScenePara && window.getScenePara();
+
+            window.backFindHotspot && backFindHotspot(getScenePara[0], locationX, locationY);
         },
         updateHotspot(data) {
             const id = data.id;
@@ -276,7 +279,7 @@ export default {
                         &.link_name {
                             width: 70px;
                             text-align: left;
-                            font-size: 14px;
+                            font-size: 12px;
                             font-family: MicrosoftYaHei;
                             color: rgba(102, 102, 102, 1);
                             line-height: 19px;
@@ -286,7 +289,7 @@ export default {
                             justify-content: space-around;
                         }
                         i {
-                            font-size: 16px;
+                            font-size: 12px;
                             color: rgba(15, 79, 168, 1);
                         }
                     }

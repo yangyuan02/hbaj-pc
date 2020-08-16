@@ -1,6 +1,6 @@
 <template>
     <el-dialog
-        title="附件管理"
+        title="课件参考内容编辑"
         :visible.sync="visible"
         @open="open"
         @close="close"

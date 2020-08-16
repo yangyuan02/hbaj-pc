@@ -225,7 +225,9 @@ export default {
                 this.isUpDown = true;
                 this.currentIndex = index - 1;
                 this.sortAttachment();
-                // this.isUpDown = false;
+                setTimeout(() => {
+                    this.isUpDown = false;
+                }, 0);
             }
         },
         down(arr, index) {
@@ -234,7 +236,9 @@ export default {
                 this.currentIndex = index + 1;
                 this.isUpDown = true;
                 this.sortAttachment();
-                // this.isUpDown = false;
+                setTimeout(() => {
+                    this.isUpDown = false;
+                }, 0);
             }
         },
         swapItems(arr, index1, index2) {
