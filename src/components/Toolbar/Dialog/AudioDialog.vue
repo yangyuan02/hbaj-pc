@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { hotspotContentDetail } from "@/model/api";
+import { hotspotContentDetail, hotspotContent } from "@/model/api";
 
 export default {
     props: {
@@ -70,16 +70,39 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        editData: {
+            type: Object,
+            default: {}
+        },
+        editType: {
+            // 编辑类型
+            type: String,
+            default: ""
         }
     },
     watch: {
         id(newVal) {
             this.params.hotspotId = newVal;
+        },
+        editData(newVal) {
+            this.$nextTick(() => {
+                this.params = { ...newVal };
+                this.fileList = [
+                    {
+                        name: "音频内容",
+                        url: newVal.extra
+                    }
+                ];
+            });
+        },
+        editType(newVal) {
+            this.type = newVal;
         }
     },
     computed: {
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.title}&fileType=HOTSPOT_AUDIO`;
+            const url = `/api/file/upload?fileName=${this.params.title}&relatedId=${this.id}&fileType=HOTSPOT_AUDIO`;
             return url;
         }
     },
@@ -122,7 +145,7 @@ export default {
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.addAudio();
+                    this.type && this.type === "audio" ? this.editAudio() : this.addAudio();
                 }
             });
             console.log("保存");
@@ -144,6 +167,22 @@ export default {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
                     this.$refs["form"].resetFields();
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
+        },
+        editAudio() {
+            // 修改
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
                     this.close();
                     this.onSuccess && this.onSuccess();
                 }

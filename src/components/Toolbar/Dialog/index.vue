@@ -60,12 +60,16 @@
         <AudioDialog
             :visible.sync="shows.isOpenAudioDialog"
             :id="attchmentId"
+            :editData="editData"
             :onSuccess="getAttachmentAudio"
+            :editType="editType"
         ></AudioDialog>
         <VideoDialog
             :visible.sync="shows.isOpenVideoDialog"
             :id="attchmentId"
+            :editData="editData"
             :onSuccess="getAttachmentVideo"
+            :editType="editType"
         ></VideoDialog>
         <SortList
             :visible.sync="shows.isOpenSortTextList"
@@ -172,6 +176,12 @@ export default {
             if (this.activeName === "html") {
                 return "保存";
             }
+            if (this.activeName === "audio" && this.display.audioList[0].extra) {
+                return "修改";
+            }
+            if (this.activeName === "video" && this.display.videoList[0].extra) {
+                return "修改";
+            }
             return "添加";
         }
     },
@@ -197,7 +207,7 @@ export default {
                 return;
             }
             this.attchmentId = this.params.id;
-            // this.editData = {};
+            this.editData = {};
             this.editType = "";
             if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;
@@ -206,9 +216,17 @@ export default {
                 this.shows.isOpenImagesDialog = true;
             }
             if (this.activeName === "audio") {
+                if (this.buttonText === "修改") {
+                    this.editData = this.display.audioList[0];
+                    this.editType = "audio";
+                }
                 this.shows.isOpenAudioDialog = true;
             }
             if (this.activeName === "video") {
+                if (this.buttonText === "修改") {
+                    this.editData = this.display.videoList[0];
+                    this.editType = "video";
+                }
                 this.shows.isOpenVideoDialog = true;
             }
         },

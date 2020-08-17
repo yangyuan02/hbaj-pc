@@ -1,7 +1,7 @@
 <template>
     <div class="video-class">
         <div class="panel-video">
-            <!-- <span class="title"> {{ title }}</span> -->
+            <span class="title"> {{ title }}</span>
             <div class="video">
                 <video id="videoPlayer" :src="src" ref="video" controls="controls"></video>
                 <!-- <video :src="src" controls="controls"></video> -->
@@ -14,7 +14,7 @@ export default {
     props: {
         title: {
             // 视频资源标题
-            default: "",
+            default: "默认标题",
             type: String
         },
         src: {
@@ -34,6 +34,7 @@ export default {
     width: 600px;
     height: 263px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
