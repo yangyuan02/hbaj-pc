@@ -10,7 +10,16 @@
  * @returns {Promise}
  */
 
-export default function ajax({ hostPath = location.origin, url, async = true, timeout = 30000, type, headers, dataType, data }) {
+export default function ajax({
+    hostPath = location.origin,
+    url,
+    async = true,
+    timeout = 30000,
+    type,
+    headers,
+    dataType,
+    data
+}) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
 
@@ -32,6 +41,8 @@ export default function ajax({ hostPath = location.origin, url, async = true, ti
             if (xhr.readyState == 4) {
                 if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     resolve(xhr.response);
+                } else if (xhr.status === 401) {
+                    window.location.href = "/";
                 } else {
                     resolve({
                         data: [],
