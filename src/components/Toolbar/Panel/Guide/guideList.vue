@@ -238,9 +238,9 @@ export default {
                 locationY: getScenePara[3], //获取的热点垂向坐标
                 projectId, //项目ID
                 sceneId: getScenePara[4], //场景ID
-                id: GuideData.id // 引导脚本列表id
+                id: GuideData.id, // 引导脚本列表id
                 // title: "默认场景名称", //热点名称
-                // type: "DEFAULT" //热点类型
+                type: "GUIDE" //热点类型
             };
 
             hotspotDetail({ type: "put", data }, GuideData.id).then(res => {
