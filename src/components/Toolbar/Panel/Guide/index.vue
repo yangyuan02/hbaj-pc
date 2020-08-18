@@ -247,7 +247,7 @@ export default {
             // const getScenePara = window.getScenePara && window.getScenePara();
             const id = sceneCode && window.getSceneCode && window.getSceneCode(sceneCode);
             if (id) {
-                window.backFindHotspot && backFindHotspot(id, locationX, locationY);
+                window.backFindHotspotId && backFindHotspotId(id, locationX, locationY);
             }
             this.$store.commit("SETGuIDELIST", data);
         },
