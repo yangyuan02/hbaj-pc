@@ -60,10 +60,10 @@
             </div>
         </div>
 
-        <AttachmentComponent
+        <!-- <AttachmentComponent
             :visible.sync="shows.isOpenAttachment"
             :data="currentItem"
-        ></AttachmentComponent>
+        ></AttachmentComponent> -->
         <div id="triangle-right" @click="closeDrawer"></div>
         <!-- 修改附件弹窗 -->
         <!-- <editSceneDialog
@@ -89,7 +89,7 @@ export default {
     data() {
         return {
             shows: {
-                isOpenAttachment: false // 附件弹窗
+                // isOpenAttachment: false // 附件弹窗
                 // isOpenEditAttachment: false // 修改附件弹窗
             },
             attachmentList: [], // 获取附件列表
@@ -100,7 +100,7 @@ export default {
         };
     },
     components: {
-        AttachmentComponent
+        // AttachmentComponent
         // editSceneDialog
     },
     computed: {

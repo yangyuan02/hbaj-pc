@@ -199,6 +199,7 @@ export default {
             });
         },
         editAttachment(data) {
+            this.currentItem = {};
             this.currentItem = data;
             this.isOpenAttachment = true;
         },

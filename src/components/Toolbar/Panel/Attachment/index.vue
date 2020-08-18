@@ -248,6 +248,7 @@ export default {
         editOpenEditAttachmentName(data, index) {
             // 修改附件名称弹窗
             this.currentIndex = index;
+            this.currentItem = {};
             this.currentItem = data;
             this.shows.isOpenEditAttachment = true;
             console.log(data);

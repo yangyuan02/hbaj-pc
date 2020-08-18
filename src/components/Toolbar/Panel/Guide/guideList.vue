@@ -59,10 +59,10 @@
             </div>
         </div>
 
-        <AttachmentComponent
+        <!-- <AttachmentComponent
             :visible.sync="shows.isOpenAttachment"
             :data="currentItem"
-        ></AttachmentComponent>
+        ></AttachmentComponent> -->
         <div id="triangle-right" @click="closeDrawer"></div>
         <!-- 修改附件弹窗 -->
         <!-- <editSceneDialog
@@ -76,7 +76,7 @@
 <script>
 import { mapState } from "vuex";
 
-import AttachmentComponent from "../../Dialog";
+// import AttachmentComponent from "../../Dialog";
 
 // import editSceneDialog from "./editScene";
 
@@ -97,7 +97,7 @@ export default {
         };
     },
     components: {
-        AttachmentComponent
+        // AttachmentComponent
         // editSceneDialog
     },
     computed: {

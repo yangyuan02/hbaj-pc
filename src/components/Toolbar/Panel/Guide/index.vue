@@ -67,10 +67,10 @@
             </div>
         </div>
 
-        <AttachmentComponent
+        <!-- <AttachmentComponent
             :visible.sync="shows.isOpenAttachment"
             :data="currentItem"
-        ></AttachmentComponent>
+        ></AttachmentComponent> -->
         <div id="triangle-right" @click="closeDrawer"></div>
 
         <HotspotConent
@@ -105,7 +105,7 @@ export default {
     data() {
         return {
             shows: {
-                isOpenAttachment: false, // 附件弹窗
+                // isOpenAttachment: false, // 附件弹窗
                 isOpenHotspotConent: false, // 批量新增弹窗
                 isOpenEditAttachment: false // 修改附件弹窗
             },
@@ -117,7 +117,7 @@ export default {
         };
     },
     components: {
-        AttachmentComponent,
+        // AttachmentComponent,
         HotspotConent,
         editSceneDialog
     },
