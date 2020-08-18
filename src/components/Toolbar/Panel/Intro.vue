@@ -27,7 +27,7 @@
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="发起时间">
+                <el-form-item label="时间">
                     <!-- <el-date-picker
                         v-model="params.startDate"
                         type="date"
@@ -38,13 +38,11 @@
                     >
                     </el-date-picker> -->
                     <span
-                        >{{ params.startDate | formaData }}-{{
-                            params.expireDate | formaData
-                        }}</span
+                        >{{ formaData(params.startDate) }}-{{ formaData(params.expireDate) }}</span
                     >
                 </el-form-item>
-                <el-form-item label="发起时间">
-                    <!-- <el-date-picker
+                <!-- <el-form-item label="发起时间">
+                    <el-date-picker
                         v-model="params.startDate"
                         type="date"
                         placeholder="选择日期"
@@ -52,9 +50,9 @@
                         format="yyyy-MM-dd"
                         value-format="timestamp"
                     >
-                    </el-date-picker> -->
+                    </el-date-picker>
                     <span></span>
-                </el-form-item>
+                </el-form-item> -->
                 <!-- <el-form-item label="结束时间">
                     <el-date-picker
                         v-model="params.expireDate"
@@ -72,7 +70,7 @@
                 <el-form-item label="课件简介" class="intro_textarea">
                     <el-input
                         type="textarea"
-                        :rows="2"
+                        :rows="5"
                         placeholder="请输入内容"
                         v-model="params.project.detail"
                         class="w100"
@@ -126,6 +124,20 @@ export default {
         }
     },
     methods: {
+        formaData(dateTime) {
+            var date = new Date(dateTime); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var year = date.getFullYear(),
+                month = ("0" + (date.getMonth() + 1)).slice(-2),
+                sdate = ("0" + date.getDate()).slice(-2),
+                hour = ("0" + date.getHours()).slice(-2),
+                minute = ("0" + date.getMinutes()).slice(-2),
+                second = ("0" + date.getSeconds()).slice(-2);
+            // 拼接
+            var result =
+                year + "-" + month + "-" + sdate + " " + hour + ":" + minute + ":" + second;
+            // 返回
+            return result.slice(0, 10);
+        },
         handleClose(done) {
             done();
             this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
