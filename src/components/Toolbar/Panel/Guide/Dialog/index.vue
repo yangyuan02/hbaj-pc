@@ -15,14 +15,12 @@
                 <div class="hostcontent_left">
                     <div class="info">
                         <div
-                            class="action"
+                            class="action "
                             @click="isOpenAction = true"
-                            :style="{
-                                'background-image': `url(
-                                    ${selectData.img1}
-                                )`
-                            }"
-                        ></div>
+                            :class="{ 'ui-lazyLoad-pic': !selectData.img1 }"
+                        >
+                            <img :src="selectData.img1" alt="" v-if="selectData.img1" />
+                        </div>
                         <div class="digest">
                             <div class="title">
                                 <span>简介</span>
@@ -47,8 +45,15 @@
                         ></audio>
                     </div>
                     <div class="operator">
-                        <i class="iconfont icontubiaoweb-24 cursor"></i>
-                        <i class="iconfont icontubiaoweb-24 cursor"></i>
+                        <i
+                            class="iconfont icontubiaoweb-34 cursor"
+                            @click="shows.isOpenAudition = true"
+                        ></i>
+                        <i
+                            class="iconfont icontubiaoweb-33 cursor"
+                            @click="shows.isOpenVideoDialog = true"
+                        ></i>
+                        <i class="iconfont icontubiaoweb-27 cursor" @click="deleteItem"></i>
                     </div>
                 </div>
             </div>
@@ -58,11 +63,21 @@
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
         </div>
+        <VideoDialog
+            :visible.sync="shows.isOpenVideoDialog"
+            :id="attchmentId"
+            :editData="editData"
+            :onSuccess="getAttachmentVideo"
+            :editType="editType"
+        ></VideoDialog>
+        <Audition :visible.sync="shows.isOpenAudition"></Audition>
     </el-dialog>
 </template>
 
 <script>
 import SelectAction from "./SelectAction.vue";
+import VideoDialog from "@/components/Toolbar/Dialog/VideoDialog";
+import Audition from "./audition";
 
 export default {
     props: {
@@ -72,10 +87,16 @@ export default {
         }
     },
     components: {
-        SelectAction
+        SelectAction,
+        VideoDialog,
+        Audition
     },
     data() {
         return {
+            shows: {
+                isOpenVideoDialog: false,
+                isOpenAudition: false
+            },
             isOpenAction: false,
             loading: {
                 save: false,
@@ -101,6 +122,22 @@ export default {
                 }
             });
             console.log("保存");
+        },
+        deleteItem() {
+            this.$confirm(`此操作文件, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    // this.delAttach(item.id);
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         },
         onConfirm(data) {
             Object.assign(this.selectData, data);
@@ -130,8 +167,13 @@ export default {
                     .action {
                         width: 96px;
                         height: 96px;
-                        background: rgba(216, 216, 216, 1) center center;
+                        // background: rgba(216, 216, 216, 1) center center;
+                        background-position: center center;
                         background-size: 100%;
+                        img {
+                            width: 100%;
+                            max-width: 100%;
+                        }
                     }
                     .digest {
                         margin-left: 10px;
@@ -149,6 +191,16 @@ export default {
             .hostcontent_right {
                 // display: flex;
                 // align-items: center;
+                .operator {
+                    margin-top: 30px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    i {
+                        font-size: 20px;
+                    }
+                }
             }
         }
         .el-dialog__body {

@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14226652",
+      "name": "上 传",
+      "font_class": "xiazai",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "16408097",
+      "name": "图标-31",
+      "font_class": "tubiao-31",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "16408098",
+      "name": "图标-30",
+      "font_class": "tubiao-30",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
       "icon_id": "9224024",
       "name": "排序",
       "font_class": "paixu",

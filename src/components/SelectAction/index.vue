@@ -12,8 +12,9 @@
                         @click="select(globalConfig.imagePath + item, index)"
                         class="ui-lazyLoad-pic"
                         :class="{ active: index === currentIndex }"
+                        v-skeleton="globalConfig.imagePath + item"
                     >
-                        <img :src="globalConfig.imagePath + item" alt="" />
+                        <!-- <img :src="globalConfig.imagePath + item" alt="" /> -->
                     </li>
                 </ul>
             </div>
