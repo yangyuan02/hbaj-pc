@@ -30,10 +30,16 @@
                     ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <AudioHban :src="display.audioList[0].extra"></AudioHban>
+                    <AudioHban
+                        :src="display.audioList[0].extra"
+                        :title="display.audioList[0].title"
+                    ></AudioHban>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
-                    <VideoHban :src="display.videoList[0].extra"></VideoHban>
+                    <VideoHban
+                        :src="display.videoList[0].extra"
+                        :title="display.videoList[0].title"
+                    ></VideoHban>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="html">
                     <RichTextBox ref="RichTextBox"></RichTextBox>
@@ -148,7 +154,7 @@ export default {
         },
         dialogTitle: {
             type: String,
-            default: "件参考内容编辑"
+            default: "附件参考内容编辑"
         }
     },
     components: {
@@ -380,6 +386,7 @@ export default {
         main {
             height: 500px;
             padding-bottom: 10px;
+            position: relative;
         }
     }
     .attchment_dialog {

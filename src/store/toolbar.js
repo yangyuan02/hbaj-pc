@@ -35,7 +35,9 @@ const mutations = {
             "drawerIntro",
             "drawerPerson",
             "drawerHotContent",
-            "drawerGuideContent"
+            "drawerGuideContent",
+            "openScene",
+            "openGuideScene"
         ];
         const hideList = toolbarList.filter(item => item !== type);
         hideList.forEach(item => {

@@ -1,7 +1,7 @@
 <template>
     <div class="audio-class">
+        <div class="title">{{ title }}</div>
         <div class="panel-audio">
-            <div class="title">{{ title }}</div>
             <div class="audio">
                 <audio
                     id="audioPlayer"
@@ -36,9 +36,10 @@ export default {
 </script>
 <style lang="less">
 .audio-class {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    // position: absolute;
+    // left: 50%;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
     .panel-audio {
         width: 600px;
         height: 263px;

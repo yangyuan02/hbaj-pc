@@ -1,7 +1,7 @@
 <template>
     <div class="video-class">
+        <div class="title">{{ title }}</div>
         <div class="panel-video">
-            <span class="title"> {{ title }}</span>
             <div class="video">
                 <video id="videoPlayer" :src="src" ref="video" controls="controls"></video>
                 <!-- <video :src="src" controls="controls"></video> -->
