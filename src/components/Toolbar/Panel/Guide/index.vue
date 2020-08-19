@@ -242,12 +242,9 @@ export default {
             return arr;
         },
         editOpenEditAttachmentName(data) {
-            const { locationX, locationY, sceneCode } = data;
-
-            // const getScenePara = window.getScenePara && window.getScenePara();
-            const id = sceneCode && window.getSceneCode && window.getSceneCode(sceneCode);
-            if (id) {
-                window.backFindHotspotId && backFindHotspotId(id, locationX, locationY);
+            const { locationX, locationY, sceneId } = data;
+            if (sceneId) {
+                window.backFindHotspotId && backFindHotspotId(sceneId, locationX, locationY);
             }
             this.$store.commit("SETGuIDELIST", data);
         },

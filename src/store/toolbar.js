@@ -13,7 +13,8 @@ const state = {
     id: "", // 场景热点列表id
     sceneCode: "",
     openGuideScene: false, // 引导列表-场景列表
-    GuideData: {} // 引导脚本列表当前选择
+    GuideData: {}, // 引导脚本列表当前选择
+    all: false
 };
 
 const mutations = {

@@ -69,6 +69,9 @@ export default {
             return this.$store.state.toolbarStore.openGuideScene;
         }
     },
+    beforeDestroy() {
+        this.$store.commit("SETTOGGLETOOLBR", "all");
+    },
     mounted() {
         this.initPano();
     }
