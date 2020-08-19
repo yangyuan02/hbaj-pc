@@ -63,7 +63,8 @@ export default {
                 name: "panoEditor",
                 params: {
                     taskId,
-                    projectId
+                    projectId,
+                    from: "1"
                 }
             });
         }

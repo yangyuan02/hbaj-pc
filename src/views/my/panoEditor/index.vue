@@ -1,10 +1,10 @@
 <template>
-    <div class="p_editor_container">
+    <div class="p_editor_container" :style="{ paddingRight: isShowToobar ? '46px' : '0px' }">
         <div id="p_editor" :style="{ width: isOpenedWidth.width }"></div>
-        <SceneList ref="SceneList"></SceneList>
-        <GuideList></GuideList>
+        <SceneList ref="SceneList" v-if="isShowToobar"></SceneList>
+        <GuideList v-if="isShowToobar"></GuideList>
         <!-- 右侧工具条 -->
-        <Toolbar></Toolbar>
+        <Toolbar v-if="isShowToobar"></Toolbar>
     </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
                 embedpano({
                     id: "kr",
                     swf: "/pano/tour.swf",
-                    xml: "/pano/main.xml",
+                    xml: `/pano/${this.isShowToobar ? "main" : "main_c"}.xml`,
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1.0,
@@ -67,6 +67,10 @@ export default {
         },
         isOpenGuideScene: function() {
             return this.$store.state.toolbarStore.openGuideScene;
+        },
+        isShowToobar: function() {
+            // 1 我的任务过 2课件过来
+            return this.$route.params.from === "1";
         }
     },
     beforeDestroy() {

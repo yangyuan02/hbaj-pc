@@ -9,8 +9,9 @@
                     <li
                         v-for="(item, index) in list"
                         :key="index"
-                        @click="select(globalConfig.imagePath + item)"
+                        @click="select(globalConfig.imagePath + item, index)"
                         class="ui-lazyLoad-pic"
+                        :class="{ active: index === currentIndex }"
                     >
                         <img :src="globalConfig.imagePath + item" alt="" />
                     </li>
@@ -44,10 +45,13 @@ export default {
         }
     },
     data() {
-        return {};
+        return {
+            currentIndex: null
+        };
     },
     methods: {
-        select(url) {
+        select(url, index) {
+            this.currentIndex = index;
             this.onSelect && this.onSelect(url);
         }
     }
@@ -73,10 +77,13 @@ export default {
                     height: 48px;
                     margin-right: 10px;
                     margin-bottom: 8px;
-                    background: rgba(221, 221, 221, 1);
+                    // background: rgba(221, 221, 221, 1);
                     img {
                         width: 100%;
                         height: 100%;
+                    }
+                    &.active {
+                        border: 1px solid #ffa500;
                     }
                 }
             }

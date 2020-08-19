@@ -130,7 +130,8 @@ export default {
                     .action {
                         width: 96px;
                         height: 96px;
-                        background: rgba(216, 216, 216, 1);
+                        background: rgba(216, 216, 216, 1) center center;
+                        background-size: 100%;
                     }
                     .digest {
                         margin-left: 10px;
