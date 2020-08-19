@@ -26,7 +26,11 @@
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload"
                     >
-                        <img v-if="params.extra" :src="params.extra" class="avatar" />
+                        <img
+                            v-if="params.extra"
+                            :src="globalConfig.imagePath + params.extra"
+                            class="avatar"
+                        />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
@@ -80,7 +84,8 @@ export default {
     },
     computed: {
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.title}&relatedId=${this.id}&fileType=HOTSPOT_IMAGE`;
+            const projectId = this.$route.params.projectId;
+            const url = `/api/file/upload?fileName=default&relatedId=${projectId}&fileType=HOTSPOT_IMAGE`;
             return url;
         }
     },
@@ -136,7 +141,7 @@ export default {
             });
         },
         handleAvatarSuccess(res, file) {
-            this.params.extra = globalConfig.imagePath + res.data.path;
+            this.params.extra = res.data.path;
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";

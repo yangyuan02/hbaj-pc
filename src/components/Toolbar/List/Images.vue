@@ -22,7 +22,7 @@
                     <p>{{ item.content }}</p>
                 </div>
                 <div class="images">
-                    <img :src="item.extra" :alt="item.title" />
+                    <img :src="globalConfig.imagePath + item.extra" :alt="item.title" />
                 </div>
             </div>
         </div>

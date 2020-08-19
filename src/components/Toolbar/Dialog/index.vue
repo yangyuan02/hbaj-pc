@@ -213,7 +213,7 @@ export default {
                 return;
             }
             this.attchmentId = this.params.id;
-            this.editData = {};
+            // this.editData = {}; // 清空了会有bug
             this.editType = "";
             if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;

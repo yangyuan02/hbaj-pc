@@ -5,7 +5,7 @@
             <div class="audio">
                 <audio
                     id="audioPlayer"
-                    :src="src"
+                    :src="globalConfig.imagePath + src"
                     controlsList="nodownload"
                     controls="controls"
                     ref="audio"

@@ -3,7 +3,12 @@
         <div class="title">{{ title }}</div>
         <div class="panel-video">
             <div class="video">
-                <video id="videoPlayer" :src="src" ref="video" controls="controls"></video>
+                <video
+                    id="videoPlayer"
+                    :src="globalConfig.imagePath + src"
+                    ref="video"
+                    controls="controls"
+                ></video>
                 <!-- <video :src="src" controls="controls"></video> -->
             </div>
         </div>

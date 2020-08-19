@@ -102,7 +102,8 @@ export default {
     },
     computed: {
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.title}&relatedId=${this.id}&fileType=HOTSPOT_AUDIO`;
+            const projectId = this.$route.params.projectId;
+            const url = `/api/file/upload?fileName=default&relatedId=${projectId}&fileType=HOTSPOT_AUDIO`;
             return url;
         }
     },
@@ -152,7 +153,7 @@ export default {
         },
         handleAvatarSuccess(res, file) {
             console.log(res);
-            this.params.extra = globalConfig.imagePath + res.data.path;
+            this.params.extra = res.data.path;
         },
         addAudio() {
             // 新增音频内容
