@@ -11,7 +11,7 @@
         <div class="intro common">
             <h2>编辑课件简介</h2>
             <el-form label-position="top" :model="params">
-                <el-form-item label="上传图片">
+                <el-form-item :label="uploadTitle">
                     <el-upload
                         class="avatar-uploader"
                         :action="uploadUrl"
@@ -114,6 +114,10 @@ export default {
         uploadUrl() {
             const url = `/api/file/upload?fileName=default&relatedId=${this.$route.params.projectId}&fileType=PROJECT_IMAGE`;
             return url;
+        },
+        uploadTitle() {
+            const { blockName, moduleName, className } = this.params.project;
+            return "课件路径:" + (blockName || "") + (moduleName || "") + (className || "");
         }
     },
     watch: {
