@@ -117,6 +117,8 @@ export default {
                             this.$message.success("登录成功");
                             this.getUserDetail();
                             this.getMessageDetail();
+                        } else {
+                            res.message && this.$message.error(res.message);
                         }
                     });
                 }
