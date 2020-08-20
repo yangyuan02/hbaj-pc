@@ -23,6 +23,7 @@ export default {
     },
     methods: {
         initPano() {
+            const projectId = this.$route.params.projectId;
             this.$nextTick(() => {
                 embedpano({
                     id: "kr",
@@ -31,7 +32,8 @@ export default {
                     target: "p_editor",
                     html5: "prefer",
                     mobilescale: 1.0,
-                    passQueryParameters: true
+                    passQueryParameters: true,
+                    onready: buildProject(projectId)
                 });
             });
         }
