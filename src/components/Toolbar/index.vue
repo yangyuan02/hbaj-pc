@@ -59,27 +59,27 @@ export default {
                     text: "引导内容",
                     icon: "icontubiaoweb-16",
                     type: "drawerGuideContent"
-                },
-                {
-                    text: "课件评论",
-                    icon: "icontubiaoweb-17",
-                    type: "drawerComment"
-                },
-                {
-                    text: "启动引导",
-                    icon: "icontubiaoweb-18",
-                    type: "drawerPlatGuide"
-                },
-                {
-                    text: "内容摘要",
-                    icon: "icontubiaoweb-19",
-                    type: "drawerDigest"
-                },
-                {
-                    text: "快速通道",
-                    icon: "icontubiaoweb-20",
-                    type: "drawerTrack"
                 }
+                // {
+                //     text: "课件评论",
+                //     icon: "icontubiaoweb-17",
+                //     type: "drawerComment"
+                // },
+                // {
+                //     text: "启动引导",
+                //     icon: "icontubiaoweb-18",
+                //     type: "drawerPlatGuide"
+                // },
+                // {
+                //     text: "内容摘要",
+                //     icon: "icontubiaoweb-19",
+                //     type: "drawerDigest"
+                // },
+                // {
+                //     text: "快速通道",
+                //     icon: "icontubiaoweb-20",
+                //     type: "drawerTrack"
+                // }
             ],
             currentIndex: null
         };
@@ -114,6 +114,8 @@ export default {
     padding-top: 30px;
     position: absolute;
     right: 0;
+    display: flex;
+    flex-wrap: wrap;
     .item-toolbar {
         width: 100%;
         display: flex;

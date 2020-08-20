@@ -46,6 +46,7 @@
                 </el-tab-pane>
             </el-tabs>
             <div class="operate">
+                <el-button type="danger" @click="deleteItem()" v-if="isDelete">删除</el-button>
                 <el-button type="primary" @click="editDialog()">{{ buttonText }}</el-button>
             </div>
         </main>
@@ -189,6 +190,15 @@ export default {
                 return "修改";
             }
             return "添加";
+        },
+        isDelete: function() {
+            if (this.activeName === "audio" && this.display.audioList[0].extra) {
+                return true;
+            }
+            if (this.activeName === "video" && this.display.videoList[0].extra) {
+                return true;
+            }
+            return false;
         }
     },
     methods: {
@@ -201,6 +211,34 @@ export default {
         },
         save() {
             console.log("保存");
+        },
+        deleteItem() {
+            const type = this.activeName === "audio" ? "audioList" : "videoList";
+            const hotspotContentId = this.display[type][0].id;
+            this.$confirm(`将删除该文件,是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
+                        if (res.suceeded) {
+                            if (type === "audioList") {
+                                this.getAttachmentAudio();
+                            }
+
+                            if (type === "videoList") {
+                                this.getAttachmentVideo();
+                            }
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         },
         handleClick(tab, event) {
             const name = tab.name.toLocaleUpperCase();

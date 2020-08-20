@@ -1,19 +1,50 @@
 <template>
     <div class="comment">
         <div class="comment_list">
-            <CommentItem v-for="(item, index) in [1, 2, 3, 4, 5]" :key="index"></CommentItem>
+            <CommentItem v-for="(item, index) in list" :key="index"></CommentItem>
         </div>
     </div>
 </template>
 
 <script>
 import CommentItem from "./item";
+import { comment } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            loading: false,
+            list: []
+        };
     },
     components: {
         CommentItem
+    },
+    methods: {
+        getComment() {
+            this.loading = true;
+            const { id } = this.$route.params;
+            comment(
+                {
+                    type: "GET",
+                    data: {
+                        page: 1,
+                        size: 10000,
+                        relatedId: id,
+                        type: "NEWS"
+                    }
+                },
+                "list"
+            ).then(res => {
+                if (res.suceeded) {
+                    this.loading = false;
+                    const { content } = res.data;
+                    this.list = content;
+                }
+            });
+        }
+    },
+    mounted() {
+        this.getComment();
     }
 };
 </script>

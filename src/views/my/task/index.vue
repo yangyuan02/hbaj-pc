@@ -2,7 +2,7 @@
     <div class="message_container">
         <div class="message_info">
             <Title title="我的任务" :isMore="false"></Title>
-            <Calendar></Calendar>
+            <!-- <Calendar></Calendar> -->
             <div class="task_list scroll-view-wrapper" v-loading="loading">
                 <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
             </div>
@@ -115,15 +115,16 @@ export default {
     display: flex;
     height: 100%;
     overflow: hidden;
-    .task_list {
-        margin-top: 20px;
-        overflow-y: scroll;
-        height: calc(100% - 365px);
-        padding-bottom: 10px;
-    }
+
     .message_info {
         width: 363px;
         padding-bottom: 5px;
+        .task_list {
+            margin-top: 20px;
+            overflow-y: scroll;
+            height: calc(100% - 55px);
+            padding-bottom: 10px;
+        }
     }
     .message_right {
         flex: 1;

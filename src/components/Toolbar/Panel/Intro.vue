@@ -20,8 +20,8 @@
                         :before-upload="beforeAvatarUpload"
                     >
                         <img
-                            v-if="params.project.imageUrl && staticPath"
-                            :src="globalConfig.imagePath + params.project.imageUrl"
+                            v-if="params.imageUrl && staticPath"
+                            :src="globalConfig.imagePath + params.imageUrl"
                             class="avatar"
                         />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -65,14 +65,14 @@
                     </el-date-picker>
                 </el-form-item> -->
                 <el-form-item label="课件标题">
-                    <el-input v-model="params.project.name" class="w100"></el-input>
+                    <el-input v-model="params.name" class="w100"></el-input>
                 </el-form-item>
                 <el-form-item label="课件简介" class="intro_textarea">
                     <el-input
                         type="textarea"
                         :rows="5"
                         placeholder="请输入内容"
-                        v-model="params.project.detail"
+                        v-model="params.detail"
                         class="w100"
                     >
                     </el-input>
@@ -116,8 +116,8 @@ export default {
             return url;
         },
         uploadTitle() {
-            const { blockName, moduleName, className } = this.params.project;
-            return "课件路径:" + (blockName || "") + (moduleName || "") + (className || "");
+            const { blockName, moduleName, className } = this.params;
+            return `课件路径:${blockName || ""}-${moduleName || ""}-${className || ""}`;
         }
     },
     watch: {
@@ -147,26 +147,25 @@ export default {
             this.$store.commit("TOGGLE_DRAWER", "drawerIntro");
         },
         getTaskDetail() {
-            const taskId = this.$route.params.taskId;
+            const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
-            taskDetail(
+            projectDetail(
                 {
                     type: "GET"
                 },
-                taskId
+                projectId
             ).then(res => {
                 if (res.suceeded) {
                     this.params = res.data;
-                    this.staticPath = res.data.project.imageUrl;
-                    this.params.project.imageUrl = this.staticPath;
-                    console.log(res, "taskId", this.loading);
+                    this.staticPath = res.data.imageUrl;
+                    this.params.imageUrl = this.staticPath;
                 } else {
                 }
             });
         },
         handleAvatarSuccess(res, file) {
             this.staticPath = res.data.path;
-            this.params.project.imageUrl = res.data.path;
+            this.params.imageUrl = res.data.path;
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";
@@ -187,7 +186,9 @@ export default {
                 name,
                 startDate,
                 expireDate,
-                project: { imageUrl, detail }
+                imageUrl,
+                detail
+                // project: { imageUrl, detail }
             } = this.params;
             const data = {
                 name,

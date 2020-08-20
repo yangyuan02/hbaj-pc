@@ -68,7 +68,7 @@ export default {
             var file = e.currentTarget.files[0];
             const info = this.info;
             var imageUpload = new ImageUpload(file, {
-                url: `/api/file/upload?fileName=${info.namecard}&relatedId=${info.id}&fileType=USER_AVATAR`,
+                url: `/api/file/upload?fileName=$default&relatedId=${info.id}&fileType=USER_AVATAR`,
                 fileKey: "file",
                 onUpload: result => {
                     if (result.suceeded >= 1) {
