@@ -21,7 +21,7 @@
                     >
                         <img
                             v-if="params.project.imageUrl && staticPath"
-                            :src="params.project.imageUrl"
+                            :src="globalConfig.imagePath + params.project.imageUrl"
                             class="avatar"
                         />
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -112,7 +112,7 @@ export default {
             drawerIntro: state => state.toolbarStore.drawerIntro
         }),
         uploadUrl() {
-            const url = `/api/file/upload?fileName=${this.params.name}&relatedId=${this.$route.params.projectId}&fileType=PROJECT_IMAGE`;
+            const url = `/api/file/upload?fileName=default&relatedId=${this.$route.params.projectId}&fileType=PROJECT_IMAGE`;
             return url;
         }
     },
@@ -162,7 +162,7 @@ export default {
         },
         handleAvatarSuccess(res, file) {
             this.staticPath = res.data.path;
-            this.params.project.imageUrl = globalConfig.imagePath + res.data.path;
+            this.params.project.imageUrl = res.data.path;
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === "image/jpeg";
