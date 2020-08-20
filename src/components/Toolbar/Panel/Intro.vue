@@ -154,7 +154,7 @@ export default {
                 if (res.suceeded) {
                     this.params = res.data;
                     this.staticPath = res.data.project.imageUrl;
-                    this.params.project.imageUrl = globalConfig.imagePath + this.staticPath;
+                    this.params.project.imageUrl = this.staticPath;
                     console.log(res, "taskId", this.loading);
                 } else {
                 }
