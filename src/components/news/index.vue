@@ -6,7 +6,7 @@
  * @Description: 
  -->
 <template>
-    <div class="news-content-item" @click="toNewsDetail(item.id)">
+    <div class="news-content-item cursor" @click="toNewsDetail(item.id)">
         <div class="news-item-detail">
             <div class="news-item-title">
                 <div class="text">

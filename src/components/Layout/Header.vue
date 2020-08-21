@@ -8,8 +8,30 @@
                 <span>海宝安检</span>
             </div>
         </div>
-        <div class="crumbs">
-            <span>{{ crumbs }}</span>
+        <div class="header-right">
+            <div class="crumbs">
+                <span>{{ crumbs }}</span>
+            </div>
+            <div class="operate">
+                <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link">
+                        快速操作<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <template v-if="histroy.length > 0">
+                            <el-dropdown-item
+                                icon="el-icon-close"
+                                v-for="(item, index) in histroy"
+                                :key="index"
+                                :command="item"
+                                >{{ item.params.name }}</el-dropdown-item
+                            >
+                        </template>
+
+                        <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
         </div>
     </header>
 </template>
@@ -22,7 +44,32 @@ export default {
     computed: {
         crumbs: function() {
             return this.$route.meta.title;
+        },
+        histroy: function() {
+            return this.$store.state.histroyStore.histroy;
         }
+    },
+    methods: {
+        goToPedit({ params }) {
+            this.$router.push({
+                name: "panoEditor",
+                params
+            });
+        },
+        handleCommand(command) {
+            if (command === "logout") {
+                const clear = ["authorization", "userId", "user"];
+                clear.forEach(item => {
+                    window.localStorage.removeItem(item);
+                });
+                this.$router.push("/");
+            } else {
+                this.goToPedit(command);
+            }
+        }
+    },
+    mounted() {
+        console.log(this.histroy, "histroy");
     }
 };
 </script>
@@ -61,10 +108,19 @@ header {
             }
         }
     }
-    .crumbs {
-        margin-left: 20px;
-        span {
-            font-size: 16px;
+    .header-right {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        .crumbs {
+            margin-left: 20px;
+            span {
+                font-size: 16px;
+            }
+        }
+        .operate {
+            margin-right: 14px;
         }
     }
 }

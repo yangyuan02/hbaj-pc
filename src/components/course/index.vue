@@ -6,7 +6,7 @@
  * @Description: 
  -->
 <template>
-    <div class="course-content-item" @click="goDetail(item)">
+    <div class="course-content-item cursor" @click="goDetail(item)">
         <div
             class="course-item-thumb ui-lazyLoad-pic"
             v-lazy
@@ -54,14 +54,20 @@ export default {
         }
     },
     methods: {
-        goDetail({ id }) {
+        goDetail({ id, name }) {
+            const params = {
+                taskId: "0",
+                projectId: id,
+                from: "2",
+                name
+            };
             this.$router.push({
                 name: "panoEditor",
-                params: {
-                    taskId: "0",
-                    projectId: id,
-                    from: "2"
-                }
+                params
+            });
+            this.$store.commit("SETHISTROY", {
+                path: `0/${id}/1`,
+                params
             });
         }
     }
