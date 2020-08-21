@@ -7,7 +7,10 @@
                 <div class="person-box">
                     <div class="role common" v-for="(item, index) in roleList" :key="index">
                         <div class="thumb">
-                            <img :src="globalConfig.imagePath + item.enterpriseAvatar" alt="" />
+                            <img
+                                src="https://msa_pc.vr2shipping.com/pano/static/role/cmsalogo.png"
+                                alt=""
+                            />
                         </div>
                         <div class="name">
                             <span>{{ item.name }}</span>
@@ -22,7 +25,10 @@
                         :key="index"
                     >
                         <div class="thumb">
-                            <img :src="globalConfig.imagePath + item.avatar" alt="" />
+                            <img
+                                src="https://msa_pc.vr2shipping.com/pano/static/role/cmsalogo.png"
+                                alt=""
+                            />
                         </div>
                         <div class="name">
                             <span>{{ item.name }}</span>
