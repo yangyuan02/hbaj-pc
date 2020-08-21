@@ -25,7 +25,7 @@
                         class="item"
                         v-for="(item, index) in attachmentList"
                         :key="index"
-                        @click="select(index)"
+                        @click="select(index, item)"
                         :class="{ active: index === currentIndex }"
                     >
                         <!-- <div class="link" @click="editOpenEditAttachmentName(item)">
@@ -116,12 +116,13 @@ export default {
         }
     },
     methods: {
-        select(index) {
+        select(index, data) {
             console.log("111");
             if (this.isUpDown) {
                 // bug
                 return false;
             }
+            this.loadpanoscene(data);
             this.currentIndex = index;
         },
         handleClose(done) {

@@ -250,9 +250,10 @@ export default {
                             border-radius: 0.1rem;
                             margin-left: 0.16rem;
                             padding: 0.1rem;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: space-between;
+                            // display: flex;
+                            // flex-wrap: wrap;
+                            // justify-content: space-between;
+
                             .item {
                                 width: 1.28rem;
                                 height: 0.4rem;
@@ -261,6 +262,8 @@ export default {
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
+                                float: left;
+                                margin-left: 10px;
                                 span {
                                     color: #fff;
                                     font-size: 0.24rem;

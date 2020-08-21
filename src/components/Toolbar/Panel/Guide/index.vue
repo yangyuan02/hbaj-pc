@@ -100,6 +100,8 @@ import editSceneDialog from "./editGuide";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
+import Bus from "@/components/bus/index.js";
+
 export default {
     name: "Attachment",
     data() {
@@ -283,7 +285,16 @@ export default {
         openHotspotConent(data) {
             this.currentItem = data;
             this.shows.isOpenHotspotConent = true;
+        },
+        initBus() {
+            Bus.$on("updetaSuccess", () => {
+                console.log("bus");
+                this.getAttachmentList();
+            });
         }
+    },
+    mounted() {
+        this.initBus();
     }
 };
 </script>

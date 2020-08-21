@@ -106,7 +106,8 @@ export default {
         position: absolute;
         top: 0;
         right: 46px;
-        overflow: hidden;
+        // overflow: hidden;
+        overflow-y: scroll;
         .common {
             h2 {
                 font-size: 18px;

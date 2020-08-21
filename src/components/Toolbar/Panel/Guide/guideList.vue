@@ -81,6 +81,7 @@ import { mapState } from "vuex";
 // import editSceneDialog from "./editScene";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
+import Bus from "@/components/bus/index.js";
 
 export default {
     name: "Attachment",
@@ -247,6 +248,7 @@ export default {
                 if (res.suceeded) {
                     this.getAttachmentList();
                     window.loadpanoscene && window.loadpanoscene(newData.id, newData.code);
+                    Bus.$emit("updetaSuccess");
                     this.$message({
                         type: "success",
                         message: "更新成功!"
