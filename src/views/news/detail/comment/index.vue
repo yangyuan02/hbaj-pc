@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment_list">
-            <CommentItem v-for="(item, index) in list" :key="index"></CommentItem>
+            <CommentItem v-for="(item, index) in list" :key="index" :item="item"></CommentItem>
         </div>
     </div>
 </template>
@@ -23,18 +23,15 @@ export default {
         getComment() {
             this.loading = true;
             const { id } = this.$route.params;
-            comment(
-                {
-                    type: "GET",
-                    data: {
-                        page: 1,
-                        size: 10000,
-                        relatedId: id,
-                        type: "NEWS"
-                    }
-                },
-                "list"
-            ).then(res => {
+            comment({
+                type: "GET",
+                data: {
+                    page: 1,
+                    size: 10000,
+                    relatedId: id,
+                    type: "NEWS"
+                }
+            }).then(res => {
                 if (res.suceeded) {
                     this.loading = false;
                     const { content } = res.data;

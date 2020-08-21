@@ -1,19 +1,18 @@
 <template>
     <div class="item_comment">
         <div class="user_name">
-            <span>用户123</span>
+            <span>{{ item.userName }}</span>
         </div>
         <div class="comment_content">
             <p class="ellipsisLineTwo">
-                航运公司对网络安全的管理还在萌芽期，强烈建议所有公司根据自身的需求，在NIST 或者BIMCO
-                网络安全框架下 的识别、保护、检测、响应和恢复五个功能上开始着手进行整改
+                {{ item.content }}
             </p>
         </div>
         <div class="info">
             <div class="date">
-                <span>今天：16：05</span>
+                <span>{{ item.createTime | formaData }}</span>
             </div>
-            <div class="like_content">
+            <!-- <div class="like_content">
                 <div class="like">
                     <i class="iconfont icondianzan"></i>
                     <span>20</span>
@@ -21,7 +20,7 @@
                 <div class="reply">
                     <span>回复</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -30,6 +29,12 @@
 export default {
     data() {
         return {};
+    },
+    props: {
+        item: {
+            type: Object,
+            default: {}
+        }
     }
 };
 </script>
