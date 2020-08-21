@@ -99,8 +99,8 @@ export default {
                     detail: "", // 课件简介
                     imageUrl: "" // 图片
                 },
-                startDate: "", // 任务开始时间
-                expireDate: "", // 任务结束时间
+                startDate: new Date(), // 任务开始时间
+                expireDate: new Date(), // 任务结束时间
                 name: "" // 课件标题
             },
             isUpload: false, // 是否显示上传按钮
@@ -129,6 +129,9 @@ export default {
     },
     methods: {
         formaData(dateTime) {
+            if (!dateTime) {
+                return;
+            }
             var date = new Date(dateTime); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
             var year = date.getFullYear(),
                 month = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -157,9 +160,27 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.params = res.data;
+                    // this.params.startDate = 1598716800000;
                     this.staticPath = res.data.imageUrl;
                     this.params.imageUrl = this.staticPath;
+                    this.getTask();
                 } else {
+                }
+            });
+        },
+        getTask() {
+            const taskId = this.$route.params.taskId;
+            // 通过任务id获取项目的有关信息
+            taskDetail(
+                {
+                    type: "GET"
+                },
+                taskId
+            ).then(res => {
+                if (res.suceeded) {
+                    const { startDate, expireDate } = res.data;
+                    this.$set(this.params, "startDate", startDate);
+                    this.$set(this.params, "expireDate", expireDate);
                 }
             });
         },
