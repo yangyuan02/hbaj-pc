@@ -193,6 +193,11 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.attachmentList = res.data || [];
+                    const currentIndex = this.currentIndex;
+                    if (this.attachmentList[currentIndex]) {
+                        this.editOpenEditAttachmentName(this.attachmentList[currentIndex]);
+                    }
+
                     console.log(res.data, "attach");
                 } else {
                 }
@@ -288,7 +293,6 @@ export default {
         },
         initBus() {
             Bus.$on("updetaSuccess", () => {
-                console.log("bus");
                 this.getAttachmentList();
             });
         }

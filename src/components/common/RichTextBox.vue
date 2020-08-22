@@ -58,12 +58,7 @@ export default {
                     // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
 
                     // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-                    var url = "";
-                    if (process.env.NODE_ENV === "development") {
-                        url = globalConfig.imagePath + result.data.path;
-                    } else {
-                        url = result.data.path;
-                    }
+                    var url = globalConfig.imagePath + result.data.path;
 
                     insertImg(url);
 

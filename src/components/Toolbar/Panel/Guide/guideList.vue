@@ -248,6 +248,7 @@ export default {
                 if (res.suceeded) {
                     this.getAttachmentList();
                     window.loadpanoscene && window.loadpanoscene(newData.id, newData.code);
+                    this.currentIndex = null;
                     Bus.$emit("updetaSuccess");
                     this.$message({
                         type: "success",
