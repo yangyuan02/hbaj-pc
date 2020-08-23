@@ -111,12 +111,13 @@ export default {
                             this.isLoginAjax = true;
                             this.$store.commit("TOGGLE_LOGIN");
                             // this.isLoginAjax = false;
-                            if (window.fromToPage) {
-                                this.$router.push({ path: window.fromToPage });
-                            }
+                            // if (window.fromToPage) {
+                            //     this.$router.push({ path: window.fromToPage });
+                            // }
                             this.$message.success("登录成功");
                             this.getUserDetail();
                             this.getMessageDetail();
+                            window.location.href = "/";
                         } else {
                             res.message && this.$message.error(res.message);
                         }

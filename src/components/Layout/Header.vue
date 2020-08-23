@@ -28,7 +28,9 @@
                             >
                         </template>
 
-                        <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+                        <el-dropdown-item divided command="logout" v-if="isLogin"
+                            >退出登录</el-dropdown-item
+                        >
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -47,6 +49,9 @@ export default {
         },
         histroy: function() {
             return this.$store.state.histroyStore.histroy;
+        },
+        isLogin: function() {
+            return window.localStorage.getItem("authorization");
         }
     },
     methods: {
@@ -62,7 +67,8 @@ export default {
                 clear.forEach(item => {
                     window.localStorage.removeItem(item);
                 });
-                this.$router.push("/");
+                window.location.href = "/";
+                // this.$router.push("/");
             } else {
                 this.goToPedit(command);
             }

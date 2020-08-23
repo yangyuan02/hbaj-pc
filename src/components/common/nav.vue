@@ -57,11 +57,12 @@ export default {
     },
     computed: {
         listNav: function() {
-            return (this.modulesList || []).map(item => ({
-                ...item,
-                ...this.list.find(k => k.title === item.name)
-            }));
-            // .sort((a, b) => a.sort - b.sort);
+            return (this.modulesList || [])
+                .map(item => ({
+                    ...item,
+                    ...this.list.find(k => k.title === item.name)
+                }))
+                .sort((a, b) => a.sort - b.sort);
         }
     },
     methods: {
