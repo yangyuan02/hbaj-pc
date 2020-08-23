@@ -1,5 +1,5 @@
 <template>
-    <div class="message_container">
+    <div class="message_container myPerson">
         <div class="message_info" v-loading="loading">
             <Title title="用户中心" :isMore="false"></Title>
             <div class="message_list">
@@ -138,7 +138,8 @@ export default {
 </script>
 
 <style lang="less">
-.message_container {
+.message_container,
+.myPerson {
     display: flex;
     height: 100%;
     overflow: hidden;

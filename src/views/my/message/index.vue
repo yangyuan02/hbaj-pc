@@ -116,10 +116,24 @@ export default {
     height: 100%;
     overflow: hidden;
     .message_info {
-        width: 363px;
+        // width: 363px;
         .message_list {
             overflow-y: scroll;
             height: calc(100% - 55px);
+            &::-webkit-scrollbar {
+                width: 4px;
+                /*height: 4px;*/
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                background: rgba(0, 0, 0, 0.2);
+            }
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 0;
+                background: rgba(0, 0, 0, 0.1);
+            }
         }
     }
     .message_right {
