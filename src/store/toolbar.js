@@ -11,6 +11,7 @@ const state = {
     drawerTrack: false, // 快速通道
     openScene: false, // 场景热点列表
     id: "", // 场景热点列表id
+    code: "", // 场景热点列表code
     sceneCode: "",
     openGuideScene: false, // 引导列表-场景列表
     GuideData: {}, // 引导脚本列表当前选择
@@ -21,7 +22,7 @@ const mutations = {
     TOGGLE_DRAWER(state, type) {
         state[type] = !state[type];
     },
-    SETSCENELIST(state, id, code) {
+    SETSCENELIST(state, { id, code }) {
         state["openScene"] = true;
         state["id"] = id;
         state["code"] = code;

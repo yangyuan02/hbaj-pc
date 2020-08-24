@@ -163,6 +163,7 @@ aside {
             }
             .name {
                 margin: 0 auto;
+                margin-top: 15px;
                 text-align: center;
                 font-size: 20px;
                 font-family: MicrosoftYaHei;

@@ -37,8 +37,10 @@
                         value-format="timestamp"
                     >
                     </el-date-picker> -->
-                    <span
-                        >{{ formaData(params.startDate) }}-{{ formaData(params.expireDate) }}</span
+                    <span style="font-weight: bold;"
+                        >{{ formaData(params.startDate) }}---{{
+                            formaData(params.expireDate)
+                        }}</span
                     >
                 </el-form-item>
                 <!-- <el-form-item label="发起时间">
@@ -70,7 +72,7 @@
                 <el-form-item label="课件简介" class="intro_textarea">
                     <el-input
                         type="textarea"
-                        :rows="5"
+                        :rows="7"
                         placeholder="请输入内容"
                         v-model="params.detail"
                         class="w100"

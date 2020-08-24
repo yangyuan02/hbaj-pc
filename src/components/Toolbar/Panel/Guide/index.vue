@@ -16,7 +16,7 @@
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span style="width:13%">播放</span>
+                    <span style="width:14%">播放</span>
                     <span style="width:170px">概要</span>
                     <span>操作</span>
                 </div>

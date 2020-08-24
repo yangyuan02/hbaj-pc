@@ -15,7 +15,7 @@
             </div>
             <div class="attachment_list">
                 <div class="attachment-header">
-                    <span style="width:13%">详情</span>
+                    <span style="width:14%">详情</span>
                     <span style="width:170px">课件参考</span>
                     <span>操作</span>
                 </div>

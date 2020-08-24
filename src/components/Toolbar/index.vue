@@ -114,8 +114,8 @@ export default {
     padding-top: 30px;
     position: absolute;
     right: 0;
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
     .item-toolbar {
         width: 100%;
         display: flex;

@@ -190,7 +190,10 @@ export default {
             hotspot({ type: "post", data }).then(res => {
                 if (res.suceeded) {
                     const id = this.$store.state.toolbarStore.id;
+                    const code = this.$store.state.toolbarStore.code;
+                    console.log(this.$store.state.toolbarStore, "toolbar");
                     this.getsceneList(id);
+                    window.loadpanoscene && window.loadpanoscene(id, code);
                     this.$message({
                         type: "success",
                         message: "新增成功!"
