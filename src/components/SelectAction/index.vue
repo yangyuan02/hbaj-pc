@@ -9,7 +9,7 @@
                     <li
                         v-for="(item, index) in list"
                         :key="index"
-                        @click="select(globalConfig.imagePath + item, index)"
+                        @click="select(item, index)"
                         class="ui-lazyLoad-pic"
                         :class="{ active: index === currentIndex }"
                         v-skeleton="globalConfig.imagePath + item"

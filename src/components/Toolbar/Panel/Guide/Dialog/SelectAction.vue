@@ -13,7 +13,7 @@
                 placeholder="图片描述"
                 title="人物或动画形象选择"
                 :list="guideHotspotImage"
-                :onSelect="url => onSelect('img1', url)"
+                :onSelect="url => onSelect('img1', url, item)"
             ></SelectAction>
             <SelectAction
                 placeholder="动作描述"
@@ -31,7 +31,7 @@
 
 <script>
 import SelectAction from "@/components/SelectAction";
-import { home } from "@/model/api";
+import { home, hotspotContent } from "@/model/api";
 
 import flashaction from "../../images/action/flashaction.png";
 import jumpaction from "../../images/action/jumpaction.png";
@@ -53,6 +53,14 @@ export default {
         onConfirm: {
             type: Function,
             default: () => {}
+        },
+        id: {
+            type: [String, Number],
+            default: ""
+        },
+        editData: {
+            type: Object,
+            default: {}
         }
     },
     components: {
@@ -74,8 +82,28 @@ export default {
                 swingaction,
                 upaction,
                 yrotateaction
-            ]
+            ],
+            params: {
+                // 参数
+                content: "", // 内容
+                extra: "", // 附件url
+                hotspotId: 0, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "IMAGE" // 类型
+            }
         };
+    },
+    watch: {
+        id(newVal) {
+            this.params.hotspotId = newVal;
+        },
+        editData(newVal) {
+            this.$nextTick(() => {
+                this.params = { ...newVal };
+            });
+        }
     },
     methods: {
         open() {
@@ -87,6 +115,7 @@ export default {
         save() {
             this.close();
             this.onConfirm && this.onConfirm(this.checkedData);
+            this.editImages();
         },
         getActionList() {
             this.loading = true;
@@ -98,8 +127,25 @@ export default {
                 console.log(res);
             });
         },
-        onSelect(type, url) {
+        onSelect(type, url, item) {
             this.checkedData[type] = url;
+        },
+        editImages() {
+            // 修改文本
+            this.params.extra = this.checkedData.img1;
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
         }
     }
 };

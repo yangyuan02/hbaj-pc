@@ -16,10 +16,14 @@
                     <div class="info">
                         <div
                             class="action "
-                            @click="isOpenAction = true"
+                            @click="openAction"
                             :class="{ 'ui-lazyLoad-pic': !selectData.img1 }"
                         >
-                            <img :src="selectData.img1" alt="" v-if="selectData.img1" />
+                            <img
+                                :src="globalConfig.imagePath + selectData.img1"
+                                alt=""
+                                v-if="selectData.img1"
+                            />
                         </div>
                         <div class="digest">
                             <div class="title">
@@ -57,7 +61,12 @@
                 </div>
             </div>
         </main>
-        <SelectAction :visible.sync="isOpenAction" :onConfirm="onConfirm"></SelectAction>
+        <SelectAction
+            :visible.sync="isOpenAction"
+            :onConfirm="onConfirm"
+            :id="attchmentId"
+            :editData="editData"
+        ></SelectAction>
         <div slot="footer">
             <el-button @click="close">关闭</el-button>
             <!-- <el-button type="primary" :loading="loading.save" @click="save">保存</el-button> -->
@@ -151,6 +160,11 @@ export default {
             Object.assign(this.selectData, data);
             console.log(data);
         },
+        openAction() {
+            this.attchmentId = this.data.id;
+            this.editData = this.IMAGE;
+            this.isOpenAction = true;
+        },
         audition() {
             if (!this.AUDIO.content) {
                 return this.$message.error("请输入文字");
@@ -196,7 +210,7 @@ export default {
                     }
                     if (type === "IMAGE" && res.data && res.data[0]) {
                         this.IMAGE = res.data[0];
-                        this.selectData.img1 = globalConfig.imagePath + this.IMAGE.extra;
+                        this.selectData.img1 = this.IMAGE.extra;
                     }
                 }
             });
