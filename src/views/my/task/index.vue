@@ -120,7 +120,7 @@ export default {
     overflow: hidden;
 
     .message_info {
-        width: 363px;
+        // width: 363px;
         padding-bottom: 5px;
         .task_list {
             margin-top: 20px;

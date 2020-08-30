@@ -119,6 +119,8 @@ export default {
         width: 70px;
         height: 70px;
         margin-left: 11px;
+        flex-shrink: 0;
+
         // background: #f0f0f0;
         img {
             width: 100%;

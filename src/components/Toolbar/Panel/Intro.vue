@@ -82,6 +82,9 @@
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit" class="w100">保存</el-button>
                 </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="audit" class="w100">审核</el-button>
+                </el-form-item>
             </el-form>
         </div>
     </div>
@@ -236,6 +239,14 @@ export default {
                         this.$message.success("操作成功");
                     }
                 });
+            });
+        },
+        audit() {
+            const projectId = this.$route.params.projectId;
+            projectDetail({ type: "PATCH" }, `${projectId}/submitVerify`).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                }
             });
         }
     }
