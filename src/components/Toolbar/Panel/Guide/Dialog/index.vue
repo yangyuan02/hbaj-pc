@@ -51,10 +51,7 @@
                     </div>
                     <div class="operator">
                         <i class="iconfont icontubiaoweb-34 cursor" @click="audition"></i>
-                        <i
-                            class="iconfont icontubiaoweb-33 cursor"
-                            @click="shows.isOpenVideoDialog = true"
-                        ></i>
+                        <i class="iconfont icontubiaoweb-33 cursor" @click="addAudio"></i>
                         <i class="iconfont icontubiaoweb-27 cursor" @click="deleteItem"></i>
                     </div>
                 </div>
@@ -172,6 +169,12 @@ export default {
                 this.shows.isOpenAudition = true;
                 console.log("生成成功", res);
             });
+        },
+        addAudio() {
+            if (!this.textContent) {
+                return this.$message.error("请输入文字");
+            }
+            this.shows.isOpenVideoDialog = true;
         },
         onConfirmAudio(src) {
             // 试听之后确定回调

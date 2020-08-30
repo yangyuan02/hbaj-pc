@@ -16,9 +16,9 @@
                 :onSelect="url => onSelect('img1', url)"
             ></SelectAction>
             <SelectAction
-                placeholder="图片描述"
-                title="人物或动画形象选择"
-                :list="guideHotspotImage"
+                placeholder="动作描述"
+                title="动作"
+                :list="actionList"
                 :onSelect="url => onSelect('img2', url)"
             ></SelectAction>
         </main>
@@ -32,6 +32,17 @@
 <script>
 import SelectAction from "@/components/SelectAction";
 import { home } from "@/model/api";
+
+import flashaction from "../../images/action/flashaction.png";
+import jumpaction from "../../images/action/jumpaction.png";
+import leftaction from "../../images/action/flashaction.png";
+import narrowaction from "../../images/action/flashaction.png";
+import none from "../../images/action/flashaction.png";
+import rightaction from "../../images/action/flashaction.png";
+import rotateaction from "../../images/action/flashaction.png";
+import swingaction from "../../images/action/flashaction.png";
+import upaction from "../../images/action/flashaction.png";
+import yrotateaction from "../../images/action/flashaction.png";
 
 export default {
     props: {
@@ -51,7 +62,19 @@ export default {
         return {
             guideHotspotImage: [],
             loading: false,
-            checkedData: {}
+            checkedData: {},
+            actionList: [
+                flashaction,
+                jumpaction,
+                leftaction,
+                narrowaction,
+                none,
+                rightaction,
+                rotateaction,
+                swingaction,
+                upaction,
+                yrotateaction
+            ]
         };
     },
     methods: {

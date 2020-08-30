@@ -19,6 +19,7 @@ import BgNav from "@/components/common/BgNav";
 
 import { task } from "@/model/api";
 import utils from "@/widget/utils";
+import store from "@/widget/store";
 
 export default {
     data() {
@@ -42,11 +43,13 @@ export default {
         getTaskList() {
             const { pageIndex } = this;
             this.loading = true;
+            const userId = store.get("userId", "local");
             task({
                 type: "GET",
                 data: {
                     page: pageIndex,
-                    size: 10
+                    size: 10,
+                    userId
                 }
             }).then(res => {
                 if (res.suceeded) {

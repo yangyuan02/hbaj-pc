@@ -99,7 +99,7 @@ import HotspotConent from "./Dialog/";
 
 import editSceneDialog from "./editGuide";
 
-import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
+import { hotspot, hotspotDetail, projectDetail, hotspotContentDetail } from "@/model/api";
 
 import Bus from "@/components/bus/index.js";
 
@@ -278,6 +278,38 @@ export default {
                     type: "GUIDE",
                     title: "请修改脚本介绍"
                 }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.defualtAddContent(res.data.id);
+                }
+            });
+        },
+        defualtAddContent(hotspotId) {
+            // 默认添加
+            const image = {
+                // 参数
+                content: "upaction", // 内容
+                extra: "/static/app/gudiance/up.png", // 附件url
+                hotspotId, //
+                title: "引导标识", // 标题
+                type: "IMAGE" // 类型
+            };
+            const audio = {
+                // 参数
+                content: "请添加语音说明", // 内容
+                extra: "/static/app/sound/defaultguide_001.wav", // 默认值
+                hotspotId, //
+                title: "引导标识", // 标题
+                type: "AUDIO" // 类型
+            };
+            const hotspotContentList = [image, audio];
+
+            const params = {
+                hotspotContentList
+            };
+            hotspotContentDetail({
+                type: "post",
+                data: params
             }).then(res => {
                 if (res.suceeded) {
                     this.$message({
