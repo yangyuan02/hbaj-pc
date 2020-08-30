@@ -270,7 +270,11 @@ export default {
                                 justify-content: center;
                                 align-items: center;
                                 float: left;
-                                margin-left: 10px;
+                                margin-right: 14px;
+                                margin-bottom: 10px;
+                                &:nth-child(3n) {
+                                    margin-right: 0px;
+                                }
                                 span {
                                     color: #fff;
                                     font-size: 0.24rem;

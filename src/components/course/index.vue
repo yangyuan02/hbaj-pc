@@ -17,7 +17,7 @@
         <div class="course-item-detail">
             <div class="course-item-title">
                 <div class="text">
-                    <p>{{ item.name }}</p>
+                    <p class="ellipsis2">{{ item.name }}</p>
                 </div>
                 <div class="status">
                     <span>{{ item.publicFlg | formPublicFlg }}</span>
@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="course-item-source">
-                <div class="organization">
+                <div class="organization" style="margin-right:10px">
                     <!-- <span>发布机构:</span> -->
                     <span>{{ item.oriEnterpriseName }}</span>
                 </div>
