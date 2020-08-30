@@ -18,9 +18,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="desc">
-                <el-input type="textarea" :rows="3" :placeholder="placeholder"></el-input>
-            </div>
         </div>
     </div>
 </template>

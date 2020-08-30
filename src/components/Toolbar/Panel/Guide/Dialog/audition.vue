@@ -5,16 +5,19 @@
         :close-on-click-modal="false"
         @open="open"
         @close="close"
-        width="680px"
+        width="480px"
         append-to-body
-        class="addGuidedialog"
+        class="audition"
         top="0vh"
     >
         <main>
-            <AudioHban
-                src="static/enterprise/null/hotspot/HOTSPOT_AUDIO_null_1595746249823_mydream.mp3"
-                title="试听音乐"
-            ></AudioHban>
+            <audio
+                id="audioPlayerGuide"
+                :src="src"
+                controlsList="nodownload"
+                controls="controls"
+                ref="audio"
+            ></audio>
         </main>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
@@ -24,19 +27,20 @@
 </template>
 
 <script>
-import SelectAction from "./SelectAction.vue";
-import AudioHban from "@/components/common/Audio";
-
 export default {
     props: {
         visible: {
             type: Boolean,
             default: false
+        },
+        src: {
+            type: String,
+            default: ""
+        },
+        onConfirmAudio: {
+            type: Function,
+            default: () => {}
         }
-    },
-    components: {
-        SelectAction,
-        AudioHban
     },
     data() {
         return {};
@@ -49,15 +53,25 @@ export default {
             this.$emit("update:visible", false);
         },
         save() {
-            this.$refs["form"].validate(valid => {
-                if (valid) {
-                    this.addAudio();
-                }
-            });
-            console.log("保存");
+            this.onConfirmAudio && this.onConfirmAudio(this.src);
+            this.close();
         }
     }
 };
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.audition {
+    /deep/.el-dialog {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .el-dialog__body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+</style>

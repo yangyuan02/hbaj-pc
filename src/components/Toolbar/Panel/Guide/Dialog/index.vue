@@ -26,29 +26,31 @@
                                 <span>简介</span>
                             </div>
                             <div class="text">
-                                <p>文本附件这里是一段文本录入</p>
+                                <p>{{ data.title }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="content">
-                        <el-input type="textarea" :rows="6" placeholder="内容"></el-input>
+                        <el-input
+                            type="textarea"
+                            :rows="6"
+                            placeholder="内容"
+                            v-model="textContent"
+                        ></el-input>
                     </div>
                 </div>
                 <div class="hostcontent_right">
                     <div class="hostcontent_audio">
                         <audio
                             id="audioPlayerGuide"
-                            src="http://pano.vr2shipping.com/static/enterprise/null/hotspot/HOTSPOT_AUDIO_null_1595746249823_mydream.mp3"
+                            :src="textSrc"
                             controlsList="nodownload"
                             controls="controls"
                             ref="audio"
                         ></audio>
                     </div>
                     <div class="operator">
-                        <i
-                            class="iconfont icontubiaoweb-34 cursor"
-                            @click="shows.isOpenAudition = true"
-                        ></i>
+                        <i class="iconfont icontubiaoweb-34 cursor" @click="audition"></i>
                         <i
                             class="iconfont icontubiaoweb-33 cursor"
                             @click="shows.isOpenVideoDialog = true"
@@ -70,13 +72,17 @@
             :onSuccess="getAttachmentVideo"
             :editType="editType"
         ></VideoDialog>
-        <Audition :visible.sync="shows.isOpenAudition"></Audition>
+        <Audition
+            :visible.sync="shows.isOpenAudition"
+            :src="textTransform"
+            :onConfirmAudio="onConfirmAudio"
+        ></Audition>
     </el-dialog>
 </template>
 
 <script>
 import SelectAction from "./SelectAction.vue";
-import VideoDialog from "@/components/Toolbar/Dialog/VideoDialog";
+import VideoDialog from "./VideoDialog";
 import Audition from "./audition";
 
 export default {
@@ -84,6 +90,10 @@ export default {
         visible: {
             type: Boolean,
             default: false
+        },
+        data: {
+            type: Object,
+            default: {}
         }
     },
     components: {
@@ -93,6 +103,9 @@ export default {
     },
     data() {
         return {
+            textContent: "",
+            textTransform: "", // 生成的url
+            textSrc: "", // 确定之后的url
             shows: {
                 isOpenVideoDialog: false,
                 isOpenAudition: false
@@ -142,6 +155,20 @@ export default {
         onConfirm(data) {
             Object.assign(this.selectData, data);
             console.log(data);
+        },
+        audition() {
+            if (!this.textContent) {
+                return this.$message.error("请输入文字");
+            }
+            youdao(this.textContent).then(res => {
+                this.textTransform = res;
+                this.shows.isOpenAudition = true;
+                console.log("生成成功", res);
+            });
+        },
+        onConfirmAudio(src) {
+            // 试听之后确定回调
+            this.textSrc = src;
         }
     }
 };
