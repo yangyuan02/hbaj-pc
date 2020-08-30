@@ -289,7 +289,7 @@ export default {
             const image = {
                 // 参数
                 content: "upaction", // 内容
-                extra: "/static/app/gudiance/up.png", // 附件url
+                extra: "static/app/gudiance/up.png", // 附件url
                 hotspotId, //
                 title: "引导标识", // 标题
                 type: "IMAGE" // 类型
@@ -297,7 +297,7 @@ export default {
             const audio = {
                 // 参数
                 content: "请添加语音说明", // 内容
-                extra: "/static/app/sound/defaultguide_001.wav", // 默认值
+                extra: "static/app/sound/defaultguide_001.wav", // 默认值
                 hotspotId, //
                 title: "引导标识", // 标题
                 type: "AUDIO" // 类型

@@ -7,7 +7,7 @@
         @close="close"
         width="580px"
         append-to-body
-        class="addVideodialog"
+        class="addAudiodialog"
         top="0vh"
     >
         <div v-loading="loading.detail">
@@ -30,12 +30,13 @@
                         <div slot="tip" class="el-upload__tip">只能上传音频文件</div>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="描述" prop="title">
+                <el-form-item label="描述" prop="content" class="title">
                     <el-input
                         type="textarea"
                         :rows="9"
                         placeholder="请输入描述"
-                        v-model="params.title"
+                        v-model="params.content"
+                        disabled
                         style="margin-left: 0px;"
                     >
                     </el-input>
@@ -90,7 +91,7 @@ export default {
                 this.params = { ...newVal };
                 this.fileList = [
                     {
-                        name: "视频内容",
+                        name: "音频内容",
                         url: newVal.extra
                     }
                 ];
@@ -117,11 +118,12 @@ export default {
                 // id: 0,
                 // seq: 0, // 排序
                 title: "", // 标题
-                type: "VIDEO" // 类型
+                type: "AUDIO" // 类型
             },
             rules: {
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
-                extra: [{ required: true, message: "请上传视频" }]
+                extra: [{ required: true, message: "请上传音频" }],
+                content: [{ required: true, message: "请输入内容", trigger: "blur" }]
             },
             fileList: [
                 // {
@@ -155,24 +157,6 @@ export default {
             console.log(res);
             this.params.extra = res.data.path;
         },
-        addAudio() {
-            // 新增音频内容
-            const hotspotContentList = [this.params];
-            const params = {
-                hotspotContentList
-            };
-            hotspotContentDetail({
-                type: "post",
-                data: params
-            }).then(res => {
-                if (res.suceeded) {
-                    this.$message.success("操作成功");
-                    this.$refs["form"].resetFields();
-                    this.close();
-                    this.onSuccess && this.onSuccess();
-                }
-            });
-        },
         editAudio() {
             // 修改
             hotspotContent(
@@ -194,7 +178,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.addVideodialog {
+.addAudiodialog {
     /deep/ .el-dialog {
         position: absolute;
         left: 50%;

@@ -35,7 +35,7 @@
                             type="textarea"
                             :rows="6"
                             placeholder="内容"
-                            v-model="textContent"
+                            v-model="AUDIO.content"
                         ></el-input>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="hostcontent_audio">
                         <audio
                             id="audioPlayerGuide"
-                            :src="textSrc"
+                            :src="globalConfig.imagePath + AUDIO.extra"
                             controlsList="nodownload"
                             controls="controls"
                             ref="audio"
@@ -59,16 +59,16 @@
         </main>
         <SelectAction :visible.sync="isOpenAction" :onConfirm="onConfirm"></SelectAction>
         <div slot="footer">
-            <el-button @click="close">取消</el-button>
-            <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
+            <el-button @click="close">关闭</el-button>
+            <!-- <el-button type="primary" :loading="loading.save" @click="save">保存</el-button> -->
         </div>
-        <VideoDialog
-            :visible.sync="shows.isOpenVideoDialog"
+        <AudioDialog
+            :visible.sync="shows.isOpenAudioDialog"
             :id="attchmentId"
             :editData="editData"
-            :onSuccess="getAttachmentVideo"
+            :onSuccess="getAttachmentAudio"
             :editType="editType"
-        ></VideoDialog>
+        ></AudioDialog>
         <Audition
             :visible.sync="shows.isOpenAudition"
             :src="textTransform"
@@ -79,7 +79,7 @@
 
 <script>
 import SelectAction from "./SelectAction.vue";
-import VideoDialog from "./VideoDialog";
+import AudioDialog from "./AudioDialog";
 import Audition from "./audition";
 import { hotspotContentDetail, hotspotContent } from "@/model/api";
 
@@ -96,7 +96,7 @@ export default {
     },
     components: {
         SelectAction,
-        VideoDialog,
+        AudioDialog,
         Audition
     },
     data() {
@@ -105,33 +105,22 @@ export default {
             textTransform: "", // 生成的url
             textSrc: "", // 确定之后的url
             shows: {
-                isOpenVideoDialog: false,
+                isOpenAudioDialog: false,
                 isOpenAudition: false
             },
             isOpenAction: false,
-            loading: {
-                save: false,
-                detail: false
-            },
             selectData: {
-                img1: "",
-                img2: ""
+                img1: ""
             },
-            params: {
-                // 参数
-                content: "", // 内容
-                // extra: "string", // 附件url
-                hotspotId: 0, // 附件id
-                // id: 0,
-                // seq: 0, // 排序
-                title: "", // 标题
-                type: "TEXT" // 类型
-            }
+            IMAGE: {},
+            AUDIO: {},
+            attchmentId: ""
         };
     },
     methods: {
         open() {
-            console.log("打开");
+            this.handerAttachment("IMAGE");
+            this.handerAttachment("AUDIO");
         },
         close() {
             this.$emit("update:visible", false);
@@ -147,7 +136,7 @@ export default {
             })
                 .then(() => {
                     this.textSrc = "";
-                    this.textContent = "";
+                    this.AUDIO.content = "";
                 })
                 .catch(() => {
                     this.$message({
@@ -161,61 +150,50 @@ export default {
             console.log(data);
         },
         audition() {
-            if (!this.textContent) {
+            if (!this.AUDIO.content) {
                 return this.$message.error("请输入文字");
             }
-            youdao(this.textContent).then(res => {
+            xunfeitts(this.AUDIO.content).then(res => {
                 this.textTransform = res;
                 this.shows.isOpenAudition = true;
                 console.log("生成成功", res);
             });
         },
         addAudio() {
-            if (!this.textContent) {
+            if (!this.AUDIO.content) {
                 return this.$message.error("请输入文字");
             }
-            this.shows.isOpenVideoDialog = true;
+            this.attchmentId = this.data.id;
+            this.editData = this.AUDIO;
+            this.editType = "audio";
+            this.shows.isOpenAudioDialog = true;
         },
         onConfirmAudio(src) {
             // 试听之后确定回调
             this.textSrc = src;
         },
-        add() {
-            // 新增文本内容
-            this.params.id = "";
-            this.params.content = "upaction";
-            this.params.hotspotId = this.data.id; // 列表中id
-            this.params.extra = this.textSrc;
-            this.params.title = "引导标识";
-            this.params.type = "IMAGE";
-            const hotspotContentList = [this.params];
-            const params = {
-                hotspotContentList
-            };
-            hotspotContentDetail({
-                type: "post",
-                data: params
-            }).then(res => {
-                if (res.suceeded) {
-                    this.$message.success("操作成功");
-                    this.close();
-                    this.onSuccess && this.onSuccess();
-                }
-            });
-        },
-        edit() {
-            // 修改文本
+        handerAttachment(type) {
+            // 获取具体的附件信息
             hotspotContent(
                 {
-                    type: "post",
-                    data: this.params
+                    type: "get",
+                    data: {
+                        hotspotId: this.data.id,
+                        type,
+                        size: 1000,
+                        page: 1
+                    }
                 },
-                this.params.id
+                "all"
             ).then(res => {
                 if (res.suceeded) {
-                    this.$message.success("操作成功");
-                    this.close();
-                    this.onSuccess && this.onSuccess();
+                    if (type === "AUDIO" && res.data && res.data[0]) {
+                        this.AUDIO = res.data[0];
+                    }
+                    if (type === "IMAGE" && res.data && res.data[0]) {
+                        this.IMAGE = res.data[0];
+                        this.selectData.img1 = globalConfig.imagePath + this.IMAGE.extra;
+                    }
                 }
             });
         }

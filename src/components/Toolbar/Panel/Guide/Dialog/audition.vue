@@ -13,7 +13,7 @@
         <main>
             <audio
                 id="audioPlayerGuide"
-                :src="src"
+                :src="globalConfig.imagePath + src"
                 controlsList="nodownload"
                 controls="controls"
                 ref="audio"
