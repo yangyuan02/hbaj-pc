@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { hotspotContent } from "@/model/api";
+
 export default {
     props: {
         visible: {
@@ -40,10 +42,49 @@ export default {
         onConfirmAudio: {
             type: Function,
             default: () => {}
+        },
+        id: {
+            type: [String, Number],
+            default: ""
+        },
+        onSuccess: {
+            type: Function,
+            default: () => {}
+        },
+        editData: {
+            type: Object,
+            default: {}
         }
     },
     data() {
-        return {};
+        return {
+            params: {
+                // 参数
+                content: "", // 内容
+                extra: "", // 附件url
+                hotspotId: 0, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "AUDIO" // 类型
+            }
+        };
+    },
+    watch: {
+        editData(newVal) {
+            this.$nextTick(() => {
+                this.params = { ...newVal };
+                this.fileList = [
+                    {
+                        name: "音频内容",
+                        url: newVal.extra
+                    }
+                ];
+            });
+        },
+        id(newVal) {
+            this.params.hotspotId = newVal;
+        }
     },
     methods: {
         open() {
@@ -54,7 +95,25 @@ export default {
         },
         save() {
             this.onConfirmAudio && this.onConfirmAudio(this.src);
+            this.editAudio();
             this.close();
+        },
+        editAudio() {
+            // 修改
+            this.params.extra = this.src;
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
         }
     }
 };

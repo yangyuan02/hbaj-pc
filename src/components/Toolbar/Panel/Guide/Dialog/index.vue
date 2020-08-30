@@ -73,6 +73,8 @@
             :visible.sync="shows.isOpenAudition"
             :src="textTransform"
             :onConfirmAudio="onConfirmAudio"
+            :id="attchmentId"
+            :editData="editData"
         ></Audition>
     </el-dialog>
 </template>
@@ -156,6 +158,8 @@ export default {
             xunfeitts(this.AUDIO.content).then(res => {
                 this.textTransform = res;
                 this.shows.isOpenAudition = true;
+                this.attchmentId = this.data.id;
+                this.editData = this.AUDIO;
                 console.log("生成成功", res);
             });
         },
