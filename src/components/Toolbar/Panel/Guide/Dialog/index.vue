@@ -75,7 +75,7 @@
             :visible.sync="shows.isOpenAudioDialog"
             :id="attchmentId"
             :editData="editData"
-            :onSuccess="getAttachmentAudio"
+            :onSuccess="onSuccess"
             :editType="editType"
         ></AudioDialog>
         <Audition
@@ -84,6 +84,7 @@
             :onConfirmAudio="onConfirmAudio"
             :id="attchmentId"
             :editData="editData"
+            :onSuccess="onSuccess"
         ></Audition>
     </el-dialog>
 </template>
@@ -159,6 +160,10 @@ export default {
         onConfirm(data) {
             Object.assign(this.selectData, data);
             console.log(data);
+        },
+        onSuccess(src) {
+            console.log(src, "src");
+            this.$set(this.AUDIO, "extra", src);
         },
         openAction() {
             this.attchmentId = this.data.id;

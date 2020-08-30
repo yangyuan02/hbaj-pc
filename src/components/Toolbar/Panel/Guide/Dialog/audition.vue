@@ -110,8 +110,8 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
+                    this.onSuccess && this.onSuccess(this.src);
                     this.close();
-                    this.onSuccess && this.onSuccess();
                 }
             });
         }
