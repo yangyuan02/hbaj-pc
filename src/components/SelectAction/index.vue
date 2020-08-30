@@ -9,10 +9,14 @@
                     <li
                         v-for="(item, index) in list"
                         :key="index"
-                        @click="select(item, index)"
+                        @click="select(item.src, index, item)"
                         class="ui-lazyLoad-pic"
                         :class="{ active: index === currentIndex }"
-                        v-skeleton="globalConfig.imagePath + item"
+                        v-skeleton="
+                            item.src.indexOf('/static/app') !== -1
+                                ? globalConfig.imagePath + item.src
+                                : item.src
+                        "
                     >
                         <!-- <img :src="globalConfig.imagePath + item" alt="" /> -->
                     </li>
@@ -40,6 +44,15 @@ export default {
         onSelect: {
             type: Function,
             default: () => {}
+        },
+        activeIndex: {
+            type: Number,
+            default: 0
+        }
+    },
+    watch: {
+        activeIndex: function(val) {
+            this.currentIndex = val;
         }
     },
     data() {
@@ -48,9 +61,14 @@ export default {
         };
     },
     methods: {
-        select(url, index) {
+        select(url, index, item) {
+            console.log(this.currentIndex, "currentIndex");
             this.currentIndex = index;
-            this.onSelect && this.onSelect(url);
+            if (item.src.indexOf("/static/app") !== -1) {
+                this.onSelect && this.onSelect(item.src);
+            } else {
+                this.onSelect && this.onSelect(item.desc);
+            }
         }
     }
 };
@@ -63,6 +81,7 @@ export default {
         width: 100%;
         text-align: center;
         height: 20px;
+        margin-bottom: 10px;
     }
     .select-body {
         .action_list {

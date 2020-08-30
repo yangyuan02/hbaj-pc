@@ -14,12 +14,14 @@
                 title="人物或动画形象选择"
                 :list="guideHotspotImage"
                 :onSelect="url => onSelect('img1', url, item)"
+                :activeIndex="actionImg1Index"
             ></SelectAction>
             <SelectAction
                 placeholder="动作描述"
                 title="动作"
                 :list="actionList"
                 :onSelect="url => onSelect('img2', url)"
+                :activeIndex="actionImg2Index"
             ></SelectAction>
         </main>
         <div slot="footer">
@@ -35,14 +37,14 @@ import { home, hotspotContent } from "@/model/api";
 
 import flashaction from "../../images/action/flashaction.png";
 import jumpaction from "../../images/action/jumpaction.png";
-import leftaction from "../../images/action/flashaction.png";
-import narrowaction from "../../images/action/flashaction.png";
-import none from "../../images/action/flashaction.png";
-import rightaction from "../../images/action/flashaction.png";
-import rotateaction from "../../images/action/flashaction.png";
-import swingaction from "../../images/action/flashaction.png";
-import upaction from "../../images/action/flashaction.png";
-import yrotateaction from "../../images/action/flashaction.png";
+import leftaction from "../../images/action/leftaction.png";
+import narrowaction from "../../images/action/narrowaction.png";
+import none from "../../images/action/none.png";
+import rightaction from "../../images/action/rightaction.png";
+import rotateaction from "../../images/action/rotateaction.png";
+import swingaction from "../../images/action/swingaction.png";
+import upaction from "../../images/action/upaction.png";
+import yrotateaction from "../../images/action/yrotateaction.png";
 
 export default {
     props: {
@@ -66,22 +68,30 @@ export default {
     components: {
         SelectAction
     },
+    computed: {
+        actionImg1Index: function() {
+            return this.guideHotspotImage.findIndex(item => item.src === this.params.extra);
+        },
+        actionImg2Index: function() {
+            return this.actionList.findIndex(item => item.desc === this.params.content);
+        }
+    },
     data() {
         return {
             guideHotspotImage: [],
             loading: false,
             checkedData: {},
             actionList: [
-                flashaction,
-                jumpaction,
-                leftaction,
-                narrowaction,
-                none,
-                rightaction,
-                rotateaction,
-                swingaction,
-                upaction,
-                yrotateaction
+                { src: flashaction, desc: "flashaction" },
+                { src: jumpaction, desc: "jumpaction" },
+                { src: leftaction, desc: "leftaction" },
+                { src: narrowaction, desc: "narrowaction" },
+                { src: none, desc: "none" },
+                { src: rightaction, desc: "rightaction" },
+                { src: rotateaction, desc: "rotateaction" },
+                { src: swingaction, desc: "swingaction" },
+                { src: upaction, desc: "upaction" },
+                { src: yrotateaction, desc: "yrotateaction" }
             ],
             params: {
                 // 参数
@@ -122,17 +132,22 @@ export default {
             home({ type: "get" }, "/pageInfo").then(res => {
                 if (res.suceeded) {
                     this.loading = false;
-                    this.guideHotspotImage = res.data.guideHotspotImage || [];
+                    this.guideHotspotImage = (res.data.guideHotspotImage || []).map(item => ({
+                        src: item,
+                        desc: ""
+                    }));
                 }
                 console.log(res);
             });
         },
         onSelect(type, url, item) {
+            console.log(url);
             this.checkedData[type] = url;
         },
         editImages() {
             // 修改文本
             this.params.extra = this.checkedData.img1;
+            this.params.content = this.checkedData.img2;
             hotspotContent(
                 {
                     type: "post",
