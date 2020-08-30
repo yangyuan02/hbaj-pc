@@ -84,6 +84,7 @@
 import SelectAction from "./SelectAction.vue";
 import VideoDialog from "./VideoDialog";
 import Audition from "./audition";
+import { hotspotContentDetail, hotspotContent } from "@/model/api";
 
 export default {
     props: {
@@ -118,6 +119,16 @@ export default {
             selectData: {
                 img1: "",
                 img2: ""
+            },
+            params: {
+                // 参数
+                content: "", // 内容
+                // extra: "string", // 附件url
+                hotspotId: 0, // 附件id
+                // id: 0,
+                // seq: 0, // 排序
+                title: "", // 标题
+                type: "TEXT" // 类型
             }
         };
     },
@@ -129,12 +140,7 @@ export default {
             this.$emit("update:visible", false);
         },
         save() {
-            this.$refs["form"].validate(valid => {
-                if (valid) {
-                    this.addAudio();
-                }
-            });
-            console.log("保存");
+            this.add();
         },
         deleteItem() {
             this.$confirm(`此操作文件, 是否继续?`, "提示", {
@@ -143,7 +149,8 @@ export default {
                 type: "warning"
             })
                 .then(() => {
-                    // this.delAttach(item.id);
+                    this.textSrc = "";
+                    this.textContent = "";
                 })
                 .catch(() => {
                     this.$message({
@@ -169,6 +176,45 @@ export default {
         onConfirmAudio(src) {
             // 试听之后确定回调
             this.textSrc = src;
+        },
+        add() {
+            // 新增文本内容
+            this.params.id = "";
+            this.params.content = "upaction";
+            this.params.hotspotId = this.data.id; // 列表中id
+            this.params.extra = this.textSrc;
+            this.params.title = "引导标识";
+            this.params.type = "IMAGE";
+            const hotspotContentList = [this.params];
+            const params = {
+                hotspotContentList
+            };
+            hotspotContentDetail({
+                type: "post",
+                data: params
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
+        },
+        edit() {
+            // 修改文本
+            hotspotContent(
+                {
+                    type: "post",
+                    data: this.params
+                },
+                this.params.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                    this.onSuccess && this.onSuccess();
+                }
+            });
         }
     }
 };

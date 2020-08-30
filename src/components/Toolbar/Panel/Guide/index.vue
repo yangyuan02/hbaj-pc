@@ -76,6 +76,7 @@
         <HotspotConent
             :visible.sync="shows.isOpenHotspotConent"
             :data="currentItem"
+            :onSuccess="getAttachmentList"
         ></HotspotConent>
 
         <!-- 修改附件弹窗 -->
