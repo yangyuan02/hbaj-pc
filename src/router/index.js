@@ -99,7 +99,7 @@ export default new Router({
             }
         },
         {
-            path: "/my/p_ditor/:taskId/:projectId/:from",
+            path: "/my/p_ditor/:taskId/:projectId/:from/:modules?",
             name: "panoEditor",
             component: () => import("@/views/my/panoEditor"),
             meta: {

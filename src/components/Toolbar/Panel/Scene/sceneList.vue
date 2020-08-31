@@ -60,6 +60,12 @@
             :data="currentItem"
             dialogTitle="场景标签内容编辑"
         ></AttachmentComponent>
+
+        <DialogEnglishDialog
+            :visible.sync="isOpenEngLishAttachment"
+            :data="currentItem"
+            dialogTitle="场景标签内容编辑"
+        ></DialogEnglishDialog>
     </div>
 </template>
 
@@ -67,6 +73,7 @@
 import { hotspot, hotspotDetail } from "@/model/api";
 import editAttachmentDialog from "./editScene";
 import AttachmentComponent from "../../Dialog";
+import DialogEnglishDialog from "../../DialogEnglish"; // 英语
 
 export default {
     data() {
@@ -75,6 +82,7 @@ export default {
             loading: false,
             isOpenEditAttachment: false,
             isOpenAttachment: false,
+            isOpenEngLishAttachment: false,
             currentItem: {}
         };
     },
@@ -86,7 +94,8 @@ export default {
     },
     components: {
         editAttachmentDialog,
-        AttachmentComponent
+        AttachmentComponent,
+        DialogEnglishDialog
     },
     watch: {
         "$store.state.toolbarStore.id": function(newval) {
@@ -205,6 +214,7 @@ export default {
             this.currentItem = {};
             this.currentItem = data;
             this.isOpenAttachment = true;
+            // this.isOpenEngLishAttachment = true;
         },
         closeDrawer() {
             this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
