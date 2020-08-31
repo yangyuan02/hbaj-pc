@@ -259,13 +259,9 @@ export default {
             if (this.activeName === "image") {
                 this.shows.isOpenImagesDialog = true;
             }
-            // if (this.activeName === "audio") {
-            //     if (this.buttonText === "修改") {
-            //         this.editData = this.display.audioList;
-            //         this.editType = "audio";
-            //     }
-            //     this.shows.isOpenAudioDialog = true;
-            // }
+            if (this.activeName === "audio") {
+                this.shows.isOpenAudioDialog = true;
+            }
             if (this.activeName === "video") {
                 if (this.buttonText === "修改") {
                     this.editData = this.display.videoList[0];

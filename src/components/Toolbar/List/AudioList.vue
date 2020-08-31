@@ -22,7 +22,14 @@
                     <p>{{ item.content }}</p>
                 </div>
                 <div class="images">
-                    <img :src="globalConfig.imagePath + item.extra" :alt="item.title" />
+                    <audio
+                        id="audioPlayerGuide"
+                        :src="globalConfig.imagePath + item.extra"
+                        controlsList="nodownload"
+                        controls="controls"
+                        ref="audio"
+                    ></audio>
+                    <!-- <img :src="globalConfig.imagePath + item.extra" :alt="item.title" /> -->
                 </div>
             </div>
         </div>
@@ -76,10 +83,10 @@ export default {
                 });
         },
         edit(data) {
-            this.onNotifiy && this.onNotifiy(data, "image");
+            this.onNotifiy && this.onNotifiy(data, "audio");
         },
         sort(list) {
-            this.onSortOpen && this.onSortOpen(list, "image");
+            this.onSortOpen && this.onSortOpen(list, "audio");
         }
     }
 };

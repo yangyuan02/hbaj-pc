@@ -42,7 +42,7 @@
                 <el-form-item label="描述" prop="title" class="title">
                     <el-input
                         type="textarea"
-                        :rows="7"
+                        :rows="6"
                         placeholder="请输入描述"
                         v-model="params.content"
                         style="margin-left: 0px;"
@@ -151,6 +151,7 @@ export default {
             console.log("打开");
         },
         close() {
+            this.$refs["form"].resetFields();
             this.$emit("update:visible", false);
         },
         save() {
