@@ -394,7 +394,7 @@ export default {
         onSortOpen(data, type) {
             this.attchmentId = this.params.id;
             this.sortList = [];
-            if (type === "text" || type === "image") {
+            if (type === "text" || type === "image" || type === "audio") {
                 this.getType = type.toLocaleUpperCase();
                 this.shows.isOpenSortTextList = true;
                 this.sortList = data.map(item => ({ id: item.id, name: item.title }));

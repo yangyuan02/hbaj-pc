@@ -18,7 +18,7 @@
                 :rules="rules"
                 label-position="left"
             >
-                <el-form-item label="上传" prop="extra">
+                <el-form-item label="上传" prop="extra" class="extra">
                     <el-upload
                         class="upload-demo"
                         :action="uploadUrl"
@@ -27,8 +27,12 @@
                         :file-list="fileList"
                     >
                         <el-button size="small" type="primary">点击上传</el-button>
+
                         <div slot="tip" class="el-upload__tip">只能上传音频文件</div>
                     </el-upload>
+                    <el-button size="small" type="primary" @click="audition" class="audition"
+                        >试听</el-button
+                    >
                 </el-form-item>
                 <el-form-item label="标题" prop="title" class="title">
                     <el-input
@@ -55,13 +59,23 @@
             <el-button @click="close">取消</el-button>
             <el-button type="primary" :loading="loading.save" @click="save">保存</el-button>
         </div>
+
+        <Audition
+            :visible.sync="shows.isOpenAudition"
+            :src="textTransform"
+            :onConfirmAudio="onConfirmAudio"
+        ></Audition>
     </el-dialog>
 </template>
 
 <script>
 import { hotspotContentDetail, hotspotContent } from "@/model/api";
+import Audition from "./audition";
 
 export default {
+    components: {
+        Audition
+    },
     props: {
         visible: {
             type: Boolean,
@@ -118,6 +132,10 @@ export default {
     },
     data() {
         return {
+            textTransform: "",
+            shows: {
+                isOpenAudition: false
+            },
             params: {
                 // 参数
                 content: "", // 内容
@@ -166,6 +184,15 @@ export default {
             console.log(res);
             this.params.extra = res.data.path;
         },
+        onConfirmAudio(val) {
+            this.params.extra = val;
+            this.fileList = [
+                {
+                    name: "音频内容",
+                    url: val
+                }
+            ];
+        },
         addAudio() {
             // 新增音频内容
             const hotspotContentList = [this.params];
@@ -199,6 +226,16 @@ export default {
                     this.onSuccess && this.onSuccess();
                 }
             });
+        },
+        audition() {
+            if (!this.params.content) {
+                return this.$message.error("请输入文字");
+            }
+            xunfeitts(this.params.content).then(res => {
+                this.textTransform = res;
+                this.shows.isOpenAudition = true;
+                console.log("生成成功", res);
+            });
         }
     }
 };
@@ -219,6 +256,14 @@ export default {
     }
     /deep/.el-dialog__body {
         height: 370px;
+        .extra {
+            position: relative;
+            .audition {
+                position: absolute;
+                top: 5px;
+                left: 100px;
+            }
+        }
     }
 }
 </style>
