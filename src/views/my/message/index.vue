@@ -116,7 +116,7 @@ export default {
     height: 100%;
     overflow: hidden;
     .message_info {
-        // width: 363px;
+        width: 367px;
         .message_list {
             overflow-y: scroll;
             height: calc(100% - 55px);
