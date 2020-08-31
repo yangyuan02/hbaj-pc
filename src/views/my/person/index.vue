@@ -1,6 +1,6 @@
 <template>
     <div class="message_container myPerson">
-        <div class="message_info" v-loading="loading">
+        <div class="message_info_myPerson" v-loading="loading">
             <Title title="用户中心" :isMore="false"></Title>
             <div class="message_list">
                 <my-header :info="user" :isBack="false"></my-header>
@@ -143,7 +143,7 @@ export default {
     display: flex;
     height: 100%;
     overflow: hidden;
-    .message_info {
+    .message_info_myPerson {
         width: 363px;
         .message_list {
             .person-box {

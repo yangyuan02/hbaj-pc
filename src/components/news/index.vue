@@ -74,7 +74,7 @@ export default {
     }
     .news-item-detail {
         flex: 1;
-        width: 222px;
+        width: 198px;
         .news-item-title {
             width: 100%;
             .text {
