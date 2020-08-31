@@ -86,14 +86,15 @@ export default {
     .select-body {
         .action_list {
             ul {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
+                // display: flex;
+                // flex-wrap: wrap;
+                // justify-content: space-between;
                 li {
                     width: 48px;
                     height: 48px;
                     margin-right: 10px;
                     margin-bottom: 8px;
+                    float: left;
                     // background: rgba(221, 221, 221, 1);
                     img {
                         width: 100%;
