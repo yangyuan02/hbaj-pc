@@ -50,6 +50,8 @@
 
 <script>
 import "@/widget/lazyLoad";
+import { projectDetail } from "@/model/api";
+
 export default {
     props: {
         item: {
@@ -65,14 +67,29 @@ export default {
                 from: "1",
                 name
             };
-            this.$router.push({
-                name: "panoEditor",
-                params
-            });
-            this.$store.commit("SETHISTROY", {
-                path: `${taskId}/${projectId}/1`,
-                params
-            });
+            const getDetail = () => {
+                // 通过任务id获取项目的有关信息
+                projectDetail(
+                    {
+                        type: "GET"
+                    },
+                    projectId
+                ).then(res => {
+                    if (res.suceeded) {
+                        const modules = res.data.moduleName;
+                        params.modules = modules;
+                        this.$router.push({
+                            name: "panoEditor",
+                            params
+                        });
+                        this.$store.commit("SETHISTROY", {
+                            path: `${taskId}/${projectId}/1`,
+                            params
+                        });
+                    }
+                });
+            };
+            getDetail();
         }
     }
 };

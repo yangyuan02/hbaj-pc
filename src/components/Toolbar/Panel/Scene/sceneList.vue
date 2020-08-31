@@ -213,8 +213,13 @@ export default {
         editAttachment(data) {
             this.currentItem = {};
             this.currentItem = data;
-            this.isOpenAttachment = true;
-            // this.isOpenEngLishAttachment = true;
+            const modules = this.$route.params.modules;
+
+            if (modules && modules === "专业英语") {
+                this.isOpenEngLishAttachment = true;
+            } else {
+                this.isOpenAttachment = true;
+            }
         },
         closeDrawer() {
             this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");

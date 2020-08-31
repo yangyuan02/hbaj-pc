@@ -30,10 +30,12 @@
                     ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <AudioHban
-                        :src="display.audioList[0].extra"
-                        :title="display.audioList[0].title"
-                    ></AudioHban>
+                    <AudioList
+                        :list="display.audioList"
+                        :onSuccess="getAttachmentAudio"
+                        :onNotifiy="notifiy"
+                        :onSortOpen="onSortOpen"
+                    ></AudioList>
                 </el-tab-pane>
                 <!-- <el-tab-pane label="视频" name="video">
                     <VideoHban
@@ -46,7 +48,7 @@
                 </el-tab-pane> -->
             </el-tabs>
             <div class="operate">
-                <el-button type="danger" @click="deleteItem()" v-if="isDelete">删除</el-button>
+                <!-- <el-button type="danger" @click="deleteItem()" v-if="isDelete">删除</el-button> -->
                 <el-button type="primary" @click="editDialog()">{{ buttonText }}</el-button>
             </div>
         </main>
@@ -105,6 +107,7 @@ import SortList from "./SortList";
 
 import TextList from "../List/Text";
 import ImagesList from "../List/Images";
+import AudioList from "../List/AudioList";
 
 import { hotspotContent, hotspotContentDetail } from "@/model/api";
 
@@ -128,11 +131,7 @@ export default {
             display: {
                 textList: [], // 文本列表
                 imageList: [], // 图文列表
-                audioList: [
-                    {
-                        extra: ""
-                    }
-                ], // 音频列表
+                audioList: [], // 音频列表
                 videoList: [
                     {
                         extra: ""
@@ -170,7 +169,8 @@ export default {
         SortList,
 
         TextList,
-        ImagesList
+        ImagesList,
+        AudioList
     },
     watch: {
         data(newVal) {
@@ -183,18 +183,18 @@ export default {
             if (this.activeName === "html") {
                 return "保存";
             }
-            if (this.activeName === "audio" && this.display.audioList[0].extra) {
-                return "修改";
-            }
+            // if (this.activeName === "audio" && this.display.audioList[0].extra) {
+            //     return "修改";
+            // }
             if (this.activeName === "video" && this.display.videoList[0].extra) {
                 return "修改";
             }
             return "添加";
         },
         isDelete: function() {
-            if (this.activeName === "audio" && this.display.audioList[0].extra) {
-                return true;
-            }
+            // if (this.activeName === "audio" && this.display.audioList[0].extra) {
+            //     return true;
+            // }
             if (this.activeName === "video" && this.display.videoList[0].extra) {
                 return true;
             }
@@ -212,34 +212,34 @@ export default {
         save() {
             console.log("保存");
         },
-        deleteItem() {
-            const type = this.activeName === "audio" ? "audioList" : "videoList";
-            const hotspotContentId = this.display[type][0].id;
-            this.$confirm(`将删除该文件,是否继续?`, "提示", {
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                type: "warning"
-            })
-                .then(() => {
-                    hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
-                        if (res.suceeded) {
-                            if (type === "audioList") {
-                                this.getAttachmentAudio();
-                            }
+        // deleteItem() {
+        //     const type = this.activeName === "audio" ? "audioList" : "videoList";
+        //     const hotspotContentId = this.display[type][0].id;
+        //     this.$confirm(`将删除该文件,是否继续?`, "提示", {
+        //         confirmButtonText: "确定",
+        //         cancelButtonText: "取消",
+        //         type: "warning"
+        //     })
+        //         .then(() => {
+        //             hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
+        //                 if (res.suceeded) {
+        //                     if (type === "audioList") {
+        //                         this.getAttachmentAudio();
+        //                     }
 
-                            if (type === "videoList") {
-                                this.getAttachmentVideo();
-                            }
-                        }
-                    });
-                })
-                .catch(() => {
-                    this.$message({
-                        type: "info",
-                        message: "已取消删除"
-                    });
-                });
-        },
+        //                     if (type === "videoList") {
+        //                         this.getAttachmentVideo();
+        //                     }
+        //                 }
+        //             });
+        //         })
+        //         .catch(() => {
+        //             this.$message({
+        //                 type: "info",
+        //                 message: "已取消删除"
+        //             });
+        //         });
+        // },
         handleClick(tab, event) {
             const name = tab.name.toLocaleUpperCase();
             this.handerAttachment(name);
@@ -259,13 +259,13 @@ export default {
             if (this.activeName === "image") {
                 this.shows.isOpenImagesDialog = true;
             }
-            if (this.activeName === "audio") {
-                if (this.buttonText === "修改") {
-                    this.editData = this.display.audioList[0];
-                    this.editType = "audio";
-                }
-                this.shows.isOpenAudioDialog = true;
-            }
+            // if (this.activeName === "audio") {
+            //     if (this.buttonText === "修改") {
+            //         this.editData = this.display.audioList;
+            //         this.editType = "audio";
+            //     }
+            //     this.shows.isOpenAudioDialog = true;
+            // }
             if (this.activeName === "video") {
                 if (this.buttonText === "修改") {
                     this.editData = this.display.videoList[0];
@@ -345,7 +345,7 @@ export default {
                     this.loading.detail = false;
                     let type = this.typeTab.toLocaleLowerCase();
                     this.display[type + "List"] = res.data || [];
-                    if (res.data.length === 0 && (type === "audio" || type === "video")) {
+                    if (res.data.length === 0 && type === "video") {
                         this.display[type + "List"].push({ extra: "" });
                     }
                     if (this.activeName === "html") {
