@@ -8,7 +8,7 @@
                     <div class="role common" v-for="(item, index) in roleList" :key="index">
                         <div class="thumb">
                             <img
-                                src="https://msa_pc.vr2shipping.com/pano/static/role/cmsalogo.png"
+                                :src="globalConfig.imagePath + 'static/app/department/group_01.jpg'"
                                 alt=""
                             />
                         </div>
@@ -16,7 +16,7 @@
                             <span>{{ item.name }}</span>
                         </div>
                         <div class="tag">
-                            <span>角色</span>
+                            <span>群组</span>
                         </div>
                     </div>
                     <div

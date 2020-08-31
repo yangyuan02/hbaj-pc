@@ -33,7 +33,7 @@ export default {
     height: 100%;
     overflow: hidden;
     & > .home_container {
-        width: 335px;
+        width: 367px;
     }
 }
 </style>

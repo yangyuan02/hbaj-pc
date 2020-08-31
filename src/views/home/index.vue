@@ -149,6 +149,7 @@ export default {
     height: 100%;
     .home_container {
         height: 100%;
+        width: 367px;
         .scroll {
             overflow-y: scroll;
             height: calc(100% - 258px);
