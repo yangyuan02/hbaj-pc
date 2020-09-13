@@ -30,10 +30,29 @@
                     ></ImagesList>
                 </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
-                    <AudioHban
+                    <!-- <AudioHban
                         :src="display.audioList[0].extra"
                         :title="display.audioList[0].title"
-                    ></AudioHban>
+                    ></AudioHban> -->
+                    <div
+                        class="title"
+                        style="border-bottom:1px solid #ccc; padding:8px;font-size:16px;padding-left:14px;"
+                    >
+                        <p>{{ display.audioList[0].title }}</p>
+                    </div>
+                    <div class="audio" style="margin:10px 0px">
+                        <audio
+                            id="audioPlayer"
+                            :src="globalConfig.imagePath + display.audioList[0].extra"
+                            controlsList="nodownload"
+                            controls="controls"
+                            ref="audio"
+                        ></audio>
+                    </div>
+
+                    <div class="desc">
+                        <p>{{ display.audioList[0].content }}</p>
+                    </div>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
                     <VideoHban
@@ -42,6 +61,12 @@
                     ></VideoHban>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="html">
+                    <el-input
+                        type="text"
+                        placeholder="请输入标题"
+                        class="richTitle"
+                        v-model="RichTextValue"
+                    ></el-input>
                     <RichTextBox ref="RichTextBox"></RichTextBox>
                 </el-tab-pane>
             </el-tabs>
@@ -112,6 +137,7 @@ export default {
     data() {
         return {
             activeName: "text",
+            RichTextValue: "", // 富文本标题
             loading: {
                 detail: false
             },
@@ -278,6 +304,8 @@ export default {
             // 保存富文本
             const RichTextBox = this.$refs.RichTextBox;
             const getHtml = RichTextBox.getHtml();
+            const RichTextValue = this.RichTextValue;
+            console.log(this.data, "dada");
             const params = {
                 // 参数
                 content: getHtml, // 内容
@@ -285,7 +313,7 @@ export default {
                 hotspotId: this.params.id, // 附件id
                 // id: 0,
                 // seq: 0, // 排序
-                title: "", // 标题
+                title: RichTextValue, // 标题
                 type: "HTML" // 类型
             };
             const hotspotContentList = [params];
@@ -295,12 +323,14 @@ export default {
             }).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
+                    this.getAttachmentHTML();
                 }
             });
         },
         handleRichTextEdit() {
             const RichTextBox = this.$refs.RichTextBox;
             const getHtml = RichTextBox.getHtml();
+            const RichTextValue = this.RichTextValue;
             const params = {
                 // 参数
                 content: getHtml, // 内容
@@ -308,7 +338,7 @@ export default {
                 hotspotId: this.params.id, // 附件id
                 // id: 0,
                 // seq: 0, // 排序
-                title: "", // 标题
+                title: RichTextValue, // 标题
                 type: "HTML" // 类型
             };
             // 修改富文本
@@ -352,6 +382,8 @@ export default {
                         // 富文本
                         if (res.data.length > 0) {
                             this.$refs.RichTextBox.setHtml(res.data[0].content);
+
+                            this.RichTextValue = res.data[0].title || "";
                             this.display.richText = res.data[0];
                         }
                     }
@@ -443,6 +475,14 @@ export default {
             .el-dialog__body {
                 padding-top: 0px;
             }
+        }
+    }
+    .richTitle {
+        input {
+            margin-bottom: 10px;
+            border: none !important;
+            border-bottom: 1px solid #ccc !important;
+            border-radius: 0 !important;
         }
     }
 }
