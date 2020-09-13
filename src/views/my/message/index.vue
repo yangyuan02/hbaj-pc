@@ -3,7 +3,10 @@
         <div class="message_info">
             <Title title="我的消息" :isMore="false"></Title>
             <div class="message_list scroll-view-wrapper" v-loading="loading">
-                <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
+                <template v-if="list.length > 0">
+                    <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
+                </template>
+                <Empty v-else />
             </div>
         </div>
         <BgNav></BgNav>
@@ -17,6 +20,7 @@ import BgNav from "@/components/common/BgNav";
 import { messageDetail } from "@/model/api";
 import store from "@/widget/store";
 import utils from "@/widget/utils";
+import Empty from "@/components/Empty";
 export default {
     data() {
         return {
@@ -32,7 +36,8 @@ export default {
     components: {
         MessageItem,
         Title,
-        BgNav
+        BgNav,
+        Empty
     },
     methods: {
         getMessageList() {
@@ -124,16 +129,16 @@ export default {
                 width: 4px;
                 /*height: 4px;*/
             }
-            &::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                background: rgba(0, 0, 0, 0.2);
-            }
-            &::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                border-radius: 0;
-                background: rgba(0, 0, 0, 0.1);
-            }
+            // &::-webkit-scrollbar-thumb {
+            //     border-radius: 10px;
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     background: rgba(0, 0, 0, 0.2);
+            // }
+            // &::-webkit-scrollbar-track {
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     border-radius: 0;
+            //     background: rgba(0, 0, 0, 0.1);
+            // }
         }
     }
     .message_right {

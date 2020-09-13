@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8526222",
+      "name": "暂无",
+      "font_class": "zanwu",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
       "icon_id": "14226652",
       "name": "上 传",
       "font_class": "xiazai",

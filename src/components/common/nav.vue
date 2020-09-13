@@ -25,21 +25,21 @@ export default {
                     title: "技术解读",
                     icon: "icontubiaoweb-411",
                     path: "",
-                    bgColor: "rgba(253,178,133,1)",
+                    bgColor: "rgba(15, 79, 168,1)",
                     sort: 1
                 },
                 {
                     title: "专业英语",
                     icon: "icontubiaoweb-431",
                     path: "",
-                    bgColor: "rgba(253,144,147,1)",
+                    bgColor: "rgba(255, 102, 0,1)",
                     sort: 2
                 },
                 {
                     title: "模拟训练",
                     icon: "icontubiaoweb-42",
                     path: "",
-                    bgColor: "rgba(153, 193, 254, 1)",
+                    bgColor: "rgba(255, 158, 58,1)",
                     sort: 3
                 }
             ]

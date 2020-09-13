@@ -5,7 +5,7 @@
             <div class="message_list">
                 <my-header :info="user" :isBack="false"></my-header>
                 <div class="person-box">
-                    <div class="role common" v-for="(item, index) in roleList" :key="index">
+                    <div class="role common">
                         <div class="thumb">
                             <img
                                 :src="globalConfig.imagePath + 'static/app/department/group_01.jpg'"
@@ -146,10 +146,13 @@ export default {
     .message_info_myPerson {
         width: 363px;
         .message_list {
+            height: 100%;
             .person-box {
                 padding: 14px 17px;
                 background: #fff;
-                min-height: 100%;
+                // min-height: 100%;
+                overflow-y: scroll;
+                height: calc(100% - 275px);
                 .common {
                     display: flex;
                     align-items: center;
@@ -163,7 +166,7 @@ export default {
                         background: #f0f0f0;
                         margin-left: 25px;
                         margin-right: 15px;
-                        border-radius: 5px;
+                        border-radius: 50%;
                         img {
                             width: 100%;
                             height: 100%;
@@ -262,21 +265,23 @@ export default {
                             border-radius: 0.1rem;
                             margin-left: 0.16rem;
                             padding: 0.1rem;
+                            padding-top: 10px;
                             // display: flex;
                             // flex-wrap: wrap;
                             // justify-content: space-between;
 
                             .item {
                                 width: 1.28rem;
-                                height: 0.4rem;
+                                height: 0.3rem;
                                 border-radius: 0.04rem;
-                                border: 0.01rem solid rgba(255, 255, 255, 1);
+                                border-bottom: 0.02rem solid rgba(255, 255, 255, 1);
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 float: left;
                                 margin-right: 14px;
                                 margin-bottom: 10px;
+                                padding-bottom: 8px;
                                 &:nth-child(3n) {
                                     margin-right: 0px;
                                 }

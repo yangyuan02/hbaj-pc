@@ -4,7 +4,10 @@
             <Title title="我的任务" :isMore="false"></Title>
             <!-- <Calendar></Calendar> -->
             <div class="task_list scroll-view-wrapper" v-loading="loading">
-                <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
+                <template v-if="list.length > 0">
+                    <TaskItem v-for="(item, index) in list" :key="index" :item="item"></TaskItem>
+                </template>
+                <Empty v-else />
             </div>
         </div>
         <BgNav></BgNav>
@@ -16,6 +19,7 @@ import Title from "@/components/common/Title";
 import Calendar from "@/components/Calendar";
 import TaskItem from "./item";
 import BgNav from "@/components/common/BgNav";
+import Empty from "@/components/Empty";
 
 import { task } from "@/model/api";
 import utils from "@/widget/utils";
@@ -37,7 +41,8 @@ export default {
         Title,
         Calendar,
         TaskItem,
-        BgNav
+        BgNav,
+        Empty
     },
     methods: {
         getTaskList() {
@@ -123,6 +128,9 @@ export default {
         width: 367px;
         padding-bottom: 5px;
         .task_list {
+            position: relative;
+        }
+        .task_list {
             margin-top: 20px;
             overflow-y: scroll;
             height: calc(100% - 55px);
@@ -130,16 +138,16 @@ export default {
                 width: 4px;
                 /*height: 4px;*/
             }
-            &::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                background: rgba(0, 0, 0, 0.2);
-            }
-            &::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                border-radius: 0;
-                background: rgba(0, 0, 0, 0.1);
-            }
+            // &::-webkit-scrollbar-thumb {
+            //     border-radius: 10px;
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     background: rgba(0, 0, 0, 0.2);
+            // }
+            // &::-webkit-scrollbar-track {
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     border-radius: 0;
+            //     background: rgba(0, 0, 0, 0.1);
+            // }
             padding-bottom: 10px;
         }
     }

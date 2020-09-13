@@ -9,11 +9,14 @@
         <div class="course_content">
             <Submenu :modulesList="modulesList" path="course"></Submenu>
             <div class="course_list" v-loading="loading">
-                <CourseItem
-                    v-for="(item, index) in recommendProjectList"
-                    :key="index"
-                    :item="item"
-                ></CourseItem>
+                <template v-if="recommendProjectList.length > 0">
+                    <CourseItem
+                        v-for="(item, index) in recommendProjectList"
+                        :key="index"
+                        :item="item"
+                    ></CourseItem>
+                </template>
+                <Empty v-else />
             </div>
         </div>
     </div>
@@ -27,6 +30,7 @@ import CourseItem from "@/components/course";
 import { home } from "@/model/api";
 import store from "@/widget/store";
 import utils from "@/widget/utils";
+import Empty from "@/components/Empty";
 export default {
     data() {
         return {
@@ -43,7 +47,8 @@ export default {
         Nav,
         Title,
         Submenu,
-        CourseItem
+        CourseItem,
+        Empty
     },
     methods: {
         getCourseList() {
@@ -151,6 +156,7 @@ export default {
                         margin-top: 40px;
                         &.active {
                             box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+                            transform: scale(1.1);
                         }
                     }
                 }
@@ -166,20 +172,21 @@ export default {
         .course_list {
             overflow-y: scroll;
             height: calc(100% - 151px);
+            position: relative;
             &::-webkit-scrollbar {
                 width: 4px;
                 /*height: 4px;*/
             }
-            &::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                background: rgba(0, 0, 0, 0.2);
-            }
-            &::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-                border-radius: 0;
-                background: rgba(0, 0, 0, 0.1);
-            }
+            // &::-webkit-scrollbar-thumb {
+            //     border-radius: 10px;
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     background: rgba(0, 0, 0, 0.2);
+            // }
+            // &::-webkit-scrollbar-track {
+            //     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            //     border-radius: 0;
+            //     background: rgba(0, 0, 0, 0.1);
+            // }
             & > .course-content-item {
                 .course-item-thumb {
                     width: 125px !important;
