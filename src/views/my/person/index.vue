@@ -13,7 +13,7 @@
                             />
                         </div>
                         <div class="name">
-                            <span>{{ item.name }}</span>
+                            <span>{{ user.departmentName || "未指定用户组" }}</span>
                         </div>
                         <div class="tag">
                             <span>群组</span>
@@ -196,6 +196,11 @@ export default {
                 }
                 .role {
                     margin-bottom: 8px;
+                    .thumb {
+                        img {
+                            border-radius: 50%;
+                        }
+                    }
                     &:last-child {
                         margin-bottom: 0;
                     }
