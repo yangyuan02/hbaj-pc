@@ -135,7 +135,7 @@ export default {
 <style lang="less">
 #editor {
     .w-e-text-container {
-        height: 450px !important;
+        height: 400px !important;
     }
 }
 </style>

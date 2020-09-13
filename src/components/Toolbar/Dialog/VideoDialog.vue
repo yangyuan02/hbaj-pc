@@ -30,12 +30,23 @@
                         <div slot="tip" class="el-upload__tip">只能上传视频文件</div>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="描述" prop="title">
+
+                <el-form-item label="标题" prop="title" class="title">
+                    <el-input
+                        type="text"
+                        placeholder="标题"
+                        v-model="params.title"
+                        style="margin-left: 0px;"
+                    >
+                    </el-input>
+                </el-form-item>
+
+                <el-form-item label="描述" prop="content" class="title">
                     <el-input
                         type="textarea"
-                        :rows="9"
+                        :rows="6"
                         placeholder="请输入描述"
-                        v-model="params.title"
+                        v-model="params.content"
                         style="margin-left: 0px;"
                     >
                     </el-input>
@@ -121,6 +132,7 @@ export default {
             },
             rules: {
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+                content: [{ required: true, message: "请输入内容", trigger: "blur" }],
                 extra: [{ required: true, message: "请上传视频" }]
             },
             fileList: [

@@ -38,7 +38,7 @@
                         class="title"
                         style="border-bottom:1px solid #ccc; padding:8px;font-size:16px;padding-left:14px;"
                     >
-                        <p>{{ display.audioList[0].title }}</p>
+                        <p>{{ display.audioList[0].title || "此内容为空" }}</p>
                     </div>
                     <div class="audio" style="margin:10px 0px">
                         <audio
@@ -55,10 +55,30 @@
                     </div>
                 </el-tab-pane>
                 <el-tab-pane label="视频" name="video">
-                    <VideoHban
+                    <!-- <VideoHban
                         :src="display.videoList[0].extra"
                         :title="display.videoList[0].title"
-                    ></VideoHban>
+                    ></VideoHban> -->
+
+                    <div
+                        class="title"
+                        style="border-bottom:1px solid #ccc; padding:8px;font-size:16px;padding-left:14px;"
+                    >
+                        <p>{{ display.videoList[0].title || "此内容为空" }}</p>
+                    </div>
+                    <div class="video" style="margin:10px 0px">
+                        <video
+                            id="videoPlayer"
+                            :src="globalConfig.imagePath + display.videoList[0].extra"
+                            ref="video"
+                            controls="controls"
+                            style="height:300px"
+                        ></video>
+                    </div>
+
+                    <div class="desc">
+                        <p>{{ display.videoList[0].content }}</p>
+                    </div>
                 </el-tab-pane>
                 <el-tab-pane label="富文本" name="html">
                     <el-input
@@ -206,8 +226,8 @@ export default {
     },
     computed: {
         buttonText: function() {
-            if (this.activeName === "html") {
-                return "保存";
+            if (this.activeName === "html" && this.display.richText.id) {
+                return "修改";
             }
             if (this.activeName === "audio" && this.display.audioList[0].extra) {
                 return "修改";
@@ -215,6 +235,7 @@ export default {
             if (this.activeName === "video" && this.display.videoList[0].extra) {
                 return "修改";
             }
+
             return "添加";
         },
         isDelete: function() {
@@ -222,6 +243,9 @@ export default {
                 return true;
             }
             if (this.activeName === "video" && this.display.videoList[0].extra) {
+                return true;
+            }
+            if (this.activeName === "html" && this.display.richText.id) {
                 return true;
             }
             return false;
@@ -238,9 +262,20 @@ export default {
         save() {
             console.log("保存");
         },
+        clearHtml() {
+            this.$refs.RichTextBox.setHtml("");
+            this.RichTextValue = "";
+            this.display.richText = {};
+        },
         deleteItem() {
-            const type = this.activeName === "audio" ? "audioList" : "videoList";
-            const hotspotContentId = this.display[type][0].id;
+            // 清空html
+            let type = this.activeName === "audio" ? "audioList" : "videoList";
+            let hotspotContentId = this.display[type][0].id;
+            if (this.activeName === "html") {
+                hotspotContentId = this.display.richText.id;
+                type = "html";
+            }
+
             this.$confirm(`将删除该文件,是否继续?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -255,6 +290,10 @@ export default {
 
                             if (type === "videoList") {
                                 this.getAttachmentVideo();
+                            }
+                            if (this.activeName === "html") {
+                                this.clearHtml();
+                                this.getAttachmentHTML();
                             }
                         }
                     });
