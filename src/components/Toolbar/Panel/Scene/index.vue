@@ -266,10 +266,26 @@ export default {
             if (this.$store.state.toolbarStore.openScene) {
                 this.$store.commit("TOGGLE_DRAWER", "openScene");
             }
+        },
+        isCloseScene(code) {
+            // 是否关闭场景列表
+            if (code) {
+                const index = this.attachmentList.findIndex(
+                    item => item.id.toString() === code.toString()
+                );
+                if (index === -1) {
+                    this.$store.commit("SETOPENSCENE");
+                    // this.$store.state.toolbarStore.openScene = false;
+                } else {
+                    const data = this.attachmentList[index];
+                    this.select(index, data);
+                }
+            }
         }
     },
     mounted() {
         window._hban_addScene = this.addScene;
+        window.isCloseScene = this.isCloseScene;
     }
 };
 </script>

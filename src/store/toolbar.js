@@ -27,6 +27,9 @@ const mutations = {
         state["id"] = id;
         state["code"] = code;
     },
+    SETOPENSCENE(state) {
+        state["openScene"] = false;
+    },
     SETGuIDELIST(state, GuideData) {
         state["openGuideScene"] = true;
         state["GuideData"] = GuideData;
