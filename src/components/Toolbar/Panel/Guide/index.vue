@@ -11,12 +11,12 @@
     <div class="panel_sidebar" v-if="drawerGuideContent">
         <div class="attachment common">
             <div class="title">
-                <span>编辑课件步骤</span>
+                <span>编辑对话或独白</span>
                 <i class="iconfont icontubiaoweb-24 cursor" @click="addGuide"></i>
             </div>
             <div class="attachment_list">
                 <div class="header">
-                    <span style="width:14%">播放</span>
+                    <span style="width:14%">内容</span>
                     <span style="width:170px">概要</span>
                     <span>操作</span>
                 </div>
