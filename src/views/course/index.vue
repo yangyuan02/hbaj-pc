@@ -155,7 +155,7 @@ export default {
                         margin: 0 auto;
                         margin-top: 40px;
                         &.active {
-                            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+                            // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
                             transform: scale(1.1);
                         }
                     }

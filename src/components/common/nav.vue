@@ -6,11 +6,11 @@
                 :key="index"
                 :class="[$route.query.name === item.title ? 'active' : '']"
                 @click="handClick(item)"
-                :style="{ 'background-color': item.bgColor }"
+                :style="{ 'background-image': `url(${item.bgColor})` }"
                 class="cursor"
             >
                 <span>{{ item.title }}</span>
-                <i class="iconfont" :class="[item.icon ? item.icon : '']"></i>
+                <!-- <i class="iconfont" :class="[item.icon ? item.icon : '']"></i> -->
             </li>
         </ul>
     </nav>
@@ -25,21 +25,21 @@ export default {
                     title: "技术解读",
                     icon: "icontubiaoweb-411",
                     path: "",
-                    bgColor: "rgba(15, 79, 168,1)",
+                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_01.png",
                     sort: 1
                 },
                 {
                     title: "专业英语",
                     icon: "icontubiaoweb-431",
                     path: "",
-                    bgColor: "rgba(255, 102, 0,1)",
+                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_02.png",
                     sort: 2
                 },
                 {
                     title: "模拟训练",
                     icon: "icontubiaoweb-42",
                     path: "",
-                    bgColor: "rgba(255, 158, 58,1)",
+                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_03.png",
                     sort: 3
                 }
             ]
@@ -94,17 +94,21 @@ nav {
         display: flex;
         flex-wrap: wrap;
         li {
-            width: 203px;
-            height: 120px;
-            border-radius: 12px;
+            width: 170px;
+            height: 119px;
+            // border-radius: 12px;
             display: flex;
             align-items: center;
+            justify-content: center;
             color: #fff;
             padding-left: 25px;
             padding-right: 14px;
-            justify-content: space-between;
+            justify-content: center;
             margin-right: 38px;
             margin-bottom: 40px;
+            background-size: cover;
+            background-position: center;
+            font-weight: bold;
             cursor: default;
             span {
                 font-size: 16px;
