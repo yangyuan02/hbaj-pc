@@ -56,6 +56,7 @@ export default {
             const { pageIndex } = this;
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
+            this.recommendProjectList = []; // 清空
             home(
                 {
                     type: "GET",

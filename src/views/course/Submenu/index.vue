@@ -40,6 +40,7 @@ import img1 from "./images/01.png";
 import img2 from "./images/02.png";
 import img3 from "./images/03.png";
 import img4 from "./images/04.png";
+import img5 from "./images/05.jpg";
 export default {
     data() {
         return {
@@ -53,8 +54,8 @@ export default {
                     title: "散货船"
                 },
                 {
-                    src: img3,
-                    title: "普通干货船"
+                    src: img5,
+                    title: "CIC示范船"
                 },
                 {
                     src: img4,
@@ -175,11 +176,16 @@ export default {
         margin: 20px 0;
         ul {
             display: flex;
+            flex-wrap: wrap;
             li {
                 margin-right: 25px;
+                margin-bottom: 14px;
                 &.active {
                     span {
                         color: rgba(255, 157, 59, 1);
+                        border-bottom: 2px solid rgba(255, 157, 59, 1);
+                        padding-bottom: 4px;
+                        font-weight: bold;
                     }
                 }
                 span {
