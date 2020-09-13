@@ -21,8 +21,13 @@
                 <div class="content">
                     <p>{{ item.content }}</p>
                 </div>
-                <div class="images">
-                    <img :src="globalConfig.imagePath + item.extra" :alt="item.title" />
+                <div class="images" @click="showImages(item)">
+                    <el-image
+                        :src="globalConfig.imagePath + item.extra"
+                        :preview-src-list="[globalConfig.imagePath + item.extra]"
+                    >
+                    </el-image>
+                    <!-- <img :src="globalConfig.imagePath + item.extra" :alt="item.title" /> -->
                 </div>
             </div>
         </div>
@@ -33,7 +38,9 @@
 import { hotspotContent } from "@/model/api";
 export default {
     data() {
-        return {};
+        return {
+            show: false
+        };
     },
     props: {
         list: {
@@ -54,6 +61,9 @@ export default {
         }
     },
     methods: {
+        showImages(data) {
+            this.show = true;
+        },
         del(data) {
             const hotspotContentId = data.id;
             this.$confirm(`此操作将永久删 ${data.title}, 是否继续?`, "提示", {
@@ -143,10 +153,22 @@ export default {
             width: 80px;
             height: 80px;
             margin-left: 8px;
-            img {
+            .el-image {
                 width: 100%;
                 height: 100%;
                 max-width: 100%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    max-width: 100%;
+                }
+                /deep/ .el-image-viewer__wrapper {
+                    .el-image-viewer__btn {
+                        .el-icon-circle-close {
+                            color: #ffa500;
+                        }
+                    }
+                }
             }
         }
     }

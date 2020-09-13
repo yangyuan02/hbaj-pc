@@ -17,19 +17,20 @@
                     </div>
                 </div>
             </div>
+            <div class="images">
+                <div class="audio-box"></div>
+                <audio
+                    id="audioPlayerGuide"
+                    :src="globalConfig.imagePath + item.extra"
+                    controlsList="nodownload"
+                    controls="controls"
+                    ref="audio"
+                ></audio>
+                <!-- <img :src="globalConfig.imagePath + item.extra" :alt="item.title" /> -->
+            </div>
             <div class="images-body">
                 <div class="content">
                     <p>{{ item.content }}</p>
-                </div>
-                <div class="images">
-                    <audio
-                        id="audioPlayerGuide"
-                        :src="globalConfig.imagePath + item.extra"
-                        controlsList="nodownload"
-                        controls="controls"
-                        ref="audio"
-                    ></audio>
-                    <!-- <img :src="globalConfig.imagePath + item.extra" :alt="item.title" /> -->
                 </div>
             </div>
         </div>
@@ -150,6 +151,12 @@ export default {
             width: 80px;
             height: 80px;
             margin-left: 8px;
+            // .audio-box {
+            //     width: 80px;
+            //     height: 80px;
+            //     border-radius: 50%;
+            //     background: red;
+            // }
             img {
                 width: 100%;
                 height: 100%;
