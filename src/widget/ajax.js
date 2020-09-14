@@ -43,7 +43,7 @@ export default function ajax({
                     resolve(xhr.response);
                 } else if (xhr.status === 401) {
                     window.localStorage.removeItem("authorization");
-                    window.location.href = "/";
+                    // window.location.href = "/";
                 } else {
                     resolve({
                         data: [],
