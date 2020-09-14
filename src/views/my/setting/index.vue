@@ -19,7 +19,7 @@
                                     <input
                                         type="text"
                                         placeholder="请输入昵称"
-                                        v-model="user.namecard"
+                                        v-model="user.sgname"
                                     />
                                 </div>
                             </li>

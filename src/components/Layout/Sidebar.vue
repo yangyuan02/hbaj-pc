@@ -11,7 +11,7 @@
                     }"
                 ></div>
                 <div class="name cursor">
-                    <span v-if="user.namecard" @click="goMy">{{ user.namecard }}</span>
+                    <span v-if="user.sgname" @click="goMy">{{ user.sgname }}</span>
                     <span @click="$store.commit('TOGGLE_LOGIN')" v-else>请登录</span>
                 </div>
             </div>

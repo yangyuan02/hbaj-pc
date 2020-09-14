@@ -25,7 +25,7 @@
             </div>
             <div class="person-digest">
                 <div class="nickname">
-                    <span>{{ info.namecard }}</span>
+                    <span>{{ info.sgname }}</span>
                 </div>
                 <div class="info">
                     <span>{{ info.description }}</span>
