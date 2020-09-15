@@ -173,7 +173,7 @@ export default {
             line-height: 19px;
             -webkit-background-clip: text;
             .text {
-                width: 90px;
+                width: 60px;
             }
             .member-content {
                 display: flex;
@@ -181,6 +181,7 @@ export default {
                 .member-item {
                     display: flex;
                     flex-wrap: wrap;
+                    flex: 1;
                     span {
                         margin-right: 5px;
                     }

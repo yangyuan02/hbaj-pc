@@ -172,8 +172,9 @@ export default {
         // height: 100%;
         .course_list {
             overflow-y: scroll;
-            height: calc(100% - 151px);
+            height: calc(100% - 206px);
             position: relative;
+            padding-right: 10px;
             &::-webkit-scrollbar {
                 width: 4px;
                 /*height: 4px;*/
