@@ -73,9 +73,6 @@ export default {
                 this.goToPedit(command);
             }
         }
-    },
-    mounted() {
-        console.log(this.histroy, "histroy");
     }
 };
 </script>
