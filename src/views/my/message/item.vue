@@ -67,7 +67,7 @@ export default {
 
 <style lang="less">
 .message-item-content {
-    width: 363px;
+    // width: 363px;
     height: 181px;
     // margin: 0 auto;
     margin-bottom: 10px;

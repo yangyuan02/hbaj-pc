@@ -287,7 +287,7 @@ export default {
                                 }
                                 span {
                                     color: #fff;
-                                    font-size: 0.24rem;
+                                    font-size: 12px;
                                 }
                             }
                         }

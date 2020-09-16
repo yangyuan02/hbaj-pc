@@ -63,10 +63,11 @@ export default {
         },
         handleCommand(command) {
             if (command === "logout") {
-                const clear = ["authorization", "userId", "user"];
+                const clear = ["authorization", "userId", "user", "TAGS_KEY"];
                 clear.forEach(item => {
                     window.localStorage.removeItem(item);
                 });
+                this.$store.commit("CLEARHISTROY");
                 window.location.href = "/";
                 // this.$router.push("/");
             } else {

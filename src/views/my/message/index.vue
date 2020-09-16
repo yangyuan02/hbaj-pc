@@ -125,6 +125,8 @@ export default {
         .message_list {
             overflow-y: scroll;
             height: calc(100% - 55px);
+            position: relative;
+            padding-right: 4px;
             &::-webkit-scrollbar {
                 width: 4px;
                 /*height: 4px;*/

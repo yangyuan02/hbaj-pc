@@ -18,6 +18,10 @@ const mutations = {
         if (isHistroy(item.path)) return false;
         state.histroy = [...state.histroy, item];
         sessionStorage.setItem("TAGS_KEY", JSON.stringify(state.histroy));
+    },
+    CLEARHISTROY() {
+        sessionStorage.removeItem("TAGS_KEY");
+        state.histroy = [];
     }
 };
 

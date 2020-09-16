@@ -132,7 +132,7 @@ export default {
     }
     .my-person-info {
         display: flex;
-        padding: 0 0.24rem;
+        padding: 0 12px;
         .person-thumb {
             width: 1.57rem;
             height: 1.57rem;
@@ -171,7 +171,7 @@ export default {
             }
             .info {
                 span {
-                    font-size: 0.24rem;
+                    font-size: 12px;
                     font-family: MicrosoftYaHei;
                     color: rgba(255, 255, 255, 1);
                     line-height: 0.42rem;

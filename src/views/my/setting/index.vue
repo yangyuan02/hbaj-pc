@@ -150,9 +150,9 @@ export default {
             .setting-edit-box {
                 .info {
                     ul {
-                        padding: 0 0.24rem;
+                        padding: 0 12px;
                         li {
-                            // padding: 0.24rem 0;
+                            // padding: 12px 0;
                             display: flex;
                             align-items: center;
                             i {
@@ -171,10 +171,10 @@ export default {
                                 }
                             }
                             .border {
-                                margin-left: 0.24rem;
+                                margin-left: 12px;
                                 display: flex;
                                 flex: 1;
-                                padding: 0.24rem 0;
+                                padding: 12px 0;
                                 border-bottom: 0.01rem solid rgba(151, 151, 151, 1);
                                 font-size: 0.28rem;
                                 font-family: MicrosoftYaHei;
@@ -183,7 +183,7 @@ export default {
                                 -webkit-background-clip: text;
                                 input {
                                     flex: 1;
-                                    padding-left: 0.24rem;
+                                    padding-left: 12px;
                                 }
                             }
                         }
@@ -191,8 +191,8 @@ export default {
                 }
                 .digest {
                     margin: 0 auto;
-                    margin-top: 0.24rem;
-                    padding: 0 0.24rem;
+                    margin-top: 12px;
+                    padding: 0 12px;
                     height: 2.7rem;
                     textarea {
                         width: 100%;
@@ -207,9 +207,9 @@ export default {
                     }
                 }
                 .save {
-                    padding: 0 0.24rem;
+                    padding: 0 12px;
                     height: 0.84rem;
-                    margin: 0.24rem 0;
+                    margin: 12px 0;
                     button {
                         width: 100%;
                         height: 0.84rem;
