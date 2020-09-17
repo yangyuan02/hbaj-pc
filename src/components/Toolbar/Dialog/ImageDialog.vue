@@ -158,6 +158,7 @@ export default {
         addImages() {
             // 新增图片内容
             this.params.id = "";
+            this.params.type = "IMAGE";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -175,6 +176,7 @@ export default {
         },
         editImages() {
             // 修改文本
+            this.params.type = "IMAGE";
             hotspotContent(
                 {
                     type: "post",

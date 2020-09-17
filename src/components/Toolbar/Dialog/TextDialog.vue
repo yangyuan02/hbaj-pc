@@ -113,6 +113,7 @@ export default {
         addText() {
             // 新增文本内容
             this.params.id = "";
+            this.params.type = "TEXT";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -130,6 +131,7 @@ export default {
         },
         editText() {
             // 修改文本
+            this.params.type = "TEXT";
             hotspotContent(
                 {
                     type: "post",

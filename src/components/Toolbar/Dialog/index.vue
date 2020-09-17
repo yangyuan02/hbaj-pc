@@ -252,11 +252,20 @@ export default {
         }
     },
     methods: {
+        clearDialog() {
+            this.display.textList = [];
+            this.display.imageList = [];
+            this.display.audioList = [{ extra: "" }];
+            this.display.videoList = [{ extra: "" }];
+            this.display.richText = {};
+            this.clearHtml();
+        },
         open() {
-            console.log("打开");
+            this.activeName = "text";
             this.getAttachmentText("text");
         },
         close() {
+            this.clearDialog();
             this.$emit("update:visible", false);
         },
         save() {
@@ -306,6 +315,7 @@ export default {
                 });
         },
         handleClick(tab, event) {
+            this.clearDialog();
             const name = tab.name.toLocaleUpperCase();
             this.handerAttachment(name);
         },

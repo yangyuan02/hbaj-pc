@@ -167,6 +167,7 @@ export default {
         },
         addAudio() {
             // 新增音频内容
+            this.params.type = "AUDIO";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -185,6 +186,7 @@ export default {
         },
         editAudio() {
             // 修改
+            this.params.type = "AUDIO";
             hotspotContent(
                 {
                     type: "post",

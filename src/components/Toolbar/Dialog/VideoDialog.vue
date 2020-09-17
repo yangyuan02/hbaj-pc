@@ -168,7 +168,8 @@ export default {
             this.params.extra = res.data.path;
         },
         addAudio() {
-            // 新增音频内容
+            // 新增音频内容'
+            this.params.type = "VIDEO";
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -187,6 +188,7 @@ export default {
         },
         editAudio() {
             // 修改
+            this.params.type = "VIDEO";
             hotspotContent(
                 {
                     type: "post",
