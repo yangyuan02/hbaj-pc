@@ -194,7 +194,6 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.getAttachmentList();
-                    console.log(res);
                 }
             });
         },
@@ -244,8 +243,7 @@ export default {
                         type: "post",
                         data: {
                             projectId,
-                            sceneId,
-                            sceneIds
+                            sceneId
                         }
                     },
                     `${projectId}/scene`
