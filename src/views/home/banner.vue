@@ -57,9 +57,22 @@ export default {
         handleClickSlide(index) {
             console.log("当前点击索引：", index);
         },
-        pageAction({ type, aim_id }) {
+        pageAction({ type, aim_id, name }) {
             if (type === "PROJECT") {
-                window.location.href = "http://www.ship2vr.com/hb/";
+                const params = {
+                    taskId: "0",
+                    projectId: aim_id,
+                    from: "2",
+                    name
+                };
+                this.$router.push({
+                    name: "panoEditor",
+                    params
+                });
+                this.$store.commit("SETHISTROY", {
+                    path: `0/${aim_id}/1`,
+                    params
+                });
             } else {
                 this.$router.push({
                     name: "newsDetail",

@@ -243,7 +243,7 @@ export default {
                         type: "post",
                         data: {
                             projectId,
-                            sceneId
+                            sceneIds: [sceneId]
                         }
                     },
                     `${projectId}/scene`
