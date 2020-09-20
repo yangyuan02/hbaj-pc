@@ -6,7 +6,7 @@
  * @Description: 
  -->
 <template>
-    <div class="task-item-content">
+    <div class="task-item-content" @click="goToPedit(item.id, item.project.id, item.name)">
         <div class="task-item-title">
             <div class="text">
                 <p class="ellipsisLineTwo">{{ item.name }}</p>
@@ -21,7 +21,7 @@
                 v-lazy
                 :data-src="globalConfig.imagePath + item.project.imageUrl"
             >
-                <div class="action" @click="goToPedit(item.id, item.project.id, item.name)">
+                <div class="action">
                     <span>立即执行</span>
                 </div>
             </div>
@@ -104,6 +104,7 @@ export default {
     filter: blur(px);
     margin-bottom: 9px;
     padding: 16px 8px 16px 8px;
+    cursor: pointer;
     &:last-child {
         margin-bottom: 0;
     }
