@@ -20,7 +20,7 @@
                 </div>
             </div>
             <el-form
-                ref="loginForm"
+                ref="forgetForm"
                 :model="form"
                 :rules="rules"
                 label-position="left"
@@ -33,9 +33,14 @@
                         placeholder="请输入手机号"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="" prop="code" class="code">
-                    <el-input v-model="form.code" placeholder="验证码" maxlength="6" type="text">
-                        <el-button slot="append">发送验证码</el-button>
+                <el-form-item label="" prop="verifyCode" class="verifyCode">
+                    <el-input
+                        v-model="form.verifyCode"
+                        placeholder="验证码"
+                        maxlength="6"
+                        type="text"
+                    >
+                        <el-button slot="append" @click="send">{{ buttonText }}</el-button>
                     </el-input>
                     <!-- <span></span> -->
                 </el-form-item>
@@ -66,12 +71,15 @@ export default {
             form: {
                 mobile: "",
                 password: "",
-                code: ""
+                verifyCode: ""
             },
+            isClickCode: false,
+            buttonText: "发送验证码",
+            time: 60,
             rules: {
                 mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
                 password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-                code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+                verifyCode: [{ required: true, message: "请输入验证码", trigger: "blur" }]
             }
         };
     },
@@ -91,7 +99,67 @@ export default {
             console.log("打开");
         },
         close() {
-            this.$store.commit("TOGGLE_FORGET");
+            this.$store.state.loginStore.isOpenForget = false;
+        },
+        send() {
+            const sendCode = () => {
+                this.isClickCode = true;
+                let times = this.time;
+                this.buttonTextClone = this.buttonText;
+                this.buttonText = times + "s";
+                const countTimeTimer = setInterval(() => {
+                    times--;
+                    this.buttonText = times + "s";
+
+                    if (times == 0) {
+                        this.isClickCode = false;
+                        this.buttonText = this.buttonTextClone;
+                        clearInterval(countTimeTimer);
+                    }
+                }, 1000);
+                this.countTimeTimer = countTimeTimer;
+            };
+
+            const { mobile } = this.form;
+            if (!validate.isMobile(mobile)) {
+                return this.$message.error("请输入正确的手机号");
+            }
+            if (this.isClickCode) {
+                return false;
+            }
+            user({ type: "GET", data: { mobile } }, "verifyCode").then(res => {
+                if (res.suceeded) {
+                    sendCode();
+                }
+            });
+        },
+        submit() {
+            const { mobile, verifyCode, password } = this.form;
+            if (!validate.isMobile(mobile)) {
+                return this.$message.error("请输入正确的手机号");
+            }
+            if (!verifyCode) {
+                return this.$message.error("请输入验证码");
+            }
+            if (!password) {
+                return this.$message.error("请输入密码");
+            }
+            this.$refs["forgetForm"].validate(valid => {
+                if (valid) {
+                    user(
+                        { type: "POST", data: { mobile, password, verifyCode } },
+                        "password/reset"
+                    ).then(res => {
+                        if (res.suceeded) {
+                            this.$message.error("操作成功");
+                            this.close();
+                            this.$router.push({ path: "/" });
+                        } else {
+                            res.message && this.$message.error(res.message);
+                        }
+                    });
+                }
+            });
         }
     }
 };
