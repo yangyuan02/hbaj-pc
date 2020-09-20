@@ -1,7 +1,7 @@
 <template>
     <el-dialog
-        title="登录"
-        :visible.sync="isOpenLoggin"
+        title="忘记密码"
+        :visible.sync="isOpenForget"
         width="350px"
         :close-on-click-modal="false"
         :modal-append-to-body="false"
@@ -10,7 +10,7 @@
         class="loginDialog"
         top="0vh"
     >
-        <div v-loading="loading" class="login_dialog">
+        <div class="login_dialog">
             <div class="head">
                 <div class="logo">
                     <img src="../Layout/images/logo.png" alt="" />
@@ -33,15 +33,18 @@
                         placeholder="请输入手机号"
                     ></el-input>
                 </el-form-item>
+                <el-form-item label="" prop="code" class="code">
+                    <el-input v-model="form.code" placeholder="验证码" maxlength="6" type="text">
+                        <el-button slot="append">发送验证码</el-button>
+                    </el-input>
+                    <!-- <span></span> -->
+                </el-form-item>
                 <el-form-item label="" prop="password">
                     <el-input
                         v-model="form.password"
                         placeholder="请输入密码"
                         type="password"
                     ></el-input>
-                </el-form-item>
-                <el-form-item label="" prop="" class="forget">
-                    <span @click="forget">忘记密码</span>
                 </el-form-item>
                 <el-form-item class="login_btn">
                     <el-button type="primary" @click="submit">登录</el-button>
@@ -62,13 +65,14 @@ export default {
         return {
             form: {
                 mobile: "",
-                password: ""
+                password: "",
+                code: ""
             },
             rules: {
                 mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
-                password: [{ required: true, message: "请输入密码", trigger: "blur" }]
-            },
-            loading: false
+                password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+                code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+            }
         };
     },
     props: {
@@ -79,7 +83,7 @@ export default {
     },
     computed: {
         ...mapState({
-            isOpenLoggin: state => state.loginStore.isOpenLogin
+            isOpenForget: state => state.loginStore.isOpenForget
         })
     },
     methods: {
@@ -87,70 +91,7 @@ export default {
             console.log("打开");
         },
         close() {
-            this.$store.state.loginStore.isOpenLogin = false;
-        },
-        forget() {
-            this.close();
             this.$store.commit("TOGGLE_FORGET");
-        },
-        submit() {
-            if (!validate.isMobile(this.form.mobile)) {
-                return this.$message.error("请输入正确的手机号");
-            }
-            const { mobile, password } = this.form;
-            this.$refs["loginForm"].validate(valid => {
-                if (valid) {
-                    user({ type: "POST", data: { mobile, password } }, "login").then(res => {
-                        if (res.suceeded) {
-                            const {
-                                suceeded,
-                                data: { authorization, id }
-                            } = res;
-
-                            store.set("authorization", authorization, "local");
-                            store.set("userId", id, "local");
-                            store.set("user", res.data, "local");
-                            this.$store.commit("TOGGLE_LOGIN");
-                            this.$message.success("登录成功");
-                            this.getUserDetail();
-                            this.getMessageDetail();
-                            window.location.href = "/";
-                        } else {
-                            res.message && this.$message.error(res.message);
-                        }
-                    });
-                }
-            });
-        },
-        getUserDetail() {
-            const userId = store.get("userId", "local");
-            user(
-                {
-                    type: "get"
-                },
-                userId
-            ).then(res => {
-                if (res.suceeded) {
-                    this.$store.commit({
-                        type: "SET_USER_INFO",
-                        plylaod: res.data
-                    });
-                    this.user = res.data;
-                }
-            });
-        },
-        getMessageDetail() {
-            messageDetail(
-                {
-                    type: "get"
-                },
-                "unreadCount"
-            ).then(res => {
-                if (res.suceeded) {
-                    const { count } = res.data;
-                    this.count = count;
-                }
-            });
         }
     }
 };
@@ -163,7 +104,7 @@ export default {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        height: 360px;
+        height: 400px;
         border-radius: 4px;
         .el-dialog__body {
             // height: 350px;
@@ -194,18 +135,6 @@ export default {
                             color: rgba(15, 79, 168, 1);
                             line-height: 26px;
                             -webkit-background-clip: text;
-                        }
-                    }
-                }
-                .forget {
-                    line-height: 12px !important;
-                    text-align: right;
-                    margin: 12px 0px;
-
-                    .el-form-item__content {
-                        line-height: 14px;
-                        span {
-                            cursor: pointer;
                         }
                     }
                 }

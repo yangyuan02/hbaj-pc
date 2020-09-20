@@ -1,5 +1,6 @@
 const state = {
     isOpenLogin: false,
+    isOpenForget: false,
     user: {}
 };
 
@@ -10,6 +11,9 @@ const mutations = {
     SET_USER_INFO(state, { plylaod }) {
         console.log("设置用户新", plylaod);
         state.user = plylaod;
+    },
+    TOGGLE_FORGET(state) {
+        state.isOpenForget = !state.isOpenForget;
     }
 };
 

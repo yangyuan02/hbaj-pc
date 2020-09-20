@@ -20,6 +20,8 @@
 
         <!-- 登录弹窗 -->
         <LoginDialog :visible.sync="isOpenLoggin"></LoginDialog>
+        <!-- 重置密码 -->
+        <ForgetDialog :visible.sync="isOpenForget"></ForgetDialog>
     </div>
 </template>
 
@@ -30,6 +32,7 @@ import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
 import LoginDialog from "@/components/Dialog/LoginDialog";
+import ForgetDialog from "@/components/Dialog/ForgetDialog";
 
 export default {
     data() {
@@ -39,11 +42,13 @@ export default {
         Header,
         Footer,
         Sidebar,
-        LoginDialog
+        LoginDialog,
+        ForgetDialog
     },
     computed: {
         ...mapState({
-            isOpenLoggin: state => state.loginStore.isOpenLogin
+            isOpenLoggin: state => state.loginStore.isOpenLogin,
+            isOpenForget: state => state.loginStore.isOpenForget
         })
     }
 };
