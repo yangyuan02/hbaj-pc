@@ -34,7 +34,7 @@
                                     />
                                 </div>
                             </li>
-                            <li>
+                            <li class="resetpassword">
                                 <i class="iconfont icontubiao-20"></i>
                                 <div class="border">
                                     <span>电话</span>
@@ -44,6 +44,7 @@
                                         v-model="user.mobile"
                                         disabled
                                     />
+                                    <span @click="resetPassword">重置密码</span>
                                 </div>
                             </li>
                             <li>
@@ -98,6 +99,10 @@ export default {
         MyHeader
     },
     methods: {
+        resetPassword() {
+            this.$store.commit("SETMOBILE", user.mobile);
+            this.$store.commit("TOGGLE_RESETPASSWORD");
+        },
         getUserDetail() {
             const userId = store.get("userId", "local");
             user(
@@ -184,6 +189,11 @@ export default {
                                 input {
                                     flex: 1;
                                     padding-left: 12px;
+                                }
+                            }
+                            &.resetpassword {
+                                span {
+                                    cursor: pointer;
                                 }
                             }
                         }

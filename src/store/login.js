@@ -1,7 +1,9 @@
 const state = {
     isOpenLogin: false,
     isOpenForget: false,
-    user: {}
+    isOpenFesetPassword: false,
+    user: {},
+    mobile: ""
 };
 
 const mutations = {
@@ -14,6 +16,12 @@ const mutations = {
     },
     TOGGLE_FORGET(state) {
         state.isOpenForget = !state.isOpenForget;
+    },
+    TOGGLE_RESETPASSWORD(state) {
+        state.isOpenFesetPassword = !state.isOpenFesetPassword;
+    },
+    SETMOBILE(state, mobile) {
+        state.mobile = mobile;
     }
 };
 

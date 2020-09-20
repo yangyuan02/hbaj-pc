@@ -1,7 +1,7 @@
 <template>
     <el-dialog
-        title="忘记密码"
-        :visible.sync="isOpenForget"
+        title="重置密码"
+        :visible.sync="isOpenFesetPassword"
         width="350px"
         :close-on-click-modal="false"
         :modal-append-to-body="false"
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <el-form
-                ref="forgetForm"
+                ref="resetPasswordForm"
                 :model="form"
                 :rules="rules"
                 label-position="left"
@@ -31,6 +31,7 @@
                         v-model="form.mobile"
                         maxlength="11"
                         placeholder="请输入手机号"
+                        readonly
                     ></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="verifyCode" class="verifyCode">
@@ -48,6 +49,13 @@
                     <el-input
                         v-model="form.password"
                         placeholder="请输入密码"
+                        type="password"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item label="" prop="confirmPassword">
+                    <el-input
+                        v-model="form.confirmPassword"
+                        placeholder="请再次输入密码"
                         type="password"
                     ></el-input>
                 </el-form-item>
@@ -69,9 +77,10 @@ export default {
     data() {
         return {
             form: {
-                mobile: "",
+                mobile: window.localStorage.getItem("mobile"),
                 password: "",
-                verifyCode: ""
+                verifyCode: "",
+                confirmPassword: ""
             },
             isClickCode: false,
             buttonText: "发送验证码",
@@ -79,6 +88,7 @@ export default {
             rules: {
                 mobile: [{ required: true, message: "请输入手机号", trigger: "blur" }],
                 password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+                confirmPassword: [{ required: true, message: "请再次输入密码", trigger: "blur" }],
                 verifyCode: [{ required: true, message: "请输入验证码", trigger: "blur" }]
             }
         };
@@ -87,19 +97,28 @@ export default {
         visible: {
             type: Boolean,
             default: false
+        },
+        mobile: {
+            type: [String, Number],
+            default: ""
         }
     },
     computed: {
         ...mapState({
-            isOpenForget: state => state.loginStore.isOpenForget
+            isOpenFesetPassword: state => state.loginStore.isOpenFesetPassword
         })
+    },
+    watch: {
+        mobile: function() {
+            this.form.mobile = this.mobile;
+        }
     },
     methods: {
         open() {
             console.log("打开");
         },
         close() {
-            this.$store.state.loginStore.isOpenForget = false;
+            this.$store.state.loginStore.isOpenFesetPassword = false;
         },
         send() {
             const sendCode = () => {
@@ -134,7 +153,7 @@ export default {
             });
         },
         submit() {
-            const { mobile, verifyCode, password } = this.form;
+            const { mobile, verifyCode, password, confirmPassword } = this.form;
             if (!validate.isMobile(mobile)) {
                 return this.$message.error("请输入正确的手机号");
             }
@@ -144,7 +163,10 @@ export default {
             if (!password) {
                 return this.$message.error("请输入密码");
             }
-            this.$refs["forgetForm"].validate(valid => {
+            if (confirmPassword !== password) {
+                return this.$message.error("两次密码输入不一致");
+            }
+            this.$refs["resetPasswordForm"].validate(valid => {
                 if (valid) {
                     user(
                         { type: "POST", data: { mobile, password, verifyCode } },
@@ -153,7 +175,6 @@ export default {
                         if (res.suceeded) {
                             this.$message.success("操作成功");
                             this.close();
-                            this.$router.push({ path: "/" });
                         } else {
                             res.message && this.$message.error(res.message);
                         }
@@ -172,7 +193,7 @@ export default {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        height: 400px;
+        height: 460px;
         border-radius: 4px;
         .el-dialog__body {
             // height: 350px;
