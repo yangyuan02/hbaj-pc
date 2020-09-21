@@ -7,7 +7,7 @@
         :modal-append-to-body="false"
         @open="open"
         @close="close"
-        class="loginDialog"
+        class="resetPasswordDialog"
         top="0vh"
     >
         <div class="login_dialog">
@@ -187,7 +187,7 @@ export default {
 </script>
 
 <style lang="less">
-.loginDialog {
+.resetPasswordDialog {
     /deep/.el-dialog {
         position: absolute;
         left: 50%;
