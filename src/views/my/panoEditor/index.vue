@@ -76,6 +76,7 @@ export default {
         }
     },
     beforeDestroy() {
+        window.removepano && window.removepano("kr");
         this.$store.commit("SETTOGGLETOOLBR", "all");
     },
     mounted() {
