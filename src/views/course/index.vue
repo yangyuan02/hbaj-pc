@@ -53,7 +53,6 @@ export default {
     methods: {
         getCourseList() {
             this.loading = true;
-            const { pageIndex } = this;
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
             this.recommendProjectList = []; // 清空
@@ -61,8 +60,8 @@ export default {
                 {
                     type: "GET",
                     data: {
-                        page: pageIndex,
-                        size: 10,
+                        page: 1,
+                        size: 100000,
                         moduleId,
                         classId: classListId,
                         blockId
@@ -73,45 +72,9 @@ export default {
                 if (res.suceeded) {
                     this.loading = false;
                     const { content, total } = res.data;
-                    if (pageIndex > 1) {
-                        setTimeout(() => {
-                            this.showLoading = false;
-                            this.isScrollLoad = true;
-                            this.recommendProjectList = this.recommendProjectList.concat(
-                                content || []
-                            );
-                        }, 500);
-                    } else {
-                        this.recommendProjectList = content || [];
-                    }
-                    this.pageTotal = total;
-                    if (pageIndex == Math.ceil(total / 10) || !content.length) {
-                        this.showLoading = false;
-                    }
+                    this.recommendProjectList = this.recommendProjectList.concat(content || []);
                 }
             });
-        },
-        scrollLoadList() {
-            const winHeight = window.innerHeight;
-            const scrollTop = document.scrollingElement.scrollTop;
-            const scrollViewHeight =
-                document.querySelector(".scroll-view-wrapper").offsetHeight - 50;
-            const realFunc = () => {
-                if (
-                    winHeight + scrollTop >= scrollViewHeight &&
-                    this.recommendProjectList.length < this.pageTotal
-                ) {
-                    this.showLoading = true;
-                    this.pageIndex += 1;
-                    this.getCourseList();
-                } else {
-                    this.isScrollLoad = true;
-                }
-            };
-            if (this.isScrollLoad) {
-                this.isScrollLoad = false;
-                this.timer = window.requestAnimationFrame(realFunc);
-            }
         }
     },
     watch: {
@@ -122,19 +85,6 @@ export default {
     },
     mounted() {
         this.getCourseList();
-        window.addEventListener(
-            "scroll",
-            this.scrollLoadList,
-            utils.isPassive() ? { passive: true, capture: true } : true
-        );
-    },
-    beforeDestroy() {
-        cancelAnimationFrame(this.timer);
-        window.removeEventListener(
-            "scroll",
-            this.scrollLoadList,
-            utils.isPassive() ? { passive: true, capture: true } : true
-        );
     }
 };
 </script>
