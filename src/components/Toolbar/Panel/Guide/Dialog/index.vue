@@ -93,7 +93,7 @@
 import SelectAction from "./SelectAction.vue";
 import AudioDialog from "./AudioDialog";
 import Audition from "./audition";
-import { hotspotContentDetail, hotspotContent } from "@/model/api";
+import { hotspotContentDetail, hotspotContent, youdao } from "@/model/api";
 
 export default {
     props: {
@@ -174,8 +174,13 @@ export default {
             if (!this.AUDIO.content) {
                 return this.$message.error("请输入文字");
             }
-            xunfeitts(this.AUDIO.content).then(res => {
-                this.textTransform = res;
+            youdao(
+                {
+                    type: "post"
+                },
+                `?text=${this.AUDIO.content}&langType=zh-CHS`
+            ).then(res => {
+                this.textTransform = res.data;
                 this.shows.isOpenAudition = true;
                 this.attchmentId = this.data.id;
                 this.editData = this.AUDIO;

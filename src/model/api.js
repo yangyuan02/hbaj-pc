@@ -40,3 +40,5 @@ export const hotspotDetail = (data, url) => request(`${baseUrl}/hotspot/${url}`,
 export const hotspotContent = (data, url) => request(`${baseUrl}/hotspotContent/${url}`, data);
 
 export const hotspotContentDetail = (data, url) => request(`${baseUrl}/hotspotContent`, data);
+
+export const youdao = (data, url) => request(`${baseUrl}/youdao/tts/${url}`, data);

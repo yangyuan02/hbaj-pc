@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { hotspotContentDetail, hotspotContent } from "@/model/api";
+import { hotspotContentDetail, hotspotContent, youdao } from "@/model/api";
 import Audition from "./audition";
 
 export default {
@@ -231,8 +231,12 @@ export default {
             if (!this.params.content) {
                 return this.$message.error("请输入文字");
             }
-            xunfeitts(this.params.content).then(res => {
-                this.textTransform = res;
+            youdao(
+                {
+                    type: "post"
+                }`?text=${this.params.content}&langType=en-GBR`
+            ).then(res => {
+                this.textTransform = res.data;
                 this.shows.isOpenAudition = true;
                 console.log("生成成功", res);
             });
