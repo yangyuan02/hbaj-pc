@@ -234,7 +234,8 @@ export default {
             youdao(
                 {
                     type: "post"
-                }`?text=${this.params.content}&langType=en-GBR`
+                },
+                `?text=${this.params.content}&langType=en-GBR`
             ).then(res => {
                 this.textTransform = res.data;
                 this.shows.isOpenAudition = true;
