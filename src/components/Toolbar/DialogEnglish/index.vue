@@ -21,14 +21,6 @@
                         :onSortOpen="onSortOpen"
                     ></TextList>
                 </el-tab-pane> -->
-                <el-tab-pane label="图片" name="image">
-                    <ImagesList
-                        :list="display.imageList"
-                        :onSuccess="getAttachmentImages"
-                        :onNotifiy="notifiy"
-                        :onSortOpen="onSortOpen"
-                    ></ImagesList>
-                </el-tab-pane>
                 <el-tab-pane label="音频" name="audio">
                     <AudioList
                         :list="display.audioList"
@@ -37,6 +29,15 @@
                         :onSortOpen="onSortOpen"
                     ></AudioList>
                 </el-tab-pane>
+                <el-tab-pane label="图片" name="image">
+                    <ImagesList
+                        :list="display.imageList"
+                        :onSuccess="getAttachmentImages"
+                        :onNotifiy="notifiy"
+                        :onSortOpen="onSortOpen"
+                    ></ImagesList>
+                </el-tab-pane>
+
                 <!-- <el-tab-pane label="视频" name="video">
                     <VideoHban
                         :src="display.videoList[0].extra"
@@ -114,7 +115,7 @@ import { hotspotContent, hotspotContentDetail } from "@/model/api";
 export default {
     data() {
         return {
-            activeName: "image",
+            activeName: "audio",
             loading: {
                 detail: false
             },
@@ -202,11 +203,19 @@ export default {
         }
     },
     methods: {
+        clearDialog() {
+            this.display.textList = [];
+            this.display.imageList = [];
+            this.display.audioList = [{ extra: "" }];
+            this.display.videoList = [{ extra: "" }];
+            this.display.richText = {};
+        },
         open() {
-            console.log("打开");
-            this.getAttachmentImages();
+            this.activeName = "audio";
+            this.getAttachmentAudio("audio");
         },
         close() {
+            this.clearDialog();
             this.$emit("update:visible", false);
         },
         save() {
@@ -241,6 +250,7 @@ export default {
         //         });
         // },
         handleClick(tab, event) {
+            this.clearDialog();
             const name = tab.name.toLocaleUpperCase();
             this.handerAttachment(name);
         },
@@ -260,6 +270,10 @@ export default {
                 this.shows.isOpenImagesDialog = true;
             }
             if (this.activeName === "audio") {
+                if (this.buttonText === "修改") {
+                    this.editData = this.display.audioList[0];
+                    this.editType = "audio";
+                }
                 this.shows.isOpenAudioDialog = true;
             }
             if (this.activeName === "video") {

@@ -13,7 +13,17 @@
     >
         <main v-loading="loading.detail" class="attchment_dialog">
             <el-tabs v-model="activeName" @tab-click="handleClick" class="attach_model">
-                <el-tab-pane label="文本" name="text">
+                <el-tab-pane label="文章" name="html" v-if="isShowHtml">
+                    <el-input
+                        type="text"
+                        placeholder="请输入标题"
+                        class="richTitle"
+                        v-model="RichTextValue"
+                    ></el-input>
+                    <RichTextBox ref="RichTextBox"></RichTextBox>
+                </el-tab-pane>
+
+                <el-tab-pane label="文本" name="text" v-if="isShowText">
                     <TextList
                         :list="display.textList"
                         :onSuccess="getAttachmentText"
@@ -21,7 +31,8 @@
                         :onSortOpen="onSortOpen"
                     ></TextList>
                 </el-tab-pane>
-                <el-tab-pane label="图片" name="image">
+
+                <el-tab-pane label="图片" name="image" v-if="isShowImage">
                     <ImagesList
                         :list="display.imageList"
                         :onSuccess="getAttachmentImages"
@@ -29,6 +40,7 @@
                         :onSortOpen="onSortOpen"
                     ></ImagesList>
                 </el-tab-pane>
+
                 <el-tab-pane label="音频" name="audio">
                     <!-- <AudioHban
                         :src="display.audioList[0].extra"
@@ -79,15 +91,6 @@
                     <div class="desc">
                         <p>{{ display.videoList[0].content }}</p>
                     </div>
-                </el-tab-pane>
-                <el-tab-pane label="富文本" name="html">
-                    <el-input
-                        type="text"
-                        placeholder="请输入标题"
-                        class="richTitle"
-                        v-model="RichTextValue"
-                    ></el-input>
-                    <RichTextBox ref="RichTextBox"></RichTextBox>
                 </el-tab-pane>
             </el-tabs>
             <div class="operate">
@@ -156,7 +159,7 @@ import { hotspotContent, hotspotContentDetail } from "@/model/api";
 export default {
     data() {
         return {
-            activeName: "text",
+            activeName: this.isShowHtml ? "html" : "text",
             RichTextValue: "", // 富文本标题
             loading: {
                 detail: false
@@ -202,6 +205,22 @@ export default {
         dialogTitle: {
             type: String,
             default: "附件参考内容编辑"
+        },
+        isShowText: {
+            type: Boolean,
+            default: true
+        },
+        isShowHtml: {
+            type: Boolean,
+            default: true
+        },
+        isShowImage: {
+            type: Boolean,
+            default: true
+        },
+        id: {
+            type: [String, Number],
+            default: ""
         }
     },
     components: {
@@ -222,6 +241,9 @@ export default {
         data(newVal) {
             console.log(newVal);
             this.params = newVal;
+        },
+        id(newVal) {
+            this.id = newVal;
         }
     },
     computed: {
@@ -261,8 +283,13 @@ export default {
             this.clearHtml();
         },
         open() {
-            this.activeName = "text";
-            this.getAttachmentText("text");
+            if (!this.isShowHtml) {
+                this.activeName = "text";
+                this.getAttachmentText("text");
+            } else {
+                this.activeName = "html";
+                this.getAttachmentHTML("html");
+            }
         },
         close() {
             this.clearDialog();
@@ -272,7 +299,7 @@ export default {
             console.log("保存");
         },
         clearHtml() {
-            this.$refs.RichTextBox.setHtml("");
+            this.$refs.RichTextBox && this.$refs.RichTextBox.setHtml("");
             this.RichTextValue = "";
             this.display.richText = {};
         },
@@ -412,7 +439,7 @@ export default {
                 {
                     type: "get",
                     data: {
-                        hotspotId: id,
+                        hotspotId: id || this.id,
                         type,
                         size: 1000,
                         page: 1

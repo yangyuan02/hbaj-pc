@@ -66,6 +66,8 @@
         <AttachmentComponent
             :visible.sync="shows.isOpenAttachment"
             :data="currentItem"
+            :isShowText="false"
+            :isShowImage="false"
         ></AttachmentComponent>
 
         <!-- 修改附件弹窗 -->

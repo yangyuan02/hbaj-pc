@@ -58,6 +58,7 @@
         <AttachmentComponent
             :visible.sync="isOpenAttachment"
             :data="currentItem"
+            :isShowHtml="false"
             dialogTitle="场景标签内容编辑"
         ></AttachmentComponent>
 
@@ -65,6 +66,7 @@
             :visible.sync="isOpenEngLishAttachment"
             :data="currentItem"
             dialogTitle="场景标签内容编辑"
+            :id="id"
         ></DialogEnglishDialog>
     </div>
 </template>
@@ -83,7 +85,8 @@ export default {
             isOpenEditAttachment: false,
             isOpenAttachment: false,
             isOpenEngLishAttachment: false,
-            currentItem: {}
+            currentItem: {},
+            id: ""
         };
     },
     computed: {
@@ -179,6 +182,7 @@ export default {
                 });
         },
         editOpenEditAttachmentName(data) {
+            console.log(data, "data");
             // 修改附件名称弹窗
             this.currentItem = data;
             this.isOpenEditAttachment = true;
@@ -213,8 +217,9 @@ export default {
         editAttachment(data) {
             this.currentItem = {};
             this.currentItem = data;
+            this.id = data.id;
             const modules = this.$route.params.modules;
-
+            console.log(data, "data");
             if (modules && modules === "专业英语") {
                 this.isOpenEngLishAttachment = true;
             } else {

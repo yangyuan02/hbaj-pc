@@ -43,7 +43,7 @@
                     >
                     </el-input>
                 </el-form-item>
-                <el-form-item label="描述" prop="title" class="title">
+                <el-form-item label="描述" prop="content" class="content">
                     <el-input
                         type="textarea"
                         :rows="6"
