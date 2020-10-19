@@ -25,22 +25,23 @@
                                 v-if="selectData.img1"
                             />
                         </div>
-                        <div class="digest">
+                        <!-- <div class="digest">
                             <div class="title">
                                 <span>简介</span>
                             </div>
                             <div class="text">
                                 <p>{{ data.title }}</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="content">
-                        <el-input
+                        <!-- <el-input
                             type="textarea"
                             :rows="6"
                             placeholder="内容"
-                            v-model="AUDIO.content"
-                        ></el-input>
+                            v-model="data.title"
+                        ></el-input> -->
+                        {{ data.title }}
                     </div>
                 </div>
                 <div class="hostcontent_right">
@@ -53,10 +54,24 @@
                             ref="audio"
                         ></audio>
                     </div>
+                    <div class="lang">
+                        <el-radio-group v-model="langType" size="mini">
+                            <el-radio-button label="zh-CHS">中文</el-radio-button>
+                            <el-radio-button label="en-GBR">英文</el-radio-button>
+                        </el-radio-group>
+                    </div>
                     <div class="operator">
                         <i class="iconfont icontubiaoweb-34 cursor" @click="audition"></i>
                         <i class="iconfont icontubiaoweb-33 cursor" @click="addAudio"></i>
                         <i class="iconfont icontubiaoweb-27 cursor" @click="deleteItem"></i>
+                    </div>
+                    <div class="text-content-container">
+                        <el-input
+                            type="textarea"
+                            :rows="6"
+                            placeholder="内容"
+                            v-model="AUDIO.content"
+                        ></el-input>
                     </div>
                 </div>
             </div>
@@ -68,8 +83,8 @@
             :editData="editData"
         ></SelectAction>
         <div slot="footer">
-            <el-button @click="close">关闭</el-button>
-            <!-- <el-button type="primary" :loading="loading.save" @click="save">保存</el-button> -->
+            <!-- <el-button @click="close">关闭</el-button> -->
+            <el-button type="primary" @click="save">保存</el-button>
         </div>
         <AudioDialog
             :visible.sync="shows.isOpenAudioDialog"
@@ -114,6 +129,7 @@ export default {
     data() {
         return {
             textContent: "",
+            langType: "zh-CHS",
             textTransform: "", // 生成的url
             textSrc: "", // 确定之后的url
             shows: {
@@ -138,7 +154,26 @@ export default {
             this.$emit("update:visible", false);
         },
         save() {
-            this.add();
+            this.editAudio();
+        },
+        editAudio() {
+            // 修改
+            const saveParams = this.AUDIO;
+            if (this.textSrc) {
+                saveParams.extra = this.textSrc;
+            }
+            hotspotContent(
+                {
+                    type: "post",
+                    data: saveParams
+                },
+                saveParams.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.close();
+                }
+            });
         },
         deleteItem() {
             this.$confirm(`此操作文件, 是否继续?`, "提示", {
@@ -178,7 +213,7 @@ export default {
                 {
                     type: "post"
                 },
-                `?text=${this.AUDIO.content}&langType=zh-CHS`
+                `?text=${this.AUDIO.content}&langType=${this.langType}`
             ).then(res => {
                 this.textTransform = res.data;
                 this.shows.isOpenAudition = true;
@@ -199,6 +234,7 @@ export default {
         onConfirmAudio(src) {
             // 试听之后确定回调
             this.textSrc = src;
+            this.AUDIO.extra = src;
         },
         handerAttachment(type) {
             // 获取具体的附件信息
@@ -273,8 +309,11 @@ export default {
             .hostcontent_right {
                 // display: flex;
                 // align-items: center;
+                .lang {
+                    margin: 30px 0;
+                    margin-bottom: 20px;
+                }
                 .operator {
-                    margin-top: 30px;
                     height: 40px;
                     display: flex;
                     align-items: center;
@@ -286,7 +325,7 @@ export default {
             }
         }
         .el-dialog__body {
-            height: 250px;
+            height: 350px;
         }
     }
 }

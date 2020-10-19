@@ -95,26 +95,26 @@ export default {
         },
         save() {
             this.onConfirmAudio && this.onConfirmAudio(this.src);
-            this.editAudio();
+            // this.editAudio();
             this.close();
-        },
-        editAudio() {
-            // 修改
-            this.params.extra = this.src;
-            hotspotContent(
-                {
-                    type: "post",
-                    data: this.params
-                },
-                this.params.id
-            ).then(res => {
-                if (res.suceeded) {
-                    this.$message.success("操作成功");
-                    this.onSuccess && this.onSuccess(this.src);
-                    this.close();
-                }
-            });
         }
+        // editAudio() {
+        //     // 修改
+        //     this.params.extra = this.src;
+        //     hotspotContent(
+        //         {
+        //             type: "post",
+        //             data: this.params
+        //         },
+        //         this.params.id
+        //     ).then(res => {
+        //         if (res.suceeded) {
+        //             this.$message.success("操作成功");
+        //             this.onSuccess && this.onSuccess(this.src);
+        //             this.close();
+        //         }
+        //     });
+        // }
     }
 };
 </script>
