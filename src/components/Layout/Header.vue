@@ -1,12 +1,12 @@
 <template>
     <header>
         <div class="logo">
-            <div class="thumb">
-                <img src="./images/logo.png" alt="" />
+            <div>
+                <img src="./images/logo-2.jpg" alt="" height="36" />
             </div>
-            <div class="logo-text">
+            <!-- <div class="logo-text">
                 <span>海宝安检</span>
-            </div>
+            </div> -->
         </div>
         <div class="header-right">
             <div class="crumbs">
@@ -92,7 +92,7 @@ header {
         border-bottom: 1px solid #fff;
         display: flex;
         align-items: center;
-        padding-left: 36px;
+        padding-left: 10px;
         .thumb {
             width: 48px;
             height: 27px;

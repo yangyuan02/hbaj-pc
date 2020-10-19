@@ -99,6 +99,15 @@ export default new Router({
             }
         },
         {
+            path: "/my/agora",
+            name: "Myagora",
+            component: () => import("@/views/my/agora"),
+            meta: {
+                title: "远程检查",
+                requireLogin: true
+            }
+        },
+        {
             path: "/my/p_ditor/:taskId/:projectId/:from/:modules?",
             name: "panoEditor",
             component: () => import("@/views/my/panoEditor"),

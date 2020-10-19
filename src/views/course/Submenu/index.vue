@@ -151,7 +151,7 @@ export default {
                 border-radius: 12px;
                 &.active {
                     // box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-                    transform: scale(1.1);
+                    transform: scale(1.13);
                 }
                 img {
                     width: 100%;

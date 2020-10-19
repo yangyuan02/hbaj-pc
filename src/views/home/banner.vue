@@ -59,6 +59,9 @@ export default {
         },
         pageAction({ type, aim_id, name }) {
             if (type === "PROJECT") {
+                if (!window.localStorage.getItem("authorization")) {
+                    return this.$store.commit("TOGGLE_LOGIN");
+                }
                 const params = {
                     taskId: "0",
                     projectId: aim_id,

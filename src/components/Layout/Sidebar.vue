@@ -60,7 +60,7 @@ export default {
                 },
                 {
                     text: "我的信息",
-                    icon: "icontubiaoweb-06",
+                    icon: "icongerenxinxi",
                     path: "/my/person",
                     name: "MySetting"
                 },
@@ -79,6 +79,11 @@ export default {
                     text: "我的通知",
                     icon: "icontubiaoweb-06",
                     path: "/my/message"
+                },
+                {
+                    text: "远程检查",
+                    icon: "iconjiankong",
+                    path: "/my/agora"
                 }
             ],
             modulesList: store.get("modulesList", "local")

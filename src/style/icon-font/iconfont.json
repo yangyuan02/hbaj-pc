@@ -1,10 +1,24 @@
 {
   "id": "1787618",
-  "name": "海宝安检 web端图标库",
+  "name": "海宝安检 WEB端图标库",
   "font_family": "iconfont",
   "css_prefix_text": "icon",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "10268536",
+      "name": "个人信息",
+      "font_class": "gerenxinxi",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "2166693",
+      "name": "监控",
+      "font_class": "jiankong",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
     {
       "icon_id": "8526222",
       "name": "暂无",
