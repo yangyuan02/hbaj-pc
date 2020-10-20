@@ -299,7 +299,7 @@ export default {
                 content: "请添加语音说明", // 内容
                 extra: "static/app/sound/defaultguide_001.wav", // 默认值
                 hotspotId, //
-                title: "引导标识", // 标题
+                title: "请添加内容提示", // 标题
                 type: "AUDIO" // 类型
             };
             const hotspotContentList = [image, audio];

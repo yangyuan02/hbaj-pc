@@ -56,3 +56,7 @@
 .iphone-footer {
     padding-bottom: 0.68rem;
 }
+
+.inputNoResize textarea {
+    resize: none;
+}

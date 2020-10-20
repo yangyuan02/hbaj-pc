@@ -35,13 +35,13 @@
                         </div> -->
                     </div>
                     <div class="content">
-                        <!-- <el-input
+                        <el-input
                             type="textarea"
                             :rows="6"
                             placeholder="内容"
-                            v-model="data.title"
-                        ></el-input> -->
-                        {{ data.title }}
+                            v-model="AUDIO.title"
+                        ></el-input>
+                        <!-- {{ data.title }} -->
                     </div>
                 </div>
                 <div class="hostcontent_right">
@@ -71,6 +71,7 @@
                             :rows="6"
                             placeholder="内容"
                             v-model="AUDIO.content"
+                            class="inputNoResize"
                         ></el-input>
                     </div>
                 </div>
@@ -128,7 +129,6 @@ export default {
     },
     data() {
         return {
-            textContent: "",
             langType: "zh-CHS",
             textTransform: "", // 生成的url
             textSrc: "", // 确定之后的url
@@ -283,8 +283,8 @@ export default {
                 .info {
                     display: flex;
                     .action {
-                        width: 96px;
-                        height: 96px;
+                        width: 166px;
+                        height: 166px;
                         // background: rgba(216, 216, 216, 1) center center;
                         background-position: center center;
                         background-size: 100%;
