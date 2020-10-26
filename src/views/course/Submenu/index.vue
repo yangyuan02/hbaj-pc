@@ -55,7 +55,7 @@ export default {
                 },
                 {
                     src: img5,
-                    title: "CIC示范船"
+                    title: "CIC2019专项船"
                 },
                 {
                     src: img4,
@@ -161,7 +161,8 @@ export default {
                     position: absolute;
                     left: 19px;
                     top: 19px;
-                    width: 77px;
+                    // width: 77px;
+                    padding: 0 10px;
                     height: 21px;
                     text-align: center;
                     line-height: 21px;

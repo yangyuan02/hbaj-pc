@@ -57,7 +57,7 @@
                     <div class="lang">
                         <el-radio-group v-model="langType" size="mini">
                             <el-radio-button label="zh-CHS">中文</el-radio-button>
-                            <el-radio-button label="en-GBR">英文</el-radio-button>
+                            <el-radio-button label="en">英文</el-radio-button>
                         </el-radio-group>
                     </div>
                     <div class="operator">

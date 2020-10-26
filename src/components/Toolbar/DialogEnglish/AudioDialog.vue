@@ -235,7 +235,7 @@ export default {
                 {
                     type: "post"
                 },
-                `?text=${this.params.content}&langType=en-GBR`
+                `?text=${this.params.content}&langType=en`
             ).then(res => {
                 this.textTransform = res.data;
                 this.shows.isOpenAudition = true;
