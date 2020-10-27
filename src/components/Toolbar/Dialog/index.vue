@@ -100,35 +100,35 @@
         </main>
         <TextDialog
             :visible.sync="shows.isOpenTextDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentText"
             :editType="editType"
         ></TextDialog>
         <ImageDialog
             :visible.sync="shows.isOpenImagesDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentImages"
             :editType="editType"
         ></ImageDialog>
         <AudioDialog
             :visible.sync="shows.isOpenAudioDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentAudio"
             :editType="editType"
         ></AudioDialog>
         <VideoDialog
             :visible.sync="shows.isOpenVideoDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentVideo"
             :editType="editType"
         ></VideoDialog>
         <SortList
             :visible.sync="shows.isOpenSortTextList"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :getType="getType"
             :onSuccess="type => handerAttachment(type)"
             :list="sortList"
