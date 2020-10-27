@@ -159,6 +159,7 @@ export default {
             // 新增图片内容
             this.params.id = "";
             this.params.type = "IMAGE";
+            this.params.hotspotId = this.id;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList

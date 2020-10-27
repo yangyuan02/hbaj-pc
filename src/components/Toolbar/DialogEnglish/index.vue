@@ -55,35 +55,35 @@
         </main>
         <TextDialog
             :visible.sync="shows.isOpenTextDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentText"
             :editType="editType"
         ></TextDialog>
         <ImageDialog
             :visible.sync="shows.isOpenImagesDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentImages"
             :editType="editType"
         ></ImageDialog>
         <AudioDialog
             :visible.sync="shows.isOpenAudioDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentAudio"
             :editType="editType"
         ></AudioDialog>
         <VideoDialog
             :visible.sync="shows.isOpenVideoDialog"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :editData="editData"
             :onSuccess="getAttachmentVideo"
             :editType="editType"
         ></VideoDialog>
         <SortList
             :visible.sync="shows.isOpenSortTextList"
-            :id="attchmentId"
+            :id="id || attchmentId"
             :getType="getType"
             :onSuccess="type => handerAttachment(type)"
             :list="sortList"
@@ -156,6 +156,10 @@ export default {
         dialogTitle: {
             type: String,
             default: "附件参考内容编辑"
+        },
+        id: {
+            type: [String, Number],
+            default: ""
         }
     },
     components: {
@@ -177,6 +181,9 @@ export default {
         data(newVal) {
             console.log(newVal);
             this.params = newVal;
+        },
+        id(newVal) {
+            this.id = newVal;
         }
     },
     computed: {
@@ -343,7 +350,7 @@ export default {
                 {
                     type: "get",
                     data: {
-                        hotspotId: id,
+                        hotspotId: id || this.id,
                         type,
                         size: 1000,
                         page: 1

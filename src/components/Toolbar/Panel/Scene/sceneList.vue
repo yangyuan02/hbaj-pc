@@ -60,6 +60,7 @@
             :data="currentItem"
             :isShowHtml="false"
             dialogTitle="场景标签内容编辑"
+            :id="id"
         ></AttachmentComponent>
 
         <DialogEnglishDialog

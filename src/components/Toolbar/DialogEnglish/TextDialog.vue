@@ -113,6 +113,7 @@ export default {
         addText() {
             // 新增文本内容
             this.params.id = "";
+            this.params.hotspotId = this.id;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList

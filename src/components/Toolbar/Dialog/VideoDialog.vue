@@ -170,6 +170,7 @@ export default {
         addAudio() {
             // 新增音频内容'
             this.params.type = "VIDEO";
+            this.params.hotspotId = this.id;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
