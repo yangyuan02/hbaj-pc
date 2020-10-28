@@ -1,7 +1,7 @@
 <template>
     <div class="home_banner">
         <div class="title">
-            <h2>主页内容</h2>
+            <h2>推荐内容</h2>
         </div>
         <div class="banner ui-lazyLoad-pic">
             <div class="wrapper">

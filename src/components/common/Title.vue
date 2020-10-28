@@ -3,6 +3,9 @@
         <div class="title">
             <span>{{ title }}</span>
         </div>
+        <div class="button-group-slot">
+            <slot></slot>
+        </div>
         <div class="more" v-if="isMore">
             <span @click="dispatchEvent">更多</span>
         </div>

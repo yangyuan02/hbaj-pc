@@ -1,7 +1,19 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="我的任务" :isMore="false"></Title>
+            <Title title="我的任务" :isMore="false">
+                <el-radio-group v-model="status" @change="changeStatus" size="mini">
+                    <el-radio-button :label="1" type="primary">
+                        进行中
+                    </el-radio-button>
+                    <el-radio-button :label="2" type="primary">
+                        已完成
+                    </el-radio-button>
+                    <el-radio-button :label="3" type="primary">
+                        已到期
+                    </el-radio-button>
+                </el-radio-group>
+            </Title>
             <!-- <Calendar></Calendar> -->
             <div class="task_list scroll-view-wrapper" v-loading="loading">
                 <template v-if="list.length > 0">
@@ -33,7 +45,8 @@ export default {
             isScrollLoad: true,
             showLoading: false,
             pageTotal: 0,
-            loading: false
+            loading: false,
+            status: 1
         };
     },
     components: {
@@ -45,6 +58,10 @@ export default {
         Empty
     },
     methods: {
+        changeStatus() {
+            this.pageIndex = 1;
+            this.getTaskList();
+        },
         getTaskList() {
             const { pageIndex } = this;
             this.loading = true;
@@ -54,7 +71,8 @@ export default {
                 data: {
                     page: pageIndex,
                     size: 10,
-                    userId
+                    userId,
+                    status: this.status
                 }
             }).then(res => {
                 if (res.suceeded) {

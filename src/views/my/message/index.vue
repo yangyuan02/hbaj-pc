@@ -1,7 +1,16 @@
 <template>
     <div class="message_container">
         <div class="message_info">
-            <Title title="我的消息" :isMore="false"></Title>
+            <Title title="我的消息" :isMore="false">
+                <el-radio-group v-model="status" @change="changeStatus" size="mini">
+                    <el-radio-button :label="0" type="primary">
+                        未读
+                    </el-radio-button>
+                    <el-radio-button :label="1" type="primary">
+                        已读
+                    </el-radio-button>
+                </el-radio-group>
+            </Title>
             <div class="message_list scroll-view-wrapper" v-loading="loading">
                 <template v-if="list.length > 0">
                     <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
@@ -30,7 +39,8 @@ export default {
             isScrollLoad: true,
             pageTotal: 0,
             showLoading: false,
-            loading: false
+            loading: false,
+            status: 0
         };
     },
     components: {
@@ -40,6 +50,10 @@ export default {
         Empty
     },
     methods: {
+        changeStatus() {
+            this.pageIndex = 1;
+            this.getMessageList();
+        },
         getMessageList() {
             const { pageIndex } = this;
             this.loading = true;
@@ -49,7 +63,8 @@ export default {
                     data: {
                         page: pageIndex,
                         size: "10",
-                        receiver: this.userId
+                        receiver: this.userId,
+                        status: this.status
                     }
                 },
                 "private"

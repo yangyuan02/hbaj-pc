@@ -120,6 +120,7 @@ export default {
         height: 70px;
         margin-left: 11px;
         flex-shrink: 0;
+        background-size: cover !important;
 
         // background: #f0f0f0;
         img {

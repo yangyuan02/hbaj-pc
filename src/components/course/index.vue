@@ -19,7 +19,7 @@
                 <div class="text">
                     <p class="ellipsis2">{{ item.name }}</p>
                 </div>
-                <div class="status">
+                <div :class="`status status${item.publicFlg}`">
                     <span>{{ item.publicFlg | formPublicFlg }}</span>
                 </div>
             </div>
@@ -90,6 +90,7 @@ export default {
         height: 70px;
         flex-shrink: 0;
         margin-right: 11px;
+        background-size: cover !important;
         img {
             width: 100%;
             height: 100%;
@@ -124,8 +125,14 @@ export default {
                 font-size: 10px;
                 color: #fff;
                 text-align: center;
-                background: rgba(59, 206, 180, 1);
+
                 border-radius: 1px;
+                &.status0 {
+                    background: red;
+                }
+                &.status1 {
+                    background: rgba(59, 206, 180, 1);
+                }
             }
         }
         .course-item-digest {
