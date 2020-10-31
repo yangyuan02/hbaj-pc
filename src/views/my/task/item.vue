@@ -150,6 +150,7 @@ export default {
             align-items: center;
             flex-shrink: 0;
             cursor: pointer;
+            background-size: cover !important;
             .action {
                 width: 75px;
                 height: 20px;

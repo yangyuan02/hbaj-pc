@@ -24,7 +24,7 @@ import Nav from "@/components/common/Nav";
 import Title from "@/components/common/Title";
 import Submenu from "../../course/Submenu";
 import CourseItem from "@/components/course";
-import { home } from "@/model/api";
+import { project } from "@/model/api";
 import store from "@/widget/store";
 import utils from "@/widget/utils";
 export default {
@@ -52,19 +52,16 @@ export default {
             let { moduleId, blockId, classListId } = this.$route.query;
             classListId = classListId.toString() === "-1" ? "" : classListId;
             this.recommendProjectList = []; // 清空
-            home(
-                {
-                    type: "GET",
-                    data: {
-                        page: pageIndex,
-                        size: 10,
-                        moduleId,
-                        classId: classListId,
-                        blockId
-                    }
-                },
-                "project"
-            ).then(res => {
+            project({
+                type: "GET",
+                data: {
+                    page: pageIndex,
+                    size: 10,
+                    moduleId,
+                    classId: classListId,
+                    blockId
+                }
+            }).then(res => {
                 if (res.suceeded) {
                     this.loading = false;
                     const { content, total } = res.data;

@@ -33,6 +33,8 @@ export const taskDetail = (data, url) => request(`${baseUrl}/task/${url}`, data)
 
 export const projectDetail = (data, url) => request(`${baseUrl}/project/${url}`, data);
 
+export const project = data => request(`${baseUrl}/project`, data);
+
 export const hotspot = (data, url) => request(`${baseUrl}/hotspot`, data);
 
 export const hotspotDetail = (data, url) => request(`${baseUrl}/hotspot/${url}`, data);

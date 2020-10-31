@@ -6,11 +6,7 @@
  * @Description: 
  -->
 <template>
-    <div
-        class="message-item-content"
-        :class="[item.status === 0 ? 'unread' : '']"
-        @click="message(item)"
-    >
+    <div class="message-item-content cursor" @click="message(item)">
         <div class="role">
             <div class="role-type">
                 <div class="thumb"></div>
@@ -40,13 +36,17 @@ export default {
         item: {
             type: Object,
             default: {}
+        },
+        onSuccess: {
+            type: Function,
+            default: () => {}
         }
     },
     methods: {
         message(item) {
             const { id, status } = item;
             if (status === 1) {
-                return this.$toast("消息是已读状态");
+                return this.$message.error("消息是已读状态");
             }
             messageDetail(
                 {
@@ -56,7 +56,8 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     item.status = 0;
-                    this.$toast("消息已读");
+                    this.onSuccess && this.onSuccess();
+                    this.$message.success("消息已读");
                 }
                 console.log(res);
             });

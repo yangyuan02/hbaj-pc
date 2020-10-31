@@ -13,7 +13,12 @@
             </Title>
             <div class="message_list scroll-view-wrapper" v-loading="loading">
                 <template v-if="list.length > 0">
-                    <message-item v-for="item in list" :key="item.id" :item="item"></message-item>
+                    <message-item
+                        v-for="item in list"
+                        :key="item.id"
+                        :item="item"
+                        :onSuccess="getMessageList"
+                    ></message-item>
                 </template>
                 <Empty v-else />
             </div>
