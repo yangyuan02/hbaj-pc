@@ -59,7 +59,8 @@ export default {
                     size: 10,
                     moduleId,
                     classId: classListId,
-                    blockId
+                    blockId,
+                    publishFlg: 1
                 }
             }).then(res => {
                 if (res.suceeded) {

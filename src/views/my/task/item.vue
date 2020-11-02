@@ -6,7 +6,10 @@
  * @Description: 
  -->
 <template>
-    <div class="task-item-content" @click="goToPedit(item.id, item.project.id, item.name)">
+    <div
+        class="task-item-content"
+        @click="goToPedit(item.id, item.project.id, item.name, item.status)"
+    >
         <div class="task-item-title">
             <div class="text">
                 <p class="ellipsisLineTwo">{{ item.name }}</p>
@@ -60,7 +63,10 @@ export default {
         }
     },
     methods: {
-        goToPedit(taskId, projectId, name) {
+        goToPedit(taskId, projectId, name, status) {
+            if (status === 2) {
+                return this.$message.error("任务已完成,修改请联系管理员");
+            }
             const params = {
                 taskId,
                 projectId,
