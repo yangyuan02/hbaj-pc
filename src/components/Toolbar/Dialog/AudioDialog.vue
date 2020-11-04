@@ -180,6 +180,8 @@ export default {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
                     this.$refs["form"].resetFields();
+                    this.params.extra = "";
+                    this.fileList = [];
                     this.close();
                     this.onSuccess && this.onSuccess();
                 }
@@ -197,6 +199,9 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
+                    this.$refs["form"].resetFields();
+                    this.params.extra = "";
+                    this.fileList = [];
                     this.close();
                     this.onSuccess && this.onSuccess();
                 }
