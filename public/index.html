@@ -19,6 +19,26 @@
             content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
         />
         <title>加载中...</title>
+        
+        <% htmlWebpackPlugin.options.src &&
+        htmlWebpackPlugin.options.src.map(function(item) { %> <% if(item.async){ %>
+        <script
+          src="<%= item.url %>"
+          async="<%= item.async %>"
+          data-name="<%= item.name %>"
+          data-cdn="<%= item.cdn %>"
+          onerror="SCRIPT_ERROR(this)"
+        ></script>
+        <% }else{ %>
+        <script
+          src="<%= item.url %>"
+          data-name="<%= item.name %>"
+          data-cdn="<%= item.cdn %>"
+          onerror="SCRIPT_ERROR(this)"
+        ></script>
+        <% } %> <% }) %>
+
+
         <script type="text/javascript" src="https://msa_pc.vr2shipping.com/pano/jquery.js"></script>
         <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <script src="https://msa_pc.vr2shipping.com/pano/layui/layui.js"></script>
