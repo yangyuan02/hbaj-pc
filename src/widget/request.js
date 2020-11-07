@@ -69,7 +69,7 @@ export default function request(
         options.headers["Authorization"] = `Bearer ${store.get("authorization", "local")}`;
         utils.setCookie("authorization", store.get("authorization", "local"));
     }
-    options.headers["app_source"] = "PC"; // 标识
+    options.headers["App-Source"] = "PC"; // 标识
 
     // if (store.get("user", "local")) {
     //     utils.setCookie("userId", store.get("user", "local"));
