@@ -148,7 +148,11 @@ export default {
     },
     methods: {
         open() {
-            console.log("打开");
+            if (!this.params.id) {
+                this.$nextTick(() => {
+                    this.$refs["form"].resetFields();
+                });
+            }
         },
         close() {
             this.$emit("update:visible", false);
