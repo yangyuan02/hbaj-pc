@@ -128,12 +128,13 @@ export default {
             }
         }
         .status {
-            width: 35px;
-            height: 17px;
+            // width: 35px;
+            height: 18px;
             background: rgba(255, 157, 59, 1);
-            border-radius: 1px;
+            // border-radius: 1px;
             text-align: center;
-            line-height: 17px;
+            line-height: 18px;
+            padding: 0px 4px;
             span {
                 font-size: 10px;
                 font-family: MicrosoftYaHei;
