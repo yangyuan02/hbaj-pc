@@ -5,6 +5,7 @@
  * @LastEditTime: 2020-05-28 16:57:17
  * @Description:
  */
+import Vue from "vue";
 import utils from "./utils";
 
 const lazyLoad = {
@@ -32,7 +33,10 @@ const lazyLoad = {
         } else {
             this.ticking = false;
             this.list.forEach(el => {
-                if (el.dataset.LazyLoadImgState != "success" && this.getClientRect(el, this.position)) {
+                if (
+                    el.dataset.LazyLoadImgState != "success" &&
+                    this.getClientRect(el, this.position)
+                ) {
                     this.loadImg(el);
                 }
             });
@@ -55,8 +59,12 @@ const lazyLoad = {
         const mh = el.offsetHeight; //元素自身的高度
         const w = window.innerWidth; //视窗的宽度
         const h = window.innerHeight; //视窗的高度
-        const boolX = !(bcr.right - options.left <= 0 && bcr.left + mw - options.left <= 0) && !(bcr.left + options.right >= w && bcr.right + options.right >= mw + w); //上下符合条件
-        const boolY = !(bcr.bottom - options.top <= 0 && bcr.top + mh - options.top <= 0) && !(bcr.top + options.bottom >= h && bcr.bottom + options.bottom >= mh + h); //上下符合条件
+        const boolX =
+            !(bcr.right - options.left <= 0 && bcr.left + mw - options.left <= 0) &&
+            !(bcr.left + options.right >= w && bcr.right + options.right >= mw + w); //上下符合条件
+        const boolY =
+            !(bcr.bottom - options.top <= 0 && bcr.top + mh - options.top <= 0) &&
+            !(bcr.top + options.bottom >= h && bcr.bottom + options.bottom >= mh + h); //上下符合条件
         return el.width != 0 && el.height != 0 && boolX && boolY;
     },
     /**
@@ -104,11 +112,19 @@ const lazyLoad = {
         }
     },
     start() {
-        window.addEventListener("scroll", this.scrollImg.bind(this), utils.isPassive() ? { passive: true, capture: true } : true);
+        window.addEventListener(
+            "scroll",
+            this.scrollImg.bind(this),
+            utils.isPassive() ? { passive: true, capture: true } : true
+        );
     },
     removeLazyLoad() {
         cancelAnimationFrame(this.timer);
-        window.removeEventListener("scroll", this.scrollImg.bind(this), utils.isPassive() ? { passive: true, capture: true } : true);
+        window.removeEventListener(
+            "scroll",
+            this.scrollImg.bind(this),
+            utils.isPassive() ? { passive: true, capture: true } : true
+        );
     }
 };
 lazyLoad.start();

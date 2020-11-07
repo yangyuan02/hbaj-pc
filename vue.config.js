@@ -17,12 +17,17 @@ function resolve(dir) {
 
 module.exports = {
     chainWebpack: config => {
-        config.resolve.alias.set("@$", resolve("src"));
+        config.resolve.alias.set("@", resolve("src"));
         config.plugins.delete("preload");
         config.plugins.delete("prefetch");
     },
     configureWebpack: config => {
         config.devtool = "eval-source-map	";
+        // config.externals = {
+        //     vue: "Vue",
+        //     vuex: "Vuex",
+        //     "vue-router": "VueRouter"
+        // };
         config.plugins.push(
             new HtmlWebpackPlugin({
                 template: "public/index.html",
@@ -49,29 +54,13 @@ module.exports = {
                 inject: true
             })
         );
-
         if (process.env.NODE_ENV == "production") {
             config.externals = {
                 vue: "Vue",
                 vuex: "Vuex",
-                "vue-router": "VueRouter"
-                // "element-ui": "ELEMENT"
+                "vue-router": "VueRouter",
+                "element-ui": "ELEMENT"
             };
-
-            // config.plugins.push(
-            //     new UglifyJsPlugin({
-            //         uglifyOptions: {
-            //             compress: {
-            //                 warnings: false,
-            //                 drop_debugger: true,
-            //                 drop_console: true
-            //             }
-            //         },
-            //         sourceMap: false,
-            //         parallel: true
-            //     })
-            // );
-
             // 为生产环境修改配置...
             // 优化打包chunk-vendor.js文件体积过大
             config.optimization = {

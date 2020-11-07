@@ -1,3 +1,4 @@
+import Vue from "vue";
 Vue.directive("skeleton", {
     bind(el, binding, vnode) {
         const pic = binding.value;
