@@ -354,6 +354,10 @@ export default {
             }
             this.attchmentId = this.params.id;
             // this.editData = {}; // 清空了会有bug
+
+            if (this.buttonText !== "修改") {
+                this.editData.id = "";
+            }
             this.editType = "";
             if (this.activeName === "text") {
                 this.shows.isOpenTextDialog = true;
