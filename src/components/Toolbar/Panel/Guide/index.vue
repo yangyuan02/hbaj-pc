@@ -67,10 +67,6 @@
             </div>
         </div>
 
-        <!-- <AttachmentComponent
-            :visible.sync="shows.isOpenAttachment"
-            :data="currentItem"
-        ></AttachmentComponent> -->
         <div id="triangle-right" @click="closeDrawer"></div>
 
         <HotspotConent
@@ -92,10 +88,8 @@
 <script>
 import { mapState } from "vuex";
 
-import AttachmentComponent from "../../Dialog";
-
 // 批量新增弹窗
-import HotspotConent from "./Dialog/";
+import HotspotConent from "./Dialog";
 
 import editSceneDialog from "./editGuide";
 
@@ -120,7 +114,6 @@ export default {
         };
     },
     components: {
-        // AttachmentComponent,
         HotspotConent,
         editSceneDialog
     },
