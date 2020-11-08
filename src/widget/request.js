@@ -69,11 +69,10 @@ export default function request(
         options.headers["Authorization"] = `Bearer ${store.get("authorization", "local")}`;
         utils.setCookie("authorization", store.get("authorization", "local"));
     }
+    if (store.get("userId", "local")) {
+        utils.setCookie("userId", store.get("userId", "local"));
+    }
     options.headers["App-Source"] = "PC"; // 标识
-
-    // if (store.get("user", "local")) {
-    //     utils.setCookie("userId", store.get("user", "local"));
-    // }
 
     let optionData = data;
 
