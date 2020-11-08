@@ -2,7 +2,9 @@ import Vue from "vue";
 import Application from "./App.vue";
 import router from "./router";
 import store from "./store";
+import storeStorege from "@/widget/store";
 import filters from "./filters";
+import utils from "@/widget/utils";
 import "@/widget/skeleton";
 
 import ElementUI from "element-ui";
@@ -18,6 +20,18 @@ Object.keys(filters).forEach(key => {
 
 Vue.prototype.globalConfig = window.globalConfig;
 
+const cookieAuthorization = utils.getCookie("authorization");
+
+const cookieUserId = utils.getCookie("userId");
+
+if (cookieUserId) {
+    storeStorege.set("userId", cookieUserId, "cookieUserId");
+}
+
+if (cookieAuthorization) {
+    storeStorege.set("authorization", cookieAuthorization, "local");
+}
+
 router.beforeEach((to, from, next) => {
     if (to.name == "login" && window.localStorage.getItem("authorization")) {
         //解决登陆后 用户输入登录地址重定向到首页
@@ -26,8 +40,10 @@ router.beforeEach((to, from, next) => {
 
     if (to.meta.requireLogin) {
         // 是需要登录的页面
-        if (window.localStorage.getItem("authorization")) {
+
+        if (window.localStorage.getItem("authorization") || cookieAuthorization) {
             // token存在 且token没有过期
+
             next();
         } else {
             window.fromToPage = to.fullPath;
