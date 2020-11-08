@@ -226,8 +226,8 @@ export default {
             projectDetail({ type: "get" }, projectId).then(res => {
                 if (res.suceeded) {
                 }
-                const { moduleId, oriEnterpriseId, classId } = res.data;
-                Object.assign(data, { moduleId, oriEnterpriseId, classId });
+                const { moduleId, oriEnterpriseId, classId, blockId } = res.data;
+                Object.assign(data, { moduleId, oriEnterpriseId, classId, blockId });
                 projectDetail(
                     {
                         type: "PUT",
