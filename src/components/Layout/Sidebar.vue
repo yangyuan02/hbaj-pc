@@ -119,22 +119,20 @@ export default {
         },
         getUserDetail() {
             this.$nextTick(() => {
-                const userId = store.get("userId", "local");
-                if (userId) {
-                    user(
-                        {
-                            type: "get"
-                        },
-                        userId
-                    ).then(res => {
-                        if (res.suceeded) {
-                            this.$store.commit({
-                                type: "SET_USER_INFO",
-                                plylaod: res.data
-                            });
-                        }
-                    });
-                }
+                user(
+                    {
+                        type: "get"
+                    },
+                    "personal"
+                ).then(res => {
+                    if (res.suceeded) {
+                        store.set("userId", res.data.id, "local");
+                        this.$store.commit({
+                            type: "SET_USER_INFO",
+                            plylaod: res.data
+                        });
+                    }
+                });
             });
         },
         goMy() {
