@@ -40,6 +40,7 @@
 
 <script>
 import utils from "@/widget/utils";
+import { user } from "@/model/api";
 export default {
     data() {
         return {};
@@ -64,14 +65,21 @@ export default {
         },
         handleCommand(command) {
             if (command === "logout") {
-                const clear = ["authorization", "userId", "user", "TAGS_KEY"];
-                clear.forEach(item => {
-                    window.localStorage.removeItem(item);
+                user(
+                    {
+                        type: "post"
+                    },
+                    "logout"
+                ).then(res => {
+                    const clear = ["authorization", "userId", "user", "TAGS_KEY"];
+                    clear.forEach(item => {
+                        window.localStorage.removeItem(item);
+                    });
+                    utils.delCookie("authorization");
+                    utils.delCookie("userId");
+                    this.$store.commit("CLEARHISTROY");
+                    window.location.href = "/";
                 });
-                utils.delCookie("authorization");
-                utils.delCookie("userId");
-                this.$store.commit("CLEARHISTROY");
-                window.location.href = "/";
                 // this.$router.push("/");
             } else {
                 this.goToPedit(command);
