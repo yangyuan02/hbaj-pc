@@ -22,7 +22,7 @@ Vue.prototype.globalConfig = window.globalConfig;
 
 const cookieAuthorization = utils.getCookie("authorization");
 
-const cookieUserId = utils.getCookie("userId");
+const cookieUserId = utils.getCookie("userId-pc-admin");
 
 if (cookieUserId) {
     storeStorege.set("userId", cookieUserId, "local");
