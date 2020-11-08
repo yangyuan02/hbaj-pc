@@ -76,7 +76,7 @@ export default {
                         window.localStorage.removeItem(item);
                     });
                     utils.delCookie("authorization");
-                    utils.delCookie("userId-pc-admin");
+                    utils.delCookie("userId");
                     this.$store.commit("CLEARHISTROY");
                     window.location.href = "/";
                 });
