@@ -1,12 +1,4 @@
 <template>
-    <!-- <el-drawer
-        title="我是标题"
-        :visible.sync="drawerAttachment"
-        :with-header="false"
-        :size="296"
-        :before-close="handleClose"
-        :modal="false"
-    > -->
     <div class="panel_sidebar" v-if="drawerAttachment">
         <div class="attachment common">
             <div class="title">
@@ -31,14 +23,7 @@
                             <i class="iconfont icontubiaoweb-29 cursor"></i>
                         </div>
                         <div class="link_name ellipsis cursor">
-                            <!-- <el-tooltip
-                                class="item"
-                                effect="dark"
-                                :content="item.title"
-                                placement="left-start"
-                            > -->
                             <span>{{ item.title }}</span>
-                            <!-- </el-tooltip> -->
                         </div>
                         <div class="operate">
                             <i
@@ -65,9 +50,8 @@
 
         <AttachmentComponent
             :visible.sync="shows.isOpenAttachment"
-            :data="currentItem"
-            :isShowText="false"
-            :isShowImage="false"
+            :hotspotId="currentItem.id"
+            v-if="currentItem.id"
         ></AttachmentComponent>
 
         <!-- 修改附件弹窗 -->
@@ -77,13 +61,12 @@
             :onSuccess="getAttachmentList"
         ></editAttachmentDialog>
     </div>
-    <!-- </el-drawer> -->
 </template>
 
 <script>
 import { mapState } from "vuex";
 
-import AttachmentComponent from "../../Dialog";
+import AttachmentComponent from "@/components/Attachment";
 
 import editAttachmentDialog from "./editAttachment";
 

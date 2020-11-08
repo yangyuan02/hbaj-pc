@@ -57,10 +57,9 @@
         <!-- 附件弹窗 -->
         <AttachmentComponent
             :visible.sync="isOpenAttachment"
-            :data="currentItem"
-            :isShowHtml="false"
+            :hotspotId="currentItem.id"
+            v-if="currentItem.id"
             dialogTitle="场景标签内容编辑"
-            :id="id"
         ></AttachmentComponent>
 
         <DialogEnglishDialog
@@ -75,7 +74,7 @@
 <script>
 import { hotspot, hotspotDetail } from "@/model/api";
 import editAttachmentDialog from "./editScene";
-import AttachmentComponent from "../../Dialog";
+import AttachmentComponent from "@/components/Attachment";
 import DialogEnglishDialog from "../../DialogEnglish"; // 英语
 
 export default {
