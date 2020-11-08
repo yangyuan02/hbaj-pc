@@ -5,6 +5,8 @@
  * @LastEditTime: 2020-05-08 21:11:01
  * @Description:
  */
+
+import utils from "@/widget/utils";
 /**
  * @param {Object} options
  * @returns {Promise}
@@ -43,6 +45,9 @@ export default function ajax({
                     resolve(xhr.response);
                 } else if (xhr.status === 401) {
                     window.localStorage.removeItem("authorization");
+                    window.localStorage.removeItem("userId");
+                    utils.delCookie("authorization");
+                    utils.delCookie("userId");
                     xhr.abort();
                     // window.location.href = "/";
                 } else {
