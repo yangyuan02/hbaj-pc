@@ -123,20 +123,22 @@ export default {
             });
         },
         getUserDetail() {
-            const userId = store.get("userId", "local");
-            user(
-                {
-                    type: "get"
-                },
-                userId
-            ).then(res => {
-                if (res.suceeded) {
-                    this.$store.commit({
-                        type: "SET_USER_INFO",
-                        plylaod: res.data
-                    });
-                    this.user = res.data;
-                }
+            this.$nextTick(() => {
+                const userId = store.get("userId", "local");
+                user(
+                    {
+                        type: "get"
+                    },
+                    userId
+                ).then(res => {
+                    if (res.suceeded) {
+                        this.$store.commit({
+                            type: "SET_USER_INFO",
+                            plylaod: res.data
+                        });
+                        this.user = res.data;
+                    }
+                });
             });
         },
         getMessageDetail() {

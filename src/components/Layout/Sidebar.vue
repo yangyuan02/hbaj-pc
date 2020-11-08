@@ -118,22 +118,22 @@ export default {
             }
         },
         getUserDetail() {
-            const userId = store.get("userId", "local");
-            if (userId) {
+            this.$nextTick(() => {
                 user(
                     {
                         type: "get"
                     },
-                    userId
+                    "personal"
                 ).then(res => {
                     if (res.suceeded) {
+                        store.set("userId", res.data.id, "local");
                         this.$store.commit({
                             type: "SET_USER_INFO",
                             plylaod: res.data
                         });
                     }
                 });
-            }
+            });
         },
         goMy() {
             this.$router.push({ path: "/my/person" });
