@@ -118,22 +118,24 @@ export default {
             }
         },
         getUserDetail() {
-            const userId = store.get("userId", "local");
-            if (userId) {
-                user(
-                    {
-                        type: "get"
-                    },
-                    userId
-                ).then(res => {
-                    if (res.suceeded) {
-                        this.$store.commit({
-                            type: "SET_USER_INFO",
-                            plylaod: res.data
-                        });
-                    }
-                });
-            }
+            this.$nextTick(() => {
+                const userId = store.get("userId", "local");
+                if (userId) {
+                    user(
+                        {
+                            type: "get"
+                        },
+                        userId
+                    ).then(res => {
+                        if (res.suceeded) {
+                            this.$store.commit({
+                                type: "SET_USER_INFO",
+                                plylaod: res.data
+                            });
+                        }
+                    });
+                }
+            });
         },
         goMy() {
             this.$router.push({ path: "/my/person" });

@@ -25,7 +25,7 @@ const cookieAuthorization = utils.getCookie("authorization");
 const cookieUserId = utils.getCookie("userId");
 
 if (cookieUserId) {
-    storeStorege.set("userId", cookieUserId, "cookieUserId");
+    storeStorege.set("userId", cookieUserId, "local");
 }
 
 if (cookieAuthorization) {

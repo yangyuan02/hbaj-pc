@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import utils from "@/widget/utils";
 export default {
     data() {
         return {};
@@ -67,6 +68,8 @@ export default {
                 clear.forEach(item => {
                     window.localStorage.removeItem(item);
                 });
+                utils.delCookie("authorization");
+                utils.delCookie("userId");
                 this.$store.commit("CLEARHISTROY");
                 window.location.href = "/";
                 // this.$router.push("/");
