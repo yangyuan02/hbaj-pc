@@ -5,8 +5,9 @@
  * @LastEditTime: 2020-05-08 21:11:01
  * @Description:
  */
-
 import utils from "@/widget/utils";
+import router from "@/router";
+import store from "@/store";
 /**
  * @param {Object} options
  * @returns {Promise}
@@ -49,7 +50,8 @@ export default function ajax({
                     utils.delCookie("authorization");
                     utils.delCookie("userId");
                     xhr.abort();
-                    // window.location.href = "/";
+                    store.commit("CLEARHISTROY");
+                    router.push("/home");
                 } else {
                     resolve({
                         data: [],

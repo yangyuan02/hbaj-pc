@@ -97,6 +97,12 @@ export default {
 
     methods: {
         goTo(path) {
+            if (path.indexOf("/my") !== -1) {
+                if (!window.localStorage.getItem("authorization")) {
+                    return this.$store.commit("TOGGLE_LOGIN");
+                }
+            }
+
             if (path === "/course" || path === "/my/course") {
                 const { name, children } = store.get("modulesList", "local")[0];
                 const query = {
@@ -118,22 +124,24 @@ export default {
             }
         },
         getUserDetail() {
-            this.$nextTick(() => {
-                user(
-                    {
-                        type: "get"
-                    },
-                    "personal"
-                ).then(res => {
-                    if (res.suceeded) {
-                        store.set("userId", res.data.id, "local");
-                        this.$store.commit({
-                            type: "SET_USER_INFO",
-                            plylaod: res.data
-                        });
-                    }
+            if (window.localStorage.getItem("authorization")) {
+                this.$nextTick(() => {
+                    user(
+                        {
+                            type: "get"
+                        },
+                        "personal"
+                    ).then(res => {
+                        if (res.suceeded) {
+                            store.set("userId", res.data.id, "local");
+                            this.$store.commit({
+                                type: "SET_USER_INFO",
+                                plylaod: res.data
+                            });
+                        }
+                    });
                 });
-            });
+            }
         },
         goMy() {
             this.$router.push({ path: "/my/person" });
