@@ -25,10 +25,7 @@
                         :key="index"
                     >
                         <div class="thumb">
-                            <img
-                                src="https://msa_pc.vr2shipping.com/pano/static/role/cmsalogo.png"
-                                alt=""
-                            />
+                            <img src="/pano/static/role/cmsalogo.png" alt="" />
                         </div>
                         <div class="name">
                             <span>{{ item.name }}</span>
