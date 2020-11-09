@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         title="文本信息"
-        :visible.sync="visible"
+        :visible="isOpenDialog"
         :close-on-click-modal="false"
         @open="open"
         @close="close"
@@ -74,6 +74,11 @@ export default {
             default: () => {}
         }
     },
+    computed: {
+        isOpenDialog() {
+            return this.$store.state.attachmentStore.isOpenDialog;
+        }
+    },
     watch: {
         id(newVal) {
             this.params.hotspotId = newVal;
@@ -97,7 +102,7 @@ export default {
         },
         close() {
             this.$refs["form"].resetFields();
-            this.$emit("update:visible", false);
+            this.$store.commit("SETATTDIALOG", false);
         },
         save() {
             this.$refs["form"].validate(valid => {

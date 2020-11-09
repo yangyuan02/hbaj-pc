@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         title="音频文件"
-        :visible.sync="visible"
+        :visible="isOpenDialog"
         :close-on-click-modal="false"
         @open="open"
         @close="close"
@@ -103,6 +103,9 @@ export default {
             const projectId = this.$route.params.projectId;
             const url = `/api/file/upload?fileName=default&relatedId=${projectId}&fileType=HOTSPOT_AUDIO`;
             return url;
+        },
+        isOpenDialog() {
+            return this.$store.state.attachmentStore.isOpenDialog;
         }
     },
     data() {
@@ -144,7 +147,7 @@ export default {
             }
         },
         close() {
-            this.$emit("update:visible", false);
+            this.$store.commit("SETATTDIALOG", false);
         },
         save() {
             this.$refs["form"].validate(valid => {

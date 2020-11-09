@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         title="图片信息"
-        :visible.sync="visible"
+        :visible="isOpenDialog"
         :close-on-click-modal="false"
         @open="open"
         @close="close"
@@ -87,6 +87,9 @@ export default {
             const projectId = this.$route.params.projectId;
             const url = `/api/file/upload?fileName=default&relatedId=${projectId}&fileType=HOTSPOT_IMAGE`;
             return url;
+        },
+        isOpenDialog() {
+            return this.$store.state.attachmentStore.isOpenDialog;
         }
     },
     props: {
@@ -129,7 +132,7 @@ export default {
         },
         close() {
             this.$refs["form"].resetFields();
-            this.$emit("update:visible", false);
+            this.$store.commit("SETATTDIALOG", false);
         },
         save() {
             this.$refs["form"].validate(valid => {

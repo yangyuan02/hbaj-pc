@@ -25,8 +25,7 @@
             :hotspotId="hotspotId"
             :id="id"
             :onSuccess="onSuccess"
-            :defaultTabName="defaultTabName"
-            :visible.sync="showsDialog"
+            :currentTabOrder="defaultTabName"
         />
     </main>
 </template>
@@ -61,7 +60,6 @@ export default {
         return {
             defaultTabName: "1",
             id: "", // 某一条的id
-            showsDialog: false,
             tabs: [
                 { component: TextList, name: "文本", order: "1", class: "TextList" },
                 { component: ImagesList, name: "图片", order: "2", class: "ImagesList" },
@@ -98,7 +96,7 @@ export default {
             console.log("1111");
         },
         addDialog() {
-            this.showsDialog = true;
+            this.$store.commit("SETATTDIALOG", true);
         },
         editDialog() {
             console.log("编辑");
