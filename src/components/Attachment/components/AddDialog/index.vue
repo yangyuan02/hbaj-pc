@@ -1,8 +1,7 @@
 <template>
     <component
-        :is="tag.component"
+        :is="defaultTabName"
         ref="tab-child"
-        v-if="defaultTabName === tag.order"
         :hotspotId="hotspotId"
         :id="id"
         :onSuccess="onSuccess"
@@ -17,6 +16,12 @@ import ImageDialog from "./ImageDialog";
 import TextDialog from "./TextDialog";
 import VideoDialog from "./VideoDialog";
 export default {
+    components: {
+        TextDialog,
+        ImageDialog,
+        AudioDialog,
+        VideoDialog
+    },
     props: {
         hotspotId: {
             // 热点id
@@ -35,22 +40,23 @@ export default {
         visible: {
             type: Boolean,
             default: false
-        },
-        defaultTabName: {
-            // 动态组件的哪一个
-            type: String,
-            default: "1"
         }
+        // defaultTabName: {
+        //     // 动态组件的哪一个
+        //     type: String,
+        //     default: "TextDialog"
+        // }
     },
     data() {
         return {
-            tabs: [
-                { component: TextDialog, name: "文本弹窗", order: "1", class: "TextDialog" },
-                { component: ImageDialog, name: "图片弹窗", order: "2", class: "ImageDialog" },
-                { component: AudioDialog, name: "音频弹窗", order: "3", class: "AudioDialog" },
-                { component: VideoDialog, name: "视频弹窗", order: "4", class: "VideoDialog" }
-                // { component: RichTextBox, name: "富文本", order: "5", class: "RichTextBox" }
-            ]
+            defaultTabName: "TextDialog"
+            // tabs: [
+            //     { component: TextDialog, name: "文本弹窗", order: "1", class: "TextDialog" },
+            //     { component: ImageDialog, name: "图片弹窗", order: "2", class: "ImageDialog" },
+            //     { component: AudioDialog, name: "音频弹窗", order: "3", class: "AudioDialog" },
+            //     { component: VideoDialog, name: "视频弹窗", order: "4", class: "VideoDialog" }
+            //     // { component: RichTextBox, name: "富文本", order: "5", class: "RichTextBox" }
+            // ]
         };
     }
 };

@@ -66,18 +66,12 @@ export default {
             type: [String, Number],
             default: ""
         },
-        editData: {
-            type: Object,
-            default: {}
+        hotspotId: {
+            type: [String, Number]
         },
         onSuccess: {
             type: Function,
             default: () => {}
-        },
-        editType: {
-            // 编辑类型
-            type: String,
-            default: ""
         }
     },
     watch: {

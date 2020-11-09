@@ -67,27 +67,16 @@ export default {
             type: Boolean,
             default: false
         },
-        title: {
-            // 音频资源标题
-            default: "",
-            type: String
-        },
         id: {
             type: [String, Number],
             default: ""
         },
+        hotspotId: {
+            type: [String, Number]
+        },
         onSuccess: {
             type: Function,
             default: () => {}
-        },
-        editData: {
-            type: Object,
-            default: {}
-        },
-        editType: {
-            // 编辑类型
-            type: String,
-            default: ""
         }
     },
     watch: {
