@@ -79,25 +79,7 @@ export default {
             default: () => {}
         }
     },
-    watch: {
-        id(newVal) {
-            this.params.hotspotId = newVal;
-        },
-        editData(newVal) {
-            this.$nextTick(() => {
-                this.params = { ...newVal };
-                this.fileList = [
-                    {
-                        name: "音频内容",
-                        url: newVal.extra
-                    }
-                ];
-            });
-        },
-        editType(newVal) {
-            this.type = newVal;
-        }
-    },
+    watch: {},
     computed: {
         uploadUrl() {
             const projectId = this.$route.params.projectId;
@@ -114,24 +96,14 @@ export default {
                 // 参数
                 content: "", // 内容
                 extra: "", // 附件url
-                hotspotId: 0, // 附件id
-                // id: 0,
-                // seq: 0, // 排序
-                title: "", // 标题
-                type: "AUDIO" // 类型
+                title: "" // 标题
             },
             rules: {
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
                 content: [{ required: true, message: "请输入内容", trigger: "blur" }],
                 extra: [{ required: true, message: "请上传音频" }]
             },
-            fileList: [
-                // {
-                //     name: "food.jpeg",
-                //     url:
-                //         "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
-                // }
-            ],
+            fileList: [],
             loading: {
                 save: false,
                 detail: false
@@ -140,7 +112,7 @@ export default {
     },
     methods: {
         open() {
-            if (!this.params.id) {
+            if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
                 });
@@ -152,10 +124,9 @@ export default {
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.type && this.type === "audio" ? this.editAudio() : this.addAudio();
+                    this.id ? this.editAudio() : this.addAudio();
                 }
             });
-            console.log("保存");
         },
         handleAvatarSuccess(res, file) {
             console.log(res);
@@ -164,7 +135,7 @@ export default {
         addAudio() {
             // 新增音频内容
             this.params.type = "AUDIO";
-            this.params.hotspotId = this.id;
+            this.params.hotspotId = this.hotspotId;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -186,12 +157,13 @@ export default {
         editAudio() {
             // 修改
             this.params.type = "AUDIO";
+            this.params.hotspotId = this.hotspotId;
             hotspotContent(
                 {
                     type: "post",
                     data: this.params
                 },
-                this.params.id
+                this.id
             ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");

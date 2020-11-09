@@ -81,25 +81,7 @@ export default {
             default: () => {}
         }
     },
-    watch: {
-        id(newVal) {
-            this.params.hotspotId = newVal;
-        },
-        editData(newVal) {
-            this.$nextTick(() => {
-                this.params = { ...newVal };
-                this.fileList = [
-                    {
-                        name: "视频内容",
-                        url: newVal.extra
-                    }
-                ];
-            });
-        },
-        editType(newVal) {
-            this.type = newVal;
-        }
-    },
+    watch: {},
     computed: {
         uploadUrl() {
             const projectId = this.$route.params.projectId;
@@ -116,11 +98,7 @@ export default {
                 // 参数
                 content: "", // 内容
                 extra: "", // 附件url
-                hotspotId: 0, // 附件id
-                // id: 0,
-                // seq: 0, // 排序
-                title: "", // 标题
-                type: "VIDEO" // 类型
+                title: "" // 标题
             },
             rules: {
                 title: [{ required: true, message: "请输入标题", trigger: "blur" }],
@@ -142,7 +120,7 @@ export default {
     },
     methods: {
         open() {
-            if (!this.params.id) {
+            if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
                 });
@@ -154,10 +132,9 @@ export default {
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.type && this.type === "audio" ? this.editAudio() : this.addAudio();
+                    this.id ? this.editAudio() : this.addAudio();
                 }
             });
-            console.log("保存");
         },
         handleAvatarSuccess(res, file) {
             console.log(res);
@@ -166,7 +143,7 @@ export default {
         addAudio() {
             // 新增音频内容'
             this.params.type = "VIDEO";
-            this.params.hotspotId = this.id;
+            this.params.hotspotId = this.hotspotId;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -188,12 +165,13 @@ export default {
         editAudio() {
             // 修改
             this.params.type = "VIDEO";
+            this.params.hotspotId = this.hotspotId;
             hotspotContent(
                 {
                     type: "post",
                     data: this.params
                 },
-                this.params.id
+                this.id
             ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");

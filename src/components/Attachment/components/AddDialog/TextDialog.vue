@@ -40,12 +40,7 @@ export default {
             params: {
                 // 参数
                 content: "", // 内容
-                // extra: "string", // 附件url
-                hotspotId: 0, // 附件id
-                // id: 0,
-                // seq: 0, // 排序
-                title: "", // 标题
-                type: "TEXT" // 类型
+                title: "" // 标题
             },
             loading: {
                 save: false
@@ -79,35 +74,22 @@ export default {
             return this.$store.state.attachmentStore.isOpenDialog;
         }
     },
-    watch: {
-        id(newVal) {
-            this.params.hotspotId = newVal;
-        },
-        editData(newVal) {
-            this.$nextTick(() => {
-                this.params = { ...newVal };
-            });
-        },
-        editType(newVal) {
-            this.type = newVal;
-        }
-    },
+    watch: {},
     methods: {
         open() {
-            if (!this.params.id) {
+            if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
                 });
             }
         },
         close() {
-            this.$refs["form"].resetFields();
             this.$store.commit("SETATTDIALOG", false);
         },
         save() {
             this.$refs["form"].validate(valid => {
                 if (valid) {
-                    this.type && this.type === "text" ? this.editText() : this.addText();
+                    this.id ? this.editText() : this.addText();
                 }
             });
 
@@ -115,9 +97,8 @@ export default {
         },
         addText() {
             // 新增文本内容
-            this.params.id = "";
             this.params.type = "TEXT";
-            this.params.hotspotId = this.id;
+            this.params.hotspotId = this.hotspotId;
             const hotspotContentList = [this.params];
             const params = {
                 hotspotContentList
@@ -137,12 +118,13 @@ export default {
         editText() {
             // 修改文本
             this.params.type = "TEXT";
+            this.params.hotspotId = this.hotspotId;
             hotspotContent(
                 {
                     type: "post",
                     data: this.params
                 },
-                this.params.id
+                this.id
             ).then(res => {
                 if (res.suceeded) {
                     this.$message.success("操作成功");
