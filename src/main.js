@@ -20,6 +20,8 @@ Object.keys(filters).forEach(key => {
 
 Vue.prototype.globalConfig = window.globalConfig;
 
+window.ElementUI = ElementUI;
+
 const cookieAuthorization = utils.getCookie("authorization");
 
 const cookieUserId = utils.getCookie("userId");
