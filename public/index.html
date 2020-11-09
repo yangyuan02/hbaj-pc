@@ -37,7 +37,11 @@
           onerror="SCRIPT_ERROR(this)"
         ></script>
         <% } %> <% }) %>
-
+        <script type="text/javascript">
+            window.globalConfig = {
+                imagePath: "<%= htmlWebpackPlugin.options.imagePath%>"
+            };
+        </script>
         
         <script type="text/javascript" src="/pano/tour.js"></script>
         <script type="text/javascript" src="/pano/jquery.js"></script>
