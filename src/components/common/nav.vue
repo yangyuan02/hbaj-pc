@@ -25,21 +25,21 @@ export default {
                     title: "技术解读",
                     icon: "icontubiaoweb-411",
                     path: "",
-                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_01.png",
+                    bgColor: "/pano/static/app/module/module_01.png",
                     sort: 1
                 },
                 {
                     title: "专业英语",
                     icon: "icontubiaoweb-431",
                     path: "",
-                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_02.png",
+                    bgColor: "/pano/static/app/module/module_02.png",
                     sort: 2
                 },
                 {
                     title: "模拟训练",
                     icon: "icontubiaoweb-42",
                     path: "",
-                    bgColor: "https://msa_pc.vr2shipping.com/pano/static/app/module/module_03.png",
+                    bgColor: "/pano/static/app/module/module_03.png",
                     sort: 3
                 }
             ]

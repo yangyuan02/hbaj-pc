@@ -37,118 +37,28 @@
           onerror="SCRIPT_ERROR(this)"
         ></script>
         <% } %> <% }) %>
-
-        
-        <script type="text/javascript" src="https://msa_pc.vr2shipping.com/pano/tour.js"></script>
-        <script type="text/javascript" src="https://msa_pc.vr2shipping.com/pano/jquery.js"></script>
-        <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-        <script src="https://msa_pc.vr2shipping.com/pano/layui/layui.js"></script>
-        <script
-            type="text/javascript"
-            src="https://msa_pc.vr2shipping.com/pano/panotour.js"
-        ></script>
-        <script type="text/javascript" src="https://msa_pc.vr2shipping.com/pano/md5.js"></script>
-        <script
-            type="text/javascript"
-            src="https://msa_pc.vr2shipping.com/pano/src/ios-weixin-config.js"
-        ></script>
-        <!-- <script src="/activity-static/lizard/index.js"></script> -->
-        <script
-            type="text/javascript"
-            src="https://msa_pc.vr2shipping.com/pano/src/app.js"
-        ></script>
-        <!-- <script src="/activity-static/lizard/index.js"></script> -->
         <script type="text/javascript">
             window.globalConfig = {
                 imagePath: "<%= htmlWebpackPlugin.options.imagePath%>"
             };
-            function isLocalStorageSupported() {
-                var testKey = "test",
-                    storage = window.sessionStorage;
-                try {
-                    storage.setItem(testKey, "testValue");
-                    storage.removeItem(testKey);
-                    return true;
-                } catch (error) {
-                    return false;
-                }
-            }
-            function appendScript(res) {
-                var script = document.createElement("script");
-                script.type = "text/javascript";
-                script.appendChild(document.createTextNode(res));
-                document.head.appendChild(script);
-            }
-            function writeLizard() {
-                document.write(
-                    '<script crossorigin="anonymous" type="text/javascript" src="/activity-static/lizard/index.js"><\/script>'
-                );
-            }
-            function loadLizardScript() {
-                if (isLocalStorageSupported()) {
-                    var results = localStorage.getItem("/activity-static/lizard/index.js");
-                    if (results && typeof results == "string") {
-                        var res = JSON.parse(results);
-                        if (res && res.times > new Date().getTime()) {
-                            appendScript(res.results);
-                        } else {
-                            writeLizard();
-                        }
-                    } else {
-                        writeLizard();
-                    }
-                } else {
-                    writeLizard();
-                }
-            }
-            // loadLizardScript();
         </script>
-        <!-- <script type="text/javascript">
-            (function(win, doc) {
-                var flex = function flex() {
-                    var ua = navigator.userAgent;
-                    var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
-                    var UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
-                    var isUCHd = UCversion && parseInt(UCversion[1].split(".").join(""), 10) >= 80;
-                    var isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);
-                    var dpr = win.devicePixelRatio || 1;
-                    if (!isIos && !(matches && matches[1] > 534) && !isUCHd) {
-                        // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;
-                        dpr = 1;
-                    }
-                    var scale = 1 / dpr;
-                    var metaEl = doc.querySelector('meta[name="viewport"]');
-                    if (!metaEl) {
-                        metaEl = doc.createElement("meta");
-                        metaEl.setAttribute("name", "viewport");
-                        doc.head.appendChild(metaEl);
-                    }
-                    var docElement = doc.documentElement;
-                    var clientWidth = docElement.getBoundingClientRect
-                        ? docElement.getBoundingClientRect().width
-                        : docElement.clientWidth;
-
-                    var docFontSize = 50 + "px";
-                    if (clientWidth <= 1200) {
-                        docFontSize = (clientWidth * dpr) / 7.5 + "px";
-                        if (clientWidth < 375 && !isIos && dpr <= 2) {
-                            docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + "px";
-                        }
-                    }
-                    metaEl.setAttribute(
-                        "content",
-                        "width=device-width,user-scalable=no,initial-scale=" +
-                            scale +
-                            ",maximum-scale=" +
-                            scale +
-                            ",minimum-scale=" +
-                            scale
-                    );
-                    docElement.style.fontSize = docFontSize;
-                };
-                flex();
-            })(window, document);
-        </script> -->
+        
+        <script type="text/javascript" src="/pano/tour.js"></script>
+        <script type="text/javascript" src="/pano/jquery.js"></script>
+        <script src="/pano/layui/layui.js"></script>
+        <script
+            type="text/javascript"
+            src="/pano/panotour.js"
+        ></script>
+        <script type="text/javascript" src="/pano/md5.js"></script>
+        <script
+            type="text/javascript"
+            src="/pano/src/ios-weixin-config.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="/pano/src/app.js"
+        ></script>
     </head>
     <body>
         <div id="app"></div>
