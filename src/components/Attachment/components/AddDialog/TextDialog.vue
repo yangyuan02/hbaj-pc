@@ -77,6 +77,7 @@ export default {
     watch: {},
     methods: {
         open() {
+            console.log(11);
             if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
