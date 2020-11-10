@@ -19,7 +19,7 @@ Object.keys(filters).forEach(key => {
 });
 
 Vue.prototype.globalConfig = window.globalConfig;
-
+window.app_source = "pc";
 window.ElementUI = ElementUI;
 window.Vue = Vue;
 
