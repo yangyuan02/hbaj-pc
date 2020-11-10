@@ -60,6 +60,7 @@ export default {
     methods: {
         changeStatus() {
             this.pageIndex = 1;
+            this.list = [];
             this.getTaskList();
         },
         getTaskList() {
