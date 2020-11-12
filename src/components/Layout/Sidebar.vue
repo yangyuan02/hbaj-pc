@@ -81,7 +81,7 @@ export default {
                     path: "/my/message"
                 },
                 {
-                    text: "远程检查",
+                    text: "远程核查",
                     icon: "iconjiankong",
                     path: "/my/agora"
                 }
