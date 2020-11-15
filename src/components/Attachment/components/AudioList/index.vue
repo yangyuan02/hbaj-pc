@@ -13,14 +13,20 @@
                         <div class="edit common cursor">
                             <i class="iconfont icontubiaoweb-07"></i>
                         </div>
-                        <div class="del common cursor">
+                        <div class="del common cursor" @click="del(item)">
                             <i class="iconfont icontubiaoweb-27"></i>
                         </div>
                     </div>
                 </div>
                 <div class="images">
                     <div class="audio-box"></div>
-                    <audio id="audioPlayerGuide" :src="globalConfig.imagePath + item.extra" controlsList="nodownload" controls="controls" ref="audio"></audio>
+                    <audio
+                        id="audioPlayerGuide"
+                        :src="globalConfig.imagePath + item.extra"
+                        controlsList="nodownload"
+                        controls="controls"
+                        ref="audio"
+                    ></audio>
                     <!-- <img :src="globalConfig.imagePath + item.extra" :alt="item.title" /> -->
                 </div>
                 <div class="images-body">
@@ -84,6 +90,28 @@ export default {
                     this.loading = false;
                 }
             });
+        },
+        del(data) {
+            const hotspotContentId = data.id;
+            this.$confirm(`此操作将永久删 ${data.title}, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
+                        if (res.suceeded) {
+                            this.$message.success("操作成功");
+                            this.getList();
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         }
     },
     mounted() {

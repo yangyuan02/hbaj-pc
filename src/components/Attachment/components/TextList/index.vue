@@ -13,7 +13,7 @@
                         <div class="edit common">
                             <i class="iconfont icontubiaoweb-07 cursor"></i>
                         </div>
-                        <div class="del common">
+                        <div class="del common" @click="del(item)">
                             <i class="iconfont icontubiaoweb-27 cursor"></i>
                         </div>
                     </div>
@@ -76,6 +76,28 @@ export default {
                     this.loading = false;
                 }
             });
+        },
+        del(data) {
+            const hotspotContentId = data.id;
+            this.$confirm(`此操作将永久删 ${data.title}, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
+                        if (res.suceeded) {
+                            this.getList();
+                            this.$message.success("操作成功");
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         }
     },
     mounted() {
