@@ -113,12 +113,21 @@ export default {
         },
         addDialog() {
             this.id = "";
+            if (this.defaultTabName === "5") {
+                // 富文本修改特殊处理
+                return this.$refs.tabChild[0].addRich();
+            }
             this.$store.commit("SETATTDIALOG", true);
         },
         editDialog(data) {
             let editData = data;
             if (this.defaultTabName === "4") {
+                // 音频修改特殊处理
                 editData = this.$refs.tabChild[0].info;
+            }
+            if (this.defaultTabName === "5") {
+                // 富文本修改特殊处理
+                return this.$refs.tabChild[0].editRich();
             }
             const { title, content, id, extra } = editData;
             this.id = id;

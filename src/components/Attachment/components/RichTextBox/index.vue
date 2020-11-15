@@ -1,7 +1,12 @@
 <template>
     <div class="RichTextBox">
         <div class="title">
-            <p>{{ info.title || "此内容为空" }}</p>
+            <el-input
+                type="text"
+                placeholder="请输入标题"
+                class="richTitle"
+                v-model="info.title"
+            ></el-input>
         </div>
         <RichTextBox ref="RichTextBox"></RichTextBox>
     </div>
@@ -9,7 +14,7 @@
 
 <script>
 import RichTextBox from "@/components/common/RichTextBox";
-import { hotspotContent } from "@/model/api";
+import { hotspotContent, hotspotContentDetail } from "@/model/api";
 
 export default {
     components: {
@@ -20,7 +25,6 @@ export default {
             loading: false,
             info: {
                 title: "",
-                extra: "",
                 content: ""
             }
         };
@@ -29,6 +33,10 @@ export default {
         hotspotId: {
             type: [String, Number],
             required: true
+        },
+        id: {
+            type: [String, Number],
+            default: ""
         }
     },
     watch: {
@@ -62,7 +70,6 @@ export default {
                         this.$store.commit("SETDELANDEDIT", false);
                     } else {
                         this.info.title = "";
-                        this.info.extra = "";
                         this.info.content = "";
                         this.$refs.RichTextBox.setHtml("");
                         this.$store.commit("SETDELANDEDIT", true);
@@ -94,6 +101,52 @@ export default {
                         message: "已取消删除"
                     });
                 });
+        },
+        editRich() {
+            // 修改文本
+            const RichTextBox = this.$refs.RichTextBox;
+            const getHtml = RichTextBox.getHtml();
+            const params = {
+                // 参数
+                content: getHtml, // 内容
+                title: this.info.title, // 标题
+                type: "HTML", // 类型
+                hotspotId: this.hotspotId
+            };
+            hotspotContent(
+                {
+                    type: "post",
+                    data: params
+                },
+                this.id
+            ).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.getList();
+                }
+            });
+        },
+        addRich() {
+            // 修改文本
+            const RichTextBox = this.$refs.RichTextBox;
+            const getHtml = RichTextBox.getHtml();
+            const params = {
+                // 参数
+                content: getHtml, // 内容
+                title: this.info.title, // 标题
+                type: "HTML", // 类型
+                hotspotId: this.hotspotId
+            };
+            const hotspotContentList = [params];
+            hotspotContentDetail({
+                type: "post",
+                data: { hotspotContentList }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.$message.success("操作成功");
+                    this.getList();
+                }
+            });
         }
     },
     mounted() {
@@ -103,12 +156,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.RichTextBox {
+/deep/ .RichTextBox {
     .title {
         border-bottom: 1px solid #ccc;
         padding: 8px;
         font-size: 16px;
         padding-left: 14px;
+        .richTitle {
+            input {
+                margin-bottom: 10px;
+                border: none !important;
+                border-bottom: 1px solid #ccc !important;
+                border-radius: 0 !important;
+            }
+        }
     }
 }
 </style>
