@@ -10,7 +10,7 @@
             >
                 <component
                     :is="tag.component"
-                    ref="tab-child"
+                    ref="tabChild"
                     v-if="defaultTabName === tag.order"
                     :hotspotId="hotspotId"
                 />
@@ -93,7 +93,7 @@ export default {
     methods: {
         onSuccess() {
             // 确定之后的回调
-            console.log("1111");
+            this.$refs.tabChild[0].getList();
         },
         addDialog() {
             this.$store.commit("SETATTDIALOG", true);
