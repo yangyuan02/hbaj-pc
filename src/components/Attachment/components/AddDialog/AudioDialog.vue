@@ -162,6 +162,7 @@ export default {
             this.params.content = "";
             this.params.title = "";
             this.params.extra = "";
+            this.fileList = [];
         },
         close() {
             this.$store.commit("SETATTDIALOG", false);

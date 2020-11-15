@@ -56,20 +56,44 @@ export default {
             ).then(res => {
                 if (res.suceeded) {
                     if (res.data.length) {
-                        const { title, extra, content } = res.data[0];
-                        this.info = { ...this.info, title, extra, content };
+                        const { title, extra, content, id } = res.data[0];
+                        this.info = { ...this.info, title, extra, content, id };
                         this.$refs.RichTextBox.setHtml(content);
+                        this.$store.commit("SETDELANDEDIT", false);
                     } else {
                         this.info.title = "";
                         this.info.extra = "";
                         this.info.content = "";
                         this.$refs.RichTextBox.setHtml("");
+                        this.$store.commit("SETDELANDEDIT", true);
                     }
                     this.loading = false;
                 } else {
                     this.loading = false;
                 }
             });
+        },
+        del() {
+            const hotspotContentId = this.info.id;
+            this.$confirm(`此操作将永久删 ${this.info.title}, 是否继续?`, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    hotspotContent({ type: "delete" }, hotspotContentId).then(res => {
+                        if (res.suceeded) {
+                            this.$message.success("操作成功");
+                            this.getList();
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         }
     },
     mounted() {

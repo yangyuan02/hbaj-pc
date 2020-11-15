@@ -71,6 +71,7 @@ export default {
     },
     methods: {
         getList() {
+            this.$store.commit("SETDELANDEDIT", true);
             this.loading = true;
             hotspotContent(
                 {

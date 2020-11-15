@@ -17,9 +17,9 @@
             </el-tab-pane>
         </el-tabs>
         <div class="operate">
-            <el-button type="danger" @click="deleteItem()" v-if="isDelete">删除</el-button>
-            <el-button type="primary" @click="addDialog">添加</el-button>
-            <el-button type="primary" @click="editDialog">修改</el-button>
+            <el-button type="danger" @click="deleteItem" v-if="!isDelAndEdit">删除</el-button>
+            <el-button type="primary" @click="addDialog" v-if="isDelAndEdit">添加</el-button>
+            <el-button type="primary" @click="editDialog" v-if="!isDelAndEdit">修改</el-button>
         </div>
         <AddDialog
             :hotspotId="hotspotId"
@@ -87,14 +87,23 @@ export default {
                     }
                 });
             });
-            this.defaultTabName = tabs[0].order;
             return tabs;
         },
         buttonText() {
             return "添加";
         },
-        isDelete() {
-            return true;
+        isDelAndEdit() {
+            return this.$store.state.attachmentStore.isDelAndEdit;
+        }
+    },
+    watch: {
+        Tabs: {
+            handler(val) {
+                if (val) {
+                    this.defaultTabName = val[0].order;
+                }
+            },
+            immediate: true
         }
     },
     methods: {
@@ -107,12 +116,20 @@ export default {
             this.$store.commit("SETATTDIALOG", true);
         },
         editDialog(data) {
-            const { title, content, id, extra } = data;
+            let editData = data;
+            if (this.defaultTabName === "4") {
+                editData = this.$refs.tabChild[0].info;
+            }
+            const { title, content, id, extra } = editData;
             this.id = id;
             this.title = title;
             this.content = content;
             this.extra = extra;
+
             this.$store.commit("SETATTDIALOG", true);
+        },
+        deleteItem() {
+            this.$refs.tabChild[0].del();
         },
         initBus() {
             Bus.$on("update-item", data => {
