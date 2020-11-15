@@ -77,9 +77,29 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        title: {
+            type: [String]
+        },
+        content: {
+            type: [String]
+        },
+        extra: {
+            type: [String]
         }
     },
-    watch: {},
+    watch: {
+        hotspotId(value) {
+            if (value) {
+                this.setOpen();
+            }
+        },
+        id(value) {
+            if (value) {
+                this.setOpen();
+            }
+        }
+    },
     computed: {
         uploadUrl() {
             const projectId = this.$route.params.projectId;
@@ -112,11 +132,36 @@ export default {
     },
     methods: {
         open() {
+            this.setOpen();
+        },
+        setOpen() {
             if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
+                    this.clear();
                 });
+            } else {
+                this.setContent();
             }
+        },
+        // 编辑填充内容
+        setContent() {
+            if (this.id) {
+                this.params.content = this.content;
+                this.params.title = this.title;
+                this.params.extra = this.extra;
+                this.fileList = [
+                    {
+                        name: "音频内容",
+                        url: this.params.extra
+                    }
+                ];
+            }
+        },
+        clear() {
+            this.params.content = "";
+            this.params.title = "";
+            this.params.extra = "";
         },
         close() {
             this.$store.commit("SETATTDIALOG", false);
