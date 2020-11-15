@@ -29,6 +29,7 @@
             :extra="extra"
             :onSuccess="onSuccess"
             :currentTabOrder="defaultTabName"
+            :engType="engType"
         />
     </main>
 </template>
@@ -49,7 +50,7 @@ export default {
         },
         orderList: {
             type: Array,
-            default: () => ["文本", "图片", "音频", "视频", "富文本"]
+            default: () => ["文本", "图片", "音频", "视频", "文章"]
         },
         engType: {
             // 是否是专业英语
@@ -72,7 +73,7 @@ export default {
                 { component: ImagesList, name: "图片", order: "2", class: "ImagesList" },
                 { component: AudioList, name: "音频", order: "3", class: "Audio" },
                 { component: Video, name: "视频", order: "4", class: "Video" },
-                { component: RichTextBox, name: "富文本", order: "5", class: "RichTextBox" }
+                { component: RichTextBox, name: "文章", order: "5", class: "RichTextBox" }
             ]
         };
     },

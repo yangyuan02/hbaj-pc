@@ -52,6 +52,7 @@
             :visible.sync="shows.isOpenAttachment"
             :hotspotId="currentItem.id"
             v-if="currentItem.id"
+            :orderList="['文章', '音频', '视频']"
         ></AttachmentComponent>
 
         <!-- 修改附件弹窗 -->

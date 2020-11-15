@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import itemVue from "../../../../views/my/message/item.vue";
 import AudioDialog from "./AudioDialog";
 import AudioEngDialog from "./AudioEngDialog";
 import ImageDialog from "./ImageDialog";
@@ -23,7 +22,8 @@ export default {
         TextDialog,
         ImageDialog,
         AudioDialog,
-        VideoDialog
+        VideoDialog,
+        AudioEngDialog
     },
     props: {
         hotspotId: {
@@ -53,6 +53,11 @@ export default {
         },
         extra: {
             type: [String]
+        },
+        engType: {
+            // 是否是专业英语
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -66,7 +71,12 @@ export default {
             tabs: [
                 { component: "TextDialog", name: "文本弹窗", order: "1", class: "TextDialog" },
                 { component: "ImageDialog", name: "图片弹窗", order: "2", class: "ImageDialog" },
-                { component: "AudioDialog", name: "音频弹窗", order: "3", class: "AudioDialog" },
+                {
+                    component: this.engType ? "AudioEngDialog" : "AudioDialog",
+                    name: "音频弹窗",
+                    order: "3",
+                    class: this.engType ? "AudioEngDialog" : "AudioDialog"
+                },
                 { component: "VideoDialog", name: "视频弹窗", order: "4", class: "VideoDialog" }
                 // { component: RichTextBox, name: "富文本", order: "5", class: "RichTextBox" }
             ]

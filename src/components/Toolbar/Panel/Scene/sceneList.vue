@@ -54,20 +54,16 @@
             :data="currentItem"
             :onSuccess="() => getsceneList(this.$store.state.toolbarStore.id)"
         ></editAttachmentDialog>
+
         <!-- 附件弹窗 -->
         <AttachmentComponent
             :visible.sync="isOpenAttachment"
             :hotspotId="currentItem.id"
+            dialogTitle="场景标签内容编辑"
             v-if="currentItem.id"
-            dialogTitle="场景标签内容编辑"
+            :orderList="['音频', '图片']"
+            :engType="engType"
         ></AttachmentComponent>
-
-        <DialogEnglishDialog
-            :visible.sync="isOpenEngLishAttachment"
-            :data="currentItem"
-            dialogTitle="场景标签内容编辑"
-            :id="id"
-        ></DialogEnglishDialog>
     </div>
 </template>
 
@@ -75,7 +71,6 @@
 import { hotspot, hotspotDetail } from "@/model/api";
 import editAttachmentDialog from "./editScene";
 import AttachmentComponent from "@/components/Attachment";
-import DialogEnglishDialog from "../../DialogEnglish"; // 英语
 
 export default {
     data() {
@@ -84,9 +79,9 @@ export default {
             loading: false,
             isOpenEditAttachment: false,
             isOpenAttachment: false,
-            isOpenEngLishAttachment: false,
             currentItem: {},
-            id: ""
+            id: "",
+            engType: false // 是否专业英语
         };
     },
     computed: {
@@ -97,8 +92,7 @@ export default {
     },
     components: {
         editAttachmentDialog,
-        AttachmentComponent,
-        DialogEnglishDialog
+        AttachmentComponent
     },
     watch: {
         "$store.state.toolbarStore.id": function(newval) {
@@ -221,8 +215,10 @@ export default {
             const modules = this.$route.params.modules;
             console.log(data, "data");
             if (modules && modules === "专业英语") {
-                this.isOpenEngLishAttachment = true;
+                this.engType = true;
+                this.isOpenAttachment = true;
             } else {
+                this.engType = false;
                 this.isOpenAttachment = true;
             }
         },

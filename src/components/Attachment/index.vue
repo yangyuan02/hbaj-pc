@@ -10,7 +10,7 @@
         lock-scroll
         top="0vh"
     >
-        <Components :hotspotId="hotspotId" :orderList="orderList" />
+        <Components :hotspotId="hotspotId" :orderList="orderList" :engType="engType" />
     </el-dialog>
 </template>
 
@@ -35,6 +35,11 @@ export default {
         dialogTitle: {
             type: String,
             default: "附件参考内容编辑"
+        },
+        engType: {
+            // 是否是专业英语
+            type: Boolean,
+            default: false
         }
     },
     data() {

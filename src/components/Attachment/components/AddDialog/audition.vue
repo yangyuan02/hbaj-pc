@@ -50,10 +50,6 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
-        },
-        editData: {
-            type: Object,
-            default: {}
         }
     },
     data() {
@@ -69,22 +65,6 @@ export default {
                 type: "AUDIO" // 类型
             }
         };
-    },
-    watch: {
-        editData(newVal) {
-            this.$nextTick(() => {
-                this.params = { ...newVal };
-                this.fileList = [
-                    {
-                        name: "音频内容",
-                        url: newVal.extra
-                    }
-                ];
-            });
-        },
-        id(newVal) {
-            this.params.hotspotId = newVal;
-        }
     },
     methods: {
         open() {
