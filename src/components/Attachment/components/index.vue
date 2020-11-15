@@ -24,6 +24,9 @@
         <AddDialog
             :hotspotId="hotspotId"
             :id="id"
+            :title="title"
+            :content="content"
+            :extra="extra"
             :onSuccess="onSuccess"
             :currentTabOrder="defaultTabName"
         />
@@ -37,6 +40,7 @@ import AudioList from "./AudioList";
 import Video from "./Video";
 import RichTextBox from "./RichTextBox";
 import AddDialog from "./AddDialog";
+import Bus from "@/components/bus/index.js";
 export default {
     props: {
         hotspotId: {
@@ -60,6 +64,9 @@ export default {
         return {
             defaultTabName: "1",
             id: "", // 某一条的id
+            title: "", // 标题
+            content: "", // 内容
+            extra: "", // 链接
             tabs: [
                 { component: TextList, name: "文本", order: "1", class: "TextList" },
                 { component: ImagesList, name: "图片", order: "2", class: "ImagesList" },
@@ -96,11 +103,25 @@ export default {
             this.$refs.tabChild[0].getList();
         },
         addDialog() {
+            this.id = "";
             this.$store.commit("SETATTDIALOG", true);
         },
-        editDialog() {
-            console.log("编辑");
+        editDialog(data) {
+            const { title, content, id, extra } = data;
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.extra = extra;
+            this.$store.commit("SETATTDIALOG", true);
+        },
+        initBus() {
+            Bus.$on("update-item", data => {
+                this.editDialog(data);
+            });
         }
+    },
+    mounted() {
+        this.initBus();
     }
 };
 </script>

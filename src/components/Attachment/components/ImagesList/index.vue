@@ -10,7 +10,7 @@
                         <div class="sort common">
                             <i class="iconfont iconpaixu cursor"></i>
                         </div>
-                        <div class="edit common cursor">
+                        <div class="edit common cursor" @click="edit(item)">
                             <i class="iconfont icontubiaoweb-07"></i>
                         </div>
                         <div class="del common cursor" @click="del(item)">
@@ -39,7 +39,7 @@
 <script>
 import { hotspotContent } from "@/model/api";
 import Empty from "@/components/Empty";
-
+import Bus from "@/components/bus/index.js";
 export default {
     components: {
         Empty
@@ -112,6 +112,9 @@ export default {
                         message: "已取消删除"
                     });
                 });
+        },
+        edit(data) {
+            Bus.$emit("update-item", data);
         }
     },
     mounted() {

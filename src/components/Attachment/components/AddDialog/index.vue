@@ -5,6 +5,9 @@
         :hotspotId="hotspotId"
         :id="id"
         :onSuccess="onSuccess"
+        :title="title"
+        :content="content"
+        :extra="extra"
     />
 </template>
 
@@ -41,6 +44,15 @@ export default {
             // 动态组件的哪一个
             type: String,
             default: "1"
+        },
+        title: {
+            type: [String]
+        },
+        content: {
+            type: [String]
+        },
+        extra: {
+            type: [String]
         }
     },
     computed: {

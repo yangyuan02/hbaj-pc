@@ -67,6 +67,15 @@ export default {
         onSuccess: {
             type: Function,
             default: () => {}
+        },
+        title: {
+            type: [String]
+        },
+        content: {
+            type: [String]
+        },
+        extra: {
+            type: [String]
         }
     },
     computed: {
@@ -74,15 +83,44 @@ export default {
             return this.$store.state.attachmentStore.isOpenDialog;
         }
     },
-    watch: {},
+    watch: {
+        hotspotId(value) {
+            if (value) {
+                this.setOpen();
+            }
+        },
+        id(value) {
+            if (value) {
+                this.setOpen();
+            }
+        }
+    },
     methods: {
         open() {
-            console.log(11);
+            this.setOpen();
+        },
+        setOpen() {
             if (!this.id) {
                 this.$nextTick(() => {
                     this.$refs["form"].resetFields();
+                    this.clear();
                 });
+            } else {
+                this.setContent();
             }
+        },
+        // 编辑填充内容
+        setContent() {
+            if (this.id) {
+                this.params.content = this.content;
+                this.params.title = this.title;
+                this.params.extra = this.extra;
+            }
+        },
+        clear() {
+            this.params.content = "";
+            this.params.title = "";
+            this.params.extra = "";
         },
         close() {
             this.$store.commit("SETATTDIALOG", false);
