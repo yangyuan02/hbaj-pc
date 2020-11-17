@@ -13,12 +13,15 @@
                     ref="tabChild"
                     v-if="defaultTabName === tag.order"
                     :hotspotId="hotspotId"
+                    :engType="engType"
                 />
             </el-tab-pane>
         </el-tabs>
         <div class="operate">
             <el-button type="danger" @click="deleteItem" v-if="!isDelAndEdit">删除</el-button>
-            <el-button type="primary" @click="addDialog" v-if="isDelAndEdit">添加</el-button>
+            <el-button type="primary" @click="addDialog" v-if="isDelAndEdit" :disabled="disabled"
+                >添加</el-button
+            >
             <el-button type="primary" @click="editDialog" v-if="!isDelAndEdit">修改</el-button>
         </div>
         <AddDialog
@@ -95,6 +98,13 @@ export default {
         },
         isDelAndEdit() {
             return this.$store.state.attachmentStore.isDelAndEdit;
+        },
+        disabled() {
+            console.log(this.defaultTabName);
+            if (this.defaultTabName !== "3") {
+                return false;
+            }
+            return this.$store.state.attachmentStore.disabled;
         }
     },
     watch: {

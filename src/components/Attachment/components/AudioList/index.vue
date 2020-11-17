@@ -59,6 +59,10 @@ export default {
         hotspotId: {
             type: [String, Number],
             required: true
+        },
+        engType: {
+            type: Boolean,
+            default: false
         }
     },
     watch: {
@@ -88,6 +92,11 @@ export default {
                 if (res.suceeded) {
                     this.list = res.data || [];
                     this.loading = false;
+                    if (!this.engType && this.list.length >= 1) {
+                        this.$store.commit("SETADDDISABLED", true);
+                    } else {
+                        this.$store.commit("SETADDDISABLED", false);
+                    }
                 } else {
                     this.loading = false;
                 }

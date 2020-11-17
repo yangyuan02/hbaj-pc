@@ -1,6 +1,7 @@
 const state = {
     isOpenDialog: false,
-    isDelAndEdit: true
+    isDelAndEdit: true,
+    disabled: false
 };
 
 const mutations = {
@@ -9,6 +10,9 @@ const mutations = {
     },
     SETDELANDEDIT(state, show) {
         state.isDelAndEdit = show;
+    },
+    SETADDDISABLED(state, show) {
+        state.disabled = show;
     }
 };
 
