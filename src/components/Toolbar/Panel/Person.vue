@@ -11,13 +11,17 @@
         <div class="person common">
             <h2>课件制作人员</h2>
             <div class="course_item_person" v-for="(item, index) in params.userList" :key="index">
-                <div class="thumb"></div>
+                <div
+                    class="thumb ui-lazyLoad-pic"
+                    v-lazy
+                    :data-src="globalConfig.imagePath + item.avatar"
+                ></div>
                 <div class="info">
                     <div class="name">{{ item.sgname }}</div>
                     <div class="role">
                         <div class="title">角色:</div>
                         <div class="roles">
-                            <span>海宝安检团队</span>
+                            <span>{{ item.department }}</span>
                         </div>
                     </div>
                 </div>
@@ -28,6 +32,7 @@
 </template>
 
 <script>
+import "@/widget/lazyLoad";
 import { mapState } from "vuex";
 import { projectDetail } from "@/model/api";
 

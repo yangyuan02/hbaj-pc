@@ -1,6 +1,6 @@
 <template>
     <div class="RichTextBox">
-        <div class="title">
+        <div class="title" style="margin-bottom:10px">
             <el-input
                 type="text"
                 placeholder="请输入标题"

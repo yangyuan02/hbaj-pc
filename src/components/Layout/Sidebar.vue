@@ -4,6 +4,7 @@
             <div class="person">
                 <div
                     class="thumb"
+                    @click="goMy"
                     :style="{
                         backgroundImage: user.avatar
                             ? `url(${globalConfig.imagePath + user.avatar})`
@@ -144,6 +145,9 @@ export default {
             }
         },
         goMy() {
+            if (!this.user.sgname) {
+                return;
+            }
             this.$router.push({ path: "/my/person" });
         }
     },

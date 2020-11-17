@@ -12,14 +12,22 @@
                     <span>操作</span>
                 </div>
                 <div class="body" v-if="list && list.length" v-loading="loading">
-                    <div class="item" v-for="(item, index) in list" :key="index">
+                    <div
+                        class="item"
+                        v-for="(item, index) in list"
+                        :key="index"
+                        :class="{ active: index === currentIndex }"
+                    >
                         <div class="link" style="width:13%">
                             <i
                                 class="iconfont icontubiaoweb-29 cursor"
                                 @click="editAttachment(item)"
                             ></i>
                         </div>
-                        <div class="link_name ellipsis cursor" @click="backFindHotspot(item)">
+                        <div
+                            class="link_name ellipsis cursor"
+                            @click="backFindHotspot(item, index)"
+                        >
                             <!-- <el-tooltip
                                 class="item"
                                 effect="dark"
@@ -61,7 +69,7 @@
             :hotspotId="currentItem.id"
             dialogTitle="场景标签内容编辑"
             v-if="currentItem.id"
-            :orderList="['音频', '图片']"
+            :orderList="orderList"
             :engType="engType"
         ></AttachmentComponent>
     </div>
@@ -81,7 +89,9 @@ export default {
             isOpenAttachment: false,
             currentItem: {},
             id: "",
-            engType: false // 是否专业英语
+            engType: false, // 是否专业英语
+            orderList: [],
+            currentIndex: 0
         };
     },
     computed: {
@@ -126,12 +136,13 @@ export default {
                 }
             });
         },
-        backFindHotspot(item) {
+        backFindHotspot(item, index) {
             // 这个做啥的，暂时不知道
             const { locationX, locationY } = item;
             const getScenePara = window.getScenePara && window.getScenePara();
 
             window.backFindHotspot && backFindHotspot(getScenePara[0], locationX, locationY);
+            this.currentIndex = index;
         },
         updateHotspot(data) {
             const id = data.id;
@@ -215,9 +226,11 @@ export default {
             const modules = this.$route.params.modules;
             console.log(data, "data");
             if (modules && modules === "专业英语") {
+                this.orderList = ["音频", "图片"];
                 this.engType = true;
                 this.isOpenAttachment = true;
             } else {
+                this.orderList = ["文本", "图片", "音频", "视频"];
                 this.engType = false;
                 this.isOpenAttachment = true;
             }
@@ -315,6 +328,9 @@ export default {
                             color: rgba(15, 79, 168, 1);
                         }
                     }
+                }
+                .active {
+                    background: rgb(255, 165, 0);
                 }
             }
         }
