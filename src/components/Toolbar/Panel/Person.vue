@@ -21,7 +21,7 @@
                     <div class="role">
                         <div class="title">角色:</div>
                         <div class="roles">
-                            <span>{{ item.department }}</span>
+                            <span>{{ item.departmentName }}</span>
                         </div>
                     </div>
                 </div>

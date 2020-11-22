@@ -142,7 +142,9 @@ export default {
             },
             IMAGE: {},
             AUDIO: {},
-            attchmentId: ""
+            attchmentId: "",
+            editData: {},
+            editType: ""
         };
     },
     methods: {

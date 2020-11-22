@@ -9,20 +9,20 @@
         append-to-body
     >
         <main class="SelectAction" v-loading="loading">
-            <SelectAction
+            <SelectActionComp
                 placeholder="图片描述"
                 title="人物或动画形象选择"
                 :list="guideHotspotImage"
                 :onSelect="url => onSelect('img1', url, item)"
                 :activeIndex="actionImg1Index"
-            ></SelectAction>
-            <SelectAction
+            ></SelectActionComp>
+            <SelectActionComp
                 placeholder="动作描述"
                 title="动作"
                 :list="actionList"
                 :onSelect="url => onSelect('img2', url)"
                 :activeIndex="actionImg2Index"
-            ></SelectAction>
+            ></SelectActionComp>
         </main>
         <div slot="footer">
             <el-button @click="close">取消</el-button>
@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import SelectAction from "@/components/SelectAction";
-import { home, hotspotContent } from "@/model/api";
+import SelectActionComp from "@/components/SelectAction";
+import { hotspotContent, appConst } from "@/model/api";
 
 import flashaction from "../../images/action/flashaction.png";
 import jumpaction from "../../images/action/jumpaction.png";
@@ -66,7 +66,7 @@ export default {
         }
     },
     components: {
-        SelectAction
+        SelectActionComp
     },
     computed: {
         actionImg1Index: function() {
@@ -128,16 +128,49 @@ export default {
             this.editImages();
         },
         getActionList() {
+            const modules = this.$route.params.modules === "技术解读";
+            if (modules) {
+                this.getActionListJSJD();
+            } else {
+                this.getActionListZYYY();
+            }
+        },
+        // 获取技术截图图片list
+        getActionListJSJD() {
             this.loading = true;
-            home({ type: "get" }, "/pageInfo").then(res => {
+            this.guideHotspotImage = [];
+            appConst({
+                type: "get",
+                data: {
+                    name: "PROJECT_GUIDE_HOTSPOT_ROLE"
+                }
+            }).then(res => {
                 if (res.suceeded) {
                     this.loading = false;
-                    this.guideHotspotImage = (res.data.guideHotspotImage || []).map(item => ({
-                        src: item,
+                    this.guideHotspotImage = (res.data || []).map(item => ({
+                        src: item.value,
                         desc: ""
                     }));
                 }
-                console.log(res);
+            });
+        },
+        // 获取专业英语图片list
+        getActionListZYYY() {
+            this.loading = true;
+            this.guideHotspotImage = [];
+            appConst({
+                type: "get",
+                data: {
+                    name: "PROJECT_GUIDE_HOTSPOT_IMAGE"
+                }
+            }).then(res => {
+                if (res.suceeded) {
+                    this.loading = false;
+                    this.guideHotspotImage = (res.data || []).map(item => ({
+                        src: item.value,
+                        desc: ""
+                    }));
+                }
             });
         },
         onSelect(type, url, item) {
