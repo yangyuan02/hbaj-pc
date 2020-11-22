@@ -35,16 +35,18 @@
 import SelectActionComp from "@/components/SelectAction";
 import { hotspotContent, appConst } from "@/model/api";
 
-import flashaction from "../../images/action/flashaction.png";
-import jumpaction from "../../images/action/jumpaction.png";
-import leftaction from "../../images/action/leftaction.png";
-import narrowaction from "../../images/action/narrowaction.png";
-import none from "../../images/action/none.png";
-import rightaction from "../../images/action/rightaction.png";
-import rotateaction from "../../images/action/rotateaction.png";
-import swingaction from "../../images/action/swingaction.png";
-import upaction from "../../images/action/upaction.png";
-import yrotateaction from "../../images/action/yrotateaction.png";
+import none from "../../images/action/01_none.png";
+import upaction from "../../images/action/02_upaction.png";
+import downaction from "../../images/action/03_downaction.png";
+import leftaction from "../../images/action/04_leftaction.png";
+import rightaction from "../../images/action/05_rightaction.png";
+import narrowaction from "../../images/action/06_narrowaction.png";
+import enlargeaction from "../../images/action/07_enlargeaction.png";
+import jumpaction from "../../images/action/08_jumpaction.png";
+import rotateaction from "../../images/action/09_rotateaction.png";
+import swingaction from "../../images/action/10_swingaction.png";
+import flashaction from "../../images/action/11_flashaction.png";
+import yrotateaction from "../../images/action/12_yrotateaction.png";
 
 export default {
     props: {
@@ -82,15 +84,17 @@ export default {
             loading: false,
             checkedData: {},
             actionList: [
-                { src: flashaction, desc: "flashaction" },
-                { src: jumpaction, desc: "jumpaction" },
-                { src: leftaction, desc: "leftaction" },
-                { src: narrowaction, desc: "narrowaction" },
                 { src: none, desc: "none" },
+                { src: upaction, desc: "upaction" },
+                { src: downaction, desc: "downaction" },
+                { src: leftaction, desc: "leftaction" },
                 { src: rightaction, desc: "rightaction" },
+                { src: narrowaction, desc: "narrowaction" },
+                { src: enlargeaction, desc: "enlargeaction" },
+                { src: jumpaction, desc: "jumpaction" },
                 { src: rotateaction, desc: "rotateaction" },
                 { src: swingaction, desc: "swingaction" },
-                { src: upaction, desc: "upaction" },
+                { src: flashaction, desc: "flashaction" },
                 { src: yrotateaction, desc: "yrotateaction" }
             ],
             params: {
