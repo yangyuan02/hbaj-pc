@@ -325,6 +325,7 @@ export default {
     },
     mounted() {
         this.initBus();
+        window._hban_addGuide = this.addGuide;
     }
 };
 </script>

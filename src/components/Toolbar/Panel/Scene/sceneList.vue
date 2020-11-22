@@ -239,6 +239,9 @@ export default {
             this.$store.commit("TOGGLE_DRAWER", "drawerHotContent");
             this.$store.commit("TOGGLE_DRAWER", "openScene");
         }
+    },
+    mounted() {
+        window._hban_addHotScene = this.addHotScene;
     }
 };
 </script>
