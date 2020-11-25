@@ -3,7 +3,7 @@
         <div class="login">
             <div class="person">
                 <div
-                    class="thumb"
+                    class="thumb cursor"
                     @click="goMy"
                     :style="{
                         backgroundImage: user.avatar
@@ -146,6 +146,7 @@ export default {
         },
         goMy() {
             if (!this.user.sgname) {
+                this.$store.commit("TOGGLE_LOGIN");
                 return;
             }
             this.$router.push({ path: "/my/person" });
