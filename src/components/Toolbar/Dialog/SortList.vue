@@ -11,7 +11,7 @@
         top="0vh"
     >
         <div class="sort-content">
-            <draggable @start="start" @end="end" handle=".handler">
+            <draggable @end="end" handle=".handler">
                 <div class="item" v-for="(item, index) in sortList" :key="index">
                     <div class="handler">
                         <i class="iconfont iconpaixu cursor"></i>

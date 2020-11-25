@@ -8,7 +8,7 @@
                     </div>
                     <div class="operate_btn">
                         <div class="sort common">
-                            <i class="iconfont iconpaixu cursor"></i>
+                            <i class="iconfont iconpaixu cursor" @click="sort"></i>
                         </div>
                         <div class="edit common" @click="edit(item)">
                             <i class="iconfont icontubiaoweb-07 cursor"></i>
@@ -24,21 +24,30 @@
             </div>
         </template>
         <Empty v-else />
+        <SortList
+            :visible.sync="isOpenSort"
+            :list="list"
+            :hotspotId="hotspotId"
+            :onSuccess="getList"
+        />
     </div>
 </template>
 <script>
 import { hotspotContent } from "@/model/api";
 import Empty from "@/components/Empty";
+import SortList from "../SortList/index";
 import Bus from "@/components/bus/index.js";
 
 export default {
     components: {
-        Empty
+        Empty,
+        SortList
     },
     data() {
         return {
             list: [],
-            loading: false
+            loading: false,
+            isOpenSort: false
         };
     },
     props: {
@@ -103,6 +112,9 @@ export default {
         },
         edit(data) {
             Bus.$emit("update-item", data);
+        },
+        sort() {
+            this.isOpenSort = true;
         }
     },
     mounted() {
