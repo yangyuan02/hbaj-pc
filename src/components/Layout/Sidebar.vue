@@ -80,11 +80,6 @@ export default {
                     text: "我的通知",
                     icon: "icontubiaoweb-06",
                     path: "/my/message"
-                },
-                {
-                    text: "远程核查",
-                    icon: "iconjiankong",
-                    path: "/my/agora"
                 }
             ],
             modulesList: store.get("modulesList", "local")
@@ -134,6 +129,13 @@ export default {
                         "personal"
                     ).then(res => {
                         if (res.suceeded) {
+                            if (res.data.userType === 1) {
+                                this.menu.push({
+                                    text: "远程核查",
+                                    icon: "iconjiankong",
+                                    path: "/my/agora"
+                                });
+                            }
                             store.set("userId", res.data.id, "local");
                             this.$store.commit({
                                 type: "SET_USER_INFO",
