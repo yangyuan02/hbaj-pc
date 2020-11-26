@@ -134,9 +134,9 @@ export default {
         getActionList() {
             const modules = this.$route.params.modules === "技术解读";
             if (modules) {
-                this.getActionListJSJD();
-            } else {
                 this.getActionListZYYY();
+            } else {
+                this.getActionListJSJD();
             }
         },
         // 获取技术截图图片list
