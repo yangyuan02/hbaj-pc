@@ -28,14 +28,15 @@
                             class="link_name ellipsis cursor"
                             @click="backFindHotspot(item, index)"
                         >
-                            <!-- <el-tooltip
+                            <el-tooltip
                                 class="item"
                                 effect="dark"
                                 :content="item.title"
                                 placement="top-start"
-                            > -->
-                            <span>{{ item.title }}</span>
-                            <!-- </el-tooltip> -->
+                                :enterable="false"
+                            >
+                                <span>{{ item.title }}</span>
+                            </el-tooltip>
                         </div>
                         <div class="operate">
                             <i

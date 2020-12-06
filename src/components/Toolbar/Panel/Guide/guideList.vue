@@ -31,14 +31,15 @@
                             @click="loadpanoscene(item, index)"
                             style="width:170px"
                         >
-                            <!-- <el-tooltip
+                            <el-tooltip
                                 class="item"
                                 effect="dark"
                                 :content="item.name"
                                 placement="top-start"
-                            > -->
-                            <span>{{ item.name }}</span>
-                            <!-- </el-tooltip> -->
+                                :enterable="false"
+                            >
+                                <span>{{ item.name }}</span>
+                            </el-tooltip>
                         </div>
                         <!-- <div class="operate">
                             <i
