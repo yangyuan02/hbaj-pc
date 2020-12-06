@@ -114,7 +114,7 @@ export default {
             const GuideData = this.$store.state.toolbarStore.GuideData;
             const sceneId = GuideData.sceneId;
             const currentIndex = list.findIndex(item => item.id === sceneId);
-            if (currentIndex) {
+            if (currentIndex || currentIndex === 0) {
                 this.currentIndex = currentIndex;
             }
         },
