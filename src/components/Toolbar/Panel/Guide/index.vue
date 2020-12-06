@@ -268,12 +268,18 @@ export default {
         addGuide() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
+            const getScenePara = window.getScenePara && window.getScenePara();
+
             hotspot({
                 type: "post",
                 data: {
                     projectId,
                     type: "GUIDE",
-                    title: "请修改脚本介绍"
+                    title: "请修改脚本介绍",
+                    locationX: getScenePara[2], //获取的热点横坐标
+                    locationY: getScenePara[3], //获取的热点垂向坐标,
+                    sceneId: getScenePara[4], //场景ID
+                    locationFov: getScenePara[1] //场景的视角
                 }
             }).then(res => {
                 if (res.suceeded) {
