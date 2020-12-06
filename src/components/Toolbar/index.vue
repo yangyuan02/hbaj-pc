@@ -112,6 +112,9 @@ export default {
     },
     mounted() {
         this.initBus();
+        window._hban_openToolbarType = type => {
+            return this.isCurrentOpen[type];
+        };
     }
 };
 </script>

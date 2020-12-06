@@ -33,9 +33,10 @@
                         >
                             <el-tooltip
                                 class="item"
-                                effect="dark"
+                                effect="light"
                                 :content="item.name"
-                                placement="top-start"
+                                placement="left"
+                                offset="30"
                                 :enterable="false"
                             >
                                 <span>{{ item.name }}</span>
