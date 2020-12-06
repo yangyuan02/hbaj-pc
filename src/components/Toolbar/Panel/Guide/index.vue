@@ -126,7 +126,9 @@ export default {
     watch: {
         drawerGuideContent(newVal, oldVal) {
             if (newVal) {
-                this.getAttachmentList();
+                this.getAttachmentList().then(res => {
+                    this.attachmentList.length > 0 && this.select(0);
+                });
             }
         }
     },
@@ -171,32 +173,32 @@ export default {
                     });
                 });
         },
-        getAttachmentList() {
+        async getAttachmentList() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
-            hotspotDetail(
-                {
-                    type: "GET",
-                    data: {
-                        projectId,
-                        type: "GUIDE",
-                        page: "1",
-                        size: "1000"
-                    }
-                },
-                "/all"
-            ).then(res => {
-                if (res.suceeded) {
-                    this.attachmentList = res.data || [];
+            try {
+                const { suceeded, data } = await hotspotDetail(
+                    {
+                        type: "GET",
+                        data: {
+                            projectId,
+                            type: "GUIDE",
+                            page: "1",
+                            size: "1000"
+                        }
+                    },
+                    "/all"
+                );
+                if (suceeded) {
+                    this.attachmentList = data || [];
                     const currentIndex = this.currentIndex;
                     if (this.attachmentList[currentIndex]) {
                         this.editOpenEditAttachmentName(this.attachmentList[currentIndex]);
                     }
-
-                    console.log(res.data, "attach");
-                } else {
                 }
-            });
+            } catch (error) {
+                console.error(error);
+            }
         },
         sortAttachment() {
             const projectId = this.$route.params.projectId;

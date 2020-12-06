@@ -93,7 +93,9 @@ export default {
     watch: {
         drawerHotContent(newVal, oldVal) {
             if (newVal) {
-                this.getAttachmentList();
+                this.getAttachmentList().then(res => {
+                    this.attachmentList.length > 0 && this.select(0, this.attachmentList[0]);
+                });
             }
         }
     },
@@ -140,26 +142,27 @@ export default {
                     });
                 });
         },
-        getAttachmentList() {
+        async getAttachmentList() {
             const projectId = this.$route.params.projectId;
             // 通过任务id获取项目的有关信息
-            projectDetail(
-                {
-                    type: "GET",
-                    data: {
-                        projectId,
-                        page: "1",
-                        size: "1000"
-                    }
-                },
-                `${projectId}/panoInfo`
-            ).then(res => {
-                if (res.suceeded) {
-                    this.attachmentList = res.data;
-                    console.log(res.data, "attach");
-                } else {
+            try {
+                const { suceeded, data } = await projectDetail(
+                    {
+                        type: "GET",
+                        data: {
+                            projectId,
+                            page: "1",
+                            size: "1000"
+                        }
+                    },
+                    `${projectId}/panoInfo`
+                );
+                if (suceeded) {
+                    this.attachmentList = data;
                 }
-            });
+            } catch (error) {
+                console.error(error);
+            }
         },
         sortAttachment() {
             const projectId = this.$route.params.projectId;
