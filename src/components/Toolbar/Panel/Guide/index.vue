@@ -38,14 +38,15 @@
                             class="link_name ellipsis cursor"
                             @click="editOpenEditAttachmentName(item)"
                         >
-                            <!-- <el-tooltip
-                                    class="item"
-                                    effect="dark"
-                                    :content="item.title"
-                                    placement="top-start"
-                                > -->
-                            <span>{{ item.title }}</span>
-                            <!-- </el-tooltip> -->
+                            <el-tooltip
+                                class="item"
+                                effect="dark"
+                                :content="item.title"
+                                placement="top-start"
+                                :enterable="false"
+                            >
+                                <span>{{ item.title }}</span>
+                            </el-tooltip>
                         </div>
                         <div class="operate">
                             <i

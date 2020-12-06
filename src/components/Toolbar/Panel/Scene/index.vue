@@ -32,14 +32,15 @@
                                 <i class="iconfont icontubiaoweb-29"></i>
                             </div> -->
                         <div class="link_name ellipsis" @click="loadpanoscene(item)">
-                            <!-- <el-tooltip
-                                    class="item"
-                                    effect="dark"
-                                    :content="item.name"
-                                    placement="top-start"
-                                > -->
-                            <span>{{ item.name }}</span>
-                            <!-- </el-tooltip> -->
+                            <el-tooltip
+                                class="item"
+                                effect="dark"
+                                :content="item.name"
+                                placement="top-start"
+                                :enterable="false"
+                            >
+                                <span>{{ item.name }}</span>
+                            </el-tooltip>
                         </div>
                         <div class="operate">
                             <i

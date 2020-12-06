@@ -23,7 +23,15 @@
                             <i class="iconfont icontubiaoweb-29 cursor"></i>
                         </div>
                         <div class="link_name ellipsis cursor">
-                            <span>{{ item.title }}</span>
+                            <el-tooltip
+                                class="item"
+                                effect="dark"
+                                :content="item.title"
+                                placement="top-start"
+                                :enterable="false"
+                            >
+                                <span>{{ item.title }}</span>
+                            </el-tooltip>
                         </div>
                         <div class="operate">
                             <i
