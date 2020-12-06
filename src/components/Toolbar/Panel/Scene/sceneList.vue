@@ -99,6 +99,9 @@ export default {
         isOpenScene: function() {
             // 打开的时候应该还需要一点动画
             return this.$store.state.toolbarStore.openScene;
+        },
+        isDrawerHotContent() {
+            return this.$store.state.toolbarStore.drawerHotContent;
         }
     },
     components: {
@@ -242,7 +245,14 @@ export default {
         }
     },
     mounted() {
-        window._hban_addHotScene = this.addHotScene;
+        window._hban_addHotScene = () => {
+            // 需要判断一级面板是否打开且选中
+            if (!this.isDrawerHotContent) {
+                return false;
+            }
+            this.addHotScene();
+            return true;
+        };
     }
 };
 </script>

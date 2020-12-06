@@ -70,6 +70,8 @@ import { mapState } from "vuex";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
 
+import Bus from "@/components/bus/index.js";
+
 export default {
     name: "Attachment",
     data() {
@@ -267,7 +269,14 @@ export default {
         }
     },
     mounted() {
-        window._hban_addScene = this.addScene;
+        window._hban_addScene = () => {
+            if (!this.drawerHotContent) {
+                Bus.$emit("toolbar-hander", { type: "drawerHotContent", index: 3 });
+            }
+            this.getAttachmentList().then(res => {
+                this.addScene();
+            });
+        };
         window.isCloseScene = this.isCloseScene;
     }
 };

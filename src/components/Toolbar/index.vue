@@ -31,6 +31,7 @@ import PersonPanel from "../Toolbar/Panel/Person";
 import AttachmentPanel from "../Toolbar/Panel/Attachment/index.vue";
 import ScenePanel from "../Toolbar/Panel/Scene/index.vue";
 import GuidePanel from "../Toolbar/Panel/Guide/index.vue";
+import Bus from "@/components/bus/index.js";
 export default {
     data() {
         return {
@@ -101,7 +102,16 @@ export default {
         toolbarHander(type, index) {
             this.currentIndex = index;
             this.$store.commit("SETTOGGLETOOLBR", type);
+        },
+        initBus() {
+            Bus.$on("toolbar-hander", data => {
+                const { type, index } = data;
+                this.toolbarHander(type, index);
+            });
         }
+    },
+    mounted() {
+        this.initBus();
     }
 };
 </script>

@@ -328,7 +328,12 @@ export default {
     },
     mounted() {
         this.initBus();
-        window._hban_addGuide = this.addGuide;
+        window._hban_addGuide = () => {
+            if (!this.drawerGuideContent) {
+                Bus.$emit("toolbar-hander", { type: "drawerGuideContent", index: 4 });
+            }
+            this.addGuide();
+        };
     }
 };
 </script>

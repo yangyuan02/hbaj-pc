@@ -25,9 +25,10 @@
                         <div class="link_name ellipsis cursor">
                             <el-tooltip
                                 class="item"
-                                effect="dark"
+                                effect="light"
                                 :content="item.title"
-                                placement="top-start"
+                                placement="left"
+                                offset="30"
                                 :enterable="false"
                             >
                                 <span>{{ item.title }}</span>
@@ -80,6 +81,7 @@ import AttachmentComponent from "@/components/Attachment";
 import editAttachmentDialog from "./editAttachment";
 
 import { hotspot, hotspotDetail, projectDetail } from "@/model/api";
+import Bus from "@/components/bus/index.js";
 
 export default {
     name: "Attachment",
@@ -251,6 +253,15 @@ export default {
             this.currentItem = data;
             this.shows.isOpenAttachment = true;
         }
+    },
+    mounted() {
+        // 暴露给全景
+        window._hban_addAttachment = () => {
+            if (!this.drawerAttachment) {
+                Bus.$emit("toolbar-hander", { type: "drawerAttachment", index: 2 });
+            }
+            this.addAttachment();
+        };
     }
 };
 </script>
