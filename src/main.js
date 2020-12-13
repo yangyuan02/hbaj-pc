@@ -7,7 +7,7 @@ import filters from "./filters";
 import utils from "@/widget/utils";
 import "@/widget/skeleton";
 
-import { getDefaultInfo } from "@/config";
+import { defaultBlocks } from "@/config";
 
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -38,7 +38,7 @@ if (cookieAuthorization) {
 }
 
 router.beforeEach((to, from, next) => {
-    getDefaultInfo().then(() => {
+    defaultBlocks().then(() => {
         if (to.name == "login" && window.localStorage.getItem("authorization")) {
             //解决登陆后 用户输入登录地址重定向到首页
             next({ path: "/home" });
