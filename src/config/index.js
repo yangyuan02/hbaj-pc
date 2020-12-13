@@ -16,7 +16,7 @@ export const defaultBlocks = async () => {
     }
 };
 
-export const getDefaultInfo = async () => {
+export const defaultInfo = async () => {
     try {
         const data = await home(
             {
@@ -30,3 +30,5 @@ export const getDefaultInfo = async () => {
         console.log(error);
     }
 };
+
+export const mapDefaultLis = async () => Promise.all([defaultBlocks(), defaultInfo()]);

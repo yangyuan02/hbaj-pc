@@ -6,7 +6,7 @@
                 :key="index"
                 :class="[$route.query.name === item.title ? 'active' : '']"
                 @click="handClick(item)"
-                :style="{ 'background-image': `url(${item.bgColor})` }"
+                :style="{ 'background-image': `url(${globalConfig.imagePath + item.bgColor})` }"
                 class="cursor"
             >
                 <span>{{ item.title }}</span>
@@ -17,32 +17,39 @@
 </template>
 
 <script>
+import itemVue from "../../views/my/message/item.vue";
 export default {
     data() {
         return {
-            list: [
-                {
-                    title: "技术解读",
-                    icon: "icontubiaoweb-411",
-                    path: "",
-                    bgColor: "/pano/static/app/module/module_01.png",
-                    sort: 1
-                },
-                {
-                    title: "专业英语",
-                    icon: "icontubiaoweb-431",
-                    path: "",
-                    bgColor: "/pano/static/app/module/module_02.png",
-                    sort: 2
-                },
-                {
-                    title: "模拟训练",
-                    icon: "icontubiaoweb-42",
-                    path: "",
-                    bgColor: "/pano/static/app/module/module_03.png",
-                    sort: 3
-                }
-            ]
+            // list: [
+            //     {
+            //         title: "技术解读",
+            //         icon: "icontubiaoweb-411",
+            //         path: "",
+            //         bgColor: "/pano/static/app/module/module_01.png",
+            //         sort: 1
+            //     },
+            //     {
+            //         title: "专业英语",
+            //         icon: "icontubiaoweb-431",
+            //         path: "",
+            //         bgColor: "/pano/static/app/module/module_02.png",
+            //         sort: 2
+            //     },
+            //     {
+            //         title: "模拟训练",
+            //         icon: "icontubiaoweb-42",
+            //         path: "",
+            //         bgColor: "/pano/static/app/module/module_03.png",
+            //         sort: 3
+            //     }
+            // ]
+            list: globalConfig.defaultInfo.APP_DEFAULT_MODULE.map(item => JSON.parse(item)).map(
+                item => ({
+                    title: item.title,
+                    bgColor: item.image
+                })
+            )
         };
     },
     props: {
