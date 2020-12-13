@@ -10,7 +10,7 @@
                     ]"
                     @click="handShip(item)"
                 >
-                    <img :src="item.src" :alt="item.text" />
+                    <img :src="globalConfig.imagePath + item.src" :alt="item.text" />
                     <div class="mask">
                         <span>{{ item.title }}</span>
                     </div>
@@ -44,24 +44,10 @@ import img5 from "./images/05.jpg";
 export default {
     data() {
         return {
-            list: [
-                {
-                    src: img1,
-                    title: "豪华邮轮"
-                },
-                {
-                    src: img2,
-                    title: "散货船"
-                },
-                {
-                    src: img5,
-                    title: "CIC2019专项船"
-                },
-                {
-                    src: img4,
-                    title: "集装箱船"
-                }
-            ],
+            list: globalConfig.defaultBlocks.map(item => ({
+                src: item.imageUrl,
+                title: item.name
+            })),
             classList: [],
             shipList: []
         };
