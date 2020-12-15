@@ -113,10 +113,11 @@ export default {
                 type: "HTML", // 类型
                 hotspotId: this.hotspotId
             };
+            const hotspotContentList = [params];
             hotspotContent(
                 {
                     type: "post",
-                    data: params
+                    data: { hotspotContentList }
                 },
                 this.id
             ).then(res => {
